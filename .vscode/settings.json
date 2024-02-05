@@ -12,5 +12,34 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.8,
+  "editor.rulers": [80, 120],
+  "workbench.startupEditor": "none",
+  "editor.renderLineHighlight": "gutter",
+  "editor.fontLigatures": true,
+  "explorer.compactFolders": false,
+  "editor.semanticHighlighting.enabled": false,
+  "workbench.activityBar.location": "hidden",
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontal": "hidden",
+  "workbench.statusBar.visible": true,
+  "editor.wordWrap": "on",
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "window.title": "",
+  "window.density.editorTabHeight": "compact",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "deno.json": "deno.lock, dev.ts, main.ts, manifest.gen.ts, fresh*, runtime.ts, .env, constants.tsx",
+    "tailwind.css": "tailwind.config.ts"
+  },
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
   }
 }

@@ -256,7 +256,7 @@ function Section({
     ...toVariables(theme),
     [
       "--font-family",
-      font?.family ||
+      "Lemon Milk" ||
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
   ]
