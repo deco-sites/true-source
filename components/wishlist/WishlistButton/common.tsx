@@ -28,9 +28,7 @@ function ButtonCommon({
 
   return (
     <Button
-      class={variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"}
+      class="text-light-gray"
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -81,7 +79,7 @@ function ButtonCommon({
         strokeWidth={2}
         fill={inWishlist ? "black" : "none"}
       />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
+      {/* {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"} */}
     </Button>
   );
 }
