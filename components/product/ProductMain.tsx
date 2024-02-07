@@ -11,14 +11,14 @@ export interface Props {
 
 export default function ProductMain(props: Props) {
   return (
-    <div class="container">
-      <div class="flex flex-col lg:flex-row lg:gap-8 py-12">
+    <div>
+      <div class="container flex flex-col lg:flex-row lg:gap-8 py-12">
         <GallerySlider page={props.page} />
         <ProductInfo page={props.page} />
       </div>
       {/* Description */}
       <div class="flex flex-col">
-        <div class="py-12">
+        <div class="container py-12">
           <h2 class="uppercase text-center text-lg text-gold font-bold mb-3">
             Principais benefícios
           </h2>
@@ -49,7 +49,7 @@ export default function ProductMain(props: Props) {
             </div>
           </div>
         </div>
-        <div class="flex items-center py-12">
+        <div class="container flex items-center py-12">
           <div class="w-1/2 flex justify-center">
             <div class="w-80 grid grid-cols-2 items-center gap-8">
               <div class="flex flex-col items-center justify-center gap-y-2 text-center">
@@ -116,7 +116,7 @@ export default function ProductMain(props: Props) {
           <img src={asset("/image/infocard-3.jpg")} />
           <img src={asset("/image/infocard-4.jpg")} />
         </div>
-        <div class="max-w-[80vw] flex items-center gap-x-24 mx-auto py-12">
+        <div class="container flex items-center gap-x-24 mx-auto py-12">
           <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-[554px] h-[471px] flex-none" />
           <div class="">
             Trazemos agora para o mercado, mais uma excelente fonte proteica: o
@@ -127,13 +127,83 @@ export default function ProductMain(props: Props) {
             derme.
           </div>
         </div>
-        <div class="max-w-[80vw] flex items-center gap-x-24 mx-auto py-12">
+        <div class="container flex items-center gap-x-24 mx-auto py-12">
           <div class="">
             Nosso colágeno tem como finalidade sua saúde, pois nós sabemos que
             para sentir-se bem é necessário estar saudável. O Collagen Protein é
             limpo, puro e natural como todos os produtos da True Source.
           </div>
           <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-[554px] h-[471px] flex-none" />
+        </div>
+        <div class="flex items-stretch bg-ice mt-12">
+          <img class="w-1/2" src={asset("/image/infocard-7.jpg")} />
+          <div class="w-1/2 flex items-center justify-center">
+            <div class="w-3/4">
+              <h2 class="text-gold text-4xl uppercase mb-3 font-bold">
+                Como Usar
+              </h2>
+              <p>
+                Adultos ≥ 19 anos: Diluir 1 scoop (26g) em 200 ml de água gelada.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-stretch bg-belga rounded-b-3xl min-h-[580px]">
+          <div class="w-1/2 flex items-center justify-center">
+            <div class="w-3/4 text-white">
+              <h2 class="text-4xl uppercase mb-3 font-bold">
+                INGREDIENTES
+              </h2>
+              <p>
+                Colágeno hidrolisado, peptídeos bioativos de colágeno hidrolisado com peso molecular médio de 2kDa (Verisol®), goma acácia, cacau alcalino lecitinado em pó, edulcorantes naturais stévia e taumatina.
+              </p>
+            </div>
+          </div>
+          <div class="w-1/2 flex items-center justify-center">
+            <div class="w-3/4 border border-white p-4 rounded-3xl">
+              <h3 class="text-lg text-white uppercase mb-2 font-bold">Tabela Nutricional</h3>
+              <table class="table-auto text-white">
+                <thead>
+                  <tr>
+                    <th colSpan={2} class="text-left">Quantidade por porção: 26mg (01 Scoop)</th>
+                    <th>%VD*</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Valor Energético</td>
+                    <td>92kcal = 386kj</td>
+                    <td>7%</td>
+                  </tr>
+                  <tr>
+                    <td>Carboidrados</td>
+                    <td>1g</td>
+                    <td>0%</td>
+                  </tr>
+                  <tr>
+                    <td>Proteínas, das quais:</td>
+                    <td>2,5g</td>
+                    <td>**</td>
+                  </tr>
+                  <tr>
+                    <td>Colágeno Verisol</td>
+                    <td>2,5g</td>
+                    <td>**</td>
+                  </tr>
+                  <tr>
+                    <td>Fibra Alimentar</td>
+                    <td>2,6g</td>
+                    <td>10%</td>
+                  </tr>
+                  <tr>
+                    <td>Sódio</td>
+                    <td>114g</td>
+                    <td>5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
