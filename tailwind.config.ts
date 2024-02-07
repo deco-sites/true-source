@@ -5,7 +5,7 @@ export default {
   daisyui: { themes: [], logs: false },
   content: ["./**/*.tsx"],
   theme: {
-    container: { 
+    container: {
       center: true,
       screens: {},
     },

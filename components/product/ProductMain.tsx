@@ -143,7 +143,8 @@ export default function ProductMain(props: Props) {
                 Como Usar
               </h2>
               <p>
-                Adultos ≥ 19 anos: Diluir 1 scoop (26g) em 200 ml de água gelada.
+                Adultos ≥ 19 anos: Diluir 1 scoop (26g) em 200 ml de água
+                gelada.
               </p>
             </div>
           </div>
@@ -155,17 +156,24 @@ export default function ProductMain(props: Props) {
                 INGREDIENTES
               </h2>
               <p>
-                Colágeno hidrolisado, peptídeos bioativos de colágeno hidrolisado com peso molecular médio de 2kDa (Verisol®), goma acácia, cacau alcalino lecitinado em pó, edulcorantes naturais stévia e taumatina.
+                Colágeno hidrolisado, peptídeos bioativos de colágeno
+                hidrolisado com peso molecular médio de 2kDa (Verisol®), goma
+                acácia, cacau alcalino lecitinado em pó, edulcorantes naturais
+                stévia e taumatina.
               </p>
             </div>
           </div>
           <div class="w-1/2 flex items-center justify-center">
             <div class="w-3/4 border border-white p-4 rounded-3xl">
-              <h3 class="text-lg text-white uppercase mb-2 font-bold">Tabela Nutricional</h3>
+              <h3 class="text-lg text-white uppercase mb-2 font-bold">
+                Tabela Nutricional
+              </h3>
               <table class="table-auto text-white">
                 <thead>
                   <tr>
-                    <th colSpan={2} class="text-left">Quantidade por porção: 26mg (01 Scoop)</th>
+                    <th colSpan={2} class="text-left">
+                      Quantidade por porção: 26mg (01 Scoop)
+                    </th>
                     <th>%VD*</th>
                   </tr>
                 </thead>

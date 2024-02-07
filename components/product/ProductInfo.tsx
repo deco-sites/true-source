@@ -68,11 +68,13 @@ function ProductInfo({ page }: Props) {
       <div class="mt-4 sm:mt-8 flex gap-4 justify-between">
         <h1>
           <span class="font-bold text-2xl uppercase">
-            {/* {layout?.name === "concat"
+            {
+              /* {layout?.name === "concat"
               ? `${isVariantOf?.name} ${name}`
               : layout?.name === "productGroup"
               ? isVariantOf?.name
-              : name} */}
+              : name} */
+            }
           </span>
         </h1>
         <WishlistButtonVtex
