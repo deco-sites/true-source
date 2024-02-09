@@ -76,7 +76,8 @@ export default function ProductMain(props: Props) {
                 </div>
               </Slider.Item>
             </Slider>
-            {/* <ul class="w-full flex gap-3 justify-center mt-10">
+            {
+              /* <ul class="w-full flex gap-3 justify-center mt-10">
               <Slider.Dot index={0}>
                 <div class="w-2 h-2 rounded bg-dark group-disabled:bg-light-gray" />
               </Slider.Dot>
@@ -89,7 +90,8 @@ export default function ProductMain(props: Props) {
               <Slider.Dot index={3}>
                 <div class="w-2 h-2 rounded bg-dark group-disabled:bg-light-gray" />
               </Slider.Dot>
-            </ul> */}
+            </ul> */
+            }
             <SliderJS rootId={id} />
           </div>
         </div>
