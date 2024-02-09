@@ -1,7 +1,7 @@
 import ProductInfo from "./ProductInfo.tsx";
 import GallerySlider from "./Gallery/ImageSlider.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
-import { Benefits, Dna, Flaccidity, Muscle } from "../ui/CustomIcons.tsx";
+import { Benefits, Dna, Flaccidity, Muscle, IconCheck, IconNotCheck } from "../ui/CustomIcons.tsx";
 import { asset } from "$fresh/runtime.ts";
 
 export interface Props {
@@ -22,7 +22,7 @@ export default function ProductMain(props: Props) {
           <h2 class="uppercase text-center text-lg text-gold font-bold mb-3">
             Principais benefícios
           </h2>
-          <div class="flex gap-3">
+          <div class="flex flex-wrap gap-3">
             <div class="flex items-center gap-3 bg-ice px-4 py-3 rounded-lg">
               <Benefits />
               <span>
@@ -49,8 +49,8 @@ export default function ProductMain(props: Props) {
             </div>
           </div>
         </div>
-        <div class="container flex items-center py-12">
-          <div class="w-1/2 flex justify-center">
+        <div class="container flex flex-col lg:flex-row items-center py-12">
+          <div class="w-full lg:w-1/2 flex justify-center">
             <div class="w-80 grid grid-cols-2 items-center gap-8">
               <div class="flex flex-col items-center justify-center gap-y-2 text-center">
                 <div class="w-24 h-24 flex items-center justify-center uppercase font-bold text-base text-dark border border-black rounded-full">
@@ -78,7 +78,7 @@ export default function ProductMain(props: Props) {
               </div>
             </div>
           </div>
-          <div class="w-1/2 mt-12">
+          <div class="w-full lg:w-1/2 mt-12">
             <iframe
               class="w-full h-96 rounded-3xl overflow-hidden shadow-[5px_5px_20px_rgba(0,0,0,0.3)]"
               src="https://www.youtube.com//embed/A3ZfPWDMMDI"
@@ -88,11 +88,11 @@ export default function ProductMain(props: Props) {
             />
           </div>
         </div>
-        <div class="flex items-stretch bg-ice rounded-t-3xl shadow-[0_0_20px_rgba(0,0,0,0.3)] overflow-hidden mt-12">
-          <img class="w-1/2" src={asset("/image/infocard-1.jpg")} />
-          <div class="w-1/2 flex items-center justify-center">
-            <div class="w-3/4">
-              <h2 class="text-gold text-4xl uppercase mb-3 font-bold">
+        <div class="flex flex-col lg:flex-row items-stretch bg-ice rounded-t-3xl shadow-[0_0_20px_rgba(0,0,0,0.3)] overflow-hidden mt-12">
+          <img class="w-full lg:w-1/2" src={asset("/image/infocard-1.jpg")} />
+          <div class="w-full lg:w-1/2 flex items-center justify-center">
+            <div class="w-full lg:w-3/4 p-8 lg:p-0">
+              <h2 class="text-gold text-2xl lg:text-4xl uppercase mb-3 font-bold">
                 TRUE COLLAGEN PROTEIN
               </h2>
               <p>
@@ -106,7 +106,7 @@ export default function ProductMain(props: Props) {
           </div>
         </div>
         <div class="bg-ice h-[712px] flex items-center justify-center relative z-1">
-          <p class="text-white w-[585px] text-center">
+          <p class="text-white w-[585px] text-center px-10 sm:px-0">
             Nós da True Source queremos que você consuma o ideal de proteína,
             sem ter nenhum efeito indesejável, para que você se mantenha mais
             saudável E longevo.
@@ -116,8 +116,8 @@ export default function ProductMain(props: Props) {
           <img src={asset("/image/infocard-3.jpg")} />
           <img src={asset("/image/infocard-4.jpg")} />
         </div>
-        <div class="container flex items-center gap-x-24 mx-auto py-12">
-          <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-[554px] h-[471px] flex-none" />
+        <div class="container flex flex-col lg:flex-row items-center gap-8 sm:gap-24 mx-auto py-6 sm:py-12">
+          <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-full sm:w-[554px] h-[254px] sm:h-[471px] flex-none" />
           <div class="">
             Trazemos agora para o mercado, mais uma excelente fonte proteica: o
             True Collagen Protein. Uma fonte de proteína hipoalergênica, limpa e
@@ -127,19 +127,50 @@ export default function ProductMain(props: Props) {
             derme.
           </div>
         </div>
-        <div class="container flex items-center gap-x-24 mx-auto py-12">
+        <div class="container flex flex-col lg:flex-row items-center gap-8 sm:gap-24 mx-auto py-6 sm:py-12">
           <div class="">
             Nosso colágeno tem como finalidade sua saúde, pois nós sabemos que
             para sentir-se bem é necessário estar saudável. O Collagen Protein é
             limpo, puro e natural como todos os produtos da True Source.
           </div>
-          <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-[554px] h-[471px] flex-none" />
+          <div class="bg-ice shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl w-full sm:w-[554px] h-[254px] sm:h-[471px] flex-none" />
         </div>
-        <div class="flex items-stretch bg-ice mt-12">
-          <img class="w-1/2" src={asset("/image/infocard-7.jpg")} />
-          <div class="w-1/2 flex items-center justify-center">
-            <div class="w-3/4">
-              <h2 class="text-gold text-4xl uppercase mb-3 font-bold">
+        <div class="container flex flex-col gap-8 lg:gap-0 lg:grid grid-cols-7 mt-12">
+          <div class="order-1 lg:order-1 col-span-2">
+            <h3 class="text-lg text-gold font-bold uppercase mb-4">Possui</h3>
+            <ul>
+              <li class="flex items-center gap-4 py-4 border-b border-light-gray-200">
+                <IconCheck />
+                2,5g Colágeno Verisol®
+              </li>
+              <li class="flex items-center gap-4 py-4 border-b border-light-gray-200">
+                <IconCheck />
+                22g de Proteína
+              </li>
+            </ul>
+          </div>
+          <div class="order-3 lg:order-2 flex justify-center items-baseline col-span-3 px-10 lg:px-0 pt-4 lg:pt-0">
+            <img src={asset("/image/whey.png")} />
+          </div>
+          <div class="order-2 lg:order-3 col-span-2">
+            <h3 class="text-lg lg:text-right text-dark font-bold uppercase mb-4">Não possui</h3>
+            <ul>
+              <li class="flex flex-row-reverse lg:flex-row justify-end items-center gap-4 py-4 border-b border-light-gray-200">
+                Glúten
+                <IconNotCheck />
+              </li>
+              <li class="flex flex-row-reverse lg:flex-row justify-end items-center gap-4 py-4 border-b border-light-gray-200">
+                Corantes artificiais
+                <IconNotCheck />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-col-reverse lg:flex-row items-stretch bg-ice">
+          <img class="w-full lg:w-1/2" src={asset("/image/infocard-7.jpg")} />
+          <div class="w-full lg:w-1/2 flex items-center justify-center">
+            <div class="w-full lg:w-3/4 py-16 lg:py-0 px-8 lg:px-0">
+              <h2 class="text-dark lg:text-gold text-2xl lg:text-4xl uppercase mb-3 font-bold">
                 Como Usar
               </h2>
               <p>
@@ -149,10 +180,10 @@ export default function ProductMain(props: Props) {
             </div>
           </div>
         </div>
-        <div class="flex items-stretch bg-belga rounded-b-3xl min-h-[580px]">
-          <div class="w-1/2 flex items-center justify-center">
-            <div class="w-3/4 text-white">
-              <h2 class="text-4xl uppercase mb-3 font-bold">
+        <div class="flex flex-col lg:flex-row items-stretch bg-belga rounded-b-3xl min-h-[580px] py-24 lg:py-0 gap-8 lg:gap-0 px-8 lg:px-0">
+          <div class="w-full lg:w-1/2 flex items-center justify-center">
+            <div class="w-full lg:w-3/4 text-white">
+              <h2 class="text-2xl lg:text-4xl uppercase mb-3 font-bold">
                 INGREDIENTES
               </h2>
               <p>
@@ -163,8 +194,8 @@ export default function ProductMain(props: Props) {
               </p>
             </div>
           </div>
-          <div class="w-1/2 flex items-center justify-center">
-            <div class="w-3/4 border border-white p-4 rounded-3xl">
+          <div class="w-full lg:w-1/2 flex items-center justify-center">
+            <div class="w-full lg:w-3/4 border border-white p-4 rounded-3xl">
               <h3 class="text-lg text-white uppercase mb-2 font-bold">
                 Tabela Nutricional
               </h3>
