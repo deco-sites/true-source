@@ -37,7 +37,7 @@ export default function GallerySlider(props: Props) {
     <div id={id} class="flex flex-col">
       {/* Image Slider */}
       <div class="relative">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+        <Slider class="carousel carousel-center gap-6 w-full sm:w-[40vw]">
           {images.map((img, index) => {
             if (!img.url) return null;
             const optimizedURL = img.url.replace(imageURL, "$1$2-664-664$3");

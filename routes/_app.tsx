@@ -29,42 +29,6 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
-
-        {/* Fonts */}
-        <style
-          type="text/css"
-          dangerouslySetInnerHTML={{
-            __html: `
-            @font-face {
-              font-family: "Lemon Milk";
-              src: url("${asset("/font/LEMONMILK-Light.woff")}") format('woff');
-              font-weight: 300;
-            }
-            @font-face {
-              font-family: "Lemon Milk";
-              src: url("${
-              asset("/font/LEMONMILK-Regular.woff")
-            }") format('woff');
-              font-weight: 400;
-            }
-            @font-face {
-              font-family: "Lemon Milk";
-              src: url("${
-              asset("/font/LEMONMILK-Medium.woff")
-            }") format('woff');
-              font-weight: 500;
-            }
-            @font-face {
-              font-family: "Lemon Milk";
-              src: url("${asset("/font/LEMONMILK-Bold.woff")}") format('woff');
-              font-weight: 700;
-            }
-            html {
-              font-family: "Lemon Milk", sans-serif;
-            }
-          `,
-          }}
-        />
       </Head>
 
       {/* Rest of Preact tree */}
