@@ -347,3 +347,95 @@ export const IconNotCheck = () => (
     />
   </svg>
 );
+
+export const IconAsterisk = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+  >
+    <g clip-path="url(#clip0_1975_32728)">
+      <path
+        d="M8.00065 1.33301V14.6663M12.7147 3.28563L3.28661 12.7137M14.6673 7.99967H1.33398M12.7147 12.7137L3.28661 3.28563"
+        stroke="white"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_1975_32728">
+        <rect width="16" height="16" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const Timeline = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="436"
+    height="11"
+    viewBox="0 0 436 11"
+    fill="none"
+  >
+    <rect width="436" height="11" rx="5.5" fill="#F0F0EE" />
+    <circle cx="5.5" cy="5.5" r="5.5" fill="url(#paint0_linear_796_20235)" />
+    <circle cx="185.5" cy="5.5" r="5.5" fill="url(#paint1_linear_796_20235)" />
+    <circle cx="365.5" cy="5.5" r="5.5" fill="url(#paint2_linear_796_20235)" />
+    <defs>
+      <linearGradient
+        id="paint0_linear_796_20235"
+        x1="11"
+        y1="5.5"
+        x2="-6.18505e-08"
+        y2="5.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#E9530E" />
+        <stop offset="1" stop-color="#E4003F" />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_796_20235"
+        x1="191"
+        y1="5.5"
+        x2="180"
+        y2="5.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#E9530E" />
+        <stop offset="1" stop-color="#E4003F" />
+      </linearGradient>
+      <linearGradient
+        id="paint2_linear_796_20235"
+        x1="371"
+        y1="5.5"
+        x2="360"
+        y2="5.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#E9530E" />
+        <stop offset="1" stop-color="#E4003F" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const IconButtonCart = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="17"
+    height="16"
+    viewBox="0 0 17 16"
+    fill="none"
+  >
+    <path
+      d="M1.83398 1.33301H2.70476C2.86877 1.33301 2.95078 1.33301 3.01677 1.36317C3.07493 1.38975 3.12422 1.43249 3.15875 1.4863C3.19794 1.54737 3.20954 1.62855 3.23273 1.79092L3.54827 3.99967M3.54827 3.99967L4.24953 9.15394C4.33852 9.80802 4.38302 10.1351 4.53938 10.3812C4.67717 10.5982 4.87471 10.7706 5.10822 10.8779C5.37323 10.9997 5.70328 10.9997 6.36339 10.9997H12.0686C12.697 10.9997 13.0112 10.9997 13.268 10.8866C13.4944 10.7869 13.6886 10.6262 13.8288 10.4225C13.9879 10.1914 14.0467 9.88278 14.1643 9.26551L15.0467 4.6328C15.0881 4.41555 15.1088 4.30692 15.0788 4.22201C15.0525 4.14752 15.0006 4.0848 14.9324 4.04502C14.8545 3.99967 14.744 3.99967 14.5228 3.99967H3.54827ZM7.16732 13.9997C7.16732 14.3679 6.86884 14.6663 6.50065 14.6663C6.13246 14.6663 5.83398 14.3679 5.83398 13.9997C5.83398 13.6315 6.13246 13.333 6.50065 13.333C6.86884 13.333 7.16732 13.6315 7.16732 13.9997ZM12.5007 13.9997C12.5007 14.3679 12.2022 14.6663 11.834 14.6663C11.4658 14.6663 11.1673 14.3679 11.1673 13.9997C11.1673 13.6315 11.4658 13.333 11.834 13.333C12.2022 13.333 12.5007 13.6315 12.5007 13.9997Z"
+      stroke="white"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

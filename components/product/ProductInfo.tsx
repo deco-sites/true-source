@@ -1,22 +1,15 @@
 import { SendEventOnView } from "$store/components/Analytics.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
-import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
-import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
-import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
-import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
-import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
-import AddToCartButtonNuvemshop from "$store/islands/AddToCartButton/nuvemshop.tsx";
-import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
-import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
-import { formatPrice } from "$store/sdk/format.ts";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import AddToCartArea from "$store/islands/AddToCartArea.tsx";
+import ProductSimilars from "$store/islands/Product/ProductSimilars.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -31,8 +24,13 @@ function ProductInfo({ page }: Props) {
   }
 
   const { breadcrumbList, product } = page;
+
   const {
     productID,
+    brand: {
+      // @ts-ignore - brandName exists
+      name: brandName,
+    },
     offers,
     name = "",
     gtin,
@@ -40,13 +38,18 @@ function ProductInfo({ page }: Props) {
     additionalProperty = [],
   } = product;
   const description = product.description || isVariantOf?.description;
+  if (!isVariantOf) return null;
+  const {
+    additionalProperty: currentVariantProperties = [],
+  } = isVariantOf;
+  if (!offers) return null;
   const {
     price = 0,
     listPrice,
     seller = "1",
     installments,
     availability,
-  } = useOffer(offers);
+  } = useOffer(offers) || {};
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const breadcrumb = {
     ...breadcrumbList,
@@ -62,19 +65,13 @@ function ProductInfo({ page }: Props) {
   });
 
   return (
-    <div class="flex flex-col" id={id}>
+    <div class="flex flex-col gap-y-6" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8 flex gap-4 justify-between">
+      <div class="flex gap-4 justify-between">
         <h1>
-          <span class="font-bold text-2xl uppercase">
-            {
-              /* {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name} */
-            }
+          <span class="font-semibold text-2xl uppercase font-lemon-milk">
+            {isVariantOf?.name}
           </span>
         </h1>
         <WishlistButtonVtex
@@ -83,66 +80,29 @@ function ProductInfo({ page }: Props) {
           productGroupID={productGroupID}
         />
       </div>
-      {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
-            </span>
-          )}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers?.priceCurrency)}
-          </span>
-        </div>
-        <span class="text-sm text-base-300">{installments}</span>
-      </div>
+      {/* Brand */}
+      <span class="font-medium text-light-gray">{brandName}</span>
+      {/* Divider */}
+      <div class="border-b border-light-gray-200 w-full" />
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6">
-        <ProductSelector product={product} />
-      </div>
-      {/* Add to Cart and Favorites button */}
-      <div class="mt-4 sm:mt-10 flex flex-col gap-2">
-        {availability === "https://schema.org/InStock"
-          ? (
-            <AddToCartButtonVTEX
-              eventParams={{ items: [eventItem] }}
-              productID={productID}
-              seller={seller}
-            />
-          )
-          : <OutOfStock productID={productID} />}
-      </div>
+      <ProductSimilars product={product} current={currentVariantProperties} />
+      {/* Add to Cart and Favorites button | Prices */}
+      <AddToCartArea
+        product={product}
+        breadcrumbList={breadcrumbList}
+        price={price}
+        listPrice={listPrice}
+      />
       {/* Shipping Simulation */}
-      <div class="mt-8">
-        {platform === "vtex" && (
-          <ShippingSimulation
-            items={[
-              {
-                id: Number(product.sku),
-                quantity: 1,
-                seller: seller,
-              },
-            ]}
-          />
-        )}
-      </div>
-      {/* Description card */}
-      {
-        /* <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            </details>
-          )}
-        </span>
-      </div> */
-      }
+      <ShippingSimulation
+        items={[
+          {
+            id: Number(product.sku),
+            quantity: 1,
+            seller: seller,
+          },
+        ]}
+      />
       {/* Analytics Event */}
       <SendEventOnView
         id={id}

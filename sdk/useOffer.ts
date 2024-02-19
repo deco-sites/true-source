@@ -2,10 +2,12 @@ import type {
   AggregateOffer,
   UnitPriceSpecification,
 } from "apps/commerce/types.ts";
+import { formatPrice } from "./format.ts";
 
 const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,
+  price: number,
 ) => {
   if (curr.priceComponentType !== "https://schema.org/Installment") {
     return acc;
@@ -15,6 +17,9 @@ const bestInstallment = (
     return curr;
   }
 
+  if (acc.price < price) return curr;
+  if (curr.price < price) return acc;
+
   if (acc.price > curr.price) {
     return curr;
   }
@@ -23,11 +28,10 @@ const bestInstallment = (
     return acc;
   }
 
-  if (
-    acc.billingDuration && curr.billingDuration &&
-    acc.billingDuration < curr.billingDuration
-  ) {
-    return curr;
+  if (acc.billingDuration && curr.billingDuration) {
+    if (acc.billingDuration < curr.billingDuration) {
+      return curr;
+    }
   }
 
   return acc;
@@ -35,7 +39,7 @@ const bestInstallment = (
 
 const installmentToString = (
   installment: UnitPriceSpecification,
-  sellingPrice: number,
+  sellingPrice: UnitPriceSpecification,
 ) => {
   const { billingDuration, billingIncrement, price } = installment;
 
@@ -43,9 +47,9 @@ const installmentToString = (
     return "";
   }
 
-  const withTaxes = sellingPrice < price;
+  const withTaxes = sellingPrice.price < price;
 
-  return `${billingDuration}x de R$ ${billingIncrement} ${
+  return `${billingDuration}x de ${formatPrice(billingIncrement, "BRL")} ${
     withTaxes ? "com juros" : "sem juros"
   }`;
 };
@@ -55,13 +59,22 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const listPrice = offer?.priceSpecification.find((spec) =>
     spec.priceType === "https://schema.org/ListPrice"
   );
-  const installment = offer?.priceSpecification.reduce(bestInstallment, null);
+  const price = offer?.priceSpecification.find((spec) =>
+    spec.priceType === "https://schema.org/SalePrice" &&
+    !spec.priceComponentType
+  );
+  if (!price) {
+    return null;
+  }
+  const installment = offer?.priceSpecification.reduce((
+    acc: UnitPriceSpecification | null,
+    curr: UnitPriceSpecification,
+  ) => bestInstallment(acc, curr, price.price), null);
   const seller = offer?.seller;
-  const price = offer?.price;
   const availability = offer?.availability;
 
   return {
-    price,
+    price: price?.price,
     listPrice: listPrice?.price,
     availability,
     seller,

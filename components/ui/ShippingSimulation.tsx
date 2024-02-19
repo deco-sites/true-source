@@ -93,37 +93,40 @@ function ShippingSimulation({ items }: Props) {
 
   return (
     <div class="flex flex-col gap-2">
-      <div class="flex flex-col">
-        <span>Calcular frete</span>
-        <span>
-          Informe seu CEP para consultar os prazos de entrega
+      <div class="flex items-center gap-6">
+        <span class="text-[13px] font-medium uppercase w-[69px] font-lemon-milk">
+          Calcule o frete
         </span>
-      </div>
-
-      <form
-        class="join"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSimulation();
-        }}
-      >
-        <input
-          as="input"
-          type="text"
-          class="input input-bordered join-item"
-          placeholder="Seu cep aqui"
-          value={postalCode.value}
-          maxLength={8}
-          size={8}
-          onChange={(e: { currentTarget: { value: string } }) => {
-            postalCode.value = e.currentTarget.value;
+        <form
+          class="flex items-center rounded-md border-2 border-light-gray-200 bg-white pr-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSimulation();
           }}
-        />
-        <Button type="submit" loading={loading.value} class="join-item">
-          Calcular
-        </Button>
-      </form>
-
+        >
+          <input
+            as="input"
+            type="text"
+            class="input border-0 placeholder:text-sm text-sm placeholder:text-dark text-dark"
+            placeholder="Informe o CEP"
+            value={postalCode.value}
+            maxLength={8}
+            size={8}
+            onChange={(e: { currentTarget: { value: string } }) => {
+              postalCode.value = e.currentTarget.value;
+            }}
+          />
+          <button
+            type="submit"
+            class="text-sm text-white bg-dark py-2 px-3 rounded-md font-bold"
+          >
+            Calcular
+          </button>
+        </form>
+        <a href="#" class="text-sm underline font-regular w-[65px] uppercase">
+          Descobrir meu cep
+        </a>
+      </div>
       <div>
         <div>
           <ShippingContent simulation={simulateResult} />

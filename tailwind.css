@@ -7,6 +7,7 @@
   /* Allow changing font family via CMS */
   html {
     font-family: var(--font-family);
+    @apply text-dark;
   }
 
   mark {
@@ -41,6 +42,43 @@
   }
 }
 
+@layer utilities {
+  .font-lemon-milk {
+    font-family: 'Lemon Milk', sans-serif;
+  }
+
+  .absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .custom-radio {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @apply relative block cursor-pointer;
+  }
+  
+  .custom-radio input[type="radio"] {
+    @apply opacity-0 cursor-pointer absolute w-full h-full;
+  }
+  
+  .custom-radio-mark {
+    @apply block w-4 h-4;
+  }
+
+  .custom-radio-mark:after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='7.25' stroke='%233C3C3B' stroke-width='1.5'/%3E%3C/svg%3E");
+  }
+  
+  .custom-radio input[type="radio"]:checked ~ .custom-radio-mark:after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='5.5' stroke='%233C3C3B' stroke-width='5'/%3E%3C/svg%3E");
+  }
+}
+
 @layer components {
   .features {
     @apply flex items-center justify-center gap-6 flex-wrap;
@@ -51,6 +89,26 @@
     @apply w-[380px] max-w-[380px] lg:h-[380px] bg-[#F4F4F4] rounded-3xl;
     @apply border-l border-transparent duration-200 whitespace-pre-line text-center;
     @apply flex flex-col items-center justify-start gap-8 py-10 px-8 lg:px-12;
+  }
+
+  #nutritionalTable table {
+    @apply table-auto text-white text-xs lg:text-sm !h-auto;
+  }
+
+  #nutritionalTable table thead tr th {
+    @apply text-left;
+  }
+
+  #nutritionalTable table tbody tr {
+    @apply border-b border-[#f0f0ee33] !h-auto;
+  }
+
+  #nutritionalTable table tbody tr td {
+    @apply py-2 !h-auto;
+  }
+
+  #nutritionalTable h6 {
+    @apply w-full text-xs text-white;
   }
 }
 
@@ -69,7 +127,7 @@
 }
 
 .bg-brand {
-  background: rgb(228, 0, 63);
+  background: #e4003f;
   background: linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%);
 }
 

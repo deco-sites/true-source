@@ -34,10 +34,10 @@ export default function GallerySlider(props: Props) {
   // const aspectRatio = `${width} / ${height}`;
 
   return (
-    <div id={id} class="flex flex-col">
+    <div id={id} class="flex flex-col max-w-[664px]">
       {/* Image Slider */}
       <div class="relative">
-        <Slider class="carousel carousel-center gap-6 w-full sm:w-[40vw]">
+        <Slider class="carousel carousel-center gap-6 w-full">
           {images.map((img, index) => {
             if (!img.url) return null;
             const optimizedURL = img.url.replace(imageURL, "$1$2-664-664$3");
@@ -89,7 +89,7 @@ export default function GallerySlider(props: Props) {
       </div>
 
       {/* Dots */}
-      <ul class="flex gap-1 px-4 sm:px-0">
+      <ul class="flex flex-wrap gap-1 px-4 sm:px-0">
         {images.map((img, index) => {
           if (!img.url) return null;
           const optimizedURL = img.url.replace(imageURL, "$1$2-160-160$3");

@@ -3,6 +3,7 @@ import { sendEvent } from "$store/sdk/analytics.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
+import { IconButtonCart } from "../../ui/CustomIcons.tsx";
 
 export interface Props {
   /** @description: sku name */
@@ -43,9 +44,10 @@ export default function AddToCartButton(props: Props) {
   return (
     <Button
       {...btnProps}
-      class="bg-green rounded-lg text-white font-bold border-0"
+      class="flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-[13px] font-bold uppercase font-lemon-milk text-white border-0"
     >
       Comprar
+      <IconButtonCart />
     </Button>
   );
 }

@@ -3,6 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
+import * as $AddToCartArea from "./islands/AddToCartArea.tsx";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
 import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";
@@ -20,10 +21,15 @@ import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
+import * as $PixPrice from "./islands/PixPrice.tsx";
+import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
+import * as $Product_SellingPrice from "./islands/Product/SellingPrice.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
+import * as $Radio from "./islands/Radio.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
+import * as $Subscription from "./islands/Subscription.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -33,6 +39,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
+    "./islands/AddToCartArea.tsx": $AddToCartArea,
     "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
     "./islands/AddToCartButton/nuvemshop.tsx": $AddToCartButton_nuvemshop,
     "./islands/AddToCartButton/shopify.tsx": $AddToCartButton_shopify,
@@ -50,10 +57,15 @@ const manifest = {
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
+    "./islands/PixPrice.tsx": $PixPrice,
+    "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,
+    "./islands/Product/SellingPrice.tsx": $Product_SellingPrice,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
+    "./islands/Radio.tsx": $Radio,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/SliderJS.tsx": $SliderJS,
+    "./islands/Subscription.tsx": $Subscription,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },

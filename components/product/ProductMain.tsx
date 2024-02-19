@@ -13,14 +13,77 @@ import { asset } from "$fresh/runtime.ts";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
+import { PropertyValue } from "apps/commerce/types.ts";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 }
 
+interface NutritionalHighlightValue {
+  name: string;
+  value: string;
+}
+
+const YOUTUBE_URL = "https://www.youtube.com/";
+const YOUTUBE_URL_REGEX =
+  /https:\/\/www\.youtube\.com\/(watch\?v=)([a-zA-Z0-9]*)/gi;
+
 export default function ProductMain(props: Props) {
   const id = useId();
+  let have: string[] = [];
+  let dontHave: string[] = [];
+  let iframeSrc = "";
+  let ingredients = "";
+  let nutritionalTable = "";
+  const nutritionalHighlights: NutritionalHighlightValue[] = [];
+  const nutritionalHighlightAux: string[] = [];
+
+  if (props.page === null) return null;
+  const { product } = props.page;
+
+  if (!product.isVariantOf) return null;
+  const {
+    isVariantOf: {
+      additionalProperty = [],
+    },
+  } = product;
+
+  additionalProperty.forEach((property: PropertyValue) => {
+    if (property.name === "Possui" && property.value) {
+      const value = property.value.split("\r\n");
+      have = [...value];
+    }
+    if (property.name === "Não Possui" && property.value) {
+      const value = property.value.split("\r\n");
+      dontHave = [...value];
+    }
+    if (property.name === "URL Youtube" && property.value) {
+      iframeSrc = property.value.replace(
+        YOUTUBE_URL_REGEX,
+        `${YOUTUBE_URL}embed/$2`,
+      );
+    }
+    if (property.name === "Ingredientes" && property.value) {
+      ingredients = property.value;
+    }
+    if (property.name === "Tabela Nutricional" && property.value) {
+      nutritionalTable = property.value;
+    }
+    if (property.name?.indexOf("Ingredientes - ") !== -1 && property.value) {
+      nutritionalHighlightAux.push(property.value);
+    }
+  });
+  console.log("iframeSrc", iframeSrc);
+
+  for (let i = 0; i < nutritionalHighlightAux.length; i += 2) {
+    nutritionalHighlights.push({
+      value: nutritionalHighlightAux[i],
+      name: nutritionalHighlightAux[i + 1],
+    });
+  }
+  console.log("nutritionalHighlights", nutritionalHighlights);
+
   return (
     <div>
       <div class="container flex flex-col lg:flex-row lg:gap-8 py-12">
@@ -95,44 +158,32 @@ export default function ProductMain(props: Props) {
             <SliderJS rootId={id} />
           </div>
         </div>
-        <div class="container flex flex-col lg:flex-row items-center py-12">
-          <div class="w-full lg:w-1/2 flex justify-center">
-            <div class="w-80 grid grid-cols-2 items-center gap-8">
-              <div class="flex flex-col items-center justify-center gap-y-2 text-center text-sm lg:text-base">
-                <div class="w-24 h-24 flex items-center justify-center uppercase font-bold text-base text-dark border border-black rounded-full">
-                  92 Kcal
-                </div>
-                Calorias
-              </div>
-              <div class="flex flex-col items-center justify-center gap-y-2 text-center text-sm lg:text-base">
-                <div class="w-24 h-24 flex items-center justify-center uppercase font-bold text-base text-dark border border-black rounded-full">
-                  2,6g
-                </div>
-                Fibra Alimentar
-              </div>
-              <div class="flex flex-col items-center justify-center gap-y-2 text-center text-sm lg:text-base">
-                <div class="w-24 h-24 flex items-center justify-center uppercase font-bold text-base text-dark border border-black rounded-full">
-                  2,5g
-                </div>
-                Colágeno Verisol®
-              </div>
-              <div class="flex flex-col items-center justify-center gap-y-2 text-center text-sm lg:text-base">
-                <div class="w-24 h-24 flex items-center justify-center uppercase font-bold text-base text-dark border border-black rounded-full">
-                  114mg
-                </div>
-                Sódio
+        <div class="container flex flex-col lg:flex-row items-center justify-center py-12">
+          {nutritionalHighlights.length > 0 && (
+            <div class="w-full lg:w-1/2 flex justify-center">
+              <div class="w-80 flex flex-wrap items-center justify-center gap-y-8">
+                {nutritionalHighlights.map((highlight) => (
+                  <div class="flex flex-col items-center justify-center gap-y-2 text-center text-sm lg:text-base w-1/2">
+                    <div class="w-24 h-24 flex items-center justify-center font-bold text-base text-dark border border-gold rounded-full">
+                      {highlight.value}
+                    </div>
+                    {highlight.name}
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-          <div class="w-full lg:w-1/2 mt-12">
-            <iframe
-              class="w-full h-96 rounded-3xl overflow-hidden shadow-[5px_5px_20px_rgba(0,0,0,0.3)]"
-              src="https://www.youtube.com//embed/A3ZfPWDMMDI"
-              frameBorder="0"
-              allowFullScreen={true}
-              allowTransparency={true}
-            />
-          </div>
+          )}
+          {iframeSrc && (
+            <div class="w-full lg:w-1/2 mt-12">
+              <iframe
+                class="w-full h-96 rounded-3xl overflow-hidden shadow-[5px_5px_20px_rgba(0,0,0,0.3)]"
+                src={iframeSrc}
+                frameBorder="0"
+                allowFullScreen={true}
+                allowTransparency={true}
+              />
+            </div>
+          )}
         </div>
         <div class="flex flex-col lg:flex-row items-stretch bg-ice rounded-t-3xl shadow-[0_0_20px_rgba(0,0,0,0.3)] overflow-hidden mt-12">
           <img class="w-full lg:w-1/2" src={asset("/image/infocard-1.jpg")} />
@@ -195,14 +246,12 @@ export default function ProductMain(props: Props) {
               Possui
             </h3>
             <ul>
-              <li class="text-sm lg:text-base flex items-center gap-4 py-4 border-b border-light-gray-200">
-                <IconCheck />
-                2,5g Colágeno Verisol®
-              </li>
-              <li class="text-sm lg:text-base flex items-center gap-4 py-4 border-b border-light-gray-200">
-                <IconCheck />
-                22g de Proteína
-              </li>
+              {have.map((item) => (
+                <li class="text-sm lg:text-base flex items-center gap-4 py-4 border-b border-light-gray-200">
+                  <IconCheck />
+                  {item.replace(";", "")}
+                </li>
+              ))}
             </ul>
           </div>
           <div class="order-3 lg:order-2 flex justify-center items-baseline col-span-3 px-10 lg:px-0 pt-4 lg:pt-0">
@@ -213,14 +262,12 @@ export default function ProductMain(props: Props) {
               Não possui
             </h3>
             <ul>
-              <li class="text-sm lg:text-base flex flex-row-reverse lg:flex-row justify-end items-center gap-4 py-4 border-b border-light-gray-200">
-                Glúten
-                <IconNotCheck />
-              </li>
-              <li class="text-sm lg:text-base flex flex-row-reverse lg:flex-row justify-end items-center gap-4 py-4 border-b border-light-gray-200">
-                Corantes artificiais
-                <IconNotCheck />
-              </li>
+              {dontHave.map((item) => (
+                <li class="text-sm lg:text-base flex flex-row-reverse lg:flex-row justify-end items-center gap-4 py-4 border-b border-light-gray-200">
+                  {item.replace(";", "")}
+                  <IconNotCheck />
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -239,74 +286,84 @@ export default function ProductMain(props: Props) {
           </div>
         </div>
         <div class="flex flex-col lg:flex-row items-center bg-belga rounded-b-3xl min-h-[580px] py-24 lg:py-0 gap-8 lg:gap-0 px-8 lg:px-0">
-          <div class="w-full lg:w-1/2 flex items-center justify-center">
-            <div class="w-full lg:w-3/4 text-white">
-              <h2 class="text-2xl lg:text-4xl uppercase mb-3 font-bold">
-                INGREDIENTES
-              </h2>
-              <p class="text-sm lg:text-base">
-                Colágeno hidrolisado, peptídeos bioativos de colágeno
-                hidrolisado com peso molecular médio de 2kDa (Verisol®), goma
-                acácia, cacau alcalino lecitinado em pó, edulcorantes naturais
-                stévia e taumatina.
-              </p>
+          {ingredients && (
+            <div class="w-full lg:w-1/2 flex items-center justify-center">
+              <div class="w-full lg:w-3/4 text-white">
+                <h2 class="text-2xl lg:text-4xl uppercase mb-3 font-bold">
+                  INGREDIENTES
+                </h2>
+                <p
+                  class="text-sm lg:text-base"
+                  dangerouslySetInnerHTML={{ __html: ingredients }}
+                />
+              </div>
             </div>
-          </div>
-          <div class="w-full lg:w-1/2 flex flex-col items-center justify-center border-none lg:border-solid border-l border-[#f0f0ee33]">
-            <div class="w-full lg:w-3/4 border border-[#f0f0ee33] p-6 rounded-3xl">
-              <h3 class="text-lg text-white uppercase mb-2 font-bold">
-                Tabela Nutricional
-              </h3>
-              <table class="table-auto text-white text-xs lg:text-sm">
-                <thead>
-                  <tr>
-                    <th colSpan={2} class="text-left">
-                      Quantidade por porção: 26mg (01 Scoop)
-                    </th>
-                    <th>%VD*</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Valor Energético</td>
-                    <td class="py-2">92kcal = 386kj</td>
-                    <td class="py-2">7%</td>
-                  </tr>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Carboidrados</td>
-                    <td class="py-2">1g</td>
-                    <td class="py-2">0%</td>
-                  </tr>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Proteínas, das quais:</td>
-                    <td class="py-2">2,5g</td>
-                    <td class="py-2">**</td>
-                  </tr>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Colágeno Verisol</td>
-                    <td class="py-2">2,5g</td>
-                    <td class="py-2">**</td>
-                  </tr>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Fibra Alimentar</td>
-                    <td class="py-2">2,6g</td>
-                    <td class="py-2">10%</td>
-                  </tr>
-                  <tr class="border-b border-[#f0f0ee33]">
-                    <td class="py-2">Sódio</td>
-                    <td class="py-2">114g</td>
-                    <td class="py-2">5%</td>
-                  </tr>
-                </tbody>
-              </table>
+          )}
+          {nutritionalTable && (
+            <div class="w-full lg:w-1/2 flex flex-col items-center justify-center border-none lg:border-solid border-l border-[#f0f0ee33]">
+              <div class="w-full lg:w-3/4 border border-[#f0f0ee33] p-6 rounded-3xl">
+                <h3 class="text-lg text-white uppercase mb-2 font-bold">
+                  Tabela Nutricional
+                </h3>
+                <div
+                  id="nutritionalTable"
+                  dangerouslySetInnerHTML={{ __html: nutritionalTable }}
+                />
+                {
+                  /* <table class="table-auto text-white text-xs lg:text-sm">
+                    <thead>
+                      <tr>
+                        <th colSpan={2} class="text-left">
+                          Quantidade por porção: 26mg (01 Scoop)
+                        </th>
+                        <th>%VD*</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Valor Energético</td>
+                        <td class="py-2">92kcal = 386kj</td>
+                        <td class="py-2">7%</td>
+                      </tr>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Carboidrados</td>
+                        <td class="py-2">1g</td>
+                        <td class="py-2">0%</td>
+                      </tr>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Proteínas, das quais:</td>
+                        <td class="py-2">2,5g</td>
+                        <td class="py-2">**</td>
+                      </tr>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Colágeno Verisol</td>
+                        <td class="py-2">2,5g</td>
+                        <td class="py-2">**</td>
+                      </tr>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Fibra Alimentar</td>
+                        <td class="py-2">2,6g</td>
+                        <td class="py-2">10%</td>
+                      </tr>
+                      <tr class="border-b border-[#f0f0ee33]">
+                        <td class="py-2">Sódio</td>
+                        <td class="py-2">114g</td>
+                        <td class="py-2">5%</td>
+                      </tr>
+                    </tbody>
+                  </table> */
+                }
+                {
+                  /* <p class="w-full lg:w-3/4 text-xs mt-8 text-white">
+                    (*) % Valores Diários de referência com base em uma dieta de
+                    2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou
+                    menores, dependendo das suas necessidades energéticas. (**)
+                    Valores diários não estabelecidos.
+                  </p> */
+                }
+              </div>
             </div>
-            <p class="w-full lg:w-3/4 text-xs mt-8 text-white">
-              (*) % Valores Diários de referência com base em uma dieta de
-              2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou
-              menores, dependendo das suas necessidades energéticas. (**)
-              Valores diários não estabelecidos.
-            </p>
-          </div>
+          )}
         </div>
       </div>
     </div>

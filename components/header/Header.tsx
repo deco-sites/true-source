@@ -80,7 +80,7 @@ function Header({
 
   return (
     <>
-      <header style={{ height: headerHeight, display: "none" }}>
+      <header style={{ height: headerHeight }}>
         <Drawers
           menu={{ items }}
           searchbar={searchbar}

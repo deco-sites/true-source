@@ -73,7 +73,7 @@ function ProductCard({
   const productGroupID = isVariantOf?.productGroupID;
   const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments } = useOffer(offers);
+  const { listPrice, price, installments } = useOffer(offers) || {};
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
