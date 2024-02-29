@@ -53,34 +53,36 @@ export default function AddToCartArea({
 
   return (
     <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4">
-      <div class="flex flex-row gap-6 items-stretch">
-        <span class="text-dark">
-          <PixPrice productId={productID} quantity={quantity} />
-          <p class="text-sm font-regular normal-case">à vista no Pix</p>
-        </span>
-        <SellingPrice productId={productID} quantity={quantity} />
-      </div>
-      <div class="flex items-center gap-4 border border-light-gray rounded-md">
-        <QuantitySelector
-          quantity={quantity}
-          onChange={(quantity) => {
-            if (quantity < 1) return;
-            if (quantity > 9) return;
-            setQuantity(quantity);
-          }}
-        />
-        <span
-          class={`text-sm ${
-            quantity >= 3 ? "text-green font-bold" : "text-gray font-regular"
-          }`}
-        >
-          10% OFF para 3 ou mais unidades
-        </span>
-      </div>
-      <div class="flex flex-col gap-2">
-        {availability === "https://schema.org/InStock"
-          ? (
-            <>
+      {availability === "https://schema.org/InStock"
+        ? (
+          <>
+            <div class="flex flex-row gap-6 items-stretch">
+              <span class="text-dark">
+                <PixPrice productId={productID} quantity={quantity} />
+                <p class="text-sm font-regular normal-case">à vista no Pix</p>
+              </span>
+              <SellingPrice productId={productID} quantity={quantity} />
+            </div>
+            <div class="flex items-center gap-4 border border-light-gray rounded-md">
+              <QuantitySelector
+                quantity={quantity}
+                onChange={(quantity) => {
+                  if (quantity < 1) return;
+                  if (quantity > 9) return;
+                  setQuantity(quantity);
+                }}
+              />
+              <span
+                class={`text-sm ${
+                  quantity >= 3
+                    ? "text-green font-bold"
+                    : "text-gray font-regular"
+                }`}
+              >
+                10% OFF para 3 ou mais unidades
+              </span>
+            </div>
+            <div class="flex flex-col gap-2">
               <AddToCartButtonVTEX
                 eventParams={{ items: [eventItem] }}
                 productID={productID}
@@ -92,10 +94,10 @@ export default function AddToCartArea({
                 seller={seller}
                 quantity={quantity}
               />
-            </>
-          )
-          : <OutOfStock productID={productID} />}
-      </div>
+            </div>
+          </>
+        )
+        : <OutOfStock productID={productID} />}
     </div>
   );
 }
