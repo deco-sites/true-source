@@ -6,6 +6,7 @@ import type { UnitPriceSpecification } from "apps/commerce/types.ts";
 export type Props = {
   productId: string;
   quantity: number;
+  type?: "subscription" | "productInfo";
 };
 
 interface Installment {
@@ -35,6 +36,7 @@ const installmentToString = (
 export default function SellingPrice({
   productId,
   quantity,
+  type = "productInfo",
 }: Props) {
   const { simulate } = useCart();
   const [price, setPrice] = useState<number | null>(null);
@@ -104,6 +106,22 @@ export default function SellingPrice({
   }, [quantity]);
 
   if (!price && !installment) return null;
+  if (type === "subscription") {
+    return (
+      <span class="text-sm text-gray line-through">
+        {/* @ts-ignore price is checked */}
+        De <strong>{formatPrice(price, "BRL")}</strong>
+        <br />
+        ou{" "}
+        <span
+          class="text-sm text-gray"
+          // @ts-ignore installment is checked
+          dangerouslySetInnerHTML={{ __html: installment }}
+        />
+      </span>
+    );
+  }
+
   return (
     <span class="text-sm text-gray pl-4 border-l border-light-gray">
       {/* @ts-ignore price is checked */}

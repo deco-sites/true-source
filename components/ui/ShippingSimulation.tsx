@@ -93,7 +93,7 @@ function ShippingSimulation({ items }: Props) {
 
   return (
     <div class="flex flex-col gap-2">
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap items-center gap-6">
         <span class="text-[13px] font-medium uppercase w-[69px] font-lemon-milk">
           Calcule o frete
         </span>

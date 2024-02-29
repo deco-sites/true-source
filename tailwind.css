@@ -53,6 +53,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .absolute-top-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   
   .custom-radio {
     -webkit-user-select: none;
@@ -109,6 +115,22 @@
 
   #nutritionalTable h6 {
     @apply w-full text-xs text-white;
+  }
+
+  #benefitsSlider {
+    @apply pb-11;
+  }
+  
+  #benefitsSlider .swiper-pagination {
+    @apply bottom-0;
+  }
+  
+  #benefitsSlider .swiper-pagination .swiper-pagination-bullet {
+    @apply bg-light-gray;
+  }
+  
+  #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
+    @apply bg-dark;
   }
 }
 

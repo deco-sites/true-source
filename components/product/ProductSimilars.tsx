@@ -48,7 +48,7 @@ function ProductSimilars({ product, current }: Props) {
           crossSelling: "similars",
           id: product.inProductGroupWithID,
         });
-      // console.log("relatedProducts", relatedProducts);
+      console.log("relatedProducts", relatedProducts);
       const possibilities = relatedProducts?.map((related) => {
         const properties = splitProperties(
           related.isVariantOf?.additionalProperty ?? [],
