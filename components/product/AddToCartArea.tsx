@@ -25,7 +25,6 @@ export default function AddToCartArea({
 }: Props) {
   if (!IS_BROWSER) return null;
 
-  console.log("product", product);
   const [quantity, setQuantity] = useState(1);
 
   const {
@@ -91,6 +90,7 @@ export default function AddToCartArea({
                 productID={productID}
                 seller={seller}
                 quantity={quantity}
+                price={price}
               />
             </>
           )
