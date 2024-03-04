@@ -1,7 +1,11 @@
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import Button from "./common.tsx";
 
-function CartButton() {
+export interface Props {
+  type?: "menu" | "header";
+}
+
+function CartButton({ type = "header" }: Props) {
   const { loading, cart } = useCart();
   const {
     totalizers = [],
@@ -17,6 +21,7 @@ function CartButton() {
 
   return (
     <Button
+      type={type}
       currency={currency}
       loading={loading.value}
       total={(total - discounts) / 100}

@@ -1,33 +1,74 @@
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
+import type { AlertProps, Theme } from "./Header.tsx";
 
-export interface Props {
-  alerts?: string[];
-  /**
-   * @title Autoplay interval
-   * @description time (in seconds) to start the carousel autoplay
-   */
-  interval?: number;
+interface Props {
+  alerts: AlertProps[];
+  theme: Theme;
 }
 
-function Alert({ alerts = [], interval = 5 }: Props) {
+function Alert({ alerts = [], theme }: Props) {
   const id = useId();
+  const isLightTheme = theme === "light";
 
   return (
-    <div id={id}>
-      <Slider class="carousel carousel-center w-screen bg-secondary gap-6">
-        {alerts.map((alert, index) => (
-          <Slider.Item index={index} class="carousel-item">
-            <span class="text-sm text-secondary-content flex justify-center items-center w-screen h-[38px]">
-              {alert}
-            </span>
-          </Slider.Item>
-        ))}
-      </Slider>
+    <>
+      <div>
+        <div id={id} className={`lg:hidden flex mx-auto `}>
+          <Slider className={`carousel carousel-center w-screen bg-secondary `}>
+            {alerts.map((alert, index) => (
+              <Slider.Item key={index} index={index} className="carousel-item">
+                <div
+                  className={`text-sm flex justify-center mx-auto items-center w-screen h-[38px] py-2 border-b border-solid border-Stroke border-opacity-100 ${
+                    isLightTheme ? "bg-white" : "bg-black"
+                  }`}
+                >
+                  {alert.icons && <img className="px-2" src={alert.icons} />}
+                  <p
+                    className={`${isLightTheme ? "text-black" : "text-white"}`}
+                  >
+                    {alert.text}
+                  </p>
+                </div>
+              </Slider.Item>
+            ))}
+          </Slider>
+          <SliderJS rootId={id} interval={5000} />
+        </div>
+      </div>
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} />
-    </div>
+      <div
+        className={`border-b border-solid border-Stroke border-opacity-100 ${
+          isLightTheme ? "bg-white" : "bg-black"
+        }`}
+      >
+        <div id={id} className="hidden lg:flex container">
+          {alerts.map((alert, index) => (
+            <div
+              key={index}
+              className={`text-sm flex items-center h-[38px] py-2 w-full justify-center`}
+            >
+              <ul class={`flex items-center w-full alertul`}>
+                <li class={`list-none `}>
+                  <a class={`flex`} href={alert.link}>
+                    {alert.icons && <img className="px-2" src={alert.icons} />}
+                    <p
+                      className={`${
+                        isLightTheme ? "text-black" : "text-white"
+                      }`}
+                    >
+                      {alert.text}
+                    </p>
+                  </a>
+                </li>
+                <li class={`benefitdot list-none`}></li>
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

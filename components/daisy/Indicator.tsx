@@ -10,7 +10,7 @@ export default function Indicator(props: Props) {
   const { text, badgeText, avatar } = props;
 
   return (
-    <div className="indicator">
+    <div className="indicator  ">
       <span className="indicator-item badge badge-secondary">
         {badgeText ? badgeText : ""}
       </span>

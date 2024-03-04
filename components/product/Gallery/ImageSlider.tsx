@@ -89,7 +89,7 @@ export default function GallerySlider(props: Props) {
       </div>
 
       {/* Dots */}
-      <ul class="flex gap-1 px-4 sm:px-0">
+      <ul class="flex flex-wrap gap-1 px-4 sm:px-0">
         {images.map((img, index) => {
           if (!img.url) return null;
           const optimizedURL = img.url.replace(imageURL, "$1$2-160-160$3");

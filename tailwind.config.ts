@@ -20,6 +20,11 @@ export default {
         "light-gray": "#D2D2D2",
         green: "#8CBF3C",
         gold: "#916F4A",
+        brand: {
+          "primary": "rgb(228, 0, 63)",
+          "gradient":
+            "linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%)",
+        },
       },
       keyframes: {
         sliding: {

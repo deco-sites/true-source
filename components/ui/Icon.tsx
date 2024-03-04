@@ -36,6 +36,7 @@ export type AvailableIcons =
   | "Trash"
   | "Truck"
   | "Twitter"
+  | "Youtube"
   | "User"
   | "Visa"
   | "WhatsApp"

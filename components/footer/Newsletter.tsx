@@ -50,40 +50,54 @@ function Newsletter(
           : "flex-col gap-4"
       }`}
     >
-      <div class="flex flex-col gap-4">
-        {content?.title && (
-          <h4 class={tiled ? "text-2xl lg:text-3xl" : "text-lg"}>
-            {content?.title}
-          </h4>
-        )}
-        {content?.description && <div>{content?.description}</div>}
-      </div>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col lg:flex-row gap-4 lg:items-center">
+        <div class="flex flex-col gap-4">
+          {content?.title && (
+            <p
+              style={`line-height:normal;`}
+              class={tiled ? "text-lg max-w-[204px] font-bold" : "text-lg"}
+            >
+              {content?.title}
+            </p>
+          )}
+          {content?.description && <div>{content?.description}</div>}
+        </div>
         <form
           class="form-control"
           onSubmit={handleSubmit}
         >
-          <div class="flex flex-wrap gap-3">
-            <input
-              name="email"
-              class="flex-auto md:flex-none input input-bordered md:w-80 text-base-content"
-              placeholder={content?.form?.placeholder || "Digite seu email"}
-            />
-            <button
-              type="submit"
-              class="btn disabled:loading"
-              disabled={loading}
-            >
-              {content?.form?.buttonText || "Inscrever"}
-            </button>
+          <div class="flex flex-wrap gap-3 ">
+            <div className="input input-bordered pr-0 pl-[32px] rounded-[300px] flex items-center">
+              <input
+                name="email"
+                class="flex-auto md:flex-none max-w-[151px] lg:max-w-[375px]  text-base-content bg-transparent outline-none"
+                placeholder={content?.form?.placeholder || "seu@email.com.br"}
+              />
+              <button
+                type="submit"
+                class="btn disabled:loading rounded-[300px] uppercase px-6 py-3 bg-brand text-white text-[13px]"
+                disabled={loading}
+              >
+                {content?.form?.buttonText || "assinar"}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M2.66406 8H13.3307M13.3307 8L9.33073 4M13.3307 8L9.33073 12"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </form>
-        {content?.form?.helpText && (
-          <div
-            class="text-sm"
-            dangerouslySetInnerHTML={{ __html: content?.form?.helpText }}
-          />
-        )}
       </div>
     </div>
   );

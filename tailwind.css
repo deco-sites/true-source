@@ -58,6 +58,252 @@
   animation: progress-frame ease normal
 }
 
+@layer utilities {
+  .searchbarInput {
+    width: calc(100% - 57px);
+    @apply text-xs pr-0 pr-2;
+  }
+
+  .menuListContainer {
+    border: 1px solid #EDEDED;
+    border-top: 0;
+    margin-top: 30px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .isSticky .dot {
+    display: none;
+  }
+
+  .dot {
+    background-color: #d2d2d2;
+    border-radius: 50%;
+    height: 3.75px;
+    width: 3.75px;
+  }
+
+  .dot:last-child {
+    display: none;
+  }
+
+  .benefitdot {
+    background-color: #d2d2d2;
+    border-radius: 50%;
+    height: 3.75px;
+    width: 3.75px;
+  }
+
+  .header::before {
+    background: linear-gradient(270deg, #e9530e, #e4003f);
+    content: "";
+    height: 4px;
+    width: 100%;
+    display: block;
+  }
+
+  .alertul {
+    justify-content: space-around;
+  }
+
+  .menuListContainer>li {
+    border-top: 1px solid #EDEDED;
+  }
+
+  .menuListContainer>li:nth-child(1) {
+    width: calc(100% + 2px);
+    margin: -30px -1px 0;
+    z-index: 1;
+    position: relative;
+  }
+
+  .menuListContainer>li:nth-child(1),
+  .menuListContainer>li:nth-child(2) {
+    border-top: 0;
+  }
+
+  .fontWithGradient {
+    background: rgb(228, 0, 63);
+    background: linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sociais {
+    padding: .5rem;
+    border: 1px solid #e4003f;
+    border-radius: 30px;
+  }
+
+  #navBarWrapper {
+    @apply hidden lg:block;
+  }
+
+  #menuCompact {
+    @apply hidden;
+  }
+
+  .isSticky #menuCompact {
+    @apply flex;
+  }
+
+  .isSticky #menuCompact> :first-child {
+    gap: 32px;
+  }
+
+  .isSticky #navBar {
+    gap: 32px;
+  }
+
+  #searchBar {
+    @apply w-full;
+    max-width: 786px;
+  }
+
+  .isSticky #searchBar {
+    max-width: 283px;
+    z-index: 100;
+  }
+
+  .searching {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: unset;
+  }
+
+  .isSticky .menu-dot {
+    display: none;
+  }
+
+  .menu-dot {
+    background-color: #d2d2d2;
+    border-radius: 50%;
+    height: 3.75px;
+    width: 3.75px;
+  }
+
+  .menu-dot:last-child {
+    display: none;
+  }
+
+  #searchBarMobile {
+    @apply block container;
+  }
+
+  #searchBarMobile form button {
+    @apply py-3 px-6;
+  }
+
+  .isSticky #searchBarMobile {
+    @apply w-full hidden;
+    max-width: calc(100% - 86px - 72px - 30px);
+  }
+
+  #quickMenu {
+    @apply hidden lg:block pb-[18px];
+  }
+
+  .isSticky #quickMenu {
+    @apply !hidden;
+  }
+
+  .isSticky #logo img {
+    width: 98px;
+    height: 34px;
+  }
+
+  .isSticky #logoMobile img {
+    width: 103px;
+    height: 46px;
+  }
+
+  #stickyHeaderLinks {
+    @apply hidden items-center gap-[0.75rem];
+  }
+
+  .isSticky #stickyHeaderLinks {
+    @apply flex;
+  }
+
+  #nonStickyHeaderLinks {
+    @apply flex justify-between items-center gap-[24px];
+  }
+
+  .isSticky #nonStickyHeaderLinks {
+    @apply hidden;
+  }
+
+  #searchBarMobileOnSticky {
+    @apply hidden container lg:pb-0;
+  }
+
+  .isSticky #searchBarMobileOnSticky {
+    @apply block;
+    max-width: 200px;
+  }
+
+  :not(.isSticky) #navBarWrapper #navBar #submenu { 
+    margin-top: 30px !important;
+
+  }
+
+  .isSticky #navBarWrapper #navBar {
+    @apply py-2
+  }
+
+  #navBarWrapper #navBar {
+    @apply pt-6 pb-[18px]
+  }
+
+  #submenu {
+    box-shadow: 0 44px 44px rgba(0, 0, 0, .4);
+    border-radius: 0 0 20px 20px;
+    transition-duration: .1s;
+    width: 100%;
+    margin: auto;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  #submenu>div {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .btnHighlight {
+    border-radius: 300px;
+    width: 200px;
+    z-index: 2;
+
+  }
+
+  .btnHighlight:visited,
+  .btnHighlight:active,
+  .btnHighlight:focus,
+  .btnHighlight:hover {
+    border: 1px solid #e9530e;
+  }
+
+
+  .menu {
+    @apply p-0
+  }
+
+  .isSticky .menu {
+    @apply text-[0.79rem]
+  }
+
+  .btnHighlits:hover {
+    background: #fff;
+    color: #e4003f;
+  }
+}
+
 @keyframes progress-frame {
   0% {
     --dot-progress: 0%
@@ -76,4 +322,9 @@
 .bg-belga {
   background: rgb(191, 171, 148);
   background: linear-gradient(45deg, rgba(191, 171, 148, 1) 5%, rgba(145, 111, 74, 1) 52%);
+}
+
+.seachContainer {
+  max-width: calc(100% - 86px - 72px - 30px);
+  width: 100%;
 }

@@ -5,6 +5,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
+import NavbarWrapper from "$store/islands/NavbarWrapper.tsx";
 import { headerHeight } from "./constants.ts";
 
 export interface Logo {
@@ -13,6 +14,7 @@ export interface Logo {
   width?: number;
   height?: number;
 }
+
 export interface Buttons {
   hideSearchButton?: boolean;
   hideAccountButton?: boolean;
@@ -20,8 +22,23 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+export interface AlertProps {
+  text: string;
+  icons?: ImageWidget;
+  link?: string;
+}
+
+export interface menuInstitucionalItem {
+  text: string;
+  link: string;
+}
+
+export type Theme = "light" | "dark";
+
 export interface Props {
-  alerts?: string[];
+  theme?: Theme;
+
+  alerts?: AlertProps[];
 
   /** @title Search Bar */
   searchbar?: Omit<SearchbarProps, "platform">;
@@ -41,6 +58,7 @@ export interface Props {
 }
 
 function Header({
+  theme = "light",
   alerts,
   searchbar,
   navItems = [
@@ -80,21 +98,25 @@ function Header({
 
   return (
     <>
-      <header style={{ height: headerHeight, display: "none" }}>
+      <header style={{ height: headerHeight }}>
         <Drawers
           menu={{ items }}
           searchbar={searchbar}
           platform={platform}
         >
-          <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
-            <Navbar
-              items={items}
-              searchbar={searchbar && { ...searchbar, platform }}
-              logo={logo}
-              logoPosition={logoPosition}
-              buttons={buttons}
-            />
+          <div class="header bg-base-100 fixed w-full z-40">
+            <NavbarWrapper>
+              {alerts && alerts.length > 0 && (
+                <Alert alerts={alerts} theme={theme} />
+              )}
+              <Navbar
+                items={items}
+                searchbar={searchbar && { ...searchbar, platform }}
+                logo={logo}
+                logoPosition={logoPosition}
+                buttons={buttons}
+              />
+            </NavbarWrapper>
           </div>
         </Drawers>
       </header>
