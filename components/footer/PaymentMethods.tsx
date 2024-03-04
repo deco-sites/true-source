@@ -10,9 +10,8 @@ export default function PaymentMethods(
   return (
     <>
       {content && content.items && content.items.length > 0 && (
-        <div class="flex flex-col gap-4">
-          {content.title && <h3 class="text-lg">{content.title}</h3>}
-          <ul class="flex items-center gap-4 flex-wrap">
+        <div class="flex flex-row gap-4 items-center">
+          <ul class="flex items-center gap-4">
             {content.items.map((item) => {
               return (
                 <li
@@ -29,6 +28,7 @@ export default function PaymentMethods(
               );
             })}
           </ul>
+          {content.title && <h3 class="text-sm uppercase ">{content.title}</h3>}
         </div>
       )}
     </>

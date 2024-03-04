@@ -1,7 +1,6 @@
 import BackToTop from "$store/components/footer/BackToTop.tsx";
 import ColorClasses from "$store/components/footer/ColorClasses.tsx";
 import Divider from "$store/components/footer/Divider.tsx";
-import ExtraLinks from "$store/components/footer/ExtraLinks.tsx";
 import FooterItems from "$store/components/footer/FooterItems.tsx";
 import Logo from "$store/components/footer/Logo.tsx";
 import MobileApps from "$store/components/footer/MobileApps.tsx";
@@ -18,18 +17,15 @@ export type Item = {
 };
 
 export type Section = {
-  label: string;
+  label?: string;
   items: Item[];
 };
 
 export interface SocialItem {
   label:
-    | "Discord"
-    | "Facebook"
     | "Instagram"
-    | "Linkedin"
     | "Tiktok"
-    | "Twitter";
+    | "Youtube";
   link: string;
 }
 
@@ -77,7 +73,6 @@ export interface Layout {
     paymentMethods?: boolean;
     mobileApps?: boolean;
     regionOptions?: boolean;
-    extraLinks?: boolean;
     backToTheTop?: boolean;
   };
 }
@@ -94,6 +89,7 @@ export interface Props {
     form?: NewsletterForm;
   };
   sections?: Section[];
+  extraLinks?: Item[];
   social?: {
     title?: string;
     items: SocialItem[];
@@ -104,7 +100,7 @@ export interface Props {
   };
   mobileApps?: MobileApps;
   regionOptions?: RegionOptions;
-  extraLinks?: Item[];
+
   backToTheTop?: {
     text?: string;
   };
@@ -161,7 +157,6 @@ function Footer({
   },
   mobileApps = { apple: "/", android: "/" },
   regionOptions = { currency: [], language: [] },
-  extraLinks = [],
   backToTheTop,
   layout = {
     backgroundColor: "Primary",
@@ -174,7 +169,6 @@ function Footer({
       paymentMethods: false,
       mobileApps: false,
       regionOptions: false,
-      extraLinks: false,
       backToTheTop: false,
     },
   },
@@ -189,13 +183,13 @@ function Footer({
       }}
     />
   );
-  const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
-    <FooterItems
-      sections={sections}
-      justify={layout?.variation == "Variation 2" ||
-        layout?.variation == "Variation 3"}
-    />
-  );
+  const _sectionLinks = layout?.hide?.sectionLinks ? <></> : null;
+  // <FooterItems
+  //   sections={sections}
+  //   justify={layout?.variation == "Variation 2" ||
+  //     layout?.variation == "Variation 3"}
+  // />
+  // );
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
@@ -208,15 +202,10 @@ function Footer({
   const _region = layout?.hide?.regionOptions
     ? <></>
     : <RegionSelector content={regionOptions} />;
-  const _links = layout?.hide?.extraLinks
-    ? <></>
-    : <ExtraLinks content={extraLinks} />;
 
   return (
     <footer
-      class={`hidden w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 ${
-        ColorClasses(layout)
-      }`}
+      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 bg-[#F0F0EE] rounded-t-[35px]`}
     >
       <div class="lg:container mx-6 lg:mx-auto">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
@@ -238,7 +227,6 @@ function Footer({
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
-              {_links}
             </div>
           </div>
         )}
@@ -260,7 +248,6 @@ function Footer({
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
-              {_links}
             </div>
           </div>
         )}
@@ -286,36 +273,26 @@ function Footer({
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
-              {_links}
             </div>
           </div>
         )}
         {layout?.variation == "Variation 4" && (
-          <div class="flex flex-col gap-10">
-            {_newsletter}
-            {layout?.hide?.newsletter ? <></> : <Divider />}
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
+          <div class="flex flex-col items-center px-4">
+            <div class="flex flex-col lg:flex-row justify-between w-full lg:pb-6 lg:pt-8 lg:px-[72px]">
+              {_newsletter}
+              {_social}
+            </div>
+            <Divider />
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full lg:py-10">
               {_sectionLinks}
-              <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-10 lg:w-2/5 lg:pl-10">
-                <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
-                  <div class="lg:flex-auto">
-                    {_payments}
-                  </div>
-                  <div class="lg:flex-auto">
-                    {_social}
-                  </div>
-                </div>
-                <div class="flex flex-col gap-10 lg:gap-10">
-                  {_region}
-                  {_apps}
-                </div>
+            </div>
+            <Divider />
+            <div class="flex flex-col md:flex-row lg:flex-col">
+              <div class="lg:flex-auto w-full">
+                {_payments}
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
-              {_logo}
-              <PoweredByDeco />
-            </div>
           </div>
         )}
         {layout?.variation == "Variation 5" && (
@@ -335,7 +312,6 @@ function Footer({
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 md:items-center">
               <PoweredByDeco />
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
-                {_links}
                 {_region}
               </div>
             </div>

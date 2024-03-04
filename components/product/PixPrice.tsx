@@ -25,7 +25,7 @@ export default function PixPrice({
         }],
         postalCode: "89218220",
         country: "BRA",
-        RnbBehavior: 0
+        RnbBehavior: 0,
         // paymentData: {
         //   id: "paymentData",
         //   payments: [{

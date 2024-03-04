@@ -21,6 +21,7 @@ interface Props {
   onAddCoupon?: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
+  onClose?: () => void;
 }
 
 function Cart({
@@ -37,45 +38,38 @@ function Cart({
   itemToAnalyticsItem,
   onUpdateQuantity,
   onAddCoupon,
+  onClose,
 }: Props) {
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
 
   return (
     <div
-      class="flex flex-col justify-center items-center overflow-hidden"
+      class="flex flex-col justify-center items-center overflow-hidden "
       style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
     >
       {isEmtpy
         ? (
-          <div class="flex flex-col gap-6">
-            <span class="font-medium text-2xl">Sua sacola está vazia</span>
+          <div class="flex flex-col gap-6 w-[245px] text-center">
+            <span class="font-bold text-lg uppercase">
+              Seu carrinho ainda está vazio. Aceita algumas sugestões?
+            </span>
             <Button
-              class="btn-outline"
+              class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green"
               onClick={() => {
                 displayCart.value = false;
               }}
             >
-              Escolher produtos
+              COMEÇAR A COMPRAR
             </Button>
           </div>
         )
         : (
           <>
-            {/* Free Shipping Bar */}
-            <div class="px-2 py-4 w-full">
-              <FreeShippingProgressBar
-                total={total}
-                locale={locale}
-                currency={currency}
-                target={freeShippingTarget}
-              />
-            </div>
-
             {/* Cart Items */}
             <ul
               role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+              class="flex-grow overflow-y-auto flex flex-col gap-6 w-full"
             >
               {items.map((item, index) => (
                 <li key={index}>
@@ -91,10 +85,14 @@ function Cart({
               ))}
             </ul>
 
-            {/* Cart Footer */}
-            <footer class="w-full">
-              {/* Subtotal */}
+            <footer
+              style="box-shadow: 0px -4px 44px 0px rgba(0, 0, 0, 0.35)"
+              class="w-full bg-Ice shadow-xl"
+            >
+              {
+                /*
               <div class="border-t border-base-200 py-2 flex flex-col">
+
                 {discounts > 0 && (
                   <div class="flex justify-between items-center px-4">
                     <span class="text-sm">Descontos</span>
@@ -114,42 +112,64 @@ function Cart({
                 )}
               </div>
 
-              {/* Total */}
+
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
+
                 <div class="flex justify-between items-center w-full">
                   <span>Total</span>
                   <span class="font-medium text-xl">
                     {formatPrice(total, currency, locale)}
                   </span>
                 </div>
+
+                {/*
                 <span class="text-sm text-base-300">
                   Taxas e fretes serão calculados no checkout
                 </span>
-              </div>
 
+
+              </div>
+               */
+              }
               <div class="p-4">
-                <a class="inline-block w-full" href={checkoutHref}>
+                <div class="px-2 py-4 w-full">
+                  <FreeShippingProgressBar
+                    total={total}
+                    locale={locale}
+                    currency={currency}
+                    target={freeShippingTarget}
+                  />
+                </div>
+                <div class="w-full flex flex-col gap-2">
                   <Button
-                    data-deco="buy-button"
-                    class="btn-primary btn-block"
-                    disabled={loading || isEmtpy}
-                    onClick={() => {
-                      sendEvent({
-                        name: "begin_checkout",
-                        params: {
-                          coupon,
-                          currency,
-                          value: total - discounts,
-                          items: items
-                            .map((_, index) => itemToAnalyticsItem(index))
-                            .filter((x): x is AnalyticsItem => Boolean(x)),
-                        },
-                      });
-                    }}
+                    class="btn no-animation btn-primary btn-block border border-solid border-gray-800 rounded-md text-[13px]"
+                    href="/promocoes"
                   >
-                    Fechar pedido
+                    ADICIONAR MAIS ITENS
                   </Button>
-                </a>
+                  <a href={checkoutHref}>
+                    <Button
+                      data-deco="buy-button"
+                      class="btn no-animation btn-primary bg-green text-white btn-block border border-solid border-green rounded-md text-[13px] font-bold"
+                      disabled={loading || isEmtpy}
+                      onClick={() => {
+                        sendEvent({
+                          name: "begin_checkout",
+                          params: {
+                            coupon,
+                            currency,
+                            value: total - discounts,
+                            items: items
+                              .map((_, index) => itemToAnalyticsItem(index))
+                              .filter((x): x is AnalyticsItem => Boolean(x)),
+                          },
+                        });
+                      }}
+                    >
+                      FINALIZAR COMPRA - {formatPrice(total, currency, locale)}
+                    </Button>
+                  </a>
+                </div>
               </div>
             </footer>
           </>
