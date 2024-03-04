@@ -104,7 +104,9 @@ function Header({
         platform={platform}
       >
         <div class="bg-base-100 fixed w-full z-50">
-          {alerts && alerts.length > 0 && <Alert alerts={alerts} theme={theme} />}
+          {alerts && alerts.length > 0 && (
+            <Alert alerts={alerts} theme={theme} />
+          )}
           <Navbar
             items={items}
             searchbar={searchbar && { ...searchbar, platform }}
