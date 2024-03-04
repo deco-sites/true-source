@@ -1,10 +1,13 @@
 import Modal from "../ui/Modal.tsx";
+import Radio from "$store/islands/Radio.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { useState } from "preact/hooks";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
+import { formatPrice } from "$store/sdk/format.ts";
 import { IconAsterisk, Timeline } from "../ui/CustomIcons.tsx";
 
-import Radio from "$store/islands/Radio.tsx";
+import type { ComponentChildren } from "preact";
+import SellingPrice from "deco-sites/true-source/components/product/SellingPrice.tsx";
 
 const subscriptionOptions = {
   "2W": "2 week",
@@ -17,17 +20,77 @@ export interface Props {
   productID: string;
   seller: string;
   quantity: number;
+  listPrice: number;
+  price: number;
+}
+
+export interface TimelineCalcProps {
+  selected: SubscriptionOptions | null;
+}
+
+type SubscriptionOptions = "2W" | "1M" | "2M" | "3M";
+
+function TimelineCalc({
+  selected,
+}: TimelineCalcProps) {
+  if (!selected) return null;
+
+  const today = new Date();
+  const day = today.getDate();
+  const daySimulation = [day];
+
+  const periods = {
+    "2W": 15,
+    "1M": 30,
+    "2M": 60,
+    "3M": 90,
+  };
+
+  // @ts-ignore day is string
+  let days = parseInt(day);
+  for (let i = 0; i < 2; ++i) {
+    days = days + periods[selected];
+    daySimulation.push(days);
+  }
+
+  return (
+    <div class="flex flex-col gap-y-6">
+      <p class="text-sm text-dark font-bold">Simulação de envios</p>
+      <div class="flex items-center justify-between">
+        {daySimulation.map((d, i) => {
+          const shippingDay = ++i;
+          const actualDate = new Date(today.setDate(d));
+          const day = actualDate.getDate();
+          const month = actualDate.getMonth();
+          const year = actualDate.getFullYear();
+          return (
+            <div class="flex flex-col font-bold text-sm text-red">
+              {shippingDay}º ENVIO
+              <span class="text-dark font-light">
+                {day <= 9 ? `0${day}` : day}/
+                {month <= 9 ? `0${month}` : month}/
+                {year}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <Timeline />
+      <p class="text-sm font-light text-right">E assim por diante...</p>
+    </div>
+  );
 }
 
 export default function SubscriptionButtonVTEX({
   productID,
   seller,
   quantity,
+  price,
+  listPrice,
 }: Props) {
-  // console.log("productID", productID, "seller", seller, "quantity", quantity);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<SubscriptionOptions | null>(null);
   const { displaySubscriptionPopup } = useUI();
-  const { addItems, addItemAttachment } = useCart();
+  const { cart, addItems, addItemAttachment } = useCart();
 
   const submitHandler = async (e: Event) => {
     e.preventDefault();
@@ -47,7 +110,6 @@ export default function SubscriptionButtonVTEX({
       "vtex.subscription.key.frequency": SUBSCRIPTION_PLAN,
       "vtex.subscription.key.purchaseday": `${currentDay}`,
     };
-    // console.log("SUBSCRIPTION_VALUE", SUBSCRIPTION_VALUE);
 
     const orderItems = [{
       id: productID,
@@ -55,12 +117,18 @@ export default function SubscriptionButtonVTEX({
       quantity,
     }];
 
-    // console.log("orderItems", orderItems);
-
     await addItems({ orderItems });
 
+    const items = cart.value?.items || [];
+
+    const index = items.findLastIndex((i) => {
+      return i.id === productID && i.attachments.length === 0;
+    });
+
+    if (index === -1) return null;
+
     addItemAttachment({
-      index: 0,
+      index,
       attachment: SUBSCRIPTION_KEY,
       content: SUBSCRIPTION_VALUE,
       noSplitItem: true,
@@ -74,13 +142,15 @@ export default function SubscriptionButtonVTEX({
     if (target.checked) setSelected(target.value);
   };
 
+  const discount = price * 0.2;
+
   return (
     <>
       <button
         class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-[13px] h-12 px-8 rounded-md font-lemon-milk"
         onClick={() => displaySubscriptionPopup.value = true}
       >
-        ASSINE COM {"R$ 36"} de desconto
+        ASSINE COM {formatPrice(discount)} de desconto
         <IconAsterisk />
       </button>
       <Modal
@@ -88,21 +158,22 @@ export default function SubscriptionButtonVTEX({
         open={displaySubscriptionPopup.value}
         onClose={() => displaySubscriptionPopup.value = false}
       >
-        <div class="absolute-center bg-white min-w-[436px] rounded-2xl p-10 max-h-screen overflow-y-auto">
+        <div class="absolute-center bg-white min-w-[436px] rounded-2xl p-10 my-8 max-h-screen overflow-y-auto">
           <form class="flex flex-col gap-y-6" onSubmit={submitHandler}>
-            <h3>ASSINE E COMPRE COM ATÉ 20% OFF</h3>
-            <div class="flex justify-between">
+            <h3 class="font-lemon-milk text-lg uppercase font-bold">
+              ASSINE E COMPRE COM ATÉ 20% OFF
+            </h3>
+            <div class="flex items-center justify-between">
+              <SellingPrice
+                sellingPrice={price}
+                listPrice={listPrice}
+                productId={productID}
+                quantity={1}
+                type="subscription"
+              />
               <div>
-                <p class="text-dark line-through text-sm opacity-60 m-0">
-                  De R$ 687,00 por R$ 666,39
-                </p>
-                <p class="text-dark line-through text-sm opacity-60 m-0">
-                  ou 6x de R$ 111,06 sem juros ou
-                </p>
-              </div>
-              <div>
-                <span class="block font-bold text-2xl text-dark m-0">
-                  R$ 566,43
+                <span class="block font-bold text-2xl text-dark font-lemon-milk m-0">
+                  {formatPrice(price - discount)}
                 </span>
                 <small class="text-dark">à vista no cartão</small>
               </div>
@@ -141,27 +212,7 @@ export default function SubscriptionButtonVTEX({
                 </div>
               </fieldset>
             </div>
-            {
-              /* <div class="flex flex-col gap-y-6">
-              <p class="text-sm text-dark font-bold">Simulação de envios</p>
-              <div class="flex items-center justify-between">
-                <div class="flex flex-col font-bold text-sm text-red">
-                  1º ENVIO
-                  <span class="text-dark font-light">10/12/2023</span>
-                </div>
-                <div class="flex flex-col font-bold text-sm text-red">
-                  2º ENVIO
-                  <span class="text-dark font-light">10/01/2024</span>
-                </div>
-                <div class="flex flex-col font-bold text-sm text-red">
-                  3º ENVIO
-                  <span class="text-dark font-light">10/02/2024</span>
-                </div>
-              </div>
-              <Timeline />
-              <p class="text-sm font-light text-right">E assim por diante...</p>
-            </div> */
-            }
+            <TimelineCalc selected={selected} />
             <div>
               <h4 class="text-sm font-bold">Por que assinar?</h4>
               <ul>

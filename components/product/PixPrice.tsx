@@ -3,44 +3,30 @@ import { useEffect, useState } from "preact/hooks";
 import { formatPrice } from "$store/sdk/format.ts";
 
 export type Props = {
+  sellingPrice: number;
   productId: string;
+  listPrice: number;
   quantity: number;
 };
 
+const PIX_DISCOUNT = 0.1;
+const KIT_DISCOUNT = 0.03;
+
 export default function PixPrice({
+  sellingPrice,
   productId,
+  listPrice,
   quantity,
 }: Props) {
-  const { simulate } = useCart();
   const [price, setPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    const getData = async () => {
-      const id = parseInt(productId);
-      const response = await simulate({
-        items: [{
-          id,
-          quantity,
-          seller: "1",
-        }],
-        postalCode: "89218220",
-        country: "BRA",
-        RnbBehavior: 0,
-        // paymentData: {
-        //   id: "paymentData",
-        //   payments: [{
-        //     paymentSystem: "125",
-        //   }],
-        // },
-      });
-
-      const total = response.totals.reduce((prev, curr) => {
-        return prev + curr.value;
-      }, 0);
-
-      setPrice(total / 100);
-    };
-    getData();
+    let pixTotal = (sellingPrice - (sellingPrice * PIX_DISCOUNT)) * quantity;
+    if (quantity >= 3) {
+      const aux = pixTotal;
+      pixTotal = aux - (aux * KIT_DISCOUNT);
+    }
+    setPrice(pixTotal);
   }, [quantity]);
 
   return (

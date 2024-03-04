@@ -24,6 +24,7 @@ import * as $NavbarWrapper from "./islands/NavbarWrapper.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PixPrice from "./islands/PixPrice.tsx";
+import * as $Product_Description from "./islands/Product/Description.tsx";
 import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
 import * as $Product_SellingPrice from "./islands/Product/SellingPrice.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
@@ -62,6 +63,7 @@ const manifest = {
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/PixPrice.tsx": $PixPrice,
+    "./islands/Product/Description.tsx": $Product_Description,
     "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,
     "./islands/Product/SellingPrice.tsx": $Product_SellingPrice,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,

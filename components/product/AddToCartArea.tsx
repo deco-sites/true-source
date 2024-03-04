@@ -21,17 +21,36 @@ export default function AddToCartArea({
   product,
   breadcrumbList,
   price,
-  listPrice,
+  listPrice = 0,
 }: Props) {
   if (!IS_BROWSER) return null;
 
-  console.log("product", product);
   const [quantity, setQuantity] = useState(1);
 
   const {
+    additionalProperty,
     productID,
     offers,
   } = product;
+
+  console.log(product);
+
+  const {
+    offers: {
+      // @ts-ignore offers exists
+      offers: [
+        {
+          inventoryLevel: {
+            value: inventoryLevelValue,
+          },
+        },
+      ],
+    },
+  } = product;
+
+  const activeSubscription = additionalProperty?.find((p) =>
+    p.name === "activeSubscriptions"
+  )?.value;
 
   const {
     seller = "1",
@@ -53,49 +72,69 @@ export default function AddToCartArea({
 
   return (
     <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4">
-      <div class="flex flex-row gap-6 items-stretch">
-        <span class="text-dark">
-          <PixPrice productId={productID} quantity={quantity} />
-          <p class="text-sm font-regular normal-case">à vista no Pix</p>
-        </span>
-        <SellingPrice productId={productID} quantity={quantity} />
-      </div>
-      <div class="flex items-center gap-4 border border-light-gray rounded-md">
-        <QuantitySelector
-          quantity={quantity}
-          onChange={(quantity) => {
-            if (quantity < 1) return;
-            if (quantity > 9) return;
-            setQuantity(quantity);
-          }}
-        />
-        <span
-          class={`text-sm ${
-            quantity >= 3 ? "text-green font-bold" : "text-gray font-regular"
-          }`}
-        >
-          10% OFF para 3 ou mais unidades
-        </span>
-      </div>
-      <div class="flex flex-col gap-2">
-        {availability === "https://schema.org/InStock"
-          ? (
-            <>
+      {availability === "https://schema.org/InStock"
+        ? (
+          <>
+            <div
+              class={`flex ${
+                listPrice > price ? "flex-col-reverse gap-2" : "flex-row gap-6"
+              } items-stretch`}
+            >
+              <span class="text-dark">
+                <PixPrice
+                  productId={productID}
+                  quantity={quantity}
+                  sellingPrice={price}
+                  listPrice={listPrice}
+                />
+                <p class="text-sm font-regular normal-case">à vista no Pix</p>
+              </span>
+              <SellingPrice
+                productId={productID}
+                quantity={quantity}
+                sellingPrice={price}
+                listPrice={listPrice}
+              />
+            </div>
+            <div class="flex items-center gap-4 border border-light-gray rounded-md">
+              <QuantitySelector
+                quantity={quantity}
+                onChange={(quantity) => {
+                  if (quantity < 1) return;
+                  if (quantity > 9 || quantity > inventoryLevelValue) return;
+                  setQuantity(quantity);
+                }}
+              />
+              <span
+                class={`text-sm ${
+                  quantity >= 3
+                    ? "text-green font-bold"
+                    : "text-gray font-regular"
+                }`}
+              >
+                10% OFF para 3 ou mais unidades
+              </span>
+            </div>
+            <div class="flex flex-col gap-2">
               <AddToCartButtonVTEX
                 eventParams={{ items: [eventItem] }}
                 productID={productID}
                 seller={seller}
                 quantity={quantity}
               />
-              <SubscriptionButtonVTEX
-                productID={productID}
-                seller={seller}
-                quantity={quantity}
-              />
-            </>
-          )
-          : <OutOfStock productID={productID} />}
-      </div>
+              {activeSubscription && (
+                <SubscriptionButtonVTEX
+                  productID={productID}
+                  seller={seller}
+                  quantity={quantity}
+                  price={price}
+                  listPrice={listPrice}
+                />
+              )}
+            </div>
+          </>
+        )
+        : <OutOfStock productID={productID} />}
     </div>
   );
 }

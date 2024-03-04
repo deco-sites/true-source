@@ -28,7 +28,8 @@ function ButtonCommon({
 
   return (
     <Button
-      class="text-light-gray"
+      class="text-gray bg-transparent p-0 h-auto min-h-unset w-auto border-0 hover:bg-transparent"
+      style={{ minHeight: "unset" }}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {

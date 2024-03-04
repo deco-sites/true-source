@@ -93,12 +93,12 @@ function ShippingSimulation({ items }: Props) {
 
   return (
     <div class="flex flex-col gap-2">
-      <div class="flex items-center gap-6">
-        <span class="text-[13px] font-medium uppercase w-[69px] font-lemon-milk">
+      <div class="flex flex-col gap-3 sm:flex-row sm:gap-6 items-center">
+        <span class="text-[13px] font-medium uppercase w-full sm:w-[69px] font-lemon-milk">
           Calcule o frete
         </span>
         <form
-          class="flex items-center rounded-md border-2 border-light-gray-200 bg-white pr-2"
+          class="flex items-center w-full sm:w-auto rounded-md border-2 border-light-gray-200 bg-white pr-2"
           onSubmit={(e) => {
             e.preventDefault();
             handleSimulation();
@@ -107,7 +107,7 @@ function ShippingSimulation({ items }: Props) {
           <input
             as="input"
             type="text"
-            class="input border-0 placeholder:text-sm text-sm placeholder:text-dark text-dark"
+            class="input w-full sm:w-auto border-0 placeholder:text-sm text-sm placeholder:text-dark text-dark"
             placeholder="Informe o CEP"
             value={postalCode.value}
             maxLength={8}
@@ -123,7 +123,10 @@ function ShippingSimulation({ items }: Props) {
             Calcular
           </button>
         </form>
-        <a href="#" class="text-sm underline font-regular w-[65px] uppercase">
+        <a
+          href="#"
+          class="text-sm underline font-regular w-full sm:w-[65px] uppercase"
+        >
           Descobrir meu cep
         </a>
       </div>

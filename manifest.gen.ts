@@ -55,8 +55,8 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/true-source/loaders/Layouts/ProductCard.tsx": $$$1,
-    "deco-sites/true-source/loaders/List/Sections.tsx": $$$0,
+    "deco-sites/true-source/loaders/Layouts/ProductCard.tsx": $$$0,
+    "deco-sites/true-source/loaders/List/Sections.tsx": $$$1,
   },
   "sections": {
     "deco-sites/true-source/sections/Animation/Animation.tsx": $$$$$$42,
@@ -108,8 +108,8 @@ const manifest = {
     "deco-sites/true-source/sections/Theme/Theme.tsx": $$$$$$7,
   },
   "apps": {
-    "deco-sites/true-source/apps/decohub.ts": $$$$$$$$$$$1,
-    "deco-sites/true-source/apps/site.ts": $$$$$$$$$$$0,
+    "deco-sites/true-source/apps/decohub.ts": $$$$$$$$$$$0,
+    "deco-sites/true-source/apps/site.ts": $$$$$$$$$$$1,
   },
   "name": "deco-sites/true-source",
   "baseUrl": import.meta.url,

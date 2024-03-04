@@ -34,10 +34,10 @@ export default function GallerySlider(props: Props) {
   // const aspectRatio = `${width} / ${height}`;
 
   return (
-    <div id={id} class="flex flex-col max-w-[664px]">
+    <div id={id} class="flex flex-col w-full">
       {/* Image Slider */}
-      <div class="relative">
-        <Slider class="carousel carousel-center gap-6 w-full">
+      <div class="relative mb-2">
+        <Slider class="carousel carousel-center gap-6 w-full rounded-3xl">
           {images.map((img, index) => {
             if (!img.url) return null;
             const optimizedURL = img.url.replace(imageURL, "$1$2-664-664$3");
@@ -89,23 +89,20 @@ export default function GallerySlider(props: Props) {
       </div>
 
       {/* Dots */}
-      <ul class="flex flex-wrap gap-1 px-4 sm:px-0">
+      <ul class="grid grid-cols-5 md:grid-cols-4 gap-4 md:gap-2">
         {images.map((img, index) => {
           if (!img.url) return null;
           const optimizedURL = img.url.replace(imageURL, "$1$2-160-160$3");
           return (
-            <li class="carousel-item">
-              <Slider.Dot index={index}>
-                <Image
-                  // style={{ aspectRatio }}
-                  class="group-disabled:border-base-300 border rounded object-cover object-center w-[160px] h-[90px]"
-                  src={optimizedURL}
-                  width={160}
-                  height={90}
-                  alt={img.alternateName}
-                />
-              </Slider.Dot>
-            </li>
+            <Slider.Dot index={index}>
+              <Image
+                class="group-disabled:border-light-gray border border-light-gray-200 rounded-xl object-cover object-center w-[58px] md:w-[160px] h-[48px] md:h-[90px]"
+                src={optimizedURL}
+                width={160}
+                height={90}
+                alt={img.alternateName}
+              />
+            </Slider.Dot>
           );
         })}
       </ul>

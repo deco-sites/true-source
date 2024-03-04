@@ -9,7 +9,7 @@ function Breadcrumb({ itemListElement = [] }: Props) {
 
   return (
     <div class="">
-      <ul class="flex items-center gap-1.5">
+      <ul class="flex items-center gap-2">
         {items
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => {
@@ -37,7 +37,7 @@ function Breadcrumb({ itemListElement = [] }: Props) {
             }
 
             return (
-              <li class="text-xs text-dark last:text-light-gray before:content-['/'] flex items-center gap-2 font-light">
+              <li class="text-xs text-dark last:text-light-gray before:content-['/'] flex items-center gap-2 font-normal capitalize">
                 <a href={item}>{name}</a>
               </li>
             );
