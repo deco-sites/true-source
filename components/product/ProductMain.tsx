@@ -1,6 +1,6 @@
 import ProductInfo from "./ProductInfo.tsx";
 import Description from "$store/islands/Product/Description.tsx";
-import GallerySlider from "./Gallery/ImageSlider.tsx";
+
 import { searchSlugify } from "../utils/slugify.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 
@@ -9,13 +9,14 @@ export interface Props {
   page: ProductDetailsPage | null;
 }
 
-const YOUTUBE_URL = "https://www.youtube.com/";
-const YOUTUBE_URL_REGEX =
-  /https:\/\/www\.youtube\.com\/(watch\?v=)([a-zA-Z0-9]*)/gi;
-
 export default function ProductMain(props: Props) {
   if (props.page === null) return null;
-  const { product } = props.page;
+
+  const {
+    page,
+  } = props;
+
+  const { product } = page;
   const { name } = product;
   const slug = name ? searchSlugify(name) : "";
 
@@ -24,8 +25,7 @@ export default function ProductMain(props: Props) {
 
   return (
     <div>
-      <div class="container flex flex-col lg:flex-row lg:gap-8 py-12">
-        <GallerySlider page={props.page} />
+      <div class="container">
         <ProductInfo page={props.page} />
       </div>
       <Description slug={slug} />

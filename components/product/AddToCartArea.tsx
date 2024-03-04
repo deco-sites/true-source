@@ -21,16 +21,36 @@ export default function AddToCartArea({
   product,
   breadcrumbList,
   price,
-  listPrice,
+  listPrice = 0,
 }: Props) {
   if (!IS_BROWSER) return null;
 
   const [quantity, setQuantity] = useState(1);
 
   const {
+    additionalProperty,
     productID,
     offers,
   } = product;
+
+  console.log(product);
+
+  const {
+    offers: {
+      // @ts-ignore offers exists
+      offers: [
+        {
+          inventoryLevel: {
+            value: inventoryLevelValue,
+          },
+        },
+      ],
+    },
+  } = product;
+
+  const activeSubscription = additionalProperty?.find((p) =>
+    p.name === "activeSubscriptions"
+  )?.value;
 
   const {
     seller = "1",
@@ -55,19 +75,33 @@ export default function AddToCartArea({
       {availability === "https://schema.org/InStock"
         ? (
           <>
-            <div class="flex flex-row gap-6 items-stretch">
+            <div
+              class={`flex ${
+                listPrice > price ? "flex-col-reverse gap-2" : "flex-row gap-6"
+              } items-stretch`}
+            >
               <span class="text-dark">
-                <PixPrice productId={productID} quantity={quantity} />
+                <PixPrice
+                  productId={productID}
+                  quantity={quantity}
+                  sellingPrice={price}
+                  listPrice={listPrice}
+                />
                 <p class="text-sm font-regular normal-case">à vista no Pix</p>
               </span>
-              <SellingPrice productId={productID} quantity={quantity} />
+              <SellingPrice
+                productId={productID}
+                quantity={quantity}
+                sellingPrice={price}
+                listPrice={listPrice}
+              />
             </div>
             <div class="flex items-center gap-4 border border-light-gray rounded-md">
               <QuantitySelector
                 quantity={quantity}
                 onChange={(quantity) => {
                   if (quantity < 1) return;
-                  if (quantity > 9) return;
+                  if (quantity > 9 || quantity > inventoryLevelValue) return;
                   setQuantity(quantity);
                 }}
               />
@@ -88,12 +122,15 @@ export default function AddToCartArea({
                 seller={seller}
                 quantity={quantity}
               />
-              <SubscriptionButtonVTEX
-                productID={productID}
-                seller={seller}
-                quantity={quantity}
-                price={price}
-              />
+              {activeSubscription && (
+                <SubscriptionButtonVTEX
+                  productID={productID}
+                  seller={seller}
+                  quantity={quantity}
+                  price={price}
+                  listPrice={listPrice}
+                />
+              )}
             </div>
           </>
         )

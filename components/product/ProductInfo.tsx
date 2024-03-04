@@ -1,22 +1,68 @@
-import { SendEventOnView } from "$store/components/Analytics.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
-import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
-import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import ProductSelector from "./ProductVariantSelector.tsx";
+import GallerySlider from "./Gallery/ImageSlider.tsx";
 import AddToCartArea from "$store/islands/AddToCartArea.tsx";
 import ProductSimilars from "$store/islands/Product/ProductSimilars.tsx";
+import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
+import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
+
+import { useId } from "$store/sdk/useId.ts";
+import { useOffer } from "$store/sdk/useOffer.ts";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
+import { BreadcrumbList, ProductDetailsPage } from "apps/commerce/types.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
 }
 
+interface ProductDataProps {
+  name: string;
+  brandName: string;
+  productID: string;
+  productGroupID: string;
+}
+
+function ProductData({
+  name,
+  productID,
+  productGroupID,
+  brandName,
+}: ProductDataProps) {
+  return (
+    <>
+      {/* Code and name */}
+      <div class="flex items-center gap-4 justify-between">
+        <h1>
+          <span class="font-semibold text-2xl uppercase font-lemon-milk">
+            {name}
+          </span>
+        </h1>
+        <div class="hidden sm:block">
+          <WishlistButtonVtex
+            variant="full"
+            productID={productID}
+            productGroupID={productGroupID}
+          />
+        </div>
+      </div>
+      {/* Brand */}
+      <div class="flex items-center justify-between">
+        <span class="font-medium text-light-gray">{brandName}</span>
+        <div class="block sm:hidden">
+          <WishlistButtonVtex
+            variant="full"
+            productID={productID}
+            productGroupID={productGroupID}
+          />
+        </div>
+      </div>
+      {/* Divider */}
+      <div class="hidden sm:block border-b border-light-gray-200 w-full" />
+    </>
+  );
+}
+
 function ProductInfo({ page }: Props) {
-  const platform = usePlatform();
   const id = useId();
 
   if (page === null) {
@@ -40,6 +86,7 @@ function ProductInfo({ page }: Props) {
   const description = product.description || isVariantOf?.description;
   if (!isVariantOf) return null;
   const {
+    name: productName = "",
     additionalProperty: currentVariantProperties = [],
   } = isVariantOf;
   if (!offers) return null;
@@ -65,56 +112,61 @@ function ProductInfo({ page }: Props) {
   });
 
   return (
-    <div class="flex flex-col gap-y-6" id={id}>
-      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
-      {/* Code and name */}
-      <div class="flex gap-4 justify-between">
-        <h1>
-          <span class="font-semibold text-2xl uppercase font-lemon-milk">
-            {isVariantOf?.name}
-          </span>
-        </h1>
-        <WishlistButtonVtex
-          variant="full"
+    <div class="flex flex-col md:flex-row gap-6 md:gap-8 mt-4 mb-14" id={id}>
+      <div class="order-2 sm:order-1 w-full lg:max-w-[664px]">
+        <GallerySlider page={page} />
+      </div>
+      <div class="flex md:hidden flex-col gap-y-4 order-1 sm:order-2">
+        <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+        <ProductData
+          name={productName}
+          brandName={brandName}
           productID={productID}
           productGroupID={productGroupID}
         />
       </div>
-      {/* Brand */}
-      <span class="font-medium text-light-gray">{brandName}</span>
-      {/* Divider */}
-      <div class="border-b border-light-gray-200 w-full" />
-      {/* Sku Selector */}
-      <ProductSimilars product={product} current={currentVariantProperties} />
-      {/* Add to Cart and Favorites button | Prices */}
-      <AddToCartArea
-        product={product}
-        breadcrumbList={breadcrumbList}
-        price={price}
-        listPrice={listPrice}
-      />
-      {/* Shipping Simulation */}
-      <ShippingSimulation
-        items={[
-          {
-            id: Number(product.sku),
-            quantity: 1,
-            seller: seller,
-          },
-        ]}
-      />
-      {/* Analytics Event */}
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item",
-          params: {
-            item_list_id: "product",
-            item_list_name: "Product",
-            items: [eventItem],
-          },
-        }}
-      />
+      <div class="flex flex-col gap-y-4 order-3">
+        <div class="hidden md:flex flex-col gap-y-4">
+          <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+          <ProductData
+            name={productName}
+            brandName={brandName}
+            productID={productID}
+            productGroupID={productGroupID}
+          />
+        </div>
+        {/* Sku Selector */}
+        <ProductSimilars product={product} current={currentVariantProperties} />
+        {/* Add to Cart and Favorites button | Prices */}
+        <AddToCartArea
+          product={product}
+          breadcrumbList={breadcrumbList}
+          price={price}
+          listPrice={listPrice}
+        />
+        {/* Shipping Simulation */}
+        <ShippingSimulation
+          items={[
+            {
+              id: Number(product.sku),
+              quantity: 1,
+              seller: seller,
+            },
+          ]}
+        />
+        {/* Analytics Event */}
+        <SendEventOnView
+          id={id}
+          event={{
+            name: "view_item",
+            params: {
+              item_list_id: "product",
+              item_list_name: "Product",
+              items: [eventItem],
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

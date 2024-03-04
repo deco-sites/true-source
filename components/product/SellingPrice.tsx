@@ -4,6 +4,8 @@ import { useEffect, useState } from "preact/hooks";
 import type { UnitPriceSpecification } from "apps/commerce/types.ts";
 
 export type Props = {
+  sellingPrice: number;
+  listPrice: number;
   productId: string;
   quantity: number;
   type?: "subscription" | "productInfo";
@@ -34,6 +36,8 @@ const installmentToString = (
 };
 
 export default function SellingPrice({
+  sellingPrice,
+  listPrice,
   productId,
   quantity,
   type = "productInfo",
@@ -105,23 +109,55 @@ export default function SellingPrice({
     getData();
   }, [quantity]);
 
-  if (!price && !installment) return null;
+  if (!price || !installment) return null;
   if (type === "subscription") {
+    if (listPrice > sellingPrice) {
+      return (
+        <span class="text-sm text-gray line-through">
+          {/* @ts-ignore price is checked */}
+          De <span>{formatPrice(listPrice * quantity, "BRL")}</span> por{" "}
+          <span>{formatPrice(price, "BRL")}</span>
+          <br />
+          ou{" "}
+          <span
+            class="text-sm text-gray"
+            // @ts-ignore installment is checked
+            dangerouslySetInnerHTML={{ __html: installment }}
+          />{" "}
+          ou
+        </span>
+      );
+    }
     return (
-      <span class="text-sm text-gray line-through">
+      <span class="text-sm text-gray">
         {/* @ts-ignore price is checked */}
-        De <strong>{formatPrice(price, "BRL")}</strong>
+        <span class="line-through">De {formatPrice(price, "BRL")}</span>
         <br />
-        ou{" "}
-        <span
-          class="text-sm text-gray"
-          // @ts-ignore installment is checked
-          dangerouslySetInnerHTML={{ __html: installment }}
-        />
+        por
       </span>
     );
   }
 
+  if (listPrice > sellingPrice) {
+    return (
+      <span class="text-sm text-gray">
+        {/* @ts-ignore price is checked */}
+        De{" "}
+        <span class="line-through">
+          {formatPrice(listPrice * quantity, "BRL")}
+        </span>{" "}
+        por <strong>{formatPrice(price, "BRL")}</strong>
+        <br />
+        Em{" "}
+        <span
+          class="text-sm text-gray"
+          // @ts-ignore installment is checked
+          dangerouslySetInnerHTML={{ __html: installment }}
+        />{" "}
+        ou
+      </span>
+    );
+  }
   return (
     <span class="text-sm text-gray pl-4 border-l border-light-gray">
       {/* @ts-ignore price is checked */}

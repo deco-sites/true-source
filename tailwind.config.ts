@@ -20,6 +20,7 @@ export default {
       "dark-green": "#294B14",
       gold: "#916F4A",
       red: "#e4003f",
+      transparent: "transparent",
     },
     extend: {
       animation: {

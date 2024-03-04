@@ -41,7 +41,11 @@ export function Benefits({ items = [], color = "#3C3C3B" }: BenefitsType) {
           id="benefitsSlider"
           class="w-full h-auto relative overflow-x-hidden"
         >
-          <div class="swiper-wrapper items-stretch">
+          <div
+            class={`swiper-wrapper items-stretch ${
+              items.length <= 4 && "flex justify-center"
+            }`}
+          >
             {items.map((item) => {
               const {
                 icon,
