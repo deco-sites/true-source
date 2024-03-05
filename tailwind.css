@@ -59,7 +59,7 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .custom-radio {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -67,11 +67,11 @@
     user-select: none;
     @apply relative block cursor-pointer;
   }
-  
+
   .custom-radio input[type="radio"] {
     @apply opacity-0 cursor-pointer absolute w-full h-full;
   }
-  
+
   .custom-radio-mark {
     @apply block w-4 h-4;
   }
@@ -79,8 +79,8 @@
   .custom-radio-mark:after {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='7.25' stroke='%233C3C3B' stroke-width='1.5'/%3E%3C/svg%3E");
   }
-  
-  .custom-radio input[type="radio"]:checked ~ .custom-radio-mark:after {
+
+  .custom-radio input[type="radio"]:checked~.custom-radio-mark:after {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='5.5' stroke='%233C3C3B' stroke-width='5'/%3E%3C/svg%3E");
   }
 }
@@ -120,15 +120,15 @@
   #benefitsSlider {
     @apply pb-11;
   }
-  
+
   #benefitsSlider .swiper-pagination {
     @apply bottom-0;
   }
-  
+
   #benefitsSlider .swiper-pagination .swiper-pagination-bullet {
     @apply bg-light-gray;
   }
-  
+
   #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
     @apply bg-dark;
   }
@@ -241,6 +241,12 @@
     max-width: 786px;
   }
 
+  #searchBar form, 
+  #searchBar input {
+    background-color: #F0F0EE;
+  }
+
+
   .isSticky #searchBar {
     max-width: 283px;
     z-index: 100;
@@ -269,7 +275,7 @@
   }
 
   #searchBarMobile {
-    @apply block container;
+    @apply block container pb-[18px];
   }
 
   #searchBarMobile form button {
@@ -324,7 +330,7 @@
     max-width: 200px;
   }
 
-  :not(.isSticky) #navBarWrapper #navBar #submenu { 
+  :not(.isSticky) #navBarWrapper #navBar #submenu {
     margin-top: 30px !important;
 
   }
@@ -394,6 +400,14 @@
   }
 }
 
+.borderHeader::before {
+  background: linear-gradient(270deg, #e9530e, #e4003f);
+  content: "";
+  height: 4px;
+  width: 100%;
+  display: block;
+}
+
 .bg-brand {
   background: #e4003f;
   background: linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%);
@@ -413,5 +427,11 @@
   #selector-options {
     width: calc(100% + 32px);
     margin: 0 -16px;
+  }
+}
+
+@media (max-width: 414px) {
+  #search-input::placeholder {
+    font-size: 11px;
   }
 }
