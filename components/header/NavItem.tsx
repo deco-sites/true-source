@@ -12,22 +12,23 @@ function NavItem({ item }: Props) {
 
   return (
     <li className="group flex items-center">
-      <ul>  
+      <ul>
         <a
-        href={url}
-        class={`flex items-center ${item.identifier === HIGHLIGHT_BTN &&
-          "bg-brand group-hover:bg-base-100 text-white px-5 rounded-[300px]"
+          href={url}
+          class={`flex items-center ${
+            item.identifier === HIGHLIGHT_BTN &&
+            "bg-brand group-hover:bg-base-100 text-white px-5 rounded-[300px]"
           }`}
-      >
-        <span
-          class={`font-bold text-[13px] uppercase py-[14px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk  dark
+        >
+          <span
+            class={`font-bold text-[13px] uppercase py-[14px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk  dark
           ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"} 
           ${item.identifier === HIGHLIGHT_BTN && "text-white p-[13px]"}
           ${children && children.length > 0 ? "has-submenu" : ""}`}
-        >
-          {name}
-        </span>
-      </a>
+          >
+            {name}
+          </span>
+        </a>
         <li class={`dot`}></li>
       </ul>
 
@@ -50,8 +51,10 @@ function NavItem({ item }: Props) {
                       href={node.url}
                     >
                       <span
-                        class={`text-sm ${node.name === SEEALL && "uppercase font-bold font-lemon-milk  dark"
-                          } `}
+                        class={`text-sm ${
+                          node.name === SEEALL &&
+                          "uppercase font-bold font-lemon-milk  dark"
+                        } `}
                       >
                         {node.name}
                       </span>
