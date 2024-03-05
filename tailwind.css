@@ -422,10 +422,16 @@
   width: 100%;
 }
 
-@media (max-width:414px) {
+@media (max-width: 640px) {
+  #selector-options {
+    width: calc(100% + 32px);
+    margin: 0 -16px;
+  }
+}
+
+@media (max-width: 414px) {
   #search-input::placeholder {
     font-size: 11px;
-
   }
 }
 
