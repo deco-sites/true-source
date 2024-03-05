@@ -39,7 +39,7 @@ function TimelineCalc({
   const actualDay = today.getDate();
   const actualMonth = today.getMonth();
   const actualYear = today.getFullYear();
-  const daySimulation = [actualDay,actualDay,actualDay];
+  const daySimulation = [actualDay, actualDay, actualDay];
 
   const periods = {
     "2W": 15,
@@ -62,7 +62,7 @@ function TimelineCalc({
               // No caso de ser o mes final, pega sempre o mes subsequente
               i === 3 ? cumulativeMonth + 1 : cumulativeMonth,
               // Vamos calcular data apenas na segunda posição do array
-              i === 2 ? actualDay + 15 : actualDay
+              i === 2 ? actualDay + 15 : actualDay,
               // A expectativa de retorno aqui, considerando que hoje é dia 05
               // Seria: 05/03/2024, 20/03/2024 e 05/04/2024
             );
@@ -81,13 +81,19 @@ function TimelineCalc({
               </div>
             );
           } else {
-            if (i > 1 && selected === "1M") cumulativeMonth = cumulativeMonth + 1;
-            if (i > 1 && selected === "2M") cumulativeMonth = cumulativeMonth + 2;
-            if (i > 1 && selected === "3M") cumulativeMonth = cumulativeMonth + 3;
+            if (i > 1 && selected === "1M") {
+              cumulativeMonth = cumulativeMonth + 1;
+            }
+            if (i > 1 && selected === "2M") {
+              cumulativeMonth = cumulativeMonth + 2;
+            }
+            if (i > 1 && selected === "3M") {
+              cumulativeMonth = cumulativeMonth + 3;
+            }
             const actualDate = new Date(
               cumulativeMonth > 11 ? actualYear + 1 : actualYear,
               cumulativeMonth > 11 ? cumulativeMonth - 11 : cumulativeMonth,
-              actualDay
+              actualDay,
             );
             console.log("actualDate", actualDate);
             const day = actualDate.getDate();

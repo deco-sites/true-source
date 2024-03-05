@@ -3,7 +3,7 @@ interface Props {
   disabled?: boolean;
   loading?: boolean;
   onChange?: (quantity: number) => void;
-  type?: "pdp" | "cart"
+  type?: "pdp" | "cart";
 }
 
 const QUANTITY_MAX_VALUE = 100;
@@ -38,22 +38,23 @@ const PlusIcon = () => (
   </svg>
 );
 
-function QuantitySelector({ onChange, quantity, disabled, loading, type = "cart" }: Props) {
+function QuantitySelector(
+  { onChange, quantity, disabled, loading, type = "cart" }: Props,
+) {
   const decrement = () => onChange?.(Math.max(0, quantity - 1));
 
   const increment = () =>
     onChange?.(Math.min(quantity + 1, QUANTITY_MAX_VALUE));
 
-
   if (type === "pdp") {
     return (
-      <div 
+      <div
         class="join bg-white border-2 border-light-gray rounded-md p-[10px]"
         style={{
           height: "calc(100% + 4px)",
           margin: "-2px 0 -1px -2px",
         }}
-      > 
+      >
         <button
           class=" join-item py-0 pl-2 pr-0 font-bold"
           onClick={decrement}
@@ -82,7 +83,7 @@ function QuantitySelector({ onChange, quantity, disabled, loading, type = "cart"
           <PlusIcon />
         </button>
       </div>
-    )
+    );
   }
 
   if (type === "cart") {

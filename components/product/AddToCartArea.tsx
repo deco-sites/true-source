@@ -18,9 +18,21 @@ export interface Props {
 }
 
 const CheckIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 14 14"
+    fill="none"
+  >
     <g clip-path="url(#clip0_1203_31881)">
-      <path d="M4.37533 7L6.12533 8.75L9.62533 5.25M12.8337 7C12.8337 10.2217 10.222 12.8333 7.00033 12.8333C3.77866 12.8333 1.16699 10.2217 1.16699 7C1.16699 3.77834 3.77866 1.16667 7.00033 1.16667C10.222 1.16667 12.8337 3.77834 12.8337 7Z" stroke="#8CBF3C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path
+        d="M4.37533 7L6.12533 8.75L9.62533 5.25M12.8337 7C12.8337 10.2217 10.222 12.8333 7.00033 12.8333C3.77866 12.8333 1.16699 10.2217 1.16699 7C1.16699 3.77834 3.77866 1.16667 7.00033 1.16667C10.222 1.16667 12.8337 3.77834 12.8337 7Z"
+        stroke="#8CBF3C"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </g>
     <defs>
       <clipPath id="clip0_1203_31881">
@@ -89,8 +101,9 @@ export default function AddToCartArea({
         ? (
           <>
             <div
-              class={`flex ${listPrice > price ? "flex-col-reverse gap-2" : "flex-row gap-6"
-                } items-stretch`}
+              class={`flex ${
+                listPrice > price ? "flex-col-reverse gap-2" : "flex-row gap-6"
+              } items-stretch`}
             >
               <span class="text-dark">
                 <PixPrice
@@ -119,10 +132,11 @@ export default function AddToCartArea({
                 }}
               />
               <span
-                class={`flex items-center gap-3 text-sm ${quantity >= 3
+                class={`flex items-center gap-3 text-sm ${
+                  quantity >= 3
                     ? "text-green font-bold"
                     : "text-gray font-regular"
-                  }`}
+                }`}
               >
                 {quantity >= 3 && <CheckIcon />}
                 10% OFF para 3 ou mais unidades
