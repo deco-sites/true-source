@@ -105,16 +105,16 @@ function Header({
       >
         <div class="bg-base-100 fixed w-full z-50">
           <NavbarWrapper>
-          {alerts && alerts.length > 0 && (
-            <Alert alerts={alerts} theme={theme} />
-          )}
-          <Navbar
-            items={items}
-            searchbar={searchbar && { ...searchbar, platform }}
-            logo={logo}
-            logoPosition={logoPosition}
-            buttons={buttons}
-          />
+            {alerts && alerts.length > 0 && (
+              <Alert alerts={alerts} theme={theme} />
+            )}
+            <Navbar
+              items={items}
+              searchbar={searchbar && { ...searchbar, platform }}
+              logo={logo}
+              logoPosition={logoPosition}
+              buttons={buttons}
+            />
           </NavbarWrapper>
         </div>
       </Drawers>

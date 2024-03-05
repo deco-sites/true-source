@@ -22,7 +22,6 @@ export default {
       red: "#e4003f",
       transparent: "transparent",
       Stroke: "#EDEDED",
-
     },
     extend: {
       animation: {
