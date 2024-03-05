@@ -97,13 +97,14 @@ function Header({
   const items = navItems ?? [];
 
   return (
-    <header style={{ height: headerHeight }}>
+    <header class={`borderHeader`} style={{ height: headerHeight }}>
       <Drawers
         menu={{ items }}
         searchbar={searchbar}
         platform={platform}
       >
         <div class="bg-base-100 fixed w-full z-50">
+          <NavbarWrapper>
           {alerts && alerts.length > 0 && (
             <Alert alerts={alerts} theme={theme} />
           )}
@@ -114,6 +115,7 @@ function Header({
             logoPosition={logoPosition}
             buttons={buttons}
           />
+          </NavbarWrapper>
         </div>
       </Drawers>
     </header>

@@ -21,6 +21,8 @@ export default {
       gold: "#916F4A",
       red: "#e4003f",
       transparent: "transparent",
+      Stroke: "#EDEDED",
+
     },
     extend: {
       animation: {

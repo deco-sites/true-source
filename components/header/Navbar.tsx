@@ -65,7 +65,7 @@ function Navbar(
           <div id="nonStickyHeaderLinks">
             <MyAccount />
             <a
-              className="flex items-center text-xs"
+              className="flex items-center text-xs gap-1"
               href="/precisa-de-ajuda"
               aria-label="Wishlist"
             >
@@ -160,7 +160,7 @@ function Navbar(
             <MyAccount />
             {!buttons?.hideWishlistButton && (
               <a
-                className="flex items-center text-xs "
+                className="flex items-center text-xs gap-1"
                 href="/precisa-de-ajuda"
               >
                 <button className="flex btn btn-circle btn-sm btn-ghost gap-1">
