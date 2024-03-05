@@ -20,7 +20,7 @@ function Alert({ alerts = [], theme }: Props) {
             {alerts.map((alert, index) => (
               <Slider.Item key={index} index={index} className="carousel-item">
                 <div
-                  className={`text-sm flex justify-center mx-auto items-center w-screen h-[38px] py-2 border-b border-solid border-Stroke border-opacity-100 ${
+                  className={`text-sm flex justify-center mx-auto items-center w-screen h-[38px] py-2 border-b border-solid border-edgegray border-opacity-100 ${
                     isLightTheme ? "bg-white" : "bg-black"
                   }`}
                 >
@@ -39,7 +39,7 @@ function Alert({ alerts = [], theme }: Props) {
       </div>
 
       <div
-        className={`border-b border-solid border-Stroke border-opacity-100 ${
+        className={`border-b border-solid border-edgegray border-opacity-100 ${
           isLightTheme ? "bg-white" : "bg-black"
         }`}
       >

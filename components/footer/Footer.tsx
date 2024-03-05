@@ -184,11 +184,11 @@ function Footer({
     />
   );
   const _sectionLinks = layout?.hide?.sectionLinks ? <></> : null;
-    // <FooterItems
-    //   sections={sections}
-    //   justify={layout?.variation == "Variation 2" ||
-    //     layout?.variation == "Variation 3"}
-    // />
+  // <FooterItems
+  //   sections={sections}
+  //   justify={layout?.variation == "Variation 2" ||
+  //     layout?.variation == "Variation 3"}
+  // />
   // );
   const _social = layout?.hide?.socialLinks
     ? <></>

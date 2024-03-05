@@ -20,27 +20,27 @@ function NavItem({ item }: Props) {
         }`}
       >
         <span
-          class={`font-bold text-[13px] uppercase py-[14px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300
-        ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"} 
+          class={`font-bold text-[13px] uppercase py-[14px] group group-hover:fontWithGradient group-hover:bg-base-100 ease-in-out duration-300
+        ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"}
         ${item.identifier === HIGHLIGHT_BTN && "text-white p-[13px]"}
         `}
         >
           {name}
         </span>
       </a>
-      <li class={`dot`}></li>
+
       {children && children.length > 0 && (
         <div
           id={`submenu`}
           className={`flex fixed hidden group-hover:block z-50 items-start justify-between gap-6 hover:px-[16px] hover:rounded-[8px]`}
           style={{ top: "42px", marginTop: "137px" }}
         >
-          <div class={`flex m-auto`}>
+          <div class={`flex m-auto justify-center`}>
             <div className="flex justify-between items-start">
               <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[12px] pb-[24px]">
                 {children.slice(0, 8).map((node) => (
                   <li
-                    className="group border-b border-solid py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px] "
+                    className="group border-b border-solid border-edgegray py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px] "
                     key={node.url}
                   >
                     <a
@@ -91,7 +91,7 @@ function NavItem({ item }: Props) {
                 <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[12px] pb-[24px]">
                   {children.slice(8, 16).map((node) => (
                     <li
-                      className="group border-b border-solid py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]"
+                      className="group border-b border-solid border-edgegray py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]"
                       key={node.url}
                     >
                       <a

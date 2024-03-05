@@ -189,7 +189,7 @@
   }
 
   #searchBarMobile {
-    @apply block container;
+    @apply block container pb-[18px];
   }
 
   #searchBarMobile form button {
@@ -244,7 +244,7 @@
     max-width: 200px;
   }
 
-  :not(.isSticky) #navBarWrapper #navBar #submenu { 
+  :not(.isSticky) #navBarWrapper #navBar #submenu {
     margin-top: 30px !important;
 
   }
@@ -327,4 +327,11 @@
 .seachContainer {
   max-width: calc(100% - 86px - 72px - 30px);
   width: 100%;
+}
+
+@media (max-width:414px) {
+  #search-input::placeholder {
+    font-size: 11px;
+
+  }
 }

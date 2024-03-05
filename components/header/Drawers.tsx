@@ -110,7 +110,7 @@ const MinicartHeader = (props: HeaderProps) => {
   const { closeFunction: { onClose } } = props;
 
   return (
-    <div class="flex justify-between items-center py-4 px-6 border-b border-gray-300">
+    <div class="flex justify-between items-center py-4 px-6 border-b border-edgegray">
       <div class="flex items-center gap-2 text-lg text-black uppercase font-medium">
         <svg
           xmlns="http://www.w3.org/2000/svg"
