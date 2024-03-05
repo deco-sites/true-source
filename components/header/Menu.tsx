@@ -143,7 +143,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
                   item.children.map((node) => (
                     <li
                       style={{ height: "fit-content" }}
-                      className="flex justify-between pl-[24px] pr-[24px] items-center border-b border-solid border-gray-200"
+                      className="flex justify-between pl-[24px] pr-[24px] items-center border-b border-solid border-Stroke"
                       key={node.id}
                     >
                       <MenuItem item={node} />
@@ -221,7 +221,7 @@ function Menu({ items }: Props) {
         <li className="py-3 px-6 text-[11px] uppercase font-bold h-10 items-center">
           <CartButtonVTEX type="menu" />
         </li>
-        <li className=" py-3 px-6 text-[11px] uppercase font-bold h-10 items-center border-t border-b border-gray-200">
+        <li className=" py-3 px-6 text-[11px] uppercase font-bold h-10 items-center border-t border-b border-Stroke">
           <a
             className="flex justify-between gap-1 items-center"
             href="/account"

@@ -51,11 +51,11 @@ function Cart({
       {isEmtpy
         ? (
           <div class="flex flex-col gap-6 w-[245px] text-center">
-            <span class="font-bold text-lg uppercase">
+            <span class="font-bold text-lg uppercase font-lemon-milk">
               Seu carrinho ainda está vazio. Aceita algumas sugestões?
             </span>
             <Button
-              class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green"
+              class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green font-lemon-milk"
               onClick={() => {
                 displayCart.value = false;
               }}

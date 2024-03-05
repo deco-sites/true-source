@@ -141,7 +141,7 @@
 @layer utilities {
   .searchbarInput {
     width: calc(100% - 57px);
-    @apply text-xs pr-0 pr-2;
+    @apply text-xs pr-0 pr-1;
   }
 
   .menuListContainer {
@@ -241,7 +241,7 @@
     max-width: 786px;
   }
 
-  #searchBar form, 
+  #searchBar form,
   #searchBar input {
     background-color: #F0F0EE;
   }
@@ -300,7 +300,7 @@
     height: 34px;
   }
 
-  .isSticky #logoMobile img {
+  .isSticky #logoMobile {
     width: 103px;
     height: 46px;
   }
@@ -322,12 +322,11 @@
   }
 
   #searchBarMobileOnSticky {
-    @apply hidden container lg:pb-0;
+    @apply hidden container lg:pb-0 pl-0;
   }
 
   .isSticky #searchBarMobileOnSticky {
     @apply block;
-    max-width: 200px;
   }
 
   :not(.isSticky) #navBarWrapper #navBar #submenu {
@@ -428,4 +427,8 @@
     font-size: 11px;
 
   }
+}
+
+.has-submenu::after {
+  content: "seta";
 }
