@@ -102,7 +102,7 @@ function Searchbar({
         <form
           id={id}
           action={action}
-          class="join border bg-gray-200  border-solid border-Stroke rounded-3xl flex m-auto w-[100%]"
+          class="searchBarForm join border bg-gray-200  border-solid border-Stroke rounded-3xl flex m-auto w-[100%]"
         >
           <input
             ref={searchInputRef}

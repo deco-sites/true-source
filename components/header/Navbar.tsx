@@ -33,7 +33,7 @@ function Navbar(
     <>
       {/* Mobile Version */}
       <div class={`lg:hidden z-50`}>
-        <div className={`container justify-between flex py-4 `}>
+        <div className={`wrapper-header-mobile container justify-between flex py-4 `}>
           <div className="flex flex-row items-center">
             <a
               id="logoMobile"

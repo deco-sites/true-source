@@ -154,7 +154,7 @@ const Aside = (
     children: ComponentChildren;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw] rounded-l-[20px]">
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[90vw] rounded-l-[20px]">
     {title === MENU_TITLE && onClose && (
       <HeaderLogin closeFunction={{ onClose }} />
     )}

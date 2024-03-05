@@ -23,7 +23,7 @@ export default function NavbarWrapper({ children }: Props) {
     <div
       id="navBarW"
       ref={navbarRef}
-      class={pos > 38 ? "fixed z-40 top-0 w-full bg-white isSticky" : ""}
+      class={pos > 38 ? "fixed z-40 top-0 w-full isSticky" : ""}
     >
       {children}
     </div>
