@@ -36,8 +36,10 @@ function TimelineCalc({
   if (!selected) return null;
 
   const today = new Date();
-  const day = today.getDate();
-  const daySimulation = [day];
+  const actualDay = today.getDate();
+  const actualMonth = today.getMonth();
+  const actualYear = today.getFullYear();
+  const daySimulation = [actualDay,actualDay,actualDay];
 
   const periods = {
     "2W": 15,
@@ -46,12 +48,7 @@ function TimelineCalc({
     "3M": 90,
   };
 
-  // @ts-ignore day is string
-  let days = parseInt(day);
-  for (let i = 0; i < 2; ++i) {
-    days = days + periods[selected];
-    daySimulation.push(days);
-  }
+  let cumulativeMonth = actualMonth;
 
   return (
     <div class="flex flex-col gap-y-6">
@@ -59,20 +56,54 @@ function TimelineCalc({
       <div class="flex items-center justify-between">
         {daySimulation.map((d, i) => {
           const shippingDay = ++i;
-          const actualDate = new Date(today.setDate(d));
-          const day = actualDate.getDate();
-          const month = actualDate.getMonth();
-          const year = actualDate.getFullYear();
-          return (
-            <div class="flex flex-col font-bold text-sm text-red">
-              {shippingDay}º ENVIO
-              <span class="text-dark font-light">
-                {day <= 9 ? `0${day}` : day}/
-                {month <= 9 ? `0${month}` : month}/
-                {year}
-              </span>
-            </div>
-          );
+          if (selected === "2W") {
+            const actualDate = new Date(
+              actualYear,
+              // No caso de ser o mes final, pega sempre o mes subsequente
+              i === 3 ? cumulativeMonth + 1 : cumulativeMonth,
+              // Vamos calcular data apenas na segunda posição do array
+              i === 2 ? actualDay + 15 : actualDay
+              // A expectativa de retorno aqui, considerando que hoje é dia 05
+              // Seria: 05/03/2024, 20/03/2024 e 05/04/2024
+            );
+            console.log("actualDate", actualDate);
+            const day = actualDate.getDate();
+            const month = actualDate.getMonth() + 1;
+            const year = actualDate.getFullYear();
+            return (
+              <div class="flex flex-col font-bold text-sm text-red">
+                {shippingDay}º ENVIO
+                <span class="text-dark font-light">
+                  {day <= 9 ? `0${day}` : day}/
+                  {month <= 9 ? `0${month}` : month}/
+                  {year}
+                </span>
+              </div>
+            );
+          } else {
+            if (i > 1 && selected === "1M") cumulativeMonth = cumulativeMonth + 1;
+            if (i > 1 && selected === "2M") cumulativeMonth = cumulativeMonth + 2;
+            if (i > 1 && selected === "3M") cumulativeMonth = cumulativeMonth + 3;
+            const actualDate = new Date(
+              cumulativeMonth > 11 ? actualYear + 1 : actualYear,
+              cumulativeMonth > 11 ? cumulativeMonth - 11 : cumulativeMonth,
+              actualDay
+            );
+            console.log("actualDate", actualDate);
+            const day = actualDate.getDate();
+            const month = actualDate.getMonth() + 1;
+            const year = actualDate.getFullYear();
+            return (
+              <div class="flex flex-col font-bold text-sm text-red">
+                {shippingDay}º ENVIO
+                <span class="text-dark font-light">
+                  {day <= 9 ? `0${day}` : day}/
+                  {month <= 9 ? `0${month}` : month}/
+                  {year}
+                </span>
+              </div>
+            );
+          }
         })}
       </div>
       <Timeline />

@@ -30,6 +30,19 @@ const PROPERTIE_NAMES = {
 
 const renderedValues: string[] = [];
 
+const CheckIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <g clip-path="url(#clip0_2871_41320)">
+      <path d="M4.37533 7L6.12533 8.75L9.62533 5.25M12.8337 7C12.8337 10.2217 10.222 12.8333 7.00033 12.8333C3.77866 12.8333 1.16699 10.2217 1.16699 7C1.16699 3.77834 3.77866 1.16667 7.00033 1.16667C10.222 1.16667 12.8337 3.77834 12.8337 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2871_41320">
+        <rect width="14" height="14" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
 function splitProperties(properties: PropertyValue[]) {
   return properties.filter((property) => {
     if (!property.name) return false;
@@ -146,14 +159,14 @@ function ProductSimilars({ product, current }: Props) {
         // @ts-ignore poss is ok
         ? Object.keys(poss).map((key) => {
           // @ts-ignore if is ok
-          if (poss[key].length === 0) return null;
+          if (poss[key].length <= 1) return null;
           return (
             <div>
               <span class="block font-lemon-milk text-[13px] font-bold uppercase mb-2">
                 {/* @ts-ignore PROPERTIE_NAMES is ok */}
                 {PROPERTIE_NAMES[key]}
               </span>
-              <ul class="flex flex-wrap flex-row gap-2">
+              <ul id="selector-options" class="flex flex-nowrap overflow-x-auto sm:flex-wrap flex-row gap-2">
                 {/* @ts-ignore poss with key in object is ok */}
                 {poss[key].map((d) => {
                   let name = "";
@@ -161,16 +174,16 @@ function ProductSimilars({ product, current }: Props) {
                   if (key === "sizes") name = d.name.split("-")[1].trim();
                   return (
                     <li
-                      class={`${
-                        d.selected
+                      class={`${d.selected
                           ? "bg-brand text-white"
                           : "bg-ice border-light-gray text-dark"
-                      } border-2 rounded-full`}
+                        } border-2 rounded-full flex-none first:ml-4 first:sm:ml-0 last:mr-4 last:sm:mr-0`}
                     >
                       <a
-                        class="block py-2 px-3 text-sm font-bold"
+                        class="flex items-center gap-2 py-2 px-3 text-sm font-bold"
                         href={d.url}
                       >
+                        {d.selected && <CheckIcon />}
                         {name}
                       </a>
                     </li>

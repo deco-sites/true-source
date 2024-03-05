@@ -408,3 +408,10 @@
   max-width: calc(100% - 86px - 72px - 30px);
   width: 100%;
 }
+
+@media (max-width: 640px) {
+  #selector-options {
+    width: calc(100% + 32px);
+    margin: 0 -16px;
+  }
+}
