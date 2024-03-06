@@ -137,7 +137,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <input className="pl-[40px] pr-[24px]" type="checkbox" />
             <div
               style={{ height: "fit-content" }}
-              className={`collapse-title flex items-center gap-4 py-[16px] px-6 hover:bg-gray-100 text-[11px] uppercase font-bold ${
+              className={`collapse-title flex items-center gap-4 py-[16px] px-6 hover:bg-gray-100 text-[11px] uppercase font-bold menuMobileItem ${
                 item.identifier === HIGHLIGHT_BTN && "highlight_btn"
               } `}
             >
