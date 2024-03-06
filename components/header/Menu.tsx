@@ -225,7 +225,7 @@ function Menu({ items }: Props) {
       </ul>
 
       <ul className="flex flex-col mt-6 border border-[#ededed] rounded-[8px]">
-        <li className="py-3 px-6 text-[11px] uppercase font-bold h-10 items-center">
+        <li className="py-3 px-6 text-[11px] uppercase font-bold h-10 items-center cartMobile">
           <CartButtonVTEX type="menu" />
         </li>
         <li className=" py-3 px-6 text-[11px] uppercase font-bold h-10 items-center border-t border-b border-Stroke">
