@@ -12,7 +12,7 @@ import MyAccount from "$store/islands/Header/MyAccount.tsx";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
 
 export const HIGHLIGHT_ID = "destaque";
-export const HIGHLIGHT_BTN = "todos produtos";
+export const HIGHLIGHT_BTN = "TODOS OS PRODUTOS";
 export const SEEALL = "ver todos";
 
 function Navbar(
@@ -148,7 +148,7 @@ function Navbar(
             </a>
           </div>
           <div id="menuCompact">
-            <ul className="flex gap-[20px] ">
+            <ul className="flex gap-[2%] menuCompactItem">
               {items &&
                 items.slice(0, 3).map((item, index) => (
                   <NavItem key={index} item={item} />
@@ -195,7 +195,10 @@ function Navbar(
           </div>
         </div>
         <div id="quickMenu">
-          <ul className="container flex justify-between items-center">
+          <ul
+            id="menuHeader"
+            className="container flex justify-between items-center"
+          >
             {items &&
               items.map((item, index) => <NavItem key={index} item={item} />)}
           </ul>

@@ -47,7 +47,9 @@ function ProductData({
       </div>
       {/* Brand */}
       <div class="flex items-center justify-between">
-        <span class="text-sm sm:text-base font-medium color-dark sm:text-light-gray">{brandName}</span>
+        <span class="text-sm sm:text-base font-medium color-dark sm:text-light-gray">
+          {brandName}
+        </span>
         <div class="block sm:hidden">
           <WishlistButtonVtex
             variant="full"

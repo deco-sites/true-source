@@ -325,7 +325,7 @@
   }
 
   :not(.isSticky) #navBarWrapper #navBar #submenu {
-    margin-top: 30px !important;
+    margin-top: 15px !important;
 
   }
 
@@ -334,7 +334,7 @@
   }
 
   .isSticky #navBarWrapper #navBar {
-    @apply py-2
+    @apply py-2;
   }
 
   .wrapper-header-mobile {
@@ -373,7 +373,7 @@
   }
 
   #navBarWrapper #navBar {
-    @apply pt-6 pb-[18px]
+    @apply pt-6 pb-[18px];
   }
 
   #submenu {
@@ -408,7 +408,6 @@
     border: 1px solid #e9530e;
   }
 
-
   .menu {
     @apply p-0
   }
@@ -417,9 +416,89 @@
     @apply text-[0.79rem]
   }
 
-  .btnHighlits:hover {
-    background: #fff;
-    color: #e4003f;
+  #menuHeader>li:first-child #menuItem {
+    @apply text-white;
+  }
+
+  #menuHeader>li:not(:hover):first-child #menuItem {
+    background: linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%);
+    border-radius: 300px;
+    border: 1px solid #e8530e;
+    padding: 12px 24px;
+    z-index: 50;
+  }
+
+  #menuHeader>li:hover:first-child #menuItem {
+    border-radius: 300px;
+    border: 1px solid #e8530e;
+    padding: 12px 24px;
+    z-index: 50;
+  }
+
+  #menuHeader>li #menuItem.has-submenu {
+    @apply flex items-center flex-row;
+  }
+
+  #menuHeader>li #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4.79688 6L8.79688 10L12.7969 6' stroke='%233C3C3B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  #menuHeader>li:first-child #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  #menuHeader>li:hover #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23FF0000'  stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  .menuCompactItem li #menuItem {
+    font-size: 11px;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .menuCompactItem>li:first-child #menuItem {
+    @apply text-white;
+  }
+
+  .menuCompactItem>li:not(:hover):first-child #menuItem {
+    background: linear-gradient(90deg, rgba(228, 0, 63, 1) 35%, rgba(233, 83, 14, 1) 70%);
+    border-radius: 300px;
+    border: 1px solid #e8530e;
+    padding: 12px 24px;
+    z-index: 50;
+  }
+
+  .menuCompactItem>li:hover:first-child #menuItem {
+    border-radius: 300px;
+    border: 1px solid #e8530e;
+    padding: 12px 24px;
+    z-index: 50;
+  }
+
+  .menuCompactItem>li #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4.79688 6L8.79688 10L12.7969 6' stroke='%233C3C3B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  .menuCompactItem>li:first-child #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  .menuCompactItem>li:hover #menuItem.has-submenu::after,
+  .menuCompactItem>li:first-child:hover #menuItem.has-submenu::after {
+    content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23FF0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: fit-content;
+    margin-top: 4px;
   }
 }
 
@@ -467,8 +546,4 @@
   #search-input::placeholder {
     font-size: 11px;
   }
-}
-
-.has-submenu::after {
-  content: "seta";
 }

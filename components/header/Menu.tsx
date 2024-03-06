@@ -56,28 +56,38 @@ const redesSociais = [
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
-        viewBox="0 0 24 24"
+        viewBox="0 0 20 20"
         fill="none"
       >
-        <path
-          d="M21.8392 5.15948C22.1799 5.51065 22.4218 5.94548 22.5406 6.42007C22.8578 8.17877 23.0118 9.96303 23.0006 11.7501C23.0069 13.5104 22.8529 15.2677 22.5406 17.0001C22.4218 17.4747 22.1799 17.9095 21.8392 18.2607C21.4986 18.6118 21.0713 18.8669 20.6006 19.0001C18.8806 19.4601 12.0006 19.4601 12.0006 19.4601C12.0006 19.4601 5.12057 19.4601 3.40057 19.0001C2.93939 18.8739 2.51855 18.6309 2.17872 18.2946C1.83888 17.9582 1.59153 17.5399 1.46057 17.0801C1.14334 15.3214 0.989351 13.5371 1.00057 11.7501C0.991808 9.97638 1.14579 8.20563 1.46057 6.46007C1.57936 5.98548 1.82129 5.55065 2.16192 5.19948C2.50255 4.84832 2.92982 4.59325 3.40057 4.46007C4.11018 4.25931 8.05723 4.00479 12.0005 4.00008C15.9886 3.99531 19.9729 4.2425 20.6006 4.42007C21.0713 4.55325 21.4986 4.80832 21.8392 5.15948Z"
-          stroke="url(#paint0_linear_2530_4291)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <g clip-path="url(#clip0_2900_43143)">
+          <path
+            d="M17.8925 4.26328C18.1657 4.54495 18.3598 4.89372 18.4551 5.27438C18.7095 6.68501 18.833 8.11613 18.824 9.54949C18.8291 10.9614 18.7056 12.3709 18.4551 13.7604C18.3598 14.1411 18.1657 14.4899 17.8925 14.7715C17.6193 15.0532 17.2766 15.2578 16.899 15.3646C15.5194 15.7336 10.0011 15.7336 10.0011 15.7336C10.0011 15.7336 4.48278 15.7336 3.10319 15.3646C2.73329 15.2634 2.39574 15.0685 2.12316 14.7987C1.85058 14.5289 1.65219 14.1934 1.54715 13.8246C1.2927 12.414 1.16919 10.9828 1.17819 9.54949C1.17116 8.12684 1.29467 6.70655 1.54715 5.30647C1.64243 4.92581 1.83648 4.57703 2.10969 4.29537C2.3829 4.0137 2.72561 3.80912 3.10319 3.70229C3.67236 3.54127 6.83822 3.33712 10.0011 3.33334C13.1999 3.32952 16.3956 3.52778 16.899 3.67021C17.2766 3.77703 17.6193 3.98162 17.8925 4.26328Z"
+            stroke="url(#paint0_linear_2900_43143)"
+            stroke-width="1.60417"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </g>
         <defs>
           <linearGradient
-            id="paint0_linear_2530_4291"
-            x1="23.0011"
-            y1="11.73"
-            x2="1"
-            y2="11.73"
+            id="paint0_linear_2900_43143"
+            x1="18.8245"
+            y1="9.53342"
+            x2="1.17773"
+            y2="9.53342"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#E9530E" />
-            <stop offset="1" stopColor="#E4003F" />
+            <stop stop-color="#E9530E" />
+            <stop offset="1" stop-color="#E4003F" />
           </linearGradient>
+          <clipPath id="clip0_2900_43143">
+            <rect
+              width="19.25"
+              height="19.25"
+              fill="white"
+              transform="translate(0.375 0.125)"
+            />
+          </clipPath>
         </defs>
       </svg>
     ),
@@ -127,12 +137,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <input className="pl-[40px] pr-[24px]" type="checkbox" />
             <div
               style={{ height: "fit-content" }}
-              className={`collapse-title ${
-                item.identifier === HIGHLIGHT_BTN &&
-                "bg-brand rounded-full text-white"
-              } flex items-center uppercase font-bold text-[11px]   ${
-                item.identifier === HIGHLIGHT_ID && "fontWithGradient"
-              }`}
+              className={`collapse-title`}
             >
               {item.name}
             </div>
@@ -208,7 +213,7 @@ export function MenuInstitutional(
 
 function Menu({ items }: Props) {
   return (
-    <div className="flex flex-col h-full px-6">
+    <div className="flex flex-col h-full px-6 overflow-y-scroll">
       <ul className="flex flex-col menuListContainer">
         {items.map((item) => (
           <li key={item.id}>
@@ -238,9 +243,9 @@ function Menu({ items }: Props) {
               <path
                 d="M5.3163 19.4384C5.92462 18.0052 7.34492 17 9 17H15C16.6551 17 18.0754 18.0052 18.6837 19.4384M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
                 stroke="#3C3C3B"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </a>
@@ -252,26 +257,6 @@ function Menu({ items }: Props) {
             aria-label="Ajuda e suporte"
           >
             Ajuda e suporte
-            <svg
-              style={{ marginRight: "4px" }}
-              width="17"
-              height="16"
-              viewBox="0 0 17 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="cursor-pointer transform transition-transform group-hover:rotate-180 ease-in group-hover:text-blue-500 "
-            >
-              <g id="chevron-down">
-                <path
-                  id="Vector"
-                  d="M4.79688 6L8.79688 10L12.7969 6"
-                  stroke="#3C3C3B"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </g>
-            </svg>
           </a>
         </li>
       </ul>
@@ -281,6 +266,7 @@ function Menu({ items }: Props) {
       <ul style={{ maxWidth: "200px" }} className={`flex gap-5 mt-6 ml-[20px]`}>
         {redesSociais.map((redeSocial, index) => (
           <a
+            class={`p-2 border border-[#E9530E] rounded-[300px]`}
             key={index}
             href={redeSocial.link}
             target="_blank"
