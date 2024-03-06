@@ -48,9 +48,10 @@ function NavItem({ item }: Props) {
                       href={node.url}
                     >
                       <span
-                        class={`text-sm ${node.name === SEEALL &&
+                        class={`text-sm ${
+                          node.name === SEEALL &&
                           "uppercase font-bold font-lemon-milk  dark"
-                          } `}
+                        } `}
                       >
                         {node.name}
                       </span>

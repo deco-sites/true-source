@@ -52,17 +52,41 @@ const redesSociais = [
     nome: "YouTube",
     link: "https://www.youtube.com/seu_canal",
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
         <g clip-path="url(#clip0_2900_43143)">
-          <path d="M17.8925 4.26328C18.1657 4.54495 18.3598 4.89372 18.4551 5.27438C18.7095 6.68501 18.833 8.11613 18.824 9.54949C18.8291 10.9614 18.7056 12.3709 18.4551 13.7604C18.3598 14.1411 18.1657 14.4899 17.8925 14.7715C17.6193 15.0532 17.2766 15.2578 16.899 15.3646C15.5194 15.7336 10.0011 15.7336 10.0011 15.7336C10.0011 15.7336 4.48278 15.7336 3.10319 15.3646C2.73329 15.2634 2.39574 15.0685 2.12316 14.7987C1.85058 14.5289 1.65219 14.1934 1.54715 13.8246C1.2927 12.414 1.16919 10.9828 1.17819 9.54949C1.17116 8.12684 1.29467 6.70655 1.54715 5.30647C1.64243 4.92581 1.83648 4.57703 2.10969 4.29537C2.3829 4.0137 2.72561 3.80912 3.10319 3.70229C3.67236 3.54127 6.83822 3.33712 10.0011 3.33334C13.1999 3.32952 16.3956 3.52778 16.899 3.67021C17.2766 3.77703 17.6193 3.98162 17.8925 4.26328Z" stroke="url(#paint0_linear_2900_43143)" stroke-width="1.60417" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="M17.8925 4.26328C18.1657 4.54495 18.3598 4.89372 18.4551 5.27438C18.7095 6.68501 18.833 8.11613 18.824 9.54949C18.8291 10.9614 18.7056 12.3709 18.4551 13.7604C18.3598 14.1411 18.1657 14.4899 17.8925 14.7715C17.6193 15.0532 17.2766 15.2578 16.899 15.3646C15.5194 15.7336 10.0011 15.7336 10.0011 15.7336C10.0011 15.7336 4.48278 15.7336 3.10319 15.3646C2.73329 15.2634 2.39574 15.0685 2.12316 14.7987C1.85058 14.5289 1.65219 14.1934 1.54715 13.8246C1.2927 12.414 1.16919 10.9828 1.17819 9.54949C1.17116 8.12684 1.29467 6.70655 1.54715 5.30647C1.64243 4.92581 1.83648 4.57703 2.10969 4.29537C2.3829 4.0137 2.72561 3.80912 3.10319 3.70229C3.67236 3.54127 6.83822 3.33712 10.0011 3.33334C13.1999 3.32952 16.3956 3.52778 16.899 3.67021C17.2766 3.77703 17.6193 3.98162 17.8925 4.26328Z"
+            stroke="url(#paint0_linear_2900_43143)"
+            stroke-width="1.60417"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </g>
         <defs>
-          <linearGradient id="paint0_linear_2900_43143" x1="18.8245" y1="9.53342" x2="1.17773" y2="9.53342" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="paint0_linear_2900_43143"
+            x1="18.8245"
+            y1="9.53342"
+            x2="1.17773"
+            y2="9.53342"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop stop-color="#E9530E" />
             <stop offset="1" stop-color="#E4003F" />
           </linearGradient>
           <clipPath id="clip0_2900_43143">
-            <rect width="19.25" height="19.25" fill="white" transform="translate(0.375 0.125)" />
+            <rect
+              width="19.25"
+              height="19.25"
+              fill="white"
+              transform="translate(0.375 0.125)"
+            />
           </clipPath>
         </defs>
       </svg>
@@ -113,10 +137,12 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <input className="pl-[40px] pr-[24px]" type="checkbox" />
             <div
               style={{ height: "fit-content" }}
-              className={`collapse-title ${item.identifier === HIGHLIGHT_BTN &&
+              className={`collapse-title ${
+                item.identifier === HIGHLIGHT_BTN &&
                 "bg-brand rounded-full text-white"
-                } flex items-center uppercase font-bold text-[11px]   ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"
-                }`}
+              } flex items-center uppercase font-bold text-[11px]   ${
+                item.identifier === HIGHLIGHT_ID && "fontWithGradient"
+              }`}
             >
               {item.name}
             </div>
@@ -160,8 +186,9 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
               href="/"
             >
               <span
-                className={`text-[11px] uppercase font-bold ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"
-                  }`}
+                className={`text-[11px] uppercase font-bold ${
+                  item.identifier === HIGHLIGHT_ID && "fontWithGradient"
+                }`}
               >
                 {item.name}
               </span>
@@ -211,8 +238,20 @@ function Menu({ items }: Props) {
             aria-label="Account"
           >
             Sua conta
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M5.3163 19.4384C5.92462 18.0052 7.34492 17 9 17H15C16.6551 17 18.0754 18.0052 18.6837 19.4384M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#3C3C3B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M5.3163 19.4384C5.92462 18.0052 7.34492 17 9 17H15C16.6551 17 18.0754 18.0052 18.6837 19.4384M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                stroke="#3C3C3B"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </a>
         </li>
@@ -223,7 +262,6 @@ function Menu({ items }: Props) {
             aria-label="Ajuda e suporte"
           >
             Ajuda e suporte
-
           </a>
         </li>
       </ul>
@@ -232,7 +270,8 @@ function Menu({ items }: Props) {
       </ul>
       <ul style={{ maxWidth: "200px" }} className={`flex gap-5 mt-6 ml-[20px]`}>
         {redesSociais.map((redeSocial, index) => (
-          <a class={`p-2 border border-[#E9530E] rounded-[300px]`}
+          <a
+            class={`p-2 border border-[#E9530E] rounded-[300px]`}
             key={index}
             href={redeSocial.link}
             target="_blank"
