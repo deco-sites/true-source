@@ -24,7 +24,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
       <div class="flex justify-center items-center gap-2 text-primary">
         {remaining > 0
           ? (
-            <span class="font-bold text-black">
+            <span class="font-bold text-dark">
               Faltam {formatPrice(remaining, currency, locale)}{" "}
               para frete grátis!
             </span>

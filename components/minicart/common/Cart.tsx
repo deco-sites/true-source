@@ -142,7 +142,7 @@ function Cart({
                 </div>
                 <div class="w-full flex flex-col gap-2">
                   <Button
-                    class="btn no-animation btn-primary btn-block border border-solid border-gray-800 rounded-md text-[13px]"
+                    class="btn no-animation btn-primary btn-block border border-solid border-dark rounded-md text-[13px]"
                     href="/promocoes"
                   >
                     ADICIONAR MAIS ITENS

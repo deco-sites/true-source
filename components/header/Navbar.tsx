@@ -12,7 +12,7 @@ import MyAccount from "$store/islands/Header/MyAccount.tsx";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
 
 export const HIGHLIGHT_ID = "destaque";
-export const HIGHLIGHT_BTN = "todos produtos";
+export const HIGHLIGHT_BTN = "TODOS OS PRODUTOS";
 export const SEEALL = "ver todos";
 
 function Navbar(
@@ -125,11 +125,10 @@ function Navbar(
           className={`hidden container lg:flex gap-[32px] items-center px-6`}
         >
           <div
-            className={`flex ${
-              logoPosition === "left"
+            className={`flex ${logoPosition === "left"
                 ? "justify-start -order-1"
                 : "justify-start"
-            }`}
+              }`}
           >
             <a
               id="logo"
@@ -193,7 +192,7 @@ function Navbar(
           </div>
         </div>
         <div id="quickMenu">
-          <ul className="container flex justify-between items-center">
+          <ul id="menuHeader" className="container flex justify-between items-center">
             {items &&
               items.map((item, index) => <NavItem key={index} item={item} />)}
           </ul>

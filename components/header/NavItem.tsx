@@ -15,15 +15,12 @@ function NavItem({ item }: Props) {
       <ul>
         <a
           href={url}
-          class={`flex items-center ${
-            item.identifier === HIGHLIGHT_BTN &&
-            "bg-brand group-hover:bg-base-100 text-white px-5 rounded-[300px]"
-          }`}
+          class={`flex items-center `}
         >
           <span
-            class={`font-bold text-[13px] uppercase py-[14px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk  dark
+            id="menuItem"
+            class={`font-bold text-[13px] uppercase py-[12px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk dark 
           ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"} 
-          ${item.identifier === HIGHLIGHT_BTN && "text-white p-[13px]"}
           ${children && children.length > 0 ? "has-submenu" : ""}`}
           >
             {name}
@@ -38,12 +35,12 @@ function NavItem({ item }: Props) {
           className={`flex fixed hidden group-hover:block z-50 items-start justify-between gap-6 hover:px-[16px] hover:rounded-[8px]`}
           style={{ top: "42px", marginTop: "137px" }}
         >
-          <div class={`flex m-auto justify-center`}>
-            <div className="flex justify-between items-start">
-              <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[12px] pb-[24px]">
+          <div class={`flex m-auto justify-center pt-[18px] pb-4`}>
+            <div className="flex justify-between items-start border-l border-solid border-red">
+              <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[16px] pb-[24px]">
                 {children.slice(0, 8).map((node) => (
                   <li
-                    className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px] "
+                    className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px] h-[48px] "
                     key={node.url}
                   >
                     <a
@@ -51,10 +48,9 @@ function NavItem({ item }: Props) {
                       href={node.url}
                     >
                       <span
-                        class={`text-sm ${
-                          node.name === SEEALL &&
+                        class={`text-sm ${node.name === SEEALL &&
                           "uppercase font-bold font-lemon-milk  dark"
-                        } `}
+                          } `}
                       >
                         {node.name}
                       </span>
@@ -92,10 +88,10 @@ function NavItem({ item }: Props) {
                 ))}
               </ul>
               {children.length > 8 && (
-                <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[12px] pb-[24px]">
+                <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[16px] pb-[24px]">
                   {children.slice(8, 16).map((node) => (
                     <li
-                      className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]"
+                      className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]  h-[48px]"
                       key={node.url}
                     >
                       <a
