@@ -148,7 +148,7 @@ function Navbar(
             </a>
           </div>
           <div id="menuCompact">
-            <ul className="flex gap-[20px] ">
+            <ul className="flex gap-[2%] menuCompactItem">
               {items &&
                 items.slice(0, 3).map((item, index) => (
                   <NavItem key={index} item={item} />

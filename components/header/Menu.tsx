@@ -137,12 +137,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <input className="pl-[40px] pr-[24px]" type="checkbox" />
             <div
               style={{ height: "fit-content" }}
-              className={`collapse-title ${
-                item.identifier === HIGHLIGHT_BTN &&
-                "bg-brand rounded-full text-white"
-              } flex items-center uppercase font-bold text-[11px]   ${
-                item.identifier === HIGHLIGHT_ID && "fontWithGradient"
-              }`}
+              className={`collapse-title`}
             >
               {item.name}
             </div>

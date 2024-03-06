@@ -19,7 +19,7 @@ function NavItem({ item }: Props) {
         >
           <span
             id="menuItem"
-            class={`font-bold text-[13px] uppercase py-[12px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk dark 
+            class={`flex font-bold text-[13px] uppercase py-[12px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk dark 
           ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"} 
           ${children && children.length > 0 ? "has-submenu" : ""}`}
           >

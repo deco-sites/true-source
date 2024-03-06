@@ -107,7 +107,7 @@ function Searchbar({
           <input
             ref={searchInputRef}
             id="search-input"
-            class="searchbarInput input join-item bg-gray-200  flex-grow focus:outline-none focus:shadow-none focus:border-transparent lg:h-[48px] placeholder:text-[13px] placeholder:text-gray-400"
+            class="searchbarInput input join-item bg-gray-200 flex-grow focus:outline-none focus:shadow-none focus:border-transparent lg:h-[48px] placeholder:text-[13px] placeholder:text-gray-400 border-0 outline-none"
             name={name}
             onInput={(e) => {
               const value = e.currentTarget.value;
