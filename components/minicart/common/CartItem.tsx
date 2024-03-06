@@ -61,7 +61,7 @@ function CartItem(
     <div
       class="grid grid-rows-1 gap-5 p-6 border-b border-solid border-[#EDEDED]"
       style={{
-        gridTemplateColumns: "auto 1fr",
+        gridTemplateColumns: "64px auto",
       }}
     >
       <Image
@@ -74,7 +74,7 @@ function CartItem(
 
       <div class="flex flex-col gap-2">
         <div class="flex justify-between items-center gap-4">
-          <span class="font-bold text-sm max-w-[223px] font-inter text-[#3C3C3B]">
+          <span class="font-bold text-sm max-w-[223px] font-inter text-[#3C3C3B] line-clamp-2">
             {name}
           </span>
           <Button
@@ -132,7 +132,7 @@ function CartItem(
             />
           </div>
           {/* */}
-          <div class="flex gap-2">
+          <div class="flex flex-wrap justify-end gap-x-2">
             <span class="line-through text-sm">
               {formatPrice(list, currency, locale)}
             </span>

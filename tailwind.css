@@ -300,11 +300,6 @@
     height: 34px;
   }
 
-  .isSticky #logoMobile {
-    width: 103px;
-    height: 46px;
-  }
-
   #stickyHeaderLinks {
     @apply hidden items-center gap-[0.75rem];
   }
@@ -326,7 +321,7 @@
   }
 
   .isSticky #searchBarMobileOnSticky {
-    @apply block;
+    @apply block !pr-0;
   }
 
   :not(.isSticky) #navBarWrapper #navBar #submenu {
@@ -334,8 +329,47 @@
 
   }
 
+  #navBarWrapper #navBar {
+    @apply bg-white;
+  }
+
   .isSticky #navBarWrapper #navBar {
     @apply py-2;
+  }
+
+  .wrapper-header-mobile {
+    @apply bg-white;
+  }
+
+  .isSticky .wrapper-header-mobile {
+    @apply items-center gap-3 rounded-b-2xl bg-white;
+  }
+
+  .isSticky .wrapper-header-mobile #logoMobile {
+    width: 86px;
+    height: 30px;
+  }
+
+  .wrapper-header-mobile #logoMobile {
+    width: 103px;
+    height: 36px;
+  }
+
+  .isSticky .wrapper-header-mobile .searchBarForm {
+    @apply !bg-ice border-light-gray-200;
+  }
+
+  .isSticky .wrapper-header-mobile .searchBarForm #search-input {
+    @apply !bg-ice text-xs pl-4 pr-0 h-8;
+  }
+
+  .isSticky .wrapper-header-mobile .searchBarForm button {
+    @apply pr-4 pl-0 h-8;
+    min-height: 32px;
+  }
+
+  .isSticky .wrapper-header-mobile .searchBarForm button svg {
+    @apply w-4 h-4;
   }
 
   #navBarWrapper #navBar {

@@ -88,16 +88,16 @@ function QuantitySelector(
 
   if (type === "cart") {
     return (
-      <div class="join border border-1 border-solid border-light-grey rounded-full p-[10px]">
+      <div class="join border border-1 border-solid border-light-grey rounded-full py-2 px-[10px]">
         <button
-          class=" join-item py-0 pl-2 pr-0 font-bold"
+          class=" join-item py-0 pl-1 pr-0 font-bold"
           onClick={decrement}
           disabled={disabled}
         >
           <MinusIcon />
         </button>
         <input
-          class="text-center p-0 font-bold outline-none"
+          class="text-center text-xs p-0 font-bold outline-none"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -106,11 +106,11 @@ function QuantitySelector(
           value={quantity}
           disabled={disabled}
           onBlur={(e) => onChange?.(e.currentTarget.valueAsNumber)}
-          maxLength={3}
-          size={3}
+          maxLength={2}
+          size={2}
         />
         <button
-          class=" join-item py-0 pr-2 pl-0 font-bold"
+          class=" join-item py-0 pr-1 pl-0 font-bold"
           onClick={increment}
           disabled={disabled}
         >
