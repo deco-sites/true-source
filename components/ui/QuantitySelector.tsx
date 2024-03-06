@@ -52,18 +52,18 @@ function QuantitySelector(
         class="join bg-white border-2 border-light-gray rounded-md p-[10px]"
         style={{
           height: "calc(100% + 4px)",
-          margin: "-2px 0 -1px -2px",
+          margin: "-2px 0 -2px -2px",
         }}
       >
         <button
-          class=" join-item py-0 pl-2 pr-0 font-bold"
+          class=" join-item py-0 pl-1 sm:pl-2 pr-0 font-bold"
           onClick={decrement}
           disabled={disabled}
         >
           <MinusIcon />
         </button>
         <input
-          class="text-center p-0 font-bold outline-none"
+          class="text-center p-0 font-bold outline-none w-[40px] sm:w-auto"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -73,10 +73,10 @@ function QuantitySelector(
           disabled={disabled}
           onBlur={(e) => onChange?.(e.currentTarget.valueAsNumber)}
           maxLength={3}
-          size={3}
+          size={1}
         />
         <button
-          class=" join-item py-0 pr-2 pl-0 font-bold"
+          class=" join-item py-0 pr-1 sm:pr-2 pl-0 font-bold"
           onClick={increment}
           disabled={disabled}
         >

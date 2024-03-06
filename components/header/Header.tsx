@@ -103,9 +103,7 @@ function Header({
         searchbar={searchbar}
         platform={platform}
       >
-        {alerts && alerts.length > 0 && (
-          <Alert alerts={alerts} theme={theme} />
-        )}
+        {alerts && alerts.length > 0 && <Alert alerts={alerts} theme={theme} />}
         <NavbarWrapper>
           <Navbar
             items={items}

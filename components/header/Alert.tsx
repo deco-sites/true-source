@@ -26,7 +26,9 @@ function Alert({ alerts = [], theme }: Props) {
                 >
                   {alert.icons && <img className="px-2" src={alert.icons} />}
                   <p
-                    className={`text-sm sm:text-base ${isLightTheme ? "text-black" : "text-white"}`}
+                    className={`text-sm sm:text-base ${
+                      isLightTheme ? "text-black" : "text-white"
+                    }`}
                   >
                     {alert.text}
                   </p>

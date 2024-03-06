@@ -33,7 +33,7 @@ function ProductData({
       {/* Code and name */}
       <div class="flex items-center gap-4 justify-between">
         <h1>
-          <span class="font-semibold text-2xl uppercase font-lemon-milk">
+          <span class="font-semibold text-base sm:text-2xl uppercase font-lemon-milk">
             {name}
           </span>
         </h1>
@@ -47,7 +47,7 @@ function ProductData({
       </div>
       {/* Brand */}
       <div class="flex items-center justify-between">
-        <span class="font-medium text-light-gray">{brandName}</span>
+        <span class="text-sm sm:text-base font-medium color-dark sm:text-light-gray">{brandName}</span>
         <div class="block sm:hidden">
           <WishlistButtonVtex
             variant="full"
@@ -116,7 +116,7 @@ function ProductInfo({ page }: Props) {
       <div class="order-2 sm:order-1 w-full lg:max-w-[664px]">
         <GallerySlider page={page} />
       </div>
-      <div class="flex md:hidden flex-col gap-y-4 order-1 sm:order-2">
+      <div class="flex md:hidden flex-col gap-y-4 order-1 sm:order-2 pt-6">
         <Breadcrumb itemListElement={breadcrumb.itemListElement} />
         <ProductData
           name={productName}

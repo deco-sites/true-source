@@ -158,7 +158,9 @@ function Cart({
                             value: total - discounts,
                             items: items
                               .map((_, index) => itemToAnalyticsItem(index))
-                              .filter((x): x is AnalyticsItem => Boolean(x)),
+                              .filter((x): x is AnalyticsItem =>
+                                Boolean(x)
+                              ),
                           },
                         });
                       }}

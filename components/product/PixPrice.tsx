@@ -32,7 +32,7 @@ export default function PixPrice({
   return (
     <>
       {price !== null && (
-        <span class="font-bold text-2xl font-lemon-milk">
+        <span class="font-bold text-base sm:text-2xl font-lemon-milk">
           {formatPrice(price, "BRL")}
         </span>
       )}

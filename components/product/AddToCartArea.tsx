@@ -102,8 +102,8 @@ export default function AddToCartArea({
           <>
             <div
               class={`flex ${
-                listPrice > price ? "flex-col-reverse gap-2" : "flex-row gap-6"
-              } items-stretch`}
+                listPrice > price ? "flex-row-reverse sm:flex-col-reverse gap-4 sm:gap-2 justify-between items-center sm:items-stretch" : "flex-row-reverse sm:flex-row gap-4 sm:gap-6 justify-between items-center sm:items-stretch"
+              }`}
             >
               <span class="text-dark">
                 <PixPrice
@@ -112,7 +112,7 @@ export default function AddToCartArea({
                   sellingPrice={price}
                   listPrice={listPrice}
                 />
-                <p class="text-sm font-regular normal-case">à vista no Pix</p>
+                <p class="text-xs sm:text-sm font-regular normal-case">à vista no Pix</p>
               </span>
               <SellingPrice
                 productId={productID}
@@ -138,8 +138,9 @@ export default function AddToCartArea({
                     : "text-gray font-regular"
                 }`}
               >
-                {quantity >= 3 && <CheckIcon />}
-                10% OFF para 3 ou mais unidades
+                {quantity >= 3 && <span class="inline max-[400px]:hidden"><CheckIcon /></span>}
+                <span class="hidden sm:inline"><strong>10% OFF</strong> para <strong>3 ou mais</strong> unidades</span>
+                <span class="inline sm:hidden text-xs"><strong>10% OFF</strong> para <strong>3 ou mais</strong> un.</span>
               </span>
             </div>
             <div class="flex flex-col gap-2">

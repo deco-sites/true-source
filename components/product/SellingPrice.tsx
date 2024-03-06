@@ -113,14 +113,14 @@ export default function SellingPrice({
   if (type === "subscription") {
     if (listPrice > sellingPrice) {
       return (
-        <span class="text-sm text-gray line-through">
+        <span class="text-xs sm:text-sm text-gray line-through">
           {/* @ts-ignore price is checked */}
           De <span>{formatPrice(listPrice * quantity, "BRL")}</span> por{" "}
           <span>{formatPrice(price, "BRL")}</span>
           <br />
           ou{" "}
           <span
-            class="text-sm text-gray"
+            class="text-xs sm:text-sm text-gray"
             // @ts-ignore installment is checked
             dangerouslySetInnerHTML={{ __html: installment }}
           />{" "}
@@ -129,7 +129,7 @@ export default function SellingPrice({
       );
     }
     return (
-      <span class="text-sm text-gray">
+      <span class="text-xs sm:text-sm text-gray">
         {/* @ts-ignore price is checked */}
         <span class="line-through">De {formatPrice(price, "BRL")}</span>
         <br />
@@ -140,7 +140,7 @@ export default function SellingPrice({
 
   if (listPrice > sellingPrice) {
     return (
-      <span class="text-sm text-gray">
+      <span class="text-xs sm:text-sm text-gray">
         {/* @ts-ignore price is checked */}
         De{" "}
         <span class="line-through">
@@ -150,7 +150,7 @@ export default function SellingPrice({
         <br />
         Em{" "}
         <span
-          class="text-sm text-gray"
+          class="text-xs sm:text-sm text-gray"
           // @ts-ignore installment is checked
           dangerouslySetInnerHTML={{ __html: installment }}
         />{" "}
@@ -159,11 +159,11 @@ export default function SellingPrice({
     );
   }
   return (
-    <span class="text-sm text-gray pl-4 border-l border-light-gray">
+    <span class="text-xs sm:text-sm text-gray pl-0 sm:pl-4 border-0 sm:border-l border-light-gray">
       {/* @ts-ignore price is checked */}
       ou <strong>{formatPrice(price, "BRL")}</strong> em até
       <p
-        class="text-sm text-gray"
+        class="text-xs sm:text-sm text-gray"
         // @ts-ignore installment is checked
         dangerouslySetInnerHTML={{ __html: installment }}
       />
