@@ -73,7 +73,7 @@ function TimelineCalc({
             return (
               <div class="flex flex-col font-bold text-sm text-red">
                 {shippingDay}º ENVIO
-                <span class="text-dark font-light">
+                <span class="text-dark font-bold">
                   {day <= 9 ? `0${day}` : day}/
                   {month <= 9 ? `0${month}` : month}/
                   {year}
@@ -184,23 +184,58 @@ export default function SubscriptionButtonVTEX({
   return (
     <>
       <button
-        class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-[13px] h-12 px-8 rounded-md font-lemon-milk"
+        class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
         onClick={() => displaySubscriptionPopup.value = true}
       >
         ASSINE COM {formatPrice(discount)} de desconto
-        <IconAsterisk />
+        <span class="flex-none max-[400px]:hidden">
+          <IconAsterisk />
+        </span>
       </button>
       <Modal
         loading="lazy"
         open={displaySubscriptionPopup.value}
         onClose={() => displaySubscriptionPopup.value = false}
       >
-        <div class="absolute-center bg-white min-w-[436px] rounded-2xl p-10 my-8 max-h-screen overflow-y-auto">
-          <form class="flex flex-col gap-y-6" onSubmit={submitHandler}>
-            <h3 class="font-lemon-milk text-lg uppercase font-bold">
-              ASSINE E COMPRE COM ATÉ 20% OFF
+        <div
+          class="absolute-center bg-white w-[516px] rounded-2xl p-2 h-full"
+          style={{
+            maxHeight: "774.5px",
+            maxWidth: "calc(100vw - 48px)",
+          }}
+        >
+          <form
+            class="flex flex-col gap-y-6 p-3 sm:p-6 overflow-y-auto h-full"
+            onSubmit={submitHandler}
+          >
+            <h3 class="flex items-center justify-between gap-4 font-lemon-milk text-sm sm:text-lg uppercase font-bold">
+              <span>
+                <span>ASSINE E COMPRE COM</span> <span>ATÉ 20% OFF</span>
+              </span>
+              <button onClick={() => displaySubscriptionPopup.value = false}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M18 6L6 18M6 6L18 18"
+                    stroke="black"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
             </h3>
-            <div class="flex items-center justify-between">
+            <div
+              class="flex items-center justify-between"
+              style={{
+                lineHeight: 1,
+              }}
+            >
               <SellingPrice
                 sellingPrice={price}
                 listPrice={listPrice}
@@ -208,11 +243,28 @@ export default function SubscriptionButtonVTEX({
                 quantity={1}
                 type="subscription"
               />
-              <div>
-                <span class="block font-bold text-2xl text-dark font-lemon-milk m-0">
-                  {formatPrice(price - discount)}
+              <div class="flex items-start gap-3 sm:gap-4">
+                <div>
+                  <span
+                    class="block font-bold text-base sm:text-2xl text-dark font-lemon-milk m-0"
+                    style={{
+                      lineHeight: 1,
+                    }}
+                  >
+                    {formatPrice(price - discount)}
+                  </span>
+                  <small
+                    class="text-xs sm:text-sm text-dark"
+                    style={{
+                      lineHeight: 1,
+                    }}
+                  >
+                    à vista no cartão
+                  </small>
+                </div>
+                <span class="bg-green py-[2px] px-[7px] rounded-full text-[11px] sm:text-xs font-bold text-white uppercase">
+                  20% Off
                 </span>
-                <small class="text-dark">à vista no cartão</small>
               </div>
             </div>
             <div>
@@ -272,7 +324,7 @@ export default function SubscriptionButtonVTEX({
             </div>
             <button
               disabled={!selected}
-              class="disabled:bg-light-gray bg-green rounded-md text-white font-bold border-0 py-5 text-[13px]"
+              class="disabled:bg-light-gray bg-green rounded-md text-white font-bold border-0 py-5 text-[13px] font-lemon-milk uppercase"
             >
               Assinar
             </button>

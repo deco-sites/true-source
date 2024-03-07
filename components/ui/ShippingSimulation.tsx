@@ -43,23 +43,23 @@ function ShippingContent({ simulation }: {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-4 bg-base-200 rounded-[4px]">
+    <ul class="flex flex-col gap-4 p-6 bg-light-gray-200 rounded-md">
       {methods.map((method) => (
-        <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">
+        <li class="grid grid-cols-4 gap-4 border-base-200 not-first-child:border-t text-xs sm:text-sm">
+          <span class="col-span-2">
             Entrega {method.name}
           </span>
-          <span class="text-button">
+          <span>
             até {formatShippingEstimate(method.shippingEstimate)}
           </span>
-          <span class="text-base font-semibold text-right">
+          <span class="font-semibold text-right">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, currencyCode, locale)
             )}
           </span>
         </li>
       ))}
-      <span class="text-base-300">
+      <span class="text-xs sm:text-sm text-gray">
         Os prazos de entrega começam a contar a partir da confirmação do
         pagamento e podem variar de acordo com a quantidade de produtos na
         sacola.
@@ -92,7 +92,7 @@ function ShippingSimulation({ items }: Props) {
   }, []);
 
   return (
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-3 sm:flex-row sm:gap-6 items-center">
         <span class="text-[13px] font-medium uppercase w-full sm:w-[69px] font-lemon-milk">
           Calcule o frete
@@ -107,7 +107,8 @@ function ShippingSimulation({ items }: Props) {
           <input
             as="input"
             type="text"
-            class="input w-full sm:w-auto border-0 placeholder:text-sm text-sm placeholder:text-dark text-dark outline-none"
+            class="h-[46px] sm:h-12 input w-full sm:w-auto border-0 placeholder:text-xs sm:placeholder:text-sm text-xs sm:text-sm placeholder:text-dark text-dark"
+            style={{ outline: "none" }}
             placeholder="Informe o CEP"
             value={postalCode.value}
             maxLength={8}
@@ -118,14 +119,14 @@ function ShippingSimulation({ items }: Props) {
           />
           <button
             type="submit"
-            class="text-sm text-white bg-dark py-2 px-3 rounded-md font-bold"
+            class="text-xs sm:text-sm text-white bg-dark py-2 px-3 rounded-md font-bold"
           >
             Calcular
           </button>
         </form>
         <a
           href="#"
-          class="text-sm underline font-regular w-full sm:w-[65px] uppercase"
+          class="text-xs sm:text-sm underline font-regular w-full sm:w-[65px] uppercase"
         >
           Descobrir meu cep
         </a>

@@ -38,9 +38,6 @@ export default function Radio({
           dangerouslySetInnerHTML={{ __html: text }}
         />
       </div>
-      <span class="bg-green py-1 px-2 rounded-full text-xs font-bold text-white uppercase">
-        20% Off
-      </span>
     </div>
   );
 }

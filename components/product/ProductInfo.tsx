@@ -114,8 +114,11 @@ function ProductInfo({ page }: Props) {
   });
 
   return (
-    <div class="flex flex-col md:flex-row gap-6 md:gap-8 mt-4 mb-14" id={id}>
-      <div class="order-2 sm:order-1 w-full lg:max-w-[664px]">
+    <div
+      class="flex flex-col min-[1000px]:flex-row gap-6 md:gap-8 mt-4 mb-14"
+      id={id}
+    >
+      <div class="flex-none order-2 sm:order-1 max-[1000px]:w-full max-[1280px]:w-[500px] w-[664px] mx-auto">
         <GallerySlider page={page} />
       </div>
       <div class="flex md:hidden flex-col gap-y-4 order-1 sm:order-2 pt-6">

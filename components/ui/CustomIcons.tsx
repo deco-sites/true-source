@@ -383,6 +383,10 @@ export const Timeline = () => (
     height="11"
     viewBox="0 0 436 11"
     fill="none"
+    style={{
+      maxWidth: "100%",
+      height: "auto",
+    }}
   >
     <rect width="436" height="11" rx="5.5" fill="#F0F0EE" />
     <circle cx="5.5" cy="5.5" r="5.5" fill="url(#paint0_linear_796_20235)" />

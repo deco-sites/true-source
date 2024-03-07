@@ -63,7 +63,7 @@ function QuantitySelector(
           <MinusIcon />
         </button>
         <input
-          class="text-center p-0 font-bold outline-none w-[40px] sm:w-auto"
+          class="text-sm sm:text-base text-center p-0 font-bold outline-none w-[40px] sm:w-auto"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"

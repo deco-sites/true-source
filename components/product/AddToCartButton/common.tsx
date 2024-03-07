@@ -44,7 +44,7 @@ export default function AddToCartButton(props: Props) {
   return (
     <Button
       {...btnProps}
-      class="flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-[13px] font-bold uppercase font-lemon-milk text-white border-0"
+      class="flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-xs sm:text-[13px] font-bold uppercase font-lemon-milk text-white border-0"
     >
       Comprar
       <IconButtonCart />
