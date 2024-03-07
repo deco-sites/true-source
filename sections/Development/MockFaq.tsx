@@ -27,19 +27,19 @@ export default function Triilha2FAQ() {
   };
 
   return (
-    <div className="px-[15%]">
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
-        <div className="mx-auto max-w-4xl">
-          <dl className="flex flex-col mt-10 space-y-4 rounded-2xl">
+    <div class="px-[15%]">
+      <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
+        <div class="mx-auto max-w-4xl">
+          <dl class="flex flex-col mt-10 space-y-4 rounded-2xl">
             {faqs.map((faq) => (
-              <div key={faq.question} className="">
-                <dt className="flex w-full items-start justify-between text-left text-black rounded-2xl p-4 bg-gray-500">
-                  <span className="text-xs md:text-base font-semibold leading-7 text-[#3C3C3B]">
+              <div key={faq.question} class="">
+                <dt class="flex w-full items-start justify-between text-left text-black rounded-2xl p-4 bg-gray-500">
+                  <span class="text-xs md:text-base font-semibold leading-7 text-[#3C3C3B]">
                     {faq.question}
                   </span>
                   <button
                     onClick={() => toggleItem(faq.question)}
-                    className="ml-6 flex h-7 items-center"
+                    class="ml-6 flex h-7 items-center"
                   >
                     {openItem === faq.question
                       ? (
@@ -49,7 +49,7 @@ export default function Triilha2FAQ() {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="#E4003F"
-                          className="w-6 h-6"
+                          class="w-6 h-6"
                         >
                           <path
                             strokeLinecap="round"
@@ -65,7 +65,7 @@ export default function Triilha2FAQ() {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="#E4003F"
-                          className="w-6 h-6"
+                          class="w-6 h-6"
                         >
                           <path
                             strokeLinecap="round"
@@ -77,8 +77,8 @@ export default function Triilha2FAQ() {
                   </button>
                 </dt>
                 {openItem === faq.question && (
-                  <dd className="mt-2 pr-12 bg-white rounded-2xl p-4">
-                    <p className="text-xs md:text-base leading-7 text-gray-900">
+                  <dd class="mt-2 pr-12 bg-white rounded-2xl p-4">
+                    <p class="text-xs md:text-base leading-7 text-gray-900">
                       {faq.answer}
                     </p>
                   </dd>
