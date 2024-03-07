@@ -2,7 +2,7 @@ import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.tsx";
 
 export const HIGHLIGHT_ID = "destaque";
-export const HIGHLIGHT_BTN = "todos produtos";
+export const HIGHLIGHT_BTN = "TODOS OS PRODUTOS";
 
 export interface Props {
   items: SiteNavigationElement[];
@@ -137,7 +137,9 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <input className="pl-[40px] pr-[24px]" type="checkbox" />
             <div
               style={{ height: "fit-content" }}
-              className={`collapse-title`}
+              className={`collapse-title flex items-center gap-4 py-[16px] px-6 hover:bg-gray-100 text-[11px] uppercase font-bold menuMobileItem ${
+                item.identifier === HIGHLIGHT_BTN && "highlight_btn"
+              } `}
             >
               {item.name}
             </div>
@@ -223,7 +225,7 @@ function Menu({ items }: Props) {
       </ul>
 
       <ul className="flex flex-col mt-6 border border-[#ededed] rounded-[8px]">
-        <li className="py-3 px-6 text-[11px] uppercase font-bold h-10 items-center">
+        <li className="py-3 px-6 text-[11px] uppercase font-bold h-10 items-center cartMobile">
           <CartButtonVTEX type="menu" />
         </li>
         <li className=" py-3 px-6 text-[11px] uppercase font-bold h-10 items-center border-t border-b border-Stroke">
