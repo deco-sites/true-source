@@ -7,15 +7,13 @@ export type Item = {
 };
 
 export type Section = {
-  label: string;
+  label?: string;
   items: Item[];
-  extraLinks?: Item[];
 };
 
 export default function FooterItems(
-  { sections, extraLinks }: {
+  { sections }: {
     sections: Section[];
-    extraLinks?: Item[];
   },
 ) {
   return (
@@ -27,11 +25,18 @@ export default function FooterItems(
             className={`hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] pb-[48px]`}
           >
             {sections.map((section, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                className={index === 3
+                  ? "font-bold font-lemon-milk text-[13px]"
+                  : ""}
+              >
                 <div className="flex flex-col">
-                  <span className="font-bold text-[13px] pb-[32px]">
-                    {section.label}
-                  </span>
+                  {section.label && (
+                    <span className="font-bold text-[13px] pb-[32px] font-lemon-milk">
+                      {section.label}
+                    </span>
+                  )}
                   <div className="flex gap-[32px]">
                     {/* Renderizando primeira coluna */}
                     <ul className={`flex flex-col gap-5 text-sm`}>
@@ -43,52 +48,112 @@ export default function FooterItems(
                         </li>
                       ))}
                     </ul>
-                    {/* Renderizando segunda coluna */}
-                    <ul className={`flex flex-col gap-5 text-sm`}>
-                      {section.items.slice(7).map((item, idx) => (
-                        <li key={idx}>
-                          <a href={item.href} className="block">
-                            {item.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Renderizando segunda coluna se houver mais de 7 itens */}
+                    {section.items.length > 7 && (
+                      <ul className={`flex flex-col gap-5 text-sm`}>
+                        {section.items.slice(7).map((item, idx) => (
+                          <li key={idx}>
+                            <a href={item.href} className="block">
+                              {item.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </li>
             ))}
-            {/* <ExtraLinks content={extraLinks} /> */}
           </ul>
 
           {/* Mobile view */}
           <ul className="flex flex-col md:hidden gap-4">
-            {sections.map((section, index) => (
-              <li key={index}>
-                <div className="collapse collapse-arrow ">
-                  <input type="checkbox" className="min-h-[0]" />
-                  <label
-                    htmlFor={section.label}
-                    className="collapse-title min-h-[0] !p-0 flex gap-2"
-                  >
-                    <span>{section.label}</span>
-                  </label>
-                  <div className="collapse-content">
-                    <ul className={`flex flex-col gap-1 pl-5 pt-2`}>
-                      {section.items?.map((item, idx) => (
-                        <li key={idx}>
-                          <a
-                            href={item.href}
-                            className="block py-1 link link-hover"
-                          >
-                            {item.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <li>
+              <div className="flex flex-col py-[40px]">
+                <span className="font-bold text-[13px] pb-[32px] font-lemon-milk">
+                  {sections[0].label}
+                </span>
+                <div className="flex gap-[32px]">
+                  {/* Renderizando primeira coluna */}
+                  <ul className={`flex flex-col gap-5 text-sm`}>
+                    {sections[0].items.slice(
+                      0,
+                      Math.ceil(sections[0].items.length / 2),
+                    ).map((item, idx) => (
+                      <li key={idx}>
+                        <a href={item.href} className="block">
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  {/* Renderizando segunda coluna */}
+                  <ul className={`flex flex-col gap-5 text-sm`}>
+                    {sections[0].items.slice(
+                      Math.ceil(sections[0].items.length / 2),
+                    ).map((item, idx) => (
+                      <li key={idx}>
+                        <a href={item.href} className="block">
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </li>
-            ))}
+              </div>
+            </li>
+            <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
+              <input type="checkbox" />
+              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
+                {sections[1].label}
+              </div>
+              <div className="collapse-content px-0">
+                <ul>
+                  {sections[1].items.map((item, idx) => (
+                    <li class={`flex gap-5`} key={idx}>
+                      <a href={item.href} class={`flex mb-5 text-sm`}>
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
+              <input type="checkbox" />
+              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
+                {sections[2].label}
+              </div>
+              <div className="collapse-content px-0">
+                <ul>
+                  {sections[2].items.map((item, idx) => (
+                    <li key={idx}>
+                      <a href={item.href} class={`flex mb-5 text-sm`}>
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <li>
+              <div className="flex flex-col pt-[40px] pb-[32px]">
+                <div className="flex gap-[32px]">
+                  <ul className={`flex flex-col gap-5`}>
+                    {sections[3].items.map((item, idx) => (
+                      <li key={idx}>
+                        <a
+                          href={item.href}
+                          className="block text-sm font-bold font-lemon-milk"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </li>
           </ul>
         </>
       )}

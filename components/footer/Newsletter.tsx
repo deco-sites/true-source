@@ -55,7 +55,9 @@ function Newsletter(
           {content?.title && (
             <p
               style={`line-height:normal;`}
-              class={tiled ? "text-lg max-w-[204px] font-bold" : "text-lg"}
+              class={tiled
+                ? "text-lg max-w-[206px] font-bold font-lemon-milk"
+                : "text-lg"}
             >
               {content?.title}
             </p>
@@ -66,16 +68,16 @@ function Newsletter(
           class="form-control"
           onSubmit={handleSubmit}
         >
-          <div class="flex flex-wrap gap-3 ">
-            <div className="input input-bordered pr-0 pl-[32px] rounded-[300px] flex items-center">
+          <div class="flex flex-wrap gap-3 pr-0 h-[unset] ">
+            <div className="pr-0 pl-[32px] bg-white flex items-center border border-light-gray-200 rounded-[300px]">
               <input
                 name="email"
-                class="flex-auto md:flex-none max-w-[151px] lg:max-w-[375px]  text-base-content bg-transparent outline-none"
+                class="flex-auto md:flex-none text-base-content bg-transparent outline-none border-none w-[151px] lg:w-[305px]"
                 placeholder={content?.form?.placeholder || "seu@email.com.br"}
               />
               <button
                 type="submit"
-                class="btn disabled:loading rounded-[300px] uppercase px-6 py-3 bg-brand text-white text-[13px]"
+                class="btn disabled:loading rounded-[300px] uppercase px-6 py-3 bg-brand text-white text-[13px] font-lemon-milk"
                 disabled={loading}
               >
                 {content?.form?.buttonText || "assinar"}
