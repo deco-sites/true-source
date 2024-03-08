@@ -1,9 +1,10 @@
-import ProductInfo from "./ProductInfo.tsx";
-
-import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { Section } from "deco/blocks/section.ts";
-import CustomDescription from "deco-sites/true-source/components/product/Description/CustomDescription.tsx";
 import { searchSlugify } from "$store/components/utils/slugify.ts";
+import { ProductDetailsPage } from "apps/commerce/types.ts";
+
+import ProductInfo from "./ProductInfo.tsx";
+import Description from "./Description/Description.tsx";
+import Trustvox from "$store/islands/Product/Trustvox.tsx";
 
 /**
  * @titleBy matcher
@@ -26,6 +27,15 @@ export default function ProductMain(props: ReturnType<typeof loader>) {
 
   const { product } = page;
 
+  const {
+    image,
+    inProductGroupWithID,
+    isVariantOf: {
+      // @ts-expect-error - name exists
+      name: productName,
+    },
+  } = product;
+
   if (product === null) return null;
   if (!product.isVariantOf) return null;
 
@@ -34,8 +44,13 @@ export default function ProductMain(props: ReturnType<typeof loader>) {
       <div class="container">
         <ProductInfo page={props.page} />
       </div>
-      {/* <Description slug={slug} /> */}
-      <CustomDescription sections={props.description?.sections ?? []} />
+      <Description sections={props.description?.sections ?? []} />
+      <Trustvox
+        productName={productName}
+        productId={inProductGroupWithID ?? ""}
+        storeId={"113397"}
+        image={!image ? "" : image[0].url ?? ""}
+      />
     </div>
   );
 }

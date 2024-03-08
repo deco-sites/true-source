@@ -1,4 +1,5 @@
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
+import ProductStars from "$store/islands/Product/ProductStars.tsx";
 import GallerySlider from "./Gallery/ImageSlider.tsx";
 import AddToCartArea from "$store/islands/AddToCartArea.tsx";
 import ProductSimilars from "$store/islands/Product/ProductSimilars.tsx";
@@ -37,6 +38,10 @@ function ProductData({
             {name}
           </span>
         </h1>
+        <ProductStars
+          storeId="113397"
+          productId={productGroupID}
+        />
         <div class="hidden sm:block">
           <WishlistButtonVtex
             variant="full"

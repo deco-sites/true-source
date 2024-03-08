@@ -9,6 +9,8 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import { useState } from "preact/hooks";
 import SellingPrice from "deco-sites/true-source/islands/Product/SellingPrice.tsx";
 import { IS_BROWSER } from "$fresh/runtime.ts";
+import { Cashback } from "$store/components/ui/CustomIcons.tsx";
+import { formatPrice } from "$store/sdk/format.ts";
 
 export interface Props {
   product: Product;
@@ -172,6 +174,16 @@ export default function AddToCartArea({
                   listPrice={listPrice}
                 />
               )}
+              <div class="flex items-center justify-between pb-2 pt-4">
+                <p class="text-xs sm:text-sm">
+                  Compre e receba até <br />
+                  <strong>
+                    {formatPrice(parseFloat((price * .05).toFixed(2)))}
+                  </strong>{" "}
+                  de volta!
+                </p>
+                <Cashback />
+              </div>
             </div>
           </>
         )

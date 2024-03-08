@@ -1,15 +1,62 @@
+/**
+ * @titleBy title
+ */
+interface TableBodyProps {
+  title: string;
+  value: string;
+  /**
+   @title %VD
+   */
+  vD: string;
+}
+
+interface TableHeadProps {
+  title1: string;
+  title2: string;
+}
+
 interface Props {
-  table?: Array<string[]>;
+  tableHeader?: TableHeadProps;
+  tableBody?: TableBodyProps[];
+  description?: string;
   ingredients?: string;
+  /**
+   * @default true
+   */
+  showIngredients: boolean;
+  /**
+   @default true
+   */
+  showTable: boolean;
   color?: string;
 }
 
-export function NutritionalTable({
-  table = [],
-  ingredients,
+export default function NutritionalTable({
+  tableHeader = {
+    title1: "Valores Diários",
+    title2: "%VD",
+  },
+  tableBody = [{
+    title: "Colágeno Verisol®",
+    value: "2,5g",
+    vD: "2,5",
+  }, {
+    title: "Proteína",
+    value: "22g",
+    vD: "22",
+  }, {
+    title: "Carboidratos",
+    value: "5g",
+    vD: "5",
+  }],
+  ingredients =
+    "Colágeno hidrolisado, peptídeos bioativos de colágeno hidrolisado com peso molecular médio de 2kDa (Verisol®), goma acácia, cacau alcalino lecitinado em pó, edulcorantes naturais stévia e taumatina.",
+  description =
+    "(*) % Valores Diários de referência com base em uma dieta de 2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou menores, dependendo das suas necessidades energéticas. (**) Valores diários não estabelecidos.",
+  showIngredients = true,
+  showTable = true,
   color = "#3C3C3B",
 }: Props) {
-  const tableValues = table.filter((item) => item.length > 0);
   return (
     <div style={{ background: color }}>
       <div
@@ -19,7 +66,7 @@ export function NutritionalTable({
             `linear-gradient(72deg, rgba(210, 210, 210, 0.36) 9.7%, rgba(210, 210, 210, 0.00) 73.19%)`,
         }}
       >
-        {ingredients && (
+        {showIngredients && (
           <div class="w-full lg:w-1/2 flex items-center justify-center">
             <div class="w-full lg:w-3/4 text-white">
               <h2 class="text-2xl lg:text-4xl uppercase mb-3 font-bold font-lemon-milk">
@@ -32,7 +79,7 @@ export function NutritionalTable({
             </div>
           </div>
         )}
-        {table && (
+        {showTable && (
           <div class="w-full lg:w-1/2 flex flex-col items-center justify-center border-none lg:border-solid border-l border-[#f0f0ee33]">
             <div class="w-full lg:w-3/4 border border-[#f0f0ee33] p-6 rounded-3xl">
               <h3 class="text-lg text-white uppercase mb-2 font-bold font-lemon-milk">
@@ -40,60 +87,44 @@ export function NutritionalTable({
               </h3>
               <table class="table-auto text-white text-xs lg:text-sm w-full">
                 <thead>
-                  {tableValues.map((item, index) => {
-                    if (index === 0) {
-                      return (
-                        <tr>
-                          {item.map((head) => (
-                            <th
-                              colSpan={index === 0 ? 2 : 1}
-                              class={index === 0
-                                ? "text-left pt-2"
-                                : "text-center pt-2"}
-                            >
-                              {head}
-                            </th>
-                          ))}
-                        </tr>
-                      );
-                    }
-                  })}
+                  <tr>
+                    <th
+                      colSpan={3}
+                      class="text-left pt-2"
+                    >
+                      {tableHeader.title1}
+                    </th>
+                    <th
+                      colSpan={1}
+                      class="text-left pt-2"
+                    >
+                      {tableHeader.title2}
+                    </th>
+                  </tr>
                 </thead>
                 <tbody>
-                  {tableValues.map((item, index) => {
-                    if (index > 0) {
-                      return (
-                        <tr class="border-b border-[#f0f0ee33]">
-                          {item.map((data) => {
-                            if (/^_{2,2}/.test(data)) {
-                              return (
-                                <>
-                                  {data.split("__").map((i, index) => {
-                                    if (index === 0) {
-                                      return (
-                                        <td width={24} class="py-2">{i}</td>
-                                      );
-                                    }
-                                    return <td class="py-2">{i}</td>;
-                                  })}
-                                </>
-                              );
-                            }
-                            return <td colSpan={2} class="py-2">{data}</td>;
-                          })}
-                        </tr>
-                      );
-                    }
+                  {tableBody.map((item) => {
+                    return (
+                      <tr class="border-b border-[#f0f0ee33]">
+                        {/^_{2,2}/.test(item.title)
+                          ? (
+                            <>
+                              <td width={24} class="py-2"></td>
+                              <td class="py-2">
+                                {item.title.replace(/^_{2,2}/, "")}
+                              </td>
+                            </>
+                          )
+                          : <td colSpan={2} class="py-2">{item.title}</td>}
+                        <td class="py-2">{item.value}</td>
+                        <td class="py-2">{item.vD}</td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>
             </div>
-            <p class="w-full lg:w-3/4 text-sm mt-8 text-white">
-              (*) % Valores Diários de referência com base em uma dieta de
-              2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou
-              menores, dependendo das suas necessidades energéticas. (**)
-              Valores diários não estabelecidos.
-            </p>
+            <p class="w-full lg:w-3/4 text-sm mt-8 text-white">{description}</p>
           </div>
         )}
       </div>

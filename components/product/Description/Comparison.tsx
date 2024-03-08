@@ -1,16 +1,33 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { IconCheck, IconNotCheck } from "../../ui/CustomIcons.tsx";
-import { DescriptionImage } from "deco-sites/true-source/components/product/Description/Image.tsx";
+
+interface ComparisonImage {
+  desktop: ImageWidget;
+  tablet?: ImageWidget;
+  mobile?: ImageWidget;
+}
 
 interface Props {
   have: string[];
   dontHave: string[];
-  haveImage: string;
+  image: ComparisonImage;
   color?: string;
 }
 
-export function Comparison(
-  { have, dontHave, haveImage, color = "#3C3C3B" }: Props,
-) {
+export default function Comparison({
+  have = [
+    "2,5g Colágeno Verisol®",
+    "22g de Proteína",
+  ],
+  dontHave = [
+    "Glúten",
+    "Corantes artificiais",
+  ],
+  image = {
+    desktop: "https://tfcucl.vtexassets.com/arquivos/whey.png",
+  },
+  color = "#3C3C3B",
+}: Props) {
   return (
     <div class="container flex flex-col gap-8 lg:gap-0 lg:grid grid-cols-7 mt-12">
       <div class="order-1 lg:order-1 col-span-2">
@@ -30,7 +47,17 @@ export function Comparison(
         </ul>
       </div>
       <div class="order-3 lg:order-2 flex justify-center items-baseline col-span-3 px-10 lg:px-0 pt-4 lg:pt-0">
-        <DescriptionImage images={haveImage} />
+        <picture>
+          <source media="(min-width:1024px)" srcset={image.desktop} />
+          <source
+            media="(min-width:640px)"
+            srcset={image.tablet ? image.tablet : image.desktop}
+          />
+          <img
+            src={image.mobile ? image.mobile : image.desktop}
+            class="w-full h-auto"
+          />
+        </picture>
       </div>
       <div class="order-2 lg:order-3 col-span-2">
         <h3 class="text-base lg:text-lg lg:text-right text-dark font-bold uppercase mb-4 font-lemon-milk">
