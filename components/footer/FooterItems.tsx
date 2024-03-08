@@ -25,7 +25,12 @@ export default function FooterItems(
             className={`hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] pb-[48px]`}
           >
             {sections.map((section, index) => (
-              <li key={index} className={index === 3 ? 'font-bold font-lemon-milk text-[13px]' : ''}>
+              <li
+                key={index}
+                className={index === 3
+                  ? "font-bold font-lemon-milk text-[13px]"
+                  : ""}
+              >
                 <div className="flex flex-col">
                   {section.label && (
                     <span className="font-bold text-[13px] pb-[32px] font-lemon-milk">
@@ -71,7 +76,10 @@ export default function FooterItems(
                 <div className="flex gap-[32px]">
                   {/* Renderizando primeira coluna */}
                   <ul className={`flex flex-col gap-5 text-sm`}>
-                    {sections[0].items.slice(0, Math.ceil(sections[0].items.length / 2)).map((item, idx) => (
+                    {sections[0].items.slice(
+                      0,
+                      Math.ceil(sections[0].items.length / 2),
+                    ).map((item, idx) => (
                       <li key={idx}>
                         <a href={item.href} className="block">
                           {item.label}
@@ -81,7 +89,9 @@ export default function FooterItems(
                   </ul>
                   {/* Renderizando segunda coluna */}
                   <ul className={`flex flex-col gap-5 text-sm`}>
-                    {sections[0].items.slice(Math.ceil(sections[0].items.length / 2)).map((item, idx) => (
+                    {sections[0].items.slice(
+                      Math.ceil(sections[0].items.length / 2),
+                    ).map((item, idx) => (
                       <li key={idx}>
                         <a href={item.href} className="block">
                           {item.label}
@@ -94,7 +104,9 @@ export default function FooterItems(
             </li>
             <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
               <input type="checkbox" />
-              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">{sections[1].label}</div>
+              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
+                {sections[1].label}
+              </div>
               <div className="collapse-content px-0">
                 <ul>
                   {sections[1].items.map((item, idx) => (
@@ -109,7 +121,9 @@ export default function FooterItems(
             </div>
             <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
               <input type="checkbox" />
-              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">{sections[2].label}</div>
+              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
+                {sections[2].label}
+              </div>
               <div className="collapse-content px-0">
                 <ul>
                   {sections[2].items.map((item, idx) => (
@@ -128,7 +142,10 @@ export default function FooterItems(
                   <ul className={`flex flex-col gap-5`}>
                     {sections[3].items.map((item, idx) => (
                       <li key={idx}>
-                        <a href={item.href} className="block text-sm font-bold font-lemon-milk">
+                        <a
+                          href={item.href}
+                          className="block text-sm font-bold font-lemon-milk"
+                        >
                           {item.label}
                         </a>
                       </li>

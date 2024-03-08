@@ -1,4 +1,13 @@
-import { IconVisa, IconMastercard, IconDinnersClub, IconBoleto, IconPix, SslSeal, GoogleSeal, RaSeal } from "$store/components/ui/CustomIcons.tsx";
+import {
+  GoogleSeal,
+  IconBoleto,
+  IconDinnersClub,
+  IconMastercard,
+  IconPix,
+  IconVisa,
+  RaSeal,
+  SslSeal,
+} from "$store/components/ui/CustomIcons.tsx";
 
 export interface PaymentItem {
   label: "Visa" | "Mastercard" | "Dinners" | "Boleto" | "Pix";
@@ -44,7 +53,11 @@ export default function PaymentMethods(
               })}
             </div>
             <div>
-              {content.title && <h3 className="text-xs font-bold text-center">{content.title}</h3>}
+              {content.title && (
+                <h3 className="text-xs font-bold text-center">
+                  {content.title}
+                </h3>
+              )}
             </div>
             <div className="flex gap-6 lg:gap-[34px] list-none">
               <li class={`flex items-center`}>

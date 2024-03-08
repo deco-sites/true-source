@@ -55,7 +55,9 @@ function Newsletter(
           {content?.title && (
             <p
               style={`line-height:normal;`}
-              class={tiled ? "text-lg max-w-[206px] font-bold font-lemon-milk" : "text-lg"}
+              class={tiled
+                ? "text-lg max-w-[206px] font-bold font-lemon-milk"
+                : "text-lg"}
             >
               {content?.title}
             </p>

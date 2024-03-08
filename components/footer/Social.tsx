@@ -1,9 +1,13 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import { IconInstagram, IconTiktok, IconYoutube } from "$store/components/ui/CustomIcons.tsx";
+import {
+  IconInstagram,
+  IconTiktok,
+  IconYoutube,
+} from "$store/components/ui/CustomIcons.tsx";
 
 // Definindo a interface SocialItem
 export interface SocialItem {
-  label: "Instagram" | "Youtube"| "Tiktok" ; 
+  label: "Instagram" | "Youtube" | "Tiktok";
   link: string;
 }
 
@@ -19,7 +23,11 @@ export default function Social(
       {content && content.items && content.items.length > 0 && (
         <div className="flex flex-col gap-4 items-center m-[auto 0] py-6 lg:py-0 lg:items-end">
           {content.title && <h3 className="text-lg">{content.title}</h3>}
-          <ul className={`flex gap-4 ${vertical ? "lg:flex-col lg:items-start" : "items-center"}`}>
+          <ul
+            className={`flex gap-4 ${
+              vertical ? "lg:flex-col lg:items-start" : "items-center"
+            }`}
+          >
             {content.items.map((item) => {
               let iconComponent;
               switch (item.label) {
@@ -49,7 +57,9 @@ export default function Social(
                       {iconComponent}
                     </span>
                     {vertical && (
-                      <div className="text-sm hidden lg:block">{item.label}</div>
+                      <div className="text-sm hidden lg:block">
+                        {item.label}
+                      </div>
                     )}
                   </a>
                 </li>
