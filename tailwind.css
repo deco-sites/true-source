@@ -37,7 +37,7 @@
 
     @screen lg {
       padding: 0 30px;
-      max-width: 1360px;
+      max-width: 1440px;
     }
   }
 }
@@ -45,6 +45,9 @@
 @layer utilities {
   .font-lemon-milk {
     font-family: 'Lemon Milk', sans-serif;
+  }
+  .between{
+    justify-content: space-between;
   }
 
   .absolute-center {

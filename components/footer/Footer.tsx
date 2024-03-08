@@ -23,14 +23,14 @@ export type Section = {
 
 export interface SocialItem {
   label:
-    | "Instagram"
-    | "Tiktok"
-    | "Youtube";
+  | "Instagram"
+  | "Tiktok"
+  | "Youtube";
   link: string;
 }
 
 export interface PaymentItem {
-  label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";
+  label: "Visa" | "Mastercard" | "Dinners" | "Boleto" | "Pix";
 }
 
 export interface MobileApps {
@@ -54,17 +54,17 @@ export interface NewsletterForm {
 
 export interface Layout {
   backgroundColor?:
-    | "Primary"
-    | "Secondary"
-    | "Accent"
-    | "Base 100"
-    | "Base 100 inverted";
+  | "Primary"
+  | "Secondary"
+  | "Accent"
+  | "Base 100"
+  | "Base 100 inverted";
   variation?:
-    | "Variation 1"
-    | "Variation 2"
-    | "Variation 3"
-    | "Variation 4"
-    | "Variation 5";
+  | "Variation 1"
+  | "Variation 2"
+  | "Variation 3"
+  | "Variation 4"
+  | "Variation 5";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
@@ -153,7 +153,7 @@ function Footer({
   },
   payments = {
     title: "Formas de pagamento",
-    items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
+    items: [{ label: "Visa" }, { label: "Mastercard" }, { label: "Dinners" }, { label: "Boleto" }, { label: "Pix" }],
   },
   mobileApps = { apple: "/", android: "/" },
   regionOptions = { currency: [], language: [] },
@@ -183,13 +183,15 @@ function Footer({
       }}
     />
   );
-  const _sectionLinks = layout?.hide?.sectionLinks ? <></> : null;
-  // <FooterItems
-  //   sections={sections}
-  //   justify={layout?.variation == "Variation 2" ||
-  //     layout?.variation == "Variation 3"}
-  // />
-  // );
+
+  const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
+    <FooterItems
+      sections={sections}
+      justify={layout?.variation == "Variation 2" ||
+        layout?.variation == "Variation 3"}
+    />
+  );
+
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
@@ -205,9 +207,9 @@ function Footer({
 
   return (
     <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 bg-[#F0F0EE] rounded-t-[35px]`}
+      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 bg-ice rounded-t-[35px]`}
     >
-      <div class="lg:container mx-6 lg:mx-auto">
+      <div class="lg:container px-4 lg:mx-auto">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
           <div class="flex flex-col gap-10">
             <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
@@ -286,13 +288,9 @@ function Footer({
             <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full lg:py-10">
               {_sectionLinks}
             </div>
-            <Divider />
-            <div class="flex flex-col md:flex-row lg:flex-col">
-              <div class="lg:flex-auto w-full">
-                {_payments}
-              </div>
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]">
+              {_payments}
             </div>
-            <Divider />
           </div>
         )}
         {layout?.variation == "Variation 5" && (
@@ -308,7 +306,6 @@ function Footer({
                 {_apps}
               </div>
             </div>
-            <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 md:items-center">
               <PoweredByDeco />
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
@@ -318,9 +315,6 @@ function Footer({
           </div>
         )}
       </div>
-      {layout?.hide?.backToTheTop
-        ? <></>
-        : <BackToTop content={backToTheTop?.text} />}
     </footer>
   );
 }

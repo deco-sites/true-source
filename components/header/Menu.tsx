@@ -1,5 +1,6 @@
 import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.tsx";
+import Social from "$store/components/footer/Social.tsx";
 
 export const HIGHLIGHT_ID = "destaque";
 export const HIGHLIGHT_BTN = "todos produtos";
