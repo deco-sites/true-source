@@ -91,10 +91,10 @@ function getPossibilities(
           {
             inventoryLevel: {
               value: inventoryLevelValue,
-            }
-          }
-        ]
-      }
+            },
+          },
+        ],
+      },
     } = related;
 
     return {
@@ -206,9 +206,7 @@ function ProductSimilars({ product, current }: Props) {
                   if (!d.selected) {
                     if (d.inventoryLevel === 0) {
                       return (
-                        <li
-                          class="bg-white text-light-gray border-2 border-light-gray rounded-full flex-none first:ml-4 first:sm:ml-0 last:mr-4 last:sm:mr-0"
-                        >
+                        <li class="bg-white text-light-gray border-2 border-light-gray rounded-full flex-none first:ml-4 first:sm:ml-0 last:mr-4 last:sm:mr-0">
                           <a
                             class="flex items-center gap-2 py-2 px-3 text-sm font-bold"
                             href={d.url}

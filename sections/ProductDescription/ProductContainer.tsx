@@ -13,7 +13,7 @@ export default function ProductContainer({ sections }: Props) {
       {sections &&
         sections.map((section) => {
           const { Component, props } = section;
-  
+
           return <Component {...props} />;
         })}
     </div>

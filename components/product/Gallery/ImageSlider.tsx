@@ -79,13 +79,15 @@ export default function GallerySlider(props: Props) {
         </Slider.NextButton> */
         }
 
-        {/* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+        {
+          /* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
             images={images}
             width={664}
             height={664}
           />
-        </div> */}
+        </div> */
+        }
       </div>
 
       {/* Dots */}

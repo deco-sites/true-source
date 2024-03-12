@@ -131,7 +131,9 @@ export default function AddToCartArea({
                 quantity={quantity}
                 onChange={(quantity) => {
                   if (quantity < 1) return;
-                  if (quantity > 9 || quantity > inventoryLevelValue) return;
+                  if (quantity > 9 || quantity > inventoryLevelValue) {
+                    return;
+                  }
                   setQuantity(quantity);
                 }}
               />

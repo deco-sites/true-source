@@ -170,7 +170,7 @@ export default function SubscriptionButtonVTEX({
         noSplitItem: true,
       });
     }
-  }
+  };
 
   // @ts-ignore all inputs are checked
   const changeHandler = (e) => {

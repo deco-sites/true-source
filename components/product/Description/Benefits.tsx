@@ -48,9 +48,11 @@ export default function Benefits({
         >
           Principais benefícios
         </h2>
-        {/* <div id={id} class="flex flex-col justify-center w-full">
+        {
+          /* <div id={id} class="flex flex-col justify-center w-full">
           <div class="relative overflow-x-hidden">
-            <Slider class="carousel carousel-center items-stretch gap-4 mx-auto"> */}
+            <Slider class="carousel carousel-center items-stretch gap-4 mx-auto"> */
+        }
         <div class="flex flex-wrap justify-center items-stretch gap-4">
           {benefits.map((benefit, index) => {
             const {
@@ -78,8 +80,10 @@ export default function Benefits({
             );
           })}
         </div>
-        {/* </Slider>
-          </div> */}
+        {
+          /* </Slider>
+          </div> */
+        }
 
         {/* Dots */}
         {
