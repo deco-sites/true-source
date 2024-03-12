@@ -66,7 +66,6 @@ function TimelineCalc({
               // A expectativa de retorno aqui, considerando que hoje é dia 05
               // Seria: 05/03/2024, 20/03/2024 e 05/04/2024
             );
-            console.log("actualDate", actualDate);
             const day = actualDate.getDate();
             const month = actualDate.getMonth() + 1;
             const year = actualDate.getFullYear();
@@ -95,7 +94,6 @@ function TimelineCalc({
               cumulativeMonth > 11 ? cumulativeMonth - 11 : cumulativeMonth,
               actualDay,
             );
-            console.log("actualDate", actualDate);
             const day = actualDate.getDate();
             const month = actualDate.getMonth() + 1;
             const year = actualDate.getFullYear();
@@ -148,29 +146,31 @@ export default function SubscriptionButtonVTEX({
       "vtex.subscription.key.purchaseday": `${currentDay}`,
     };
 
-    const orderItems = [{
-      id: productID,
-      seller,
-      quantity,
-    }];
+    for (let i = 1; i <= quantity; i++) {
+      const orderItems = [{
+        id: productID,
+        seller,
+        quantity: 1,
+      }];
 
-    await addItems({ orderItems });
+      await addItems({ orderItems });
 
-    const items = cart.value?.items || [];
+      const items = cart.value?.items || [];
 
-    const index = items.findLastIndex((i) => {
-      return i.id === productID && i.attachments.length === 0;
-    });
+      const index = items.findLastIndex((i) => {
+        return i.id === productID && i.attachments.length === 0;
+      });
 
-    if (index === -1) return null;
+      if (index === -1) return null;
 
-    addItemAttachment({
-      index,
-      attachment: SUBSCRIPTION_KEY,
-      content: SUBSCRIPTION_VALUE,
-      noSplitItem: true,
-    });
-  };
+      await addItemAttachment({
+        index,
+        attachment: SUBSCRIPTION_KEY,
+        content: SUBSCRIPTION_VALUE,
+        noSplitItem: true,
+      });
+    }
+  }
 
   // @ts-ignore all inputs are checked
   const changeHandler = (e) => {
@@ -187,7 +187,7 @@ export default function SubscriptionButtonVTEX({
         class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
         onClick={() => displaySubscriptionPopup.value = true}
       >
-        ASSINE COM {formatPrice(discount)} de desconto
+        ASSINE COM {formatPrice(discount * quantity)} de desconto
         <span class="flex-none max-[400px]:hidden">
           <IconAsterisk />
         </span>
@@ -236,13 +236,18 @@ export default function SubscriptionButtonVTEX({
                 lineHeight: 1,
               }}
             >
-              <SellingPrice
-                sellingPrice={price}
-                listPrice={listPrice}
-                productId={productID}
-                quantity={1}
-                type="subscription"
-              />
+              <div class="flex flex-col">
+                <span class="text-xs sm:text-sm text-gray font-bold">
+                  {quantity} {quantity > 1 ? "unidades" : "unidade"}
+                </span>
+                <SellingPrice
+                  sellingPrice={price}
+                  listPrice={listPrice}
+                  productId={productID}
+                  quantity={quantity}
+                  type="subscription"
+                />
+              </div>
               <div class="flex items-start gap-3 sm:gap-4">
                 <div>
                   <span
@@ -251,7 +256,7 @@ export default function SubscriptionButtonVTEX({
                       lineHeight: 1,
                     }}
                   >
-                    {formatPrice(price - discount)}
+                    {formatPrice((price - discount) * quantity)}
                   </span>
                   <small
                     class="text-xs sm:text-sm text-dark"

@@ -83,10 +83,25 @@ function getPossibilities(
     const properties = splitProperties(
       related.isVariantOf?.additionalProperty ?? [],
     );
+
+    const {
+      offers: {
+        // @ts-expect-error - inventoryLevel exists
+        offers: [
+          {
+            inventoryLevel: {
+              value: inventoryLevelValue,
+            }
+          }
+        ]
+      }
+    } = related;
+
     return {
       id: related.isVariantOf?.productGroupID,
       url: related.url,
       name: `${properties.map((property) => property.value).join(" - ")}`,
+      inventoryLevel: inventoryLevelValue,
       properties,
     };
   });
@@ -180,13 +195,32 @@ function ProductSimilars({ product, current }: Props) {
               </span>
               <ul
                 id="selector-options"
-                class="flex flex-nowrap overflow-x-auto sm:flex-wrap flex-row gap-2"
+                class="flex flex-nowrap overflow-x-auto sm:flex-wrap flex-row gap-2 pb-2 sm:pb-0"
               >
                 {/* @ts-ignore poss with key in object is ok */}
                 {poss[key].map((d) => {
                   let name = "";
                   if (key === "flavours") name = d.name.split("-")[0].trim();
                   if (key === "sizes") name = d.name.split("-")[1].trim();
+
+                  if (!d.selected) {
+                    if (d.inventoryLevel === 0) {
+                      return (
+                        <li
+                          class="bg-white text-light-gray border-2 border-light-gray rounded-full flex-none first:ml-4 first:sm:ml-0 last:mr-4 last:sm:mr-0"
+                        >
+                          <a
+                            class="flex items-center gap-2 py-2 px-3 text-sm font-bold"
+                            href={d.url}
+                          >
+                            {d.selected && <CheckIcon />}
+                            {name}
+                          </a>
+                        </li>
+                      );
+                    }
+                  }
+
                   return (
                     <li
                       class={`${

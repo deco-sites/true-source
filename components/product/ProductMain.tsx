@@ -58,7 +58,7 @@ export default function ProductMain(props: ReturnType<typeof loader>) {
 export function loader(props: Props, req: Request) {
   const description = (props.descriptions ?? []).find(
     (d) =>
-      new URLPattern({ pathname: `/${searchSlugify(d.matcher)}/p` }).test(
+      new URLPattern({ pathname: d.matcher }).test(
         req.url,
       ),
   );

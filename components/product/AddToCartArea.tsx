@@ -60,8 +60,6 @@ export default function AddToCartArea({
     offers,
   } = product;
 
-  console.log(product);
-
   const {
     offers: {
       // @ts-ignore offers exists
@@ -98,7 +96,7 @@ export default function AddToCartArea({
   });
 
   return (
-    <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4">
+    <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4 max-w-[484px]">
       {availability === "https://schema.org/InStock"
         ? (
           <>

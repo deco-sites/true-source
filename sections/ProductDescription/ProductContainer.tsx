@@ -10,11 +10,12 @@ export default function ProductContainer({ sections }: Props) {
       class="rounded-[35px] overflow-hidden"
       style={{ boxShadow: "0 0px 35px rgba(0,0,0,.2)" }}
     >
-      {sections.map((section) => {
-        const { Component, props } = section;
-
-        return <Component {...props} />;
-      })}
+      {sections &&
+        sections.map((section) => {
+          const { Component, props } = section;
+  
+          return <Component {...props} />;
+        })}
     </div>
   );
 }

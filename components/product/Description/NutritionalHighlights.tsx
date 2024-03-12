@@ -9,7 +9,13 @@ interface Items {
 interface Props {
   items?: Items[];
   youtubeUrl?: string;
+  /**
+   @default true
+   */
   showItems: boolean;
+  /**
+   @default true
+   */
   showYoutubeIframe: boolean;
   color?: string;
 }

@@ -4,11 +4,16 @@ import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
+/**
+ * @titleBy text
+ */
+export interface Benefit {
+  icon: ImageWidget;
+  text: string;
+}
+
 export interface BenefitsType {
-  benefits: Array<{
-    icon: ImageWidget;
-    text: string;
-  }>;
+  benefits: Benefit[];
   color?: string;
 }
 
@@ -43,53 +48,54 @@ export default function Benefits({
         >
           Principais benefícios
         </h2>
-        <div id={id} class="flex flex-col justify-center w-full">
+        {/* <div id={id} class="flex flex-col justify-center w-full">
           <div class="relative overflow-x-hidden">
-            <Slider class="carousel carousel-center items-stretch gap-4 mx-auto">
-              {benefits.slice(0, 4).map((benefit, index) => {
-                const {
-                  icon,
-                  text,
-                } = benefit;
-                return (
-                  <Slider.Item
-                    key={index}
-                    index={index}
-                    class="carousel-item first:ml-4 last:mr-4"
-                  >
-                    <div class="!w-[238px] sm:!w-[350px] flex flex-none items-center gap-6 bg-ice px-4 py-3 rounded-lg text-sm lg:text-base">
-                      <div class="w-[48px] sm:w-[80px] flex-none">
-                        <img
-                          class="w-[48px] sm:w-[80px] h-auto"
-                          width={80}
-                          height={80}
-                          src={icon}
-                        />
-                      </div>
-                      <div dangerouslySetInnerHTML={{ __html: marky(text) }} />
-                    </div>
-                  </Slider.Item>
-                );
-              })}
-            </Slider>
-          </div>
-
-          {/* Dots */}
-          {
-            /* <ul class="flex gap-3 w-full justify-center mt-10">
-            {benefits.slice(0, 3).map((benefit, index) => {
-              return (
-                <Slider.Dot index={index}>
-                  <div
-                    class="group-disabled:bg-dark bg-light-gray w-2 h-2 rounded-full"
+            <Slider class="carousel carousel-center items-stretch gap-4 mx-auto"> */}
+        <div class="flex flex-wrap justify-center items-stretch gap-4">
+          {benefits.map((benefit, index) => {
+            const {
+              icon,
+              text,
+            } = benefit;
+            return (
+              // <Slider.Item
+              //   key={index}
+              //   index={index}
+              //   class="carousel-item first:ml-4 last:mr-4"
+              // >
+              <div class="!w-[238px] sm:!w-[350px] flex flex-none items-center gap-6 bg-ice px-4 py-3 rounded-lg text-sm lg:text-base">
+                <div class="w-[48px] sm:w-[80px] flex-none">
+                  <img
+                    class="w-[48px] sm:w-[80px] h-auto"
+                    width={80}
+                    height={80}
+                    src={icon}
                   />
-                </Slider.Dot>
-              );
-            })}
-          </ul> */
-          }
-          <SliderJS rootId={id} interval={5000} />
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: marky(text) }} />
+              </div>
+              // </Slider.Item>
+            );
+          })}
         </div>
+        {/* </Slider>
+          </div> */}
+
+        {/* Dots */}
+        {
+          /* <ul class="flex gap-3 w-full justify-center mt-10">
+          {benefits.slice(0, 3).map((benefit, index) => {
+            return (
+              <Slider.Dot index={index}>
+                <div
+                  class="group-disabled:bg-dark bg-light-gray w-2 h-2 rounded-full"
+                />
+              </Slider.Dot>
+            );
+          })}
+        </ul> */
+        }
+        {/* <SliderJS rootId={id} interval={5000} /> */}
       </div>
     </div>
   );
