@@ -84,9 +84,9 @@ export default defineApp(async (_req, ctx) => {
         src="/swiper-bundle.min.js"
       />
 
-      <link 
-        rel="stylesheet" 
-        href="/swiper-bundle.min.css" 
+      <link
+        rel="stylesheet"
+        href="/swiper-bundle.min.css"
       />
     </>
   );

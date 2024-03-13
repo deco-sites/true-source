@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import type { ImageWidget, HTMLWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
 /**
  * @titleBy text
@@ -35,7 +35,6 @@ export default function Benefits({
   }],
   color = "#3C3C3B",
 }: BenefitsType) {
-
   if (!IS_BROWSER) return null;
 
   useEffect(() => {

@@ -126,7 +126,10 @@ export default function NutritionalTable({
                 </tbody>
               </table>
             </div>
-            <p class="w-full lg:w-3/4 text-sm mt-8 text-white" dangerouslySetInnerHTML={{ __html: description }} />
+            <p
+              class="w-full lg:w-3/4 text-sm mt-8 text-white"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </div>
         )}
       </div>
