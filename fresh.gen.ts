@@ -3,6 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
+import * as $A from "./islands/A.ts";
 import * as $AddToCartArea from "./islands/AddToCartArea.tsx";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
@@ -24,7 +25,9 @@ import * as $NavbarWrapper from "./islands/NavbarWrapper.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PixPrice from "./islands/PixPrice.tsx";
+import * as $PriceRange from "./islands/PriceRange.tsx";
 import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
+import * as $Product_ProductStarCard from "./islands/Product/ProductStarCard.tsx";
 import * as $Product_ProductStars from "./islands/Product/ProductStars.tsx";
 import * as $Product_SellingPrice from "./islands/Product/SellingPrice.tsx";
 import * as $Product_Trustvox from "./islands/Product/Trustvox.tsx";
@@ -34,6 +37,7 @@ import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
 import * as $Subscription from "./islands/Subscription.tsx";
+import * as $SubscriptionModal from "./islands/SubscriptionModal.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -43,6 +47,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
+    "./islands/A.ts": $A,
     "./islands/AddToCartArea.tsx": $AddToCartArea,
     "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
     "./islands/AddToCartButton/nuvemshop.tsx": $AddToCartButton_nuvemshop,
@@ -64,7 +69,9 @@ const manifest = {
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/PixPrice.tsx": $PixPrice,
+    "./islands/PriceRange.tsx": $PriceRange,
     "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,
+    "./islands/Product/ProductStarCard.tsx": $Product_ProductStarCard,
     "./islands/Product/ProductStars.tsx": $Product_ProductStars,
     "./islands/Product/SellingPrice.tsx": $Product_SellingPrice,
     "./islands/Product/Trustvox.tsx": $Product_Trustvox,
@@ -74,6 +81,7 @@ const manifest = {
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/SliderJS.tsx": $SliderJS,
     "./islands/Subscription.tsx": $Subscription,
+    "./islands/SubscriptionModal.tsx": $SubscriptionModal,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },

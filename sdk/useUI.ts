@@ -4,6 +4,7 @@
  */
 
 import { signal } from "@preact/signals";
+import type { Props } from "deco-sites/true-source/components/product/SubscriptionModal.tsx";
 
 const displayCart = signal(false);
 const displayMenu = signal(false);
@@ -11,12 +12,15 @@ const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
 const displaySubscriptionPopup = signal(false);
 
+const currentSubscription = signal<Props | null>(null);
+
 const state = {
   displayCart,
   displayMenu,
   displaySearchPopup,
   displaySearchDrawer,
   displaySubscriptionPopup,
+  currentSubscription,
 };
 
 // Keyboard event listeners

@@ -25,6 +25,7 @@ export type AvailableIcons =
   | "Mastercard"
   | "Message"
   | "Phone"
+  | "CheckCircle"
   | "Pix"
   | "Plus"
   | "QuestionMarkCircle"

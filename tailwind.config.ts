@@ -1,4 +1,4 @@
-import daisyui from "daisyui";
+import daisyui, { Config } from "daisyui";
 
 export default {
   plugins: [daisyui],
@@ -19,6 +19,7 @@ export default {
       green: "#8CBF3C",
       "dark-green": "#294B14",
       gold: "#916F4A",
+      orange: "#E9530E",
       red: "#e4003f",
       transparent: "transparent",
       Stroke: "#EDEDED",
@@ -33,6 +34,10 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
       },
+      fontFamily: {
+        lemon: ["Lemon Milk"],
+        inter: ["Inter"],
+      },
     },
   },
-};
+} as Config;

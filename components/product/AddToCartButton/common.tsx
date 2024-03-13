@@ -4,6 +4,7 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
 import { IconButtonCart } from "../../ui/CustomIcons.tsx";
+import { useSignal } from "@preact/signals";
 
 export interface Props {
   /** @description: sku name */
@@ -11,8 +12,8 @@ export interface Props {
   onAddItem: () => Promise<void>;
 }
 
-const useAddToCart = ({ eventParams, onAddItem }: Props) => {
-  const [loading, setLoading] = useState(false);
+export const useAddToCart = ({ eventParams, onAddItem }: Props) => {
+  const loading = useSignal(false);
   const { displayCart } = useUI();
 
   const onClick = async (e: MouseEvent) => {
@@ -20,7 +21,7 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
     e.stopPropagation();
 
     try {
-      setLoading(true);
+      loading.value = true;
 
       await onAddItem();
 
@@ -31,7 +32,7 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
 
       displayCart.value = true;
     } finally {
-      setLoading(false);
+      loading.value = false;
     }
   };
 
@@ -39,11 +40,12 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
 };
 
 export default function AddToCartButton(props: Props) {
-  const btnProps = useAddToCart(props);
+  const { loading, ...btnProps } = useAddToCart(props);
 
   return (
     <Button
       {...btnProps}
+      loading={loading.value}
       class="flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-xs sm:text-[13px] font-bold uppercase font-lemon-milk text-white border-0"
     >
       Comprar

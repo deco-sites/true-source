@@ -1,5 +1,4 @@
-import Avatar from "$store/components/ui/Avatar.tsx";
-import { formatPrice } from "$store/sdk/format.ts";
+import PriceRange from "$store/components/ui/PriceRange.tsx";
 import type {
   Filter,
   FilterToggle,
@@ -7,72 +6,192 @@ import type {
   ProductListingPage,
 } from "apps/commerce/types.ts";
 import { parseRange } from "apps/commerce/utils/filters.ts";
+import { capitalize } from "apps/utils/capitalize.ts";
+import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
 interface Props {
   filters: ProductListingPage["filters"];
+  url: string;
 }
 
 const isToggle = (filter: Filter): filter is FilterToggle =>
   filter["@type"] === "FilterToggle";
 
 function ValueItem(
-  { url, selected, label, quantity }: FilterToggleValue,
+  { url, selected, label }: FilterToggleValue,
 ) {
+  const id = useId();
+
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
-      <div aria-checked={selected} class="checkbox" />
+    <a
+      href={url}
+      rel="nofollow"
+      class="flex items-center gap-4 text-sm text-dark py-4 w-full"
+    >
+      <input type="checkbox" id={id} checked={selected} class="peer hidden" />
+      <label
+        for={id}
+        class={clx(
+          "size-4 border-2 border-dark rounded-full flex justify-center items-center",
+          selected && "bg-dark",
+        )}
+      >
+        {selected && <span class="size-2 absolute bg-white rounded-full" />}
+      </label>
       <span class="text-sm">{label}</span>
-      {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>}
     </a>
   );
 }
 
-function FilterValues({ key, values }: FilterToggle) {
-  const flexDirection = key === "tamanho" || key === "cor"
-    ? "flex-row"
-    : "flex-col";
+function FilterValues({ key, values, label }: FilterToggle) {
+  const collapsable = useCollapsable();
+  const categoryCollapsable = useCollapsable();
+
+  const NO_DIVIDER = [/^category/, /^price/];
 
   return (
-    <ul class={`flex flex-wrap gap-2 ${flexDirection}`}>
-      {values.map((item) => {
-        const { url, selected, value, quantity } = item;
+    <collapsable.Collapsable open>
+      <collapsable.Trigger class="flex items-center gap-3 text-dark font-medium text-sm font-lemon group/trigger">
+        {label.toLowerCase() === "categoria" ? "Produtos" : label}
+        <Icon
+          id="ChevronRight"
+          width={32}
+          height={32}
+          class="rotate-90 peer-checked:group-[]/trigger:-rotate-90 transition-transform"
+        />
+      </collapsable.Trigger>
+      <collapsable.ContentWrapper class="mt-6">
+        <collapsable.Content
+          class={clx(
+            "flex flex-col items-start",
+            NO_DIVIDER.some((re) => re.test(key))
+              ? "gap-2"
+              : "divide-y divide-light-gray-200",
+          )}
+        >
+          {(() => {
+            if (label === "priceranges") {
+              const [min, max] = values.map(({ value }) =>
+                parseRange(value) || { from: 0, to: 0 }
+              ).reduce((acc, curr) => {
+                return [Math.min(acc[0], curr.from), Math.max(acc[1], curr.to)];
+              }, [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]);
 
-        if (key === "cor" || key === "tamanho") {
-          return (
-            <a href={url} rel="nofollow">
-              <Avatar
-                content={value}
-                variant={selected ? "active" : "default"}
-              />
-            </a>
-          );
-        }
+              return <PriceRange min={min} max={max} />;
+            }
 
-        if (key === "price") {
-          const range = parseRange(item.value);
+            if (label === "produtos") {
+              return (
+                <div class="border-b border-b-light-gray-200 pb-8 flex flex-col gap-2 items-start">
+                  {values.slice(0, 10).map((
+                    { url, quantity, label, selected },
+                  ) => (
+                    <a
+                      href={url}
+                      class={clx(
+                        "flex justify-center items-center px-3 py-1.5 rounded-full font-bold text-sm hover:text-white hover:bg-dark hover:border-dark transition-colors",
+                        selected
+                          ? "text-white bg-dark"
+                          : "text-dark bg-white border-2 border-light-gray-200",
+                      )}
+                    >
+                      {capitalize(label.toLowerCase()).split(" ").map((
+                        word,
+                      ) =>
+                        word.length === 1 || word.length === 2
+                          ? word.toLowerCase()
+                          : word
+                      ).join(" ")} ({quantity})
+                    </a>
+                  ))}
+                  {values.length > 10 && (
+                    <categoryCollapsable.Collapsable>
+                      <categoryCollapsable.ContentWrapper>
+                        <categoryCollapsable.Content class="flex flex-col gap-2 items-start">
+                          {values.slice(10).map(({ url, quantity, label }) => (
+                            <a
+                              href={url}
+                              class="flex justify-center items-center px-3 py-1.5 border-2 border-light-gray-200 rounded-full text-dark font-bold text-sm"
+                            >
+                              {capitalize(label.toLowerCase()).split(" ").map((
+                                word,
+                              ) =>
+                                word.length === 1 || word.length === 2
+                                  ? word.toLowerCase()
+                                  : word
+                              ).join(" ")} ({quantity})
+                            </a>
+                          ))}
+                        </categoryCollapsable.Content>
+                      </categoryCollapsable.ContentWrapper>
 
-          return range && (
-            <ValueItem
-              {...item}
-              label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`}
-            />
-          );
-        }
+                      <categoryCollapsable.Trigger class="flex items-center gap-3 text-dark font-bold text-sm group/categorytrigger mt-5 font-inter">
+                        <span class="block peer-checked:group-[]/categorytrigger:hidden">
+                          Ver todas as categorias +
+                        </span>
+                        <span class="hidden peer-checked:group-[]/categorytrigger:block">
+                          Ver menos categorias -
+                        </span>
+                      </categoryCollapsable.Trigger>
+                    </categoryCollapsable.Collapsable>
+                  )}
+                </div>
+              );
+            }
 
-        return <ValueItem {...item} />;
-      })}
-    </ul>
+            return values.map((item) => {
+              return <ValueItem {...item} />;
+            });
+          })()}
+        </collapsable.Content>
+      </collapsable.ContentWrapper>
+    </collapsable.Collapsable>
   );
 }
 
-function Filters({ filters }: Props) {
+const TRANSLATE = {
+  "departments": "departamentos",
+  "brands": "marcas",
+  "categories": "produtos",
+} as Record<string, string>;
+
+function Filters({ filters: f, url }: Props) {
+  let filters = f
+    .filter(isToggle)
+    .filter(({ values }) => values.length > 0)
+    .map((i) => {
+      i.label = TRANSLATE[i.label.toLowerCase()] || i.label;
+
+      return i;
+    })
+    .sort((a, b) => a.label === "produtos" ? -1 : 1);
+
+  console.log(filters.find(({ label }) => label === "departamentos"));
+
+  const allProducts = filters.find(({ label }) => label === "departamentos")
+    ?.values.find(({ label }) => label.toLowerCase() === "produtos");
+
+  if (allProducts) {
+    allProducts.label = "Todos os produtos";
+
+    for (const f of filters) {
+      if (f.label === "produtos") {
+        f.values.unshift(allProducts);
+      }
+    }
+  }
+
+  filters = filters
+    .filter(({ label }) => label !== "departamentos");
+
   return (
-    <ul class="flex flex-col gap-6 p-4">
+    <ul class="flex flex-col gap-6 mr-14">
       {filters
-        .filter(isToggle)
         .map((filter) => (
           <li class="flex flex-col gap-4">
-            <span>{filter.label}</span>
             <FilterValues {...filter} />
           </li>
         ))}

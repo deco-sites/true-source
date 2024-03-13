@@ -1,45 +1,19 @@
 import type { Platform } from "$store/apps/site.ts";
 import { SendEventOnClick } from "$store/components/Analytics.tsx";
-import Avatar from "$store/components/ui/Avatar.tsx";
-import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
-import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
+import ProductStarCard from "$store/components/product/ProductStarCard.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import Loading from "$store/components/ui/Loading.tsx";
+import { clx } from "$store/sdk/clx.ts";
 import { formatPrice } from "$store/sdk/format.ts";
+import { relative } from "$store/sdk/url.ts";
+import useBuyProduct from "$store/sdk/useBuyProduct.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
-import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
+import { useUI } from "$store/sdk/useUI.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { useCart } from "apps/vtex/hooks/useCart.ts";
 import Image from "apps/website/components/Image.tsx";
-import { relative } from "$store/sdk/url.ts";
-
-export interface Layout {
-  basics?: {
-    contentAlignment?: "Left" | "Center";
-    oldPriceSize?: "Small" | "Normal";
-    ctaText?: string;
-  };
-  elementsPositions?: {
-    skuSelector?: "Top" | "Bottom";
-    favoriteIcon?: "Top right" | "Top left";
-  };
-  hide?: {
-    productName?: boolean;
-    productDescription?: boolean;
-    allPrices?: boolean;
-    discount?: boolean;
-    installments?: boolean;
-    skuSelector?: boolean;
-    cta?: boolean;
-    favoriteIcon?: boolean;
-  };
-  onMouseOver?: {
-    image?: "Change image" | "Zoom image";
-    card?: "None" | "Move up";
-    showFavoriteIcon?: boolean;
-    showSkuSelector?: boolean;
-    showCardShadow?: boolean;
-    showCta?: boolean;
-  };
-}
+import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 
 interface Props {
   product: Product;
@@ -52,76 +26,67 @@ interface Props {
   /** @description index of the product card in the list */
   index?: number;
 
-  layout?: Layout;
   platform?: Platform;
 }
 
-const WIDTH = 200;
-const HEIGHT = 279;
+const WIDTH = 260;
+const HEIGHT = 300;
 
 function ProductCard({
   product,
   preload,
   itemListName,
-  layout,
-  platform,
   index,
 }: Props) {
   const { url, productID, name, image: images, offers, isVariantOf } = product;
+  const { seller = "1" } = useOffer(offers) ?? {};
   const id = `product-card-${productID}`;
-  const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
-  const description = product.description || isVariantOf?.description;
-  const [front, back] = images ?? [];
-  const { listPrice, price, installments } = useOffer(offers) || {};
-  const possibilities = useVariantPossibilities(hasVariant, product);
-  const variants = Object.entries(Object.values(possibilities)[0] ?? {});
+  const [front] = images ?? [];
+  const { listPrice = 0, price = 0 } = useOffer(offers) || {};
+  const { displayCart } = useUI();
+  const { cart } = useCart();
+  const { currentSubscription } = useUI();
 
-  const l = layout;
-  const align =
-    !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
-      ? "left"
-      : "center";
-  const relativeUrl = relative(url);
-  const skuSelector = variants.map(([value, link]) => {
-    const relativeLink = relative(link);
-    return (
-      <li>
-        <a href={relativeLink}>
-          <Avatar
-            variant={relativeLink === relativeUrl
-              ? "active"
-              : relativeLink
-              ? "default"
-              : "disabled"}
-            content={value}
-          />
-        </a>
-      </li>
-    );
-  });
-  const cta = (
-    <a
-      href={url && relative(url)}
-      aria-label="view product"
-      class="btn btn-block"
-    >
-      {l?.basics?.ctaText || "Ver produto"}
-    </a>
+  const isBestSeller = product.additionalProperty?.some(
+    ({ value }) => value && /best-seller/i.test(value),
   );
+
+  const canBuyWithSubscription = product.additionalProperty?.some(
+    ({ name }) => name === "activeSubscriptions",
+  );
+  const discountPercentage = Math.round(
+    ((listPrice - price) / listPrice) * 100,
+  );
+
+  const isInCart = cart.value?.items.some((item) => item.id === productID);
+
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    breadcrumbList: {
+      "@type": "BreadcrumbList",
+      numberOfItems: 0,
+      itemListElement: [],
+    },
+    price,
+    listPrice,
+  });
+
+  const buyProduct = useBuyProduct({
+    eventParams: { items: [eventItem] },
+    productID,
+    seller,
+    quantity: 1,
+    onSuccess: () => {
+      displayCart.value = true;
+    },
+  });
 
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
-        align === "center" ? "text-center" : "text-start"
-      } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
-        ${
-        l?.onMouseOver?.card === "Move up" &&
-        "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
-      }
-      `}
       data-deco="view-product"
+      class="max-w-[260px]"
     >
       <SendEventOnClick
         id={id}
@@ -140,49 +105,27 @@ function ProductCard({
           },
         }}
       />
-      <figure
-        class="relative overflow-hidden"
-        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
-      >
+      <figure class="relative overflow-hidden">
         {/* Wishlist button */}
+        <div class="absolute top-4 right-4 z-10 flex items-center">
+          <WishlistButtonVtex
+            productGroupID={productGroupID}
+            productID={productID}
+          />
+        </div>
 
-        <div
-          class={`absolute top-2 z-10 flex items-center
-            ${
-            l?.elementsPositions?.favoriteIcon === "Top left"
-              ? "left-2"
-              : "right-2"
-          }
-            
-          `}
-        >
-          <div
-            class={`${l?.hide?.favoriteIcon ? "hidden" : "block"} ${
-              l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
-            }`}
-          >
-            {platform === "vtex" && (
-              <WishlistButtonVtex
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-            {platform === "wake" && (
-              <WishlistButtonWake
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-          </div>
+        <div class="absolute top-2.5 left-2.5 flex flex-col items-start gap-2">
+          {/* Best seller */}
+          {isBestSeller && (
+            <div class="rounded-full bg-orange text-white text-xs font-bold px-3 py-1.5 whitespace-nowrap">
+              Mais vendidos
+            </div>
+          )}
+
           {/* Discount % */}
-          {!l?.hide?.discount && (
-            <div class="text-sm bg-base-100 p-[10px]">
-              <span class="text-base-content font-bold">
-                {listPrice && price
-                  ? `${Math.round(((listPrice - price) / listPrice) * 100)}% `
-                  : ""}
-              </span>
-              OFF
+          {listPrice && price && discountPercentage > 0 && (
+            <div class="rounded-full bg-green text-white text-xs font-bold px-3 py-1.5 whitespace-nowrap">
+              {discountPercentage}% OFF
             </div>
           )}
         </div>
@@ -191,175 +134,96 @@ function ProductCard({
         <a
           href={url && relative(url)}
           aria-label="view product"
-          class="grid grid-cols-1 grid-rows-1 w-full"
+          class="grid grid-cols-1 grid-rows-1 w-full bg-ice rounded-[20px]"
         >
           <Image
             src={front.url!}
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
-              l?.onMouseOver?.image == "Zoom image"
-                ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
-                : ""
-            }`}
+            class="h-[300px] max-w-[unset]"
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
             decoding="async"
           />
-          {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && (
-            <Image
-              src={back?.url ?? front.url!}
-              alt={back?.alternateName ?? front.alternateName}
-              width={WIDTH}
-              height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity rounded w-full opacity-0 lg:group-hover:opacity-100"
-              sizes="(max-width: 640px) 50vw, 20vw"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
         </a>
-        <figcaption
-          class={`
-          absolute bottom-1 left-0 w-full flex flex-col gap-3 p-2 ${
-            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta
-              ? "transition-opacity opacity-0 lg:group-hover:opacity-100"
-              : "lg:hidden"
-          }`}
-        >
-          {/* SKU Selector */}
-          {l?.onMouseOver?.showSkuSelector && (
-            <ul class="flex justify-center items-center gap-2 w-full">
-              {skuSelector}
-            </ul>
-          )}
-          {l?.onMouseOver?.showCta && cta}
-        </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-2">
-        {/* SKU Selector */}
-        {(!l?.elementsPositions?.skuSelector ||
-          l?.elementsPositions?.skuSelector === "Top") && (
-          <>
-            {l?.hide?.skuSelector
-              ? (
-                ""
-              )
-              : (
-                <ul
-                  class={`flex items-center gap-2 w-full overflow-auto p-3 ${
-                    align === "center" ? "justify-center" : "justify-start"
-                  } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-                >
-                  {skuSelector}
-                </ul>
-              )}
-          </>
-        )}
+      <div class="flex-auto flex flex-col px-4 gap-4 mt-4">
+        <h2 class="text-dark text-sm text-ellipsis font-bold line-clamp-2 h-10">
+          {name}
+        </h2>
 
-        {l?.hide?.productName && l?.hide?.productDescription
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-0">
-              {l?.hide?.productName
+        <div class="flex items-center gap-2 h-6">
+          {listPrice > price && (
+            <div class="line-through text-gray text-sm">
+              {formatPrice(listPrice, offers?.priceCurrency)}
+            </div>
+          )}
+          <div class="text-dark text-sm">
+            {formatPrice(price, offers?.priceCurrency)}
+          </div>
+
+          <div class="ml-auto">
+            <ProductStarCard
+              storeId="113397"
+              productId={productGroupID ?? ""}
+            />
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={isInCart
+            ? buyProduct.remove(productID)
+            : canBuyWithSubscription
+            ? () =>
+              currentSubscription.value = {
+                productID,
+                seller,
+                quantity: 1,
+                listPrice,
+                price,
+              }
+            : buyProduct.add}
+          class={clx(
+            "flex justify-center items-center gap-4 rounded text-sm font-bold h-10 group/card",
+            isInCart
+              ? "bg-green text-white"
+              : "text-green hover:bg-green hover:text-white transition-colors duration-[200ms] border-2 border-green",
+          )}
+        >
+          {buyProduct.loading.value ? <Loading /> : (
+            <>
+              {isInCart
                 ? (
-                  ""
+                  <Icon
+                    id="CheckCircle"
+                    width={16}
+                    height={16}
+                    class="text-white"
+                  />
                 )
+                : canBuyWithSubscription
+                ? null
                 : (
-                  <h2
-                    class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
-                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
+                  <Icon
+                    id="ShoppingCart"
+                    width={16}
+                    height={16}
+                    class="text-green group-hover/card:text-white delay-75"
                   />
                 )}
-              {l?.hide?.productDescription
-                ? (
-                  ""
-                )
-                : (
-                  <div
-                    class="truncate text-sm lg:text-sm text-neutral"
-                    dangerouslySetInnerHTML={{ __html: description ?? "" }}
-                  />
-                )}
-            </div>
-          )}
-        {l?.hide?.allPrices
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-2">
-              <div
-                class={`flex flex-col gap-0 ${
-                  l?.basics?.oldPriceSize === "Normal"
-                    ? "lg:flex-row-reverse lg:gap-2"
-                    : ""
-                } ${align === "center" ? "justify-center" : "justify-end"}`}
-              >
-                <div
-                  class={`line-through text-base-300 text-xs font-light ${
-                    l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                  }`}
-                >
-                  {formatPrice(listPrice, offers?.priceCurrency)}
-                </div>
-                <div class="text-base-content lg:text-sm font-light">
-                  {formatPrice(price, offers?.priceCurrency)}
-                </div>
-              </div>
-            </div>
-          )}
 
-        {/* SKU Selector */}
-        {l?.elementsPositions?.skuSelector === "Bottom" && (
-          <>
-            <ul
-              class={`flex items-center gap-2 w-full ${
-                align === "center" ? "justify-center" : "justify-between"
-              } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-            >
-              {l?.hide?.installments
-                ? (
-                  ""
-                )
-                : (
-                  <li>
-                    <span class="text-base-300 font-light text-sm truncate">
-                      ou {installments}
-                    </span>
-                  </li>
-                )}
-              {l?.hide?.skuSelector
-                ? (
-                  ""
-                )
-                : (
-                  <li>
-                    <ul class="flex items-center gap-2">{skuSelector}</ul>
-                  </li>
-                )}
-            </ul>
-          </>
-        )}
-        {!l?.hide?.cta
-          ? (
-            <div
-              class={`flex-auto flex items-end ${
-                l?.onMouseOver?.showCta ? "lg:hidden" : ""
-              }`}
-            >
-              {cta}
-            </div>
-          )
-          : (
-            ""
+              {isInCart
+                ? "Adicionado"
+                : canBuyWithSubscription
+                ? "Assinar com desconto"
+                : "Adicionar ao carrinho"}
+            </>
           )}
+        </button>
       </div>
     </div>
   );

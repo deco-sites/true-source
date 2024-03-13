@@ -4,7 +4,7 @@ import SearchResult, {
 
 export type Props = SearchResultProps;
 
-function WishlistGallery(props: Props) {
+function WishlistGallery(props: ReturnType<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
 
   if (isEmpty) {
@@ -22,6 +22,18 @@ function WishlistGallery(props: Props) {
   }
 
   return <SearchResult {...props} />;
+}
+
+export function loader(props: Props, req: Request) {
+  const sectionsSEO = props.sectionsSEO.sections?.find(
+    (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
+  )?.sections ?? [];
+
+  return {
+    ...props,
+    sectionsSEO,
+    url: req.url,
+  };
 }
 
 export default WishlistGallery;

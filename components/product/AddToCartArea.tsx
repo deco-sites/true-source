@@ -60,8 +60,6 @@ export default function AddToCartArea({
     offers,
   } = product;
 
-  console.log(product);
-
   const {
     offers: {
       // @ts-ignore offers exists

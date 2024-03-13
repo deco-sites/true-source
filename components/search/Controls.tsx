@@ -11,10 +11,11 @@ export type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
   & {
     displayFilter?: boolean;
+    url: string;
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions }: Props,
+  { filters, breadcrumb, displayFilter, sortOptions, url }: Props,
 ) {
   const open = useSignal(false);
 
@@ -35,28 +36,34 @@ function SearchControls(
               </Button>
             </div>
             <div class="flex-grow overflow-auto">
-              <Filters filters={filters} />
+              <Filters filters={filters} url={url} />
             </div>
           </div>
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
-        <div class="flex flex-row items-center sm:p-0 mb-2">
-          <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+      <div class="flex flex-col">
+        <div>
+          <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
+            {
+              /* <Button
+              class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
+              onClick={() => {
+                open.value = true;
+              }}
+            >
+              Filtrar
+              <Icon id="FilterList" width={16} height={16} />
+            </Button> */
+            }
+            {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+          </div>
         </div>
 
-        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
-          <Button
-            class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
-            onClick={() => {
-              open.value = true;
-            }}
-          >
-            Filtrar
-            <Icon id="FilterList" width={16} height={16} />
-          </Button>
-          {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+        <div class="w-full h-px bg-light-gray-200 my-6" />
+
+        <div class="mb-6">
+          <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
         </div>
       </div>
     </Drawer>

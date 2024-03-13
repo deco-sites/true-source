@@ -1,5 +1,4 @@
 import { SendEventOnView } from "$store/components/Analytics.tsx";
-import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
 import Filters from "$store/components/search/Filters.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import SearchControls from "$store/islands/SearchControls.tsx";
@@ -7,27 +6,18 @@ import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
-
-export interface Layout {
-  /**
-   * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
-   */
-  variant?: "aside" | "drawer";
-  /**
-   * @description Number of products per line on grid
-   */
-  columns?: Columns;
-}
+import ProductGallery from "../product/ProductGallery.tsx";
+import { renderSection } from "apps/website/pages/Page.tsx";
+import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
 
 export interface Props {
   /** @title Integration */
   page: ProductListingPage | null;
-  layout?: Layout;
-  cardLayout?: CardLayout;
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
+
+  sectionsSEO: ReturnSectionSEO;
 }
 
 function NotFound() {
@@ -40,10 +30,12 @@ function NotFound() {
 
 function Result({
   page,
-  layout,
-  cardLayout,
   startingPage = 0,
-}: Omit<Props, "page"> & { page: ProductListingPage }) {
+  sectionsSEO,
+  url,
+}: ReturnType<typeof loader>) {
+  if (!page) throw new Error("Unreachable");
+
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
 
@@ -59,20 +51,20 @@ function Result({
           sortOptions={sortOptions}
           filters={filters}
           breadcrumb={breadcrumb}
-          displayFilter={layout?.variant === "drawer"}
+          displayFilter
+          url={url}
         />
 
         <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 && (
+          {filters.length > 0 && (
             <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
+              <Filters filters={filters} url={url} />
             </aside>
           )}
           <div class="flex-grow" id={id}>
             <ProductGallery
               products={products}
               offset={offset}
-              layout={{ card: cardLayout, columns: layout?.columns }}
             />
           </div>
         </div>
@@ -100,6 +92,10 @@ function Result({
             </a>
           </div>
         </div>
+
+        <div class="flex flex-col border-t border-t-light-gray max-w-[1340px] w-[95%] container">
+          {sectionsSEO.map(renderSection)}
+        </div>
       </div>
       <SendEventOnView
         id={id}
@@ -124,12 +120,24 @@ function Result({
   );
 }
 
-function SearchResult({ page, ...props }: Props) {
+function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
   if (!page) {
     return <NotFound />;
   }
 
   return <Result {...props} page={page} />;
+}
+
+export function loader(props: Props, req: Request) {
+  const sectionsSEO = props.sectionsSEO.sections?.find(
+    (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
+  )?.sections ?? [];
+
+  return {
+    ...props,
+    sectionsSEO,
+    url: req.url,
+  };
 }
 
 export default SearchResult;

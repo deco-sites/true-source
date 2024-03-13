@@ -37,7 +37,7 @@ function Breadcrumb({ itemListElement = [] }: Props) {
             }
 
             return (
-              <li class="text-xs text-dark last:text-light-gray before:content-['/'] flex items-center gap-2 font-normal capitalize">
+              <li class="text-xs text-dark last:text-gray before:content-['/'] flex items-center gap-2">
                 <a href={item}>{name}</a>
               </li>
             );

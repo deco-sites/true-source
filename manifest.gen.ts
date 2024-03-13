@@ -4,8 +4,7 @@
 
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$1 from "./loaders/List/Sections.tsx";
+import * as $$$0 from "./loaders/PLPSectionsSEO.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -49,23 +48,23 @@ import * as $$$$$$39 from "./sections/Product/ProductShelf.tsx";
 import * as $$$$$$40 from "./sections/Product/ProductShelfTabbed.tsx";
 import * as $$$$$$41 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$42 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$43 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$44 from "./sections/ProductDescription/ProductBenefits.tsx";
-import * as $$$$$$45 from "./sections/ProductDescription/ProductComparison.tsx";
-import * as $$$$$$46 from "./sections/ProductDescription/ProductContainer.tsx";
-import * as $$$$$$47 from "./sections/ProductDescription/ProductGallery.tsx";
-import * as $$$$$$48 from "./sections/ProductDescription/ProductInfoCard.tsx";
-import * as $$$$$$49 from "./sections/ProductDescription/ProductNutritionalHighlights.tsx";
-import * as $$$$$$50 from "./sections/ProductDescription/ProductNutritionalTable.tsx";
-import * as $$$$$$51 from "./sections/ProductDescription/ProductSpace.tsx";
-import * as $$$$$$52 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$53 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$54 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$43 from "./sections/Product/SubscriptionModal.tsx";
+import * as $$$$$$44 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$45 from "./sections/ProductDescription/ProductBenefits.tsx";
+import * as $$$$$$46 from "./sections/ProductDescription/ProductComparison.tsx";
+import * as $$$$$$47 from "./sections/ProductDescription/ProductContainer.tsx";
+import * as $$$$$$48 from "./sections/ProductDescription/ProductGallery.tsx";
+import * as $$$$$$49 from "./sections/ProductDescription/ProductInfoCard.tsx";
+import * as $$$$$$50 from "./sections/ProductDescription/ProductNutritionalHighlights.tsx";
+import * as $$$$$$51 from "./sections/ProductDescription/ProductNutritionalTable.tsx";
+import * as $$$$$$52 from "./sections/ProductDescription/ProductSpace.tsx";
+import * as $$$$$$53 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$54 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$55 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
-    "deco-sites/true-source/loaders/Layouts/ProductCard.tsx": $$$0,
-    "deco-sites/true-source/loaders/List/Sections.tsx": $$$1,
+    "deco-sites/true-source/loaders/PLPSectionsSEO.ts": $$$0,
   },
   "sections": {
     "deco-sites/true-source/sections/Animation/Animation.tsx": $$$$$$0,
@@ -112,26 +111,27 @@ const manifest = {
     "deco-sites/true-source/sections/Product/ProductShelfTabbed.tsx": $$$$$$40,
     "deco-sites/true-source/sections/Product/SearchResult.tsx": $$$$$$41,
     "deco-sites/true-source/sections/Product/ShelfWithImage.tsx": $$$$$$42,
-    "deco-sites/true-source/sections/Product/Wishlist.tsx": $$$$$$43,
+    "deco-sites/true-source/sections/Product/SubscriptionModal.tsx": $$$$$$43,
+    "deco-sites/true-source/sections/Product/Wishlist.tsx": $$$$$$44,
     "deco-sites/true-source/sections/ProductDescription/ProductBenefits.tsx":
-      $$$$$$44,
-    "deco-sites/true-source/sections/ProductDescription/ProductComparison.tsx":
       $$$$$$45,
-    "deco-sites/true-source/sections/ProductDescription/ProductContainer.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductComparison.tsx":
       $$$$$$46,
-    "deco-sites/true-source/sections/ProductDescription/ProductGallery.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductContainer.tsx":
       $$$$$$47,
-    "deco-sites/true-source/sections/ProductDescription/ProductInfoCard.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductGallery.tsx":
       $$$$$$48,
-    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalHighlights.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductInfoCard.tsx":
       $$$$$$49,
-    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalHighlights.tsx":
       $$$$$$50,
-    "deco-sites/true-source/sections/ProductDescription/ProductSpace.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable.tsx":
       $$$$$$51,
-    "deco-sites/true-source/sections/Social/InstagramPosts.tsx": $$$$$$52,
-    "deco-sites/true-source/sections/Social/WhatsApp.tsx": $$$$$$53,
-    "deco-sites/true-source/sections/Theme/Theme.tsx": $$$$$$54,
+    "deco-sites/true-source/sections/ProductDescription/ProductSpace.tsx":
+      $$$$$$52,
+    "deco-sites/true-source/sections/Social/InstagramPosts.tsx": $$$$$$53,
+    "deco-sites/true-source/sections/Social/WhatsApp.tsx": $$$$$$54,
+    "deco-sites/true-source/sections/Theme/Theme.tsx": $$$$$$55,
   },
   "apps": {
     "deco-sites/true-source/apps/decohub.ts": $$$$$$$$$$$0,
