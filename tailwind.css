@@ -135,6 +135,18 @@
   #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
     @apply bg-dark;
   }
+
+  .swiper-pagination {
+    @apply !static flex justify-center mt-8;
+  }
+
+  .swiper-pagination .swiper-pagination-bullet {
+    @apply bg-light-gray;
+  }
+
+  .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    @apply bg-dark;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {
