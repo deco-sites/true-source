@@ -1,15 +1,13 @@
-import { marky } from "marky";
-import { useId } from "$store/sdk/useId.ts";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import { useEffect } from "preact/hooks";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import type { ImageWidget, HTMLWidget } from "apps/admin/widgets.ts";
 
 /**
  * @titleBy text
  */
 export interface Benefit {
   icon: ImageWidget;
-  text: string;
+  text: HTMLWidget;
 }
 
 export interface BenefitsType {
@@ -37,70 +35,57 @@ export default function Benefits({
   }],
   color = "#3C3C3B",
 }: BenefitsType) {
-  const id = useId();
+
+  if (!IS_BROWSER) return null;
+
+  useEffect(() => {
+    // @ts-expect-error - swiper exists
+    new Swiper("#benefits", {
+      spaceBetween: 16,
+      slidesPerView: "auto",
+      centerInsufficientSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  }, []);
 
   return (
     <div>
-      <div>
-        <h2
-          class="w-full uppercase text-center text-base lg:text-lg font-bold mb-10 font-lemon-milk"
-          style={{ color: color }}
-        >
-          Principais benefícios
-        </h2>
-        {
-          /* <div id={id} class="flex flex-col justify-center w-full">
-          <div class="relative overflow-x-hidden">
-            <Slider class="carousel carousel-center items-stretch gap-4 mx-auto"> */
-        }
-        <div class="flex flex-wrap justify-center items-stretch gap-4">
-          {benefits.map((benefit, index) => {
+      <h2
+        class="w-full uppercase text-center text-base lg:text-lg font-bold mb-10 font-lemon-milk"
+        style={{ color: color }}
+      >
+        Principais benefícios
+      </h2>
+      <div id="benefits" class="swiper">
+        <div class="swiper-wrapper">
+          {benefits.map((benefit) => {
             const {
               icon,
               text,
             } = benefit;
+
             return (
-              // <Slider.Item
-              //   key={index}
-              //   index={index}
-              //   class="carousel-item first:ml-4 last:mr-4"
-              // >
-              <div class="!w-[238px] sm:!w-[350px] flex flex-none items-center gap-6 bg-ice px-4 py-3 rounded-lg text-sm lg:text-base">
-                <div class="w-[48px] sm:w-[80px] flex-none">
-                  <img
-                    class="w-[48px] sm:w-[80px] h-auto"
-                    width={80}
-                    height={80}
-                    src={icon}
-                  />
+              <div class="swiper-slide !w-[238px] sm:!w-[350px]  first:ml-4 last:mr-4">
+                <div class="flex flex-none items-center gap-6 bg-ice px-4 py-3 rounded-lg text-sm lg:text-base h-full">
+                  <div class="w-[48px] sm:w-[80px] flex-none">
+                    <img
+                      class="w-[48px] sm:w-[80px] h-auto"
+                      width={80}
+                      height={80}
+                      src={icon}
+                    />
+                  </div>
+                  <div dangerouslySetInnerHTML={{ __html: text }} />
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: marky(text) }} />
               </div>
-              // </Slider.Item>
             );
           })}
         </div>
-        {
-          /* </Slider>
-          </div> */
-        }
-
-        {/* Dots */}
-        {
-          /* <ul class="flex gap-3 w-full justify-center mt-10">
-          {benefits.slice(0, 3).map((benefit, index) => {
-            return (
-              <Slider.Dot index={index}>
-                <div
-                  class="group-disabled:bg-dark bg-light-gray w-2 h-2 rounded-full"
-                />
-              </Slider.Dot>
-            );
-          })}
-        </ul> */
-        }
-        {/* <SliderJS rootId={id} interval={5000} /> */}
       </div>
+      <div class="swiper-pagination" />
     </div>
   );
 }

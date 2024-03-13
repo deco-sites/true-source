@@ -1,5 +1,4 @@
-import { marky } from "marky";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
 interface InfoCardImage {
   desktop: ImageWidget;
@@ -11,7 +10,7 @@ interface Props {
   type: "1" | "2" | "full";
   textAlign: "left" | "right" | "center";
   image: InfoCardImage;
-  description: string;
+  description: HTMLWidget;
   title?: string;
   color?: string;
 }
@@ -49,7 +48,7 @@ export default function InfoCard({
             >
               {title}
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: marky(description) }} />
+            <p dangerouslySetInnerHTML={{ __html: description }} />
           </div>
         </div>
         <div class="w-full md:w-1/2">
@@ -83,10 +82,18 @@ export default function InfoCard({
       <div
         class={`w-full px-6 md:max-w-[80vw] md:px-0 flex ${alignment} items-center gap-8 sm:gap-24 mx-auto`}
       >
-        <div
-          class="text-sm md:text-base"
-          dangerouslySetInnerHTML={{ __html: marky(description) }}
-        />
+        <div>
+          <h2
+            class="text-2xl lg:text-4xl uppercase mb-3 font-bold font-lemon-milk"
+            style={{ color }}
+          >
+            {title}
+          </h2>
+          <div
+            class="text-sm md:text-base"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        </div>
         <div class="overflow-hidden w-full md:w-2/5 shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl flex-none">
           <picture>
             <source media="(min-width:1024px)" srcset={image.desktop} />
@@ -154,7 +161,7 @@ export default function InfoCard({
                 : "text-base leading-6"
             }  ${textAlignment}`}
           >
-            <p dangerouslySetInnerHTML={{ __html: marky(description) }} />
+            <p dangerouslySetInnerHTML={{ __html: description }} />
           </div>
         </div>
       </div>
