@@ -13,6 +13,7 @@ export default {
       ice: "#F0F0EE",
       dark: "#3C3C3B",
       white: "#fff",
+      black: "#000",
       "light-gray-200": "#E2E2E2",
       "light-gray": "#D2D2D2",
       gray: "#8E8E8D",

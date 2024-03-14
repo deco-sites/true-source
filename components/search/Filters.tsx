@@ -15,6 +15,7 @@ import { clx } from "deco-sites/true-source/sdk/clx.ts";
 interface Props {
   filters: ProductListingPage["filters"];
   url: string;
+  noCollapsable?: boolean;
 }
 
 const isToggle = (filter: Filter): filter is FilterToggle =>
@@ -46,7 +47,11 @@ function ValueItem(
   );
 }
 
-function FilterValues({ key, values, label }: FilterToggle) {
+function FilterValues(
+  { key, values, label, noCollapsable }: FilterToggle & {
+    noCollapsable?: boolean;
+  },
+) {
   const collapsable = useCollapsable();
   const categoryCollapsable = useCollapsable();
 
@@ -54,15 +59,23 @@ function FilterValues({ key, values, label }: FilterToggle) {
 
   return (
     <collapsable.Collapsable open>
-      <collapsable.Trigger class="flex items-center gap-3 text-dark font-medium text-sm font-lemon group/trigger">
-        {label.toLowerCase() === "categoria" ? "Produtos" : label}
-        <Icon
-          id="ChevronRight"
-          width={32}
-          height={32}
-          class="rotate-90 peer-checked:group-[]/trigger:-rotate-90 transition-transform"
-        />
-      </collapsable.Trigger>
+      {noCollapsable
+        ? (
+          <span class="text-dark font-medium text-sm font-lemon">
+            {label.toLowerCase() === "categoria" ? "Produtos" : label}
+          </span>
+        )
+        : (
+          <collapsable.Trigger class="flex items-center gap-3 text-dark font-medium text-sm font-lemon group/trigger">
+            {label.toLowerCase() === "categoria" ? "Produtos" : label}
+            <Icon
+              id="ChevronRight"
+              width={32}
+              height={32}
+              class="rotate-90 peer-checked:group-[]/trigger:-rotate-90 transition-transform"
+            />
+          </collapsable.Trigger>
+        )}
       <collapsable.ContentWrapper class="mt-6">
         <collapsable.Content
           class={clx(
@@ -73,7 +86,7 @@ function FilterValues({ key, values, label }: FilterToggle) {
           )}
         >
           {(() => {
-            if (label === "priceranges") {
+            if (label === "Preço") {
               const [min, max] = values.map(({ value }) =>
                 parseRange(value) || { from: 0, to: 0 }
               ).reduce((acc, curr) => {
@@ -83,7 +96,7 @@ function FilterValues({ key, values, label }: FilterToggle) {
               return <PriceRange min={min} max={max} />;
             }
 
-            if (label === "produtos") {
+            if (label === "Categoria") {
               return (
                 <div class="border-b border-b-light-gray-200 pb-8 flex flex-col gap-2 items-start">
                   {values.slice(0, 10).map((
@@ -152,47 +165,33 @@ function FilterValues({ key, values, label }: FilterToggle) {
   );
 }
 
-const TRANSLATE = {
-  "departments": "departamentos",
-  "brands": "marcas",
-  "categories": "produtos",
-} as Record<string, string>;
-
-function Filters({ filters: f, url }: Props) {
-  let filters = f
+function Filters({ filters: f, url, noCollapsable }: Props) {
+  const filters = f
     .filter(isToggle)
-    .filter(({ values }) => values.length > 0)
-    .map((i) => {
-      i.label = TRANSLATE[i.label.toLowerCase()] || i.label;
-
-      return i;
-    })
+    .filter(({ values, label }) =>
+      values.length > 0 && label !== "Departamento"
+    )
     .sort((a, b) => a.label === "produtos" ? -1 : 1);
 
-  console.log(filters.find(({ label }) => label === "departamentos"));
+  //   const allProducts = filters.find(({ label }) => label === "Departamento")
+  //     ?.values.find(({ label }) => label.toLowerCase() === "produtos");
 
-  const allProducts = filters.find(({ label }) => label === "departamentos")
-    ?.values.find(({ label }) => label.toLowerCase() === "produtos");
+  //   if (allProducts) {
+  //     allProducts.label = "Todos os produtos";
 
-  if (allProducts) {
-    allProducts.label = "Todos os produtos";
-
-    for (const f of filters) {
-      if (f.label === "produtos") {
-        f.values.unshift(allProducts);
-      }
-    }
-  }
-
-  filters = filters
-    .filter(({ label }) => label !== "departamentos");
+  //     for (const f of filters) {
+  //       if (f.label === "produtos") {
+  //         f.values.unshift(allProducts);
+  //       }
+  //     }
+  //   }
 
   return (
     <ul class="flex flex-col gap-6 mr-14">
       {filters
         .map((filter) => (
           <li class="flex flex-col gap-4">
-            <FilterValues {...filter} />
+            <FilterValues {...filter} noCollapsable={noCollapsable} />
           </li>
         ))}
     </ul>

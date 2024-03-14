@@ -1,6 +1,7 @@
 import SearchResult, {
   Props as SearchResultProps,
 } from "$store/components/search/SearchResult.tsx";
+import { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 export type Props = SearchResultProps;
 
@@ -24,7 +25,7 @@ function WishlistGallery(props: ReturnType<typeof loader>) {
   return <SearchResult {...props} />;
 }
 
-export function loader(props: Props, req: Request) {
+export function loader(props: Props, req: Request, ctx: AppContext) {
   const sectionsSEO = props.sectionsSEO.sections?.find(
     (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
   )?.sections ?? [];
@@ -33,6 +34,7 @@ export function loader(props: Props, req: Request) {
     ...props,
     sectionsSEO,
     url: req.url,
+    isMobile: ctx.device !== "desktop",
   };
 }
 

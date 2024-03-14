@@ -32,7 +32,7 @@ function Navbar(
   return (
     <>
       {/* Mobile Version */}
-      <div class={`lg:hidden z-50`}>
+      <div class={`lg:hidden z-40`}>
         <div
           className={`wrapper-header-mobile container justify-between flex py-4 `}
         >

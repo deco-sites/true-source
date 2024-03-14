@@ -18,6 +18,8 @@ export type AvailableIcons =
   | "FilterList"
   | "Heart"
   | "Instagram"
+  | "CloseCircle"
+  | "X"
   | "Linkedin"
   | "Minus"
   | "MapPin"

@@ -8,6 +8,7 @@ import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 export interface Props {
   products: Product[] | null;
@@ -29,7 +30,8 @@ function ProductShelf({
   title,
   description,
   layout,
-}: Props) {
+  isMobile,
+}: ReturnType<typeof loader>) {
   const id = useId();
 
   if (!products || products.length === 0) {
@@ -77,6 +79,7 @@ function ProductShelf({
                 product={product}
                 itemListName={title}
                 index={index}
+                isMobile={isMobile}
               />
             </Slider.Item>
           ))}
@@ -116,6 +119,13 @@ function ProductShelf({
       </div>
     </div>
   );
+}
+
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  return {
+    ...props,
+    isMobile: ctx.device !== "desktop",
+  };
 }
 
 export default ProductShelf;

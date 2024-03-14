@@ -9,6 +9,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import ProductGallery from "../product/ProductGallery.tsx";
 import { renderSection } from "apps/website/pages/Page.tsx";
 import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
+import { AppContext } from "$store/apps/site.ts";
 
 export interface Props {
   /** @title Integration */
@@ -33,6 +34,7 @@ function Result({
   startingPage = 0,
   sectionsSEO,
   url,
+  isMobile,
 }: ReturnType<typeof loader>) {
   if (!page) throw new Error("Unreachable");
 
@@ -44,6 +46,10 @@ function Result({
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
+  const URLi = new URL(url);
+
+  const title = `${URLi.pathname.split("/").pop() ?? ""} (${pageInfo.records})`;
+
   return (
     <>
       <div class="container px-4 sm:py-10">
@@ -53,11 +59,13 @@ function Result({
           breadcrumb={breadcrumb}
           displayFilter
           url={url}
+          title={title}
+          isMobile={isMobile}
         />
 
         <div class="flex flex-row">
-          {filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
+          {filters.length > 0 && !isMobile && (
+            <aside class="w-min min-w-[250px]">
               <Filters filters={filters} url={url} />
             </aside>
           )}
@@ -65,6 +73,7 @@ function Result({
             <ProductGallery
               products={products}
               offset={offset}
+              isMobile={isMobile}
             />
           </div>
         </div>
@@ -128,7 +137,7 @@ function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
   return <Result {...props} page={page} />;
 }
 
-export function loader(props: Props, req: Request) {
+export function loader(props: Props, req: Request, ctx: AppContext) {
   const sectionsSEO = props.sectionsSEO.sections?.find(
     (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
   )?.sections ?? [];
@@ -137,6 +146,7 @@ export function loader(props: Props, req: Request) {
     ...props,
     sectionsSEO,
     url: req.url,
+    isMobile: ctx.device !== "desktop",
   };
 }
 

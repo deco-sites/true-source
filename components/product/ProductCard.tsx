@@ -26,17 +26,18 @@ interface Props {
   /** @description index of the product card in the list */
   index?: number;
 
-  platform?: Platform;
+  isMobile: boolean;
 }
 
-const WIDTH = 260;
-const HEIGHT = 300;
+const WIDTH = 350;
+const HEIGHT = 350;
 
 function ProductCard({
   product,
   preload,
   itemListName,
   index,
+  isMobile,
 }: Props) {
   const { url, productID, name, image: images, offers, isVariantOf } = product;
   const { seller = "1" } = useOffer(offers) ?? {};
@@ -86,7 +87,7 @@ function ProductCard({
     <div
       id={id}
       data-deco="view-product"
-      class="max-w-[260px]"
+      class="w-full lg:max-w-[260px]"
     >
       <SendEventOnClick
         id={id}
@@ -105,7 +106,7 @@ function ProductCard({
           },
         }}
       />
-      <figure class="relative overflow-hidden">
+      <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center bg-ice rounded-[20px]">
         {/* Wishlist button */}
         <div class="absolute top-4 right-4 z-10 flex items-center">
           <WishlistButtonVtex
@@ -134,14 +135,13 @@ function ProductCard({
         <a
           href={url && relative(url)}
           aria-label="view product"
-          class="grid grid-cols-1 grid-rows-1 w-full bg-ice rounded-[20px]"
         >
           <Image
             src={front.url!}
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class="h-[300px] max-w-[unset]"
+            class=""
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
@@ -150,19 +150,22 @@ function ProductCard({
         </a>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col px-4 gap-4 mt-4">
+      <div class="flex-auto flex flex-col gap-2 lg:px-4 lg:gap-4 mt-4">
         <h2 class="text-dark text-sm text-ellipsis font-bold line-clamp-2 h-10">
           {name}
         </h2>
 
-        <div class="flex items-center gap-2 h-6">
-          {listPrice > price && (
-            <div class="line-through text-gray text-sm">
-              {formatPrice(listPrice, offers?.priceCurrency)}
+        {/* Price and rating */}
+        <div class="flex gap-2 h-7 lg:h-6">
+          <div class="flex flex-col lg:flex-row justify-center">
+            {listPrice > price && (
+              <div class="line-through text-gray text-xs lg:text-sm">
+                {formatPrice(listPrice, offers?.priceCurrency)}
+              </div>
+            )}
+            <div class="text-dark text-xs lg:text-sm">
+              {formatPrice(price, offers?.priceCurrency)}
             </div>
-          )}
-          <div class="text-dark text-sm">
-            {formatPrice(price, offers?.priceCurrency)}
           </div>
 
           <div class="ml-auto">
@@ -188,7 +191,7 @@ function ProductCard({
               }
             : buyProduct.add}
           class={clx(
-            "flex justify-center items-center gap-4 rounded text-sm font-bold h-10 group/card",
+            "flex justify-center items-center gap-4 rounded text-xs sm:text-sm font-bold h-10 group/card",
             isInCart
               ? "bg-green text-white"
               : "text-green hover:bg-green hover:text-white transition-colors duration-[200ms] border-2 border-green",
@@ -205,21 +208,22 @@ function ProductCard({
                     class="text-white"
                   />
                 )
-                : canBuyWithSubscription
-                ? null
-                : (
-                  <Icon
-                    id="ShoppingCart"
-                    width={16}
-                    height={16}
-                    class="text-green group-hover/card:text-white delay-75"
-                  />
-                )}
+                : canBuyWithSubscription ||
+                  (isMobile && !canBuyWithSubscription) && (
+                      <Icon
+                        id="ShoppingCart"
+                        width={16}
+                        height={16}
+                        class="text-green group-hover/card:text-white delay-75"
+                      />
+                    )}
 
               {isInCart
                 ? "Adicionado"
                 : canBuyWithSubscription
                 ? "Assinar com desconto"
+                : isMobile
+                ? "Comprar"
                 : "Adicionar ao carrinho"}
             </>
           )}
