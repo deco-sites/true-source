@@ -38,10 +38,12 @@ function ProductData({
             {name}
           </span>
         </h1>
-        <ProductStars
-          storeId="113397"
-          productId={productGroupID}
-        />
+        <div class="hidden sm:block">
+          <ProductStars
+            storeId="113397"
+            productId={productGroupID}
+          />
+        </div>
         <div class="hidden sm:block">
           <WishlistButtonVtex
             variant="full"
@@ -55,6 +57,12 @@ function ProductData({
         <span class="text-sm sm:text-base font-medium color-dark sm:text-light-gray">
           {brandName}
         </span>
+        <div class="block sm:hidden">
+          <ProductStars
+            storeId="113397"
+            productId={productGroupID}
+          />
+        </div>
         <div class="block sm:hidden">
           <WishlistButtonVtex
             variant="full"

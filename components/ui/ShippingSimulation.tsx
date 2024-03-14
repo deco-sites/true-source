@@ -43,7 +43,7 @@ function ShippingContent({ simulation }: {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-6 bg-light-gray-200 rounded-md">
+    <ul class="flex flex-col gap-4 p-6 bg-ice rounded-md">
       {methods.map((method) => (
         <li class="grid grid-cols-4 gap-4 border-base-200 not-first-child:border-t text-xs sm:text-sm">
           <span class="col-span-2">
@@ -92,7 +92,7 @@ function ShippingSimulation({ items }: Props) {
   }, []);
 
   return (
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 max-w-[484px]">
       <div class="flex flex-col gap-3 sm:flex-row sm:gap-6 items-center">
         <span class="text-[13px] font-medium uppercase w-full sm:w-[69px] font-lemon-milk">
           Calcule o frete

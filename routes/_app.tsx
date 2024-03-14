@@ -78,6 +78,16 @@ export default defineApp(async (_req, ctx) => {
         type="module"
         dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
       />
+
+      <script
+        type="text/javascript"
+        src="/swiper-bundle.min.js"
+      />
+
+      <link
+        rel="stylesheet"
+        href="/swiper-bundle.min.css"
+      />
     </>
   );
 });

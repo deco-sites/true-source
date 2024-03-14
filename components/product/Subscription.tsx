@@ -35,7 +35,7 @@ export default function SubscriptionButtonVTEX({
         class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
         onClick={() => displaySubscriptionPopup.value = true}
       >
-        ASSINE COM {formatPrice(discount)} de desconto
+        ASSINE COM {formatPrice(discount * quantity)} de desconto
         <span class="flex-none max-[400px]:hidden">
           <IconAsterisk />
         </span>

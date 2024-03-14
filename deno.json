@@ -12,8 +12,7 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "std/": "https://deno.land/std@0.190.0/",
     "partytown/": "https://denopkg.com/deco-cx/partytown@0.4.8/",
-    "daisyui": "npm:daisyui@4.6.0",
-    "marky": "https://deno.land/x/marky@v1.1.6/mod.ts"
+    "daisyui": "npm:daisyui@4.6.0"
   },
   "tasks": {
     "start": "deno task bundle && deno run -A --unstable-kv --env --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",

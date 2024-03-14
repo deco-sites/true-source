@@ -133,9 +133,21 @@
         @apply bg-light-gray;
     }
 
-    #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
-        @apply bg-dark;
-    }
+  #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
+    @apply bg-dark;
+  }
+
+  .swiper-pagination {
+    @apply !static flex justify-center mt-8;
+  }
+
+  .swiper-pagination .swiper-pagination-bullet {
+    @apply bg-light-gray;
+  }
+
+  .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    @apply bg-dark;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {
@@ -580,19 +592,19 @@
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #E2E2E2;
-    border-radius: 10px;
+  background: #E2E2E2; 
+  border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #D2D2D2;
-    border-radius: 10px;
+  background: #D2D2D2; 
+  border-radius: 5px;
 }
 
 /* Handle on hover */
