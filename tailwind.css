@@ -147,6 +147,22 @@
   .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
     @apply bg-dark;
   }
+
+  .custom-category-title {
+    @apply text-base md:text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
+  }
+
+  .custom-category-title strong {
+    @apply font-bold text-red;
+  }
+
+  /* .custom-category-text {
+    @apply text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
+  } */
+
+  .custom-category-text a {
+    @apply underline text-red;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {
