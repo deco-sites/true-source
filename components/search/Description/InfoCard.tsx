@@ -22,19 +22,25 @@ export interface Props {
 
 export default function InfoCardHorizontal({
   type = "1",
-  title = "<p>Complementos alimentares <strong>perfeitos</strong> para quem tem uma rotina de <strong>atividades físicas intensas</strong></p>",
+  title =
+    "<p>Complementos alimentares <strong>perfeitos</strong> para quem tem uma rotina de <strong>atividades físicas intensas</strong></p>",
   color = "#3C3C3B",
   image = {
     desktop: "https://tfcucl.vtexassets.com/arquivos/infocard-2.jpg",
   },
   textAlign = "left",
   backgroundColor = "#F0F0EE",
-  description = "Os suplementos ajudam a melhorar a resistência física, auxiliam no ganho de massa magra e também na recuperação muscular, além de diversos outros benefícios para você que busca hipertrofia ou definição muscular.\n\nProduzidos com substâncias naturais, nossos produtos são desenvolvidos por especialistas de peso e formulados com produtos altamente eficientes e, claro, muito saborosos. Para te ajudar a alcançar seus objetivos de treino, a True Source dispõe de tudo o que você precisa em proteínas, aminoácidos, termogênicos e vitaminas e minerais. Venha com a gente e conheça um pouco mais de nossos suplementos!",
+  description =
+    "Os suplementos ajudam a melhorar a resistência física, auxiliam no ganho de massa magra e também na recuperação muscular, além de diversos outros benefícios para você que busca hipertrofia ou definição muscular.\n\nProduzidos com substâncias naturais, nossos produtos são desenvolvidos por especialistas de peso e formulados com produtos altamente eficientes e, claro, muito saborosos. Para te ajudar a alcançar seus objetivos de treino, a True Source dispõe de tudo o que você precisa em proteínas, aminoácidos, termogênicos e vitaminas e minerais. Venha com a gente e conheça um pouco mais de nossos suplementos!",
 }: Props) {
   if (type === "full") {
     return (
       <div className="md:container">
-        <div class={`flex ${textAlign === "right" ? "justify-end" : "justify-start"} relative z-1 rounded-[35px] overflow-hidden min-h-[580px]`}>
+        <div
+          class={`flex ${
+            textAlign === "right" ? "justify-end" : "justify-start"
+          } relative z-1 rounded-[35px] overflow-hidden min-h-[580px]`}
+        >
           <picture>
             <source media="(min-width:1024px)" srcset={image.desktop} />
             <source
@@ -57,7 +63,11 @@ export default function InfoCardHorizontal({
               />
             )}
             <div
-              class={`custom-category-text ${!title ? "text-1xl sm:text-2xl font-lemon-milk font-bold leading-6 sm:leading-7" : "text-sm lg:text-base leading-6"}`}
+              class={`custom-category-text ${
+                !title
+                  ? "text-1xl sm:text-2xl font-lemon-milk font-bold leading-6 sm:leading-7"
+                  : "text-sm lg:text-base leading-6"
+              }`}
             >
               <p dangerouslySetInnerHTML={{ __html: description }} />
             </div>
@@ -67,7 +77,8 @@ export default function InfoCardHorizontal({
     );
   } else {
     const cardTextLeft = "gap-12 flex-col-reverse md:gap-0 md:flex-row";
-    const cardTextRight = "gap-12 flex-col-reverse md:gap-0 md:flex-row-reverse";
+    const cardTextRight =
+      "gap-12 flex-col-reverse md:gap-0 md:flex-row-reverse";
 
     const alignment = textAlign === "left"
       ? cardTextLeft
