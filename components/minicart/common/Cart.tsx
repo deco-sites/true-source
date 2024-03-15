@@ -44,15 +44,15 @@ function Cart({
   const isEmtpy = items.length === 0;
 
   return (
-    <div class="flex flex-col justify-center items-center overflow-hidden w-[425px] max-w-[90vw]">
+    <div class="flex flex-col justify-center items-center overflow-hidden">
       {isEmtpy
         ? (
-          <div class="flex flex-col items-center gap-6 w-full text-center">
-            <span class="font-bold text-lg uppercase font-lemon-milk max-w-[245px]">
+          <div class="flex flex-col items-center gap-8 w-full text-center">
+            <span class="font-bold text-sm uppercase font-lemon-milk max-w-[210px]">
               Seu carrinho ainda está vazio. Aceita algumas sugestões?
             </span>
             <Button
-              class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green font-lemon-milk max-w-[245px]"
+              class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green text-xs font-lemon-milk w-full max-w-[219px] h-[40px]"
               onClick={() => {
                 displayCart.value = false;
               }}

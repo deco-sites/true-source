@@ -9,6 +9,8 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
+import type { INavItem } from "$store/components/header/NavItem.tsx";
+
 
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
@@ -138,11 +140,11 @@ const MinicartHeader = (props: HeaderProps) => {
           CARRINHO
         </span>
       </div>
-      {onClose && (
-        <button class="text-black" onClick={onClose}>
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </button>
-      )}
+
+      <button class="text-black" onClick={onClose}>
+        <Icon id="XMark" size={24} strokeWidth={2} />
+      </button>
+
     </div>
   );
 };
@@ -154,7 +156,7 @@ const Aside = (
     children: ComponentChildren;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[90vw] rounded-l-[20px]">
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full w-full max-w-[308px] rounded-l-[20px]">
     {title === MENU_TITLE && onClose && (
       <HeaderLogin closeFunction={{ onClose }} />
     )}

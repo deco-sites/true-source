@@ -3,9 +3,10 @@ import Button from "./common.tsx";
 
 export interface Props {
   type?: "menu" | "header";
+  size?: "sm" | "md" | "lg"
 }
 
-function CartButton({ type = "header" }: Props) {
+function CartButton({ type = "header", size = "md" }: Props) {
   const { loading, cart } = useCart();
   const {
     totalizers = [],
@@ -22,6 +23,7 @@ function CartButton({ type = "header" }: Props) {
   return (
     <Button
       type={type}
+      size={size}
       currency={currency}
       loading={loading.value}
       total={(total - discounts) / 100}

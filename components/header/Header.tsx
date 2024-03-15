@@ -2,18 +2,12 @@ import type { Props as SearchbarProps } from "$store/components/search/Searchbar
 import Drawers from "$store/islands/Header/Drawers.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Alert from "./Alert.tsx";
-import Navbar from "./Navbar.tsx";
-import NavbarWrapper from "$store/islands/NavbarWrapper.tsx";
-import { headerHeight } from "./constants.ts";
-
-export interface Logo {
-  src: ImageWidget;
-  alt: string;
-  width?: number;
-  height?: number;
-}
+import MicroHeaderSetup from "$store/components/ui/MicroHeaderSetup.tsx";
+import { LoaderContext } from "deco/mod.ts";
+import Navbar from "$store/components/header/Navbar.tsx";
+import type { INavItem } from "$store/components/header/NavItem.tsx";
+import { InstitucionalItem, Socials } from "$store/components/header/Menu.tsx";
 
 export interface Buttons {
   hideSearchButton?: boolean;
@@ -22,100 +16,83 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+export interface Logo {
+  src: ImageWidget;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+/** @titleBy text */
 export interface AlertProps {
   text: string;
   icons?: ImageWidget;
   link?: string;
 }
 
-export interface menuInstitucionalItem {
-  text: string;
-  link: string;
-}
-
 export type Theme = "light" | "dark";
 
 export interface Props {
-  theme?: Theme;
-
-  alerts?: AlertProps[];
-
-  /** @title Search Bar */
-  searchbar?: Omit<SearchbarProps, "platform">;
-
-  /**
-   * @title Navigation items
-   * @description Navigation items used both on mobile and desktop menus
-   */
-  navItems?: SiteNavigationElement[] | null;
-
   /** @title Logo */
-  logo?: Logo;
-
-  logoPosition?: "left" | "center";
-
-  buttons?: Buttons;
+  logo: Logo;
+  /** @title Mensagens do topo */
+  alerts?: AlertProps[];
+  /** @title Barra de pesquisa */
+  searchbar: Omit<SearchbarProps, "platform">;
+  /** @title Itens do menu de navegação */
+  navItems: INavItem[]
+  /** @title Links institucionais do menu mobile */
+  institutionalItems: InstitucionalItem[];
+  /** @title Redes sociais do menu mobile */
+  socials: Socials[]
+  theme?: Theme;
+  /** 
+   * @ignore 
+   */
+  isMobile: boolean;
 }
 
 function Header({
-  theme = "light",
   alerts,
   searchbar,
-  navItems = [
-    {
-      "@type": "SiteNavigationElement",
-      name: "Feminino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Masculino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Sale",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Linktree",
-      url: "/",
-    },
-  ],
-  logo = {
-    src:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
-    width: 100,
-    height: 16,
-    alt: "Logo",
-  },
-  logoPosition = "center",
-  buttons,
+  navItems = [],
+  institutionalItems,
+  socials,
+  logo,
+  theme = "light",
+  isMobile,
 }: Props) {
   const platform = usePlatform();
   const items = navItems ?? [];
 
   return (
-    <header class={`borderHeader`}>
-      <Drawers
-        menu={{ items }}
-        searchbar={searchbar}
-        platform={platform}
-      >
-        {alerts && alerts.length > 0 && <Alert alerts={alerts} theme={theme} />}
-        <NavbarWrapper>
-          <Navbar
-            items={items}
-            searchbar={searchbar && { ...searchbar, platform }}
-            logo={logo}
-            logoPosition={logoPosition}
-            buttons={buttons}
-          />
-        </NavbarWrapper>
-      </Drawers>
-    </header>
+    <>
+      <header id="header" class="group/header h-[211px] md:h-[193px]">
+        <Drawers
+          menu={{ items, institutionalItems, socials }}
+          searchbar={searchbar}
+          platform={platform}
+        >
+          <div class="bg-white fixed w-full z-50">
+            {alerts && alerts.length > 0 && <Alert alerts={alerts} theme={theme} isMobile={isMobile} />}
+            <Navbar
+              items={navItems}
+              searchbar={searchbar && { ...searchbar, platform, isMobile }}
+              logo={logo}
+              isMobile={isMobile}
+            />
+          </div>
+        </Drawers>
+        <MicroHeaderSetup rootId="header" threshold={120} />
+      </header>
+    </>
   );
 }
 
 export default Header;
+
+export const loader = ({ ...props }: Props, req: Request, ctx: LoaderContext) => {
+  const isMobile = ctx.device === "mobile";
+
+  return { ...props, isMobile };
+};

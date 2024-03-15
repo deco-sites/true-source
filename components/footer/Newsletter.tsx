@@ -44,13 +44,12 @@ function Newsletter(
 
   return (
     <div
-      class={`flex ${
-        tiled
-          ? "flex-col gap-4 lg:flex-row lg:w-full lg:justify-between"
-          : "flex-col gap-4"
-      }`}
+      class={`flex ${tiled
+        ? "flex-col gap-4 lg:flex-row lg:w-full lg:justify-between"
+        : "flex-col gap-4"
+        }`}
     >
-      <div class="flex flex-col lg:flex-row gap-4 lg:items-center">
+      <div class="flex flex-col lg:flex-row gap-4 lg:items-center bg-black">
         <div class="flex flex-col gap-4">
           {content?.title && (
             <p

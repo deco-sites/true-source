@@ -1,152 +1,109 @@
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { HIGHLIGHT_BTN, HIGHLIGHT_ID, SEEALL } from "./Navbar.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+
+/** @titleBy name */
+export interface Children {
+  name: string
+  url: string
+  isBold?: boolean
+}
+
+/** @titleBy name */
+export interface INavItem {
+  /** @title Texto */
+  name: string
+  /** @title Link */
+  url: string
+  /** @title Filhos */
+  children?: Children[]
+  /** @title Imagem */
+  image?: {
+    src: ImageWidget
+    alt: string
+  }
+  /** @title Fixar ao diminuir o header? */
+  isShortcut?: boolean
+  /** @title Item possui destaque? */
+  ishighlighted?: boolean
+}
 
 interface Props {
-  item: SiteNavigationElement;
+  item: INavItem;
 }
 
 function NavItem({ item }: Props) {
-  const { url, name, children } = item;
-  const image = item?.image?.[0];
+  const { url, name, children, image } = item;
 
+  // TODO: implement border gradient
   return (
     <li className="group flex items-center">
-      <ul>
+      <ul class='flex items-center justify-between'>
         <a
           href={url}
-          class={`flex items-center `}
-        >
-          <span
-            id="menuItem"
-            class={`flex font-bold text-[13px] uppercase py-[12px] group-hover:fontWithGradient group-hover:bg-base-100  ease-in-out duration-300 font-lemon-milk dark 
-          ${item.identifier === HIGHLIGHT_ID && "fontWithGradient"} 
+          class={`flex items-center gap-2 font-bold text-[11px] md:text-[13px] leading-[14px] md:leading-[17.5px] uppercase h-[25px] md:h-[40px] rounded-full font-lemon-milk text-dark group-first:text-white group-first:bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% group-first:px-2 md:group-first:px-6 group-hover:bg-gradient-to-r group-hover:text-transparent group-hover:bg-clip-text border border-transparent group-first:hover:border-red whitespace-nowrap
+          ${item.ishighlighted && "fontWithGradient"}
           ${children && children.length > 0 ? "has-submenu" : ""}`}
-          >
-            {name}
-          </span>
+        >
+          {name}
+          {children && children.length > 0 && (
+            <Icon
+              id='ChevronDown'
+              size={20}
+              class='text-dark group-first:text-white group-hover:text-red group-hover:rotate-180 duration-300 hidden md:block' />
+          )}
         </a>
-        <li class={`dot`}></li>
       </ul>
 
       {children && children.length > 0 && (
-        <div
-          id={`submenu`}
-          className={`flex fixed hidden group-hover:block z-50 items-start justify-between gap-6 hover:px-[16px] hover:rounded-[8px]`}
-          style={{ top: "42px", marginTop: "137px" }}
-        >
-          <div class={`flex m-auto justify-center pt-[18px] pb-4`}>
-            <div className="flex justify-between items-start border-l border-solid border-red">
-              <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[16px] pb-[24px]">
-                {children.slice(0, 8).map((node) => (
-                  <li
-                    className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px] h-[48px] "
-                    key={node.url}
+        <div className="absolute top-full group-data-[micro-header='true']/header:top-[48px] left-0 right-0 hidden md:group-hover:block z-50 items-start justify-center gap-6 rounded-b-[20px] bg-white w-full py-8 shadow-md" >
+          <div className='flex justify-between items-start border-l border-solid border-red max-w-[1360px] mx-auto'>
+            <ul className='flex flex-col lg:w-[377px] px-[32px]'>
+              {children.slice(0, 8).map((node) => (
+                <li className="group/icon border-b border-solid border-Stroke py-[13px] ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]" >
+                  <a
+                    className="flex justify-between items-center"
+                    href={node.url}
                   >
+                    <span class={`text-sm leading-[22px] text-dark font-medium ${node.isBold && "uppercase font-bold font-lemon-milk text-[13px] leading-[17px]"} `}>
+                      {node.name}
+                    </span>
+                    <Icon id="ArrowNarrowRight" size={16} class='text-dark group-hover/icon:text-red' />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {children.length > 8 && (
+              <ul className="flex flex-col lg:w-[377px]">
+                {children.slice(8, 16).map((node) => (
+                  <li className="group/icon border-b border-solid border-Stroke py-[13px] ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]" >
                     <a
                       className="flex justify-between items-center"
                       href={node.url}
                     >
-                      <span
-                        class={`text-sm ${
-                          node.name === SEEALL &&
-                          "uppercase font-bold font-lemon-milk  dark"
-                        } `}
-                      >
+                      <span class={`text-sm leading-[22px] text-dark font-medium ${node.isBold && "uppercase font-bold font-lemon-milk text-[13px] leading-[17px]"} `}>
                         {node.name}
                       </span>
-                      <span className="h-[16px] text-transparent">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <g id="arrow-narrow-right">
-                            <path
-                              id="Icon"
-                              d="M2.66406 8H13.3307M13.3307 8L9.33073 4M13.3307 8L9.33073 12"
-                              stroke="#3C3C3B"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
-                        </svg>
-                      </span>
+                      <Icon id="ArrowNarrowRight" size={16} class='text-dark group-hover/icon:text-red' />
                     </a>
-                    <ul className="flex flex-col">
-                      {node.children?.map((leaf) => (
-                        <li key={leaf.url}>
-                          <a href={leaf.url}>
-                            <span class="text-sm">{leaf.name}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
                   </li>
                 ))}
               </ul>
-              {children.length > 8 && (
-                <ul className="flex flex-col lg:w-[377px] lg:px-9 pt-[16px] pb-[24px]">
-                  {children.slice(8, 16).map((node) => (
-                    <li
-                      className="group border-b border-solid border-Stroke py-4 ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]  h-[48px]"
-                      key={node.url}
-                    >
-                      <a
-                        className="flex justify-between items-center"
-                        href={node.url}
-                      >
-                        <span class="text-sm">{node.name}</span>
-                        <span className="h-[16px] text-transparent">
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g id="arrow-narrow-right">
-                              <path
-                                id="Icon"
-                                d="M2.66406 8H13.3307M13.3307 8L9.33073 4M13.3307 8L9.33073 12"
-                                stroke="#3C3C3B"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </g>
-                          </svg>
-                        </span>
-                      </a>
-                      <ul className="flex flex-col">
-                        {node.children?.map((leaf) => (
-                          <li key={leaf.url}>
-                            <a href={leaf.url}>
-                              <span class="text-sm">{leaf.name}</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
+            )}
+            <ul>
+              {image && (
+                <Image
+                  className="rounded-[20px] cover"
+                  src={image.src}
+                  alt={image.alt}
+                  width={526}
+                  height={392}
+                  loading="lazy"
+                />
               )}
-              <ul class={`pt-[14px] px-9`}>
-                {image?.url && (
-                  <Image
-                    className="rounded-[20px] cover mt-2"
-                    src={image.url}
-                    alt={image.alternateName}
-                    width={526}
-                    height={392}
-                    loading="lazy"
-                  />
-                )}
-              </ul>
-            </div>
+            </ul>
           </div>
         </div>
       )}

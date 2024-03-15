@@ -1,31 +1,18 @@
 import { useUI } from "$store/sdk/useUI.ts";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 export default function MenuButton() {
   const { displayMenu } = useUI();
 
   return (
     <button
-      class="bg-brand rounded-full flex justify-center p-2"
+      class="bg-brand rounded-full flex justify-center items-center size-[36px] group-data-[micro-header='true']/header:size-[24px]"
       aria-label="open menu"
       onClick={() => {
         displayMenu.value = !displayMenu.value;
       }}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M2 8H14M2 4H14M2 12H14"
-          stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <Icon id="Bars3" size={16} class="size-[16px] group-data-[micro-header='true']/header:size-[12px] " />
     </button>
   );
 }
