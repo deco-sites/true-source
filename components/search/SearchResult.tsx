@@ -25,9 +25,25 @@ export interface Props {
 
 function NotFound() {
   return (
-    <div class="w-full flex justify-center items-center py-10">
-      <span>Not Found!</span>
-    </div>
+    <>
+      <div class="w-full flex flex-col gap-8 justify-center items-center py-6 max-w-[432px] mx-auto">
+        <strong class="text-dark font-bold text-lg font-lemon text-center">
+          Ops, não encontramos nenhum resultado para a sua busca.
+        </strong>
+
+        <span class="text-center text-sm text-dark">
+          Experimente explorar todos os produtos
+        </span>
+
+        <a
+          href="/produtos"
+          class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E9530E] to-[#E4003F] rounded-full"
+        >
+          VER TODOS OS PRODUTOS
+          <Icon id="ArrowRight" width={16} height={16} />
+        </a>
+      </div>
+    </>
   );
 }
 
@@ -51,11 +67,42 @@ function Result({
 
   const URLi = new URL(url);
 
-  let title = _title ?? URLi.pathname.split("/").pop() ?? "";
+  let title = _title ?? URLi.searchParams.get("q") ??
+    URLi.pathname.split("/").pop() ?? "";
 
   const isSearchPage = breadcrumb.itemListElement.length === 0;
 
   title = isSearchPage && !_title ? `Buscando por "${title}"` : title;
+
+  if (!page || products.length === 0) {
+    return (
+      <div class="max-w-[1440px] w-[95%] mx-auto mt-6">
+        <h1 class="text-sm lg:text-2xl font-bold text-dark font-lemon">
+          {title} <span class="font-light">({pageInfo.records})</span>
+        </h1>
+
+        <div class="w-full h-px bg-light-gray-200 my-6" />
+
+        <div class="w-full flex flex-col gap-8 justify-center items-center mt-6 mb-16 max-w-[432px] mx-auto">
+          <strong class="text-dark font-bold text-sm lg:text-lg font-lemon text-center">
+            Ops, não encontramos nenhum resultado para a sua busca.
+          </strong>
+
+          <span class="text-center text-sm text-dark">
+            Experimente explorar todos os produtos
+          </span>
+
+          <a
+            href="/produtos"
+            class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E9530E] to-[#E4003F] rounded-full"
+          >
+            VER TODOS OS PRODUTOS
+            <Icon id="ArrowRight" width={16} height={16} />
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -138,10 +185,6 @@ function Result({
 }
 
 function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
-  if (!page || page.products.length === 0) {
-    return <NotFound />;
-  }
-
   return <Result {...props} page={page} />;
 }
 

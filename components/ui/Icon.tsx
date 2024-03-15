@@ -20,6 +20,7 @@ export type AvailableIcons =
   | "Instagram"
   | "CloseCircle"
   | "X"
+  | "ArrowRight"
   | "Linkedin"
   | "Minus"
   | "MapPin"

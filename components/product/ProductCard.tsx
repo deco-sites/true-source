@@ -107,7 +107,7 @@ function ProductCard({
           },
         }}
       />
-      <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center bg-ice rounded-[20px]">
+      <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center">
         {/* Wishlist button */}
         <div class="absolute top-4 right-4 z-10 flex items-center">
           <WishlistButtonVtex
