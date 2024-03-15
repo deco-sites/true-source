@@ -40,7 +40,7 @@ function ProductCard({
   isMobile,
 }: Props) {
   const { url, productID, name, image: images, offers, isVariantOf } = product;
-  const { seller = "1" } = useOffer(offers) ?? {};
+  const { seller = "1", availability } = useOffer(offers) ?? {};
   const id = `product-card-${productID}`;
   const productGroupID = isVariantOf?.productGroupID;
   const [front] = images ?? [];
@@ -61,6 +61,7 @@ function ProductCard({
   );
 
   const isInCart = cart.value?.items.some((item) => item.id === productID);
+  const isUnavailable = availability !== "https://schema.org/InStock";
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -192,7 +193,9 @@ function ProductCard({
             : buyProduct.add}
           class={clx(
             "flex justify-center items-center gap-4 rounded text-xs sm:text-sm font-bold h-10 group/card",
-            isInCart
+            isUnavailable
+              ? "text-[#666] bg-[#ccc]"
+              : isInCart
               ? "bg-green text-white"
               : "text-green hover:bg-green hover:text-white transition-colors duration-[200ms] border-2 border-green",
           )}
@@ -208,17 +211,20 @@ function ProductCard({
                     class="text-white"
                   />
                 )
-                : canBuyWithSubscription ||
-                  (isMobile && !canBuyWithSubscription) && (
-                      <Icon
-                        id="ShoppingCart"
-                        width={16}
-                        height={16}
-                        class="text-green group-hover/card:text-white delay-75"
-                      />
-                    )}
+                : !isUnavailable && (canBuyWithSubscription ||
+                  (isMobile && !canBuyWithSubscription)) &&
+                  (
+                    <Icon
+                      id="ShoppingCart"
+                      width={16}
+                      height={16}
+                      class="text-green group-hover/card:text-white delay-75"
+                    />
+                  )}
 
-              {isInCart
+              {isUnavailable
+                ? "Em breve"
+                : isInCart
                 ? "Adicionado"
                 : canBuyWithSubscription
                 ? "Assinar com desconto"

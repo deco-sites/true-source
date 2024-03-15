@@ -30,11 +30,16 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
     (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
   )?.sections ?? [];
 
+  const title = props.titles.titles?.find(
+    (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
+  )?.title;
+
   return {
     ...props,
     sectionsSEO,
     url: req.url,
     isMobile: ctx.device !== "desktop",
+    title,
   };
 }
 

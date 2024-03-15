@@ -10,6 +10,7 @@ import ProductGallery from "../product/ProductGallery.tsx";
 import { renderSection } from "apps/website/pages/Page.tsx";
 import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
 import { AppContext } from "$store/apps/site.ts";
+import { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
 
 export interface Props {
   /** @title Integration */
@@ -19,6 +20,7 @@ export interface Props {
   startingPage?: 0 | 1;
 
   sectionsSEO: ReturnSectionSEO;
+  titles: ReturnCustomPLPTitle;
 }
 
 function NotFound() {
@@ -35,6 +37,7 @@ function Result({
   sectionsSEO,
   url,
   isMobile,
+  title: _title,
 }: ReturnType<typeof loader>) {
   if (!page) throw new Error("Unreachable");
 
@@ -48,7 +51,11 @@ function Result({
 
   const URLi = new URL(url);
 
-  const title = `${URLi.pathname.split("/").pop() ?? ""} (${pageInfo.records})`;
+  let title = _title ?? URLi.pathname.split("/").pop() ?? "";
+
+  const isSearchPage = breadcrumb.itemListElement.length === 0;
+
+  title = isSearchPage && !_title ? `Buscando por "${title}"` : title;
 
   return (
     <>
@@ -61,6 +68,7 @@ function Result({
           url={url}
           title={title}
           isMobile={isMobile}
+          productsCount={pageInfo.records ?? 0}
         />
 
         <div class="flex flex-row">
@@ -130,7 +138,7 @@ function Result({
 }
 
 function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
-  if (!page) {
+  if (!page || page.products.length === 0) {
     return <NotFound />;
   }
 
@@ -142,11 +150,16 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
     (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
   )?.sections ?? [];
 
+  const title = props.titles.titles?.find(
+    (section) => new URLPattern({ pathname: section.matcher }).test(req.url),
+  )?.title;
+
   return {
     ...props,
     sectionsSEO,
     url: req.url,
     isMobile: ctx.device !== "desktop",
+    title,
   };
 }
 

@@ -1,8 +1,9 @@
 import { useMemo } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import type { JSX } from "preact";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
 
 const SORT_QUERY_PARAM = "sort";
 
@@ -42,15 +43,18 @@ const portugueseMappings = {
 
 function Sort({ sortOptions, isMobile }: Props) {
   const sort = useSort();
+  const sortCollapsable = useCollapsable();
+
+  const options = sortOptions.map(({ value, label }) => ({
+    value,
+    label: portugueseMappings[label as keyof typeof portugueseMappings] ??
+      label,
+  })).filter(({ label }) => label);
 
   if (isMobile) {
     return (
       <div class="flex flex-col items-start divide-y divide-light-gray-200">
-        {sortOptions.map(({ value, label }) => ({
-          value,
-          label: portugueseMappings[label as keyof typeof portugueseMappings] ??
-            label,
-        })).filter(({ label }) => label).map(({ value, label }) => {
+        {options.map(({ value, label }) => {
           const selected = value === sort;
           const id = useId();
 
@@ -87,23 +91,50 @@ function Sort({ sortOptions, isMobile }: Props) {
 
   return (
     <>
-      <label for="sort" class="sr-only">Ordenar por</label>
-      <select
-        id="sort"
-        name="sort"
-        onInput={(e) => applySort(e.currentTarget.value)}
-        class="w-min h-[36px] px-1 rounded m-2 text-base-content cursor-pointer outline-none"
-      >
-        {sortOptions.map(({ value, label }) => ({
-          value,
-          label: portugueseMappings[label as keyof typeof portugueseMappings] ??
-            label,
-        })).filter(({ label }) => label).map(({ value, label }) => (
-          <option key={value} value={value} selected={value === sort}>
-            <span class="text-sm">{label}</span>
-          </option>
-        ))}
-      </select>
+      <sortCollapsable.Collapsable class="relative z-20 w-[200px]">
+        <sortCollapsable.Trigger class="px-3 py-2 rounded-full bg-ice flex justify-center items-center gap-2 text-sm font-bold text-dark relative z-10">
+          Ordenar por
+          <Icon id="ChevronDown" width={16} height={16} />
+        </sortCollapsable.Trigger>
+
+        <sortCollapsable.ContentWrapper class="absolute left-0 top-[calc(100%-20px)] bg-ice rounded-bl-xl rounded-br-xl w-full">
+          <sortCollapsable.Content>
+            <div class="pt-4">
+              {options.map(({ value, label }) => {
+                const selected = value === sort;
+                const id = useId();
+
+                return (
+                  <button
+                    type="button"
+                    onClick={() => applySort(value)}
+                    class="flex items-center gap-4 text-sm text-dark p-3 w-full"
+                  >
+                    <input
+                      type="checkbox"
+                      id={id}
+                      checked={selected}
+                      class="peer hidden"
+                    />
+                    <label
+                      for={id}
+                      class={clx(
+                        "size-4 border-2 border-dark rounded-full flex justify-center items-center",
+                        selected && "bg-dark",
+                      )}
+                    >
+                      {selected && (
+                        <span class="size-2 absolute bg-white rounded-full" />
+                      )}
+                    </label>
+                    <span class="text-sm">{label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </sortCollapsable.Content>
+        </sortCollapsable.ContentWrapper>
+      </sortCollapsable.Collapsable>
     </>
   );
 }

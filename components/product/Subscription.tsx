@@ -2,8 +2,6 @@ import { formatPrice } from "$store/sdk/format.ts";
 import { useUI } from "$store/sdk/useUI.ts";
 import { IconAsterisk } from "../ui/CustomIcons.tsx";
 
-import SubscriptionModal from "deco-sites/true-source/components/product/SubscriptionModal.tsx";
-
 export interface Props {
   productID: string;
   seller: string;
@@ -25,21 +23,26 @@ export default function SubscriptionButtonVTEX({
   price,
   listPrice,
 }: Props) {
-  const { displaySubscriptionPopup } = useUI();
+  const { currentSubscription } = useUI();
 
   const discount = price * 0.2;
 
   return (
-    <>
-      <button
-        class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
-        onClick={() => displaySubscriptionPopup.value = true}
-      >
-        ASSINE COM {formatPrice(discount * quantity)} de desconto
-        <span class="flex-none max-[400px]:hidden">
-          <IconAsterisk />
-        </span>
-      </button>
-    </>
+    <button
+      class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
+      onClick={() =>
+        currentSubscription.value = {
+          productID,
+          seller,
+          quantity,
+          listPrice,
+          price,
+        }}
+    >
+      ASSINE COM {formatPrice(discount * quantity)} de desconto
+      <span class="flex-none max-[400px]:hidden">
+        <IconAsterisk />
+      </span>
+    </button>
   );
 }

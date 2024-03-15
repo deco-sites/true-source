@@ -4,7 +4,8 @@
 
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/PLPSectionsSEO.ts";
+import * as $$$0 from "./loaders/CustomPLPTitle.ts";
+import * as $$$1 from "./loaders/PLPSectionsSEO.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -65,7 +66,8 @@ import * as $$$$$$56 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
-    "deco-sites/true-source/loaders/PLPSectionsSEO.ts": $$$0,
+    "deco-sites/true-source/loaders/CustomPLPTitle.ts": $$$0,
+    "deco-sites/true-source/loaders/PLPSectionsSEO.ts": $$$1,
   },
   "sections": {
     "deco-sites/true-source/sections/Animation/Animation.tsx": $$$$$$0,

@@ -14,12 +14,21 @@ export type Props =
     displayFilter?: boolean;
     url: string;
     title: string;
+    productsCount: number;
     isMobile: boolean;
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions, url, title, isMobile }:
-    Props,
+  {
+    filters,
+    breadcrumb,
+    displayFilter,
+    sortOptions,
+    url,
+    title,
+    isMobile,
+    productsCount,
+  }: Props,
 ) {
   const sortModal = useModal();
   const filterModal = useModal();
@@ -27,7 +36,9 @@ function SearchControls(
   return (
     <div class="flex flex-col">
       <div class="flex flex-row items-center justify-between sm:gap-4 sm:border-none">
-        <h1 class="text-2xl font-bold text-dark font-lemon">{title}</h1>
+        <h1 class="text-2xl font-bold text-dark font-lemon">
+          {title} <span class="font-light">({productsCount})</span>
+        </h1>
         {sortOptions.length > 0 && !isMobile && (
           <Sort sortOptions={sortOptions} isMobile={isMobile} />
         )}
