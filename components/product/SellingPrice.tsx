@@ -1,5 +1,5 @@
 import { useCart } from "apps/vtex/hooks/useCart.ts";
-import { formatPrice } from "$store/sdk/format.ts";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 import { useEffect, useState } from "preact/hooks";
 import type { UnitPriceSpecification } from "apps/commerce/types.ts";
 

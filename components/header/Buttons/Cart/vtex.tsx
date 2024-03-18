@@ -3,7 +3,7 @@ import Button from "./common.tsx";
 
 export interface Props {
   type?: "menu" | "header";
-  size?: "sm" | "md" | "lg"
+  size?: "sm" | "md" | "lg";
 }
 
 function CartButton({ type = "header", size = "md" }: Props) {

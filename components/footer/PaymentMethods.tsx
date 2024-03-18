@@ -7,7 +7,7 @@ import {
   IconVisa,
   RaSeal,
   SslSeal,
-} from "$store/components/ui/CustomIcons.tsx";
+} from "deco-sites/true-source/components/ui/CustomIcons.tsx";
 
 export interface PaymentItem {
   label: "Visa" | "Mastercard" | "Dinners" | "Boleto" | "Pix";

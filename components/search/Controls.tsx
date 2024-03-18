@@ -1,9 +1,9 @@
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Filters from "$store/components/search/Filters.tsx";
-import Sort from "$store/components/search/Sort.tsx";
-import Drawer from "$store/components/ui/Drawer.tsx";
-import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
+import Button from "deco-sites/true-source/components/ui/Button.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import Filters from "deco-sites/true-source/components/search/Filters.tsx";
+import Sort from "deco-sites/true-source/components/search/Sort.tsx";
+import Drawer from "deco-sites/true-source/components/ui/Drawer.tsx";
+import Breadcrumb from "deco-sites/true-source/components/ui/Breadcrumb.tsx";
 import { useSignal } from "@preact/signals";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import useModal from "deco-sites/true-source/components/ui/useModal.tsx";

@@ -1,4 +1,4 @@
-import Button from "$store/components/ui/Button.tsx";
+import Button from "deco-sites/true-source/components/ui/Button.tsx";
 import { useState } from "preact/hooks";
 
 export interface Props {

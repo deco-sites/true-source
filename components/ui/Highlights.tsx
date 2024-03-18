@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
+import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Highlight {

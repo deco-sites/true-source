@@ -1,1 +1,1 @@
-export { default } from "$store/islands/Product/Benefits.tsx";
+export { default } from "deco-sites/true-source/islands/Product/Benefits.tsx";

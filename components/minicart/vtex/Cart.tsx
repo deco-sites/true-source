@@ -1,4 +1,4 @@
-import { invoke } from "$store/runtime.ts";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 import { useSignal } from "@preact/signals";
 import { Product } from "apps/commerce/types.ts";
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";

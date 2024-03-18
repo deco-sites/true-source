@@ -1,5 +1,7 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Icon, {
+  AvailableIcons,
+} from "deco-sites/true-source/components/ui/Icon.tsx";
+import Header from "deco-sites/true-source/components/ui/SectionHeader.tsx";
 
 export interface Props {
   title?: string;

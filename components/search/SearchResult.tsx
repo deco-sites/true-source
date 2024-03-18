@@ -1,15 +1,15 @@
-import { SendEventOnView } from "$store/components/Analytics.tsx";
-import Filters from "$store/components/search/Filters.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import SearchControls from "$store/islands/SearchControls.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
+import { SendEventOnView } from "deco-sites/true-source/components/Analytics.tsx";
+import Filters from "deco-sites/true-source/components/search/Filters.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import SearchControls from "deco-sites/true-source/islands/SearchControls.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
+import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery from "../product/ProductGallery.tsx";
 import { renderSection } from "apps/website/pages/Page.tsx";
 import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
-import { AppContext } from "$store/apps/site.ts";
+import { AppContext } from "deco-sites/true-source/apps/site.ts";
 import { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
 
 export interface Props {
@@ -81,7 +81,7 @@ function SearchResult(
 
         <div class="w-full h-px bg-light-gray-200 my-6" />
 
-        <div class="w-full flex flex-col gap-8 justify-center items-center mt-6 mb-16 max-w-[432px] mx-auto">
+        <div class="w-full flex flex-col gap-8 justify-center items-center my-16 max-w-[432px] mx-auto">
           <strong class="text-dark font-bold text-sm lg:text-lg font-lemon text-center">
             Ops, não encontramos nenhum resultado para a sua busca.
           </strong>

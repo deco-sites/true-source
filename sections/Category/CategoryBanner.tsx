@@ -1,1 +1,4 @@
-export { default, loader } from "$store/components/ui/CategoryBanner.tsx";
+export {
+  default,
+  loader,
+} from "deco-sites/true-source/components/ui/CategoryBanner.tsx";

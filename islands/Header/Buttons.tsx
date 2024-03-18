@@ -1,5 +1,5 @@
-import { default as MenuButtonComponent } from "$store/components/header/Buttons/Menu.tsx";
-import { default as SearchButtonComponent } from "$store/components/header/Buttons/Search.tsx";
+import { default as MenuButtonComponent } from "deco-sites/true-source/components/header/Buttons/Menu.tsx";
+import { default as SearchButtonComponent } from "deco-sites/true-source/components/header/Buttons/Search.tsx";
 
 export function MenuButton() {
   return <MenuButtonComponent />;

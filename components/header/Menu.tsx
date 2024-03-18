@@ -1,7 +1,7 @@
-import CartButtonVTEX from "$store/components/minicart/Cart.tsx";
+import CartButtonVTEX from "deco-sites/true-source/components/minicart/Cart.tsx";
 import type { INavItem } from "./NavItem.tsx";
-import Collapsable from "$store/components/ui/Collapsable.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
+import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 

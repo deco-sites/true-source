@@ -1,4 +1,4 @@
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 export interface Props {

@@ -1,16 +1,16 @@
-import { useOffer } from "$store/sdk/useOffer.ts";
-import PixPrice from "$store/islands/PixPrice.tsx";
-import OutOfStock from "$store/islands/OutOfStock.tsx";
+import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
+import PixPrice from "deco-sites/true-source/islands/PixPrice.tsx";
+import OutOfStock from "deco-sites/true-source/islands/OutOfStock.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
-import SubscriptionButtonVTEX from "$store/islands/Subscription.tsx";
-import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
+import SubscriptionButtonVTEX from "deco-sites/true-source/islands/Subscription.tsx";
+import AddToCartButtonVTEX from "deco-sites/true-source/islands/AddToCartButton/vtex.tsx";
 import type { BreadcrumbList, Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useState } from "preact/hooks";
 import SellingPrice from "deco-sites/true-source/islands/Product/SellingPrice.tsx";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Cashback } from "$store/components/ui/CustomIcons.tsx";
-import { formatPrice } from "$store/sdk/format.ts";
+import { Cashback } from "deco-sites/true-source/components/ui/CustomIcons.tsx";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 
 export interface Props {
   product: Product;

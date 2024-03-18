@@ -1,4 +1,4 @@
-import PriceRange from "$store/components/ui/PriceRange.tsx";
+import PriceRange from "deco-sites/true-source/components/ui/PriceRange.tsx";
 import type {
   Filter,
   FilterToggle,
@@ -207,7 +207,7 @@ function Filters({ filters: f, url, noCollapsable }: Props) {
   //   }
 
   return (
-    <ul class="flex flex-col gap-6 mr-14">
+    <ul class="flex flex-col gap-6 lg:mr-14">
       {filters
         .map((filter) => (
           <FilterValues {...filter} noCollapsable={noCollapsable} />

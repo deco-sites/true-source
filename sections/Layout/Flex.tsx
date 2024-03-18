@@ -1,4 +1,4 @@
-import { clx } from "$store/sdk/clx.ts";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { ComponentChildren } from "preact";
 import { flex } from "../../constants.tsx";

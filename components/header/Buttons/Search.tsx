@@ -1,6 +1,6 @@
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
+import Button from "deco-sites/true-source/components/ui/Button.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 
 export default function SearchButton() {
   const { displaySearchDrawer, displaySearchPopup } = useUI();

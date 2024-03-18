@@ -1,6 +1,6 @@
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
+import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
+import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { AlertProps, Theme } from "./Header.tsx";
 
 interface Props {

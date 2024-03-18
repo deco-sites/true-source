@@ -1,4 +1,4 @@
-import { useUI } from "$store/sdk/useUI.ts";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 export default function MenuButton() {
@@ -12,7 +12,11 @@ export default function MenuButton() {
         displayMenu.value = !displayMenu.value;
       }}
     >
-      <Icon id="Bars3" size={16} class="size-[16px] group-data-[micro-header='true']/header:size-[12px] " />
+      <Icon
+        id="Bars3"
+        size={16}
+        class="size-[16px] group-data-[micro-header='true']/header:size-[12px] "
+      />
     </button>
   );
 }

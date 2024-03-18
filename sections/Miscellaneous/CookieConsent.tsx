@@ -1,1 +1,1 @@
-export { default } from "$store/components/ui/CookieConsent.tsx";
+export { default } from "deco-sites/true-source/components/ui/CookieConsent.tsx";

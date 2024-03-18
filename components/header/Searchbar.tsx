@@ -1,9 +1,9 @@
-import { headerHeight } from "$store/components/header/constants.ts";
+import { headerHeight } from "deco-sites/true-source/components/header/constants.ts";
 import Searchbar, {
   Props as SearchbarProps,
-} from "$store/components/search/Searchbar.tsx";
-import Modal from "$store/components/ui/Modal.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
+} from "deco-sites/true-source/components/search/Searchbar.tsx";
+import Modal from "deco-sites/true-source/components/ui/Modal.tsx";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 
 export interface Props {
   searchbar?: SearchbarProps;

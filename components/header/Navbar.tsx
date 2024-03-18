@@ -1,14 +1,17 @@
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import { MenuButton } from "$store/islands/Header/Buttons.tsx";
-import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
-import Searchbar from "$store/islands/Header/Searchbar.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import type { Props as SearchbarProps } from "deco-sites/true-source/components/search/Searchbar.tsx";
+import { MenuButton } from "deco-sites/true-source/islands/Header/Buttons.tsx";
+import CartButtonVTEX from "deco-sites/true-source/islands/Header/Cart/vtex.tsx";
+import Searchbar from "deco-sites/true-source/islands/Header/Searchbar.tsx";
+import { usePlatform } from "deco-sites/true-source/sdk/usePlatform.tsx";
 import Image from "apps/website/components/Image.tsx";
 import NavItem, { INavItem } from "./NavItem.tsx";
-import { Buttons, Logo } from "$store/components/header/Header.tsx";
-import MyAccount from "$store/islands/Header/MyAccount.tsx";
+import {
+  Buttons,
+  Logo,
+} from "deco-sites/true-source/components/header/Header.tsx";
+import MyAccount from "deco-sites/true-source/islands/Header/MyAccount.tsx";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
-import Icon from "$store/components/ui/Icon.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 export const HIGHLIGHT_ID = "destaque";
 export const HIGHLIGHT_BTN = "TODOS OS PRODUTOS";

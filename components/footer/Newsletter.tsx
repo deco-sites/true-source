@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { invoke } from "$store/runtime.ts";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 import type { JSX } from "preact";
 
 export interface Form {
@@ -44,10 +44,11 @@ function Newsletter(
 
   return (
     <div
-      class={`flex ${tiled
-        ? "flex-col gap-4 lg:flex-row lg:w-full lg:justify-between"
-        : "flex-col gap-4"
-        }`}
+      class={`flex ${
+        tiled
+          ? "flex-col gap-4 lg:flex-row lg:w-full lg:justify-between"
+          : "flex-col gap-4"
+      }`}
     >
       <div class="flex flex-col lg:flex-row gap-4 lg:items-center bg-black">
         <div class="flex flex-col gap-4">

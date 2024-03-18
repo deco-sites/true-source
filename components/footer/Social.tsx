@@ -1,9 +1,11 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Icon, {
+  AvailableIcons,
+} from "deco-sites/true-source/components/ui/Icon.tsx";
 import {
   IconInstagram,
   IconTiktok,
   IconYoutube,
-} from "$store/components/ui/CustomIcons.tsx";
+} from "deco-sites/true-source/components/ui/CustomIcons.tsx";
 
 // Definindo a interface SocialItem
 export interface SocialItem {

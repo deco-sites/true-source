@@ -1,13 +1,13 @@
-import BackToTop from "$store/components/footer/BackToTop.tsx";
-import ColorClasses from "$store/components/footer/ColorClasses.tsx";
-import Divider from "$store/components/footer/Divider.tsx";
-import FooterItems from "$store/components/footer/FooterItems.tsx";
-import Logo from "$store/components/footer/Logo.tsx";
-import MobileApps from "$store/components/footer/MobileApps.tsx";
-import PaymentMethods from "$store/components/footer/PaymentMethods.tsx";
-import RegionSelector from "$store/components/footer/RegionSelector.tsx";
-import Social from "$store/components/footer/Social.tsx";
-import Newsletter from "$store/islands/Newsletter.tsx";
+import BackToTop from "deco-sites/true-source/components/footer/BackToTop.tsx";
+import ColorClasses from "deco-sites/true-source/components/footer/ColorClasses.tsx";
+import Divider from "deco-sites/true-source/components/footer/Divider.tsx";
+import FooterItems from "deco-sites/true-source/components/footer/FooterItems.tsx";
+import Logo from "deco-sites/true-source/components/footer/Logo.tsx";
+import MobileApps from "deco-sites/true-source/components/footer/MobileApps.tsx";
+import PaymentMethods from "deco-sites/true-source/components/footer/PaymentMethods.tsx";
+import RegionSelector from "deco-sites/true-source/components/footer/RegionSelector.tsx";
+import Social from "deco-sites/true-source/components/footer/Social.tsx";
+import Newsletter from "deco-sites/true-source/islands/Newsletter.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 

@@ -1,14 +1,14 @@
-import ProductCard from "$store/components/product/ProductCard.tsx";
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useSuggestions } from "$store/sdk/useSuggestions.ts";
+import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
+import Button from "deco-sites/true-source/components/ui/Button.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
+import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
+import { useSuggestions } from "deco-sites/true-source/sdk/useSuggestions.ts";
 import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef, useState } from "preact/compat";
-import type { Platform } from "$store/apps/site.ts";
+import type { Platform } from "deco-sites/true-source/apps/site.ts";
 import Image from "apps/website/components/Image.tsx";
 
 // Editable props
@@ -124,12 +124,13 @@ function Searchbar({
       </div>
 
       <div
-        class={`${searching
-          ? (!hasProducts && !hasTerms)
-            ? "hidden"
-            : "lg:searching absolute z-50 left-0 lg:left-[unset] lg:max-w-[786px] w-full bg-white rounded-t-sm rounded-bl-[1rem] rounded-br-[1rem] pb-4;"
-          : "hidden"
-          }`}
+        class={`${
+          searching
+            ? (!hasProducts && !hasTerms)
+              ? "hidden"
+              : "lg:searching absolute z-50 left-0 lg:left-[unset] lg:max-w-[786px] w-full bg-white rounded-t-sm rounded-bl-[1rem] rounded-br-[1rem] pb-4;"
+            : "hidden"
+        }`}
       >
         <div class="gap-4 py-3 container flex flex-col sm:flex-row m-auto">
           {searches.length > 0

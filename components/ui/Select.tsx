@@ -1,5 +1,5 @@
 import { ComponentChildren, JSX } from "preact";
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 function Select({
   title,

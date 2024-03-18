@@ -1,9 +1,9 @@
-import Icon from "$store/components/ui/Icon.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
+import Header from "deco-sites/true-source/components/ui/SectionHeader.tsx";
+import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
+import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Testimonial {

@@ -1,1 +1,1 @@
-export { default } from "$store/components/product/Description/NutritionalTable.tsx";
+export { default } from "deco-sites/true-source/components/product/Description/NutritionalTable.tsx";

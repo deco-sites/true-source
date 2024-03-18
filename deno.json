@@ -1,7 +1,6 @@
 {
   "imports": {
     "deco-sites/true-source/": "./",
-    "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.57.12/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.35.7/",
     "$fresh/": "https://deno.land/x/fresh@1.6.5/",

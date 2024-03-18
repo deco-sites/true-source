@@ -1,1 +1,4 @@
-export { default, loader } from "$store/components/search/SearchResult.tsx";
+export {
+  default,
+  loader,
+} from "deco-sites/true-source/components/search/SearchResult.tsx";

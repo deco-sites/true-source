@@ -1,5 +1,7 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import ExtraLinks from "$store/components/footer/ExtraLinks.tsx";
+import Icon, {
+  AvailableIcons,
+} from "deco-sites/true-source/components/ui/Icon.tsx";
+import ExtraLinks from "deco-sites/true-source/components/footer/ExtraLinks.tsx";
 
 export type Item = {
   label?: string;

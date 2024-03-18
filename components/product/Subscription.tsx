@@ -1,5 +1,5 @@
-import { formatPrice } from "$store/sdk/format.ts";
-import { useUI } from "$store/sdk/useUI.ts";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import { IconAsterisk } from "../ui/CustomIcons.tsx";
 
 export interface Props {

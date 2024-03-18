@@ -1,1 +1,1 @@
-export { default } from "$store/components/footer/Footer.tsx";
+export { default } from "deco-sites/true-source/components/footer/Footer.tsx";

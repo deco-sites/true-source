@@ -1,14 +1,14 @@
-import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
-import ProductStars from "$store/islands/Product/ProductStars.tsx";
+import Breadcrumb from "deco-sites/true-source/components/ui/Breadcrumb.tsx";
+import ProductStars from "deco-sites/true-source/islands/Product/ProductStars.tsx";
 import GallerySlider from "./Gallery/ImageSlider.tsx";
-import AddToCartArea from "$store/islands/AddToCartArea.tsx";
-import ProductSimilars from "$store/islands/Product/ProductSimilars.tsx";
-import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
+import AddToCartArea from "deco-sites/true-source/islands/AddToCartArea.tsx";
+import ProductSimilars from "deco-sites/true-source/islands/Product/ProductSimilars.tsx";
+import ShippingSimulation from "deco-sites/true-source/islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 
-import { useId } from "$store/sdk/useId.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
-import { SendEventOnView } from "$store/components/Analytics.tsx";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
+import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
+import { SendEventOnView } from "deco-sites/true-source/components/Analytics.tsx";
 import { BreadcrumbList, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 

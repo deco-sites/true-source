@@ -1,1 +1,1 @@
-export { default } from "$store/components/product/SubscriptionModal.tsx";
+export { default } from "deco-sites/true-source/components/product/SubscriptionModal.tsx";

@@ -1,7 +1,7 @@
-import Button from "$store/components/ui/Button.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { formatPrice } from "$store/sdk/format.ts";
-import { useUI } from "$store/sdk/useUI.ts";
+import Button from "deco-sites/true-source/components/ui/Button.tsx";
+import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import { AnalyticsItem, Product } from "apps/commerce/types.ts";
 import { OrderFormItem } from "apps/vtex/utils/types.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";

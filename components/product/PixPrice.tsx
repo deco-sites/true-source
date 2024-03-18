@@ -1,6 +1,6 @@
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 import { useEffect, useState } from "preact/hooks";
-import { formatPrice } from "$store/sdk/format.ts";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 
 export type Props = {
   sellingPrice: number;

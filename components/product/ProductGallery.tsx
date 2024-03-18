@@ -1,4 +1,4 @@
-import ProductCard from "$store/components/product/ProductCard.tsx";
+import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
 import { Product } from "apps/commerce/types.ts";
 
 export interface Props {

@@ -1,12 +1,15 @@
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Drawers from "$store/islands/Header/Drawers.tsx";
+import type { Props as SearchbarProps } from "deco-sites/true-source/components/search/Searchbar.tsx";
+import Drawers from "deco-sites/true-source/islands/Header/Drawers.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Alert from "./Alert.tsx";
-import MicroHeaderSetup from "$store/components/ui/MicroHeaderSetup.tsx";
+import MicroHeaderSetup from "deco-sites/true-source/components/ui/MicroHeaderSetup.tsx";
 import { LoaderContext } from "deco/mod.ts";
-import Navbar from "$store/components/header/Navbar.tsx";
-import type { INavItem } from "$store/components/header/NavItem.tsx";
-import { InstitucionalItem, Socials } from "$store/components/header/Menu.tsx";
+import Navbar from "deco-sites/true-source/components/header/Navbar.tsx";
+import type { INavItem } from "deco-sites/true-source/components/header/NavItem.tsx";
+import {
+  InstitucionalItem,
+  Socials,
+} from "deco-sites/true-source/components/header/Menu.tsx";
 
 export interface Buttons {
   hideSearchButton?: boolean;

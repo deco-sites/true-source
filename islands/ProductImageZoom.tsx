@@ -1,5 +1,5 @@
-import Component from "$store/components/product/ProductImageZoom.tsx";
-import type { Props } from "$store/components/product/ProductImageZoom.tsx";
+import Component from "deco-sites/true-source/components/product/ProductImageZoom.tsx";
+import type { Props } from "deco-sites/true-source/components/product/ProductImageZoom.tsx";
 
 function Island(props: Props) {
   return <Component {...props} />;

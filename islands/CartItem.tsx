@@ -1,1 +1,1 @@
-export { default } from "$store/components/minicart/common/CartItem.tsx";
+export { default } from "deco-sites/true-source/components/minicart/common/CartItem.tsx";

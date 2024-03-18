@@ -1,4 +1,4 @@
-import CartVTEX from "$store/components/minicart/vtex/Cart.tsx";
+import CartVTEX from "deco-sites/true-source/components/minicart/vtex/Cart.tsx";
 
 function Cart() {
   return <CartVTEX />;

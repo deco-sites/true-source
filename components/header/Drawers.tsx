@@ -1,15 +1,19 @@
-import type { Props as MenuProps } from "$store/components/header/Menu.tsx";
-import Cart from "$store/components/minicart/Cart.tsx";
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Drawer from "$store/components/ui/Drawer.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
+import type { Props as MenuProps } from "deco-sites/true-source/components/header/Menu.tsx";
+import Cart from "deco-sites/true-source/components/minicart/Cart.tsx";
+import type { Props as SearchbarProps } from "deco-sites/true-source/components/search/Searchbar.tsx";
+import Drawer from "deco-sites/true-source/components/ui/Drawer.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
 import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
 
-const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
-const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
+const Menu = lazy(() =>
+  import("deco-sites/true-source/components/header/Menu.tsx")
+);
+const Searchbar = lazy(() =>
+  import("deco-sites/true-source/components/search/Searchbar.tsx")
+);
 
 const MENU_TITLE = "Menu";
 const SEARCH_TITLE = "Buscar";

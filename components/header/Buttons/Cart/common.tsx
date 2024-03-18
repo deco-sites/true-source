@@ -1,6 +1,6 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 

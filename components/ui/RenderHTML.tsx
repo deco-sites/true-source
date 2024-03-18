@@ -1,14 +1,19 @@
-import type { ComponentType, JSX } from 'preact'
+import type { ComponentType, JSX } from "preact";
 
 interface Props extends JSX.HTMLAttributes {
-	html: string
-	as?: keyof JSX.IntrinsicElements
+  html: string;
+  as?: keyof JSX.IntrinsicElements;
 }
 
-function RenderHTML({ html, as = 'div', ...restProps }: Props) {
-	const Component = as as unknown as ComponentType<JSX.HTMLAttributes>
+function RenderHTML({ html, as = "div", ...restProps }: Props) {
+  const Component = as as unknown as ComponentType<JSX.HTMLAttributes>;
 
-	return <Component dangerouslySetInnerHTML={{ __html: html }} {...restProps} />
+  return (
+    <Component
+      dangerouslySetInnerHTML={{ __html: html }}
+      {...restProps}
+    />
+  );
 }
 
-export default RenderHTML
+export default RenderHTML;

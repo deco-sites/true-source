@@ -1,1 +1,1 @@
-export { default } from "$store/components/search/Description/OnlyText.tsx";
+export { default } from "deco-sites/true-source/components/search/Description/OnlyText.tsx";

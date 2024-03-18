@@ -1,1 +1,1 @@
-export { default } from "$store/components/ui/PriceRange.tsx";
+export { default } from "deco-sites/true-source/components/ui/PriceRange.tsx";
