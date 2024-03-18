@@ -47,15 +47,13 @@ function NotFound() {
   );
 }
 
-function Result({
-  page,
-  startingPage = 0,
-  sectionsSEO,
-  url,
-  isMobile,
-  title: _title,
-}: ReturnType<typeof loader>) {
-  if (!page) throw new Error("Unreachable");
+function SearchResult(
+  { page, startingPage = 0, sectionsSEO, url, isMobile, title: _title }:
+    ReturnType<typeof loader>,
+) {
+  if (!page) {
+    return <NotFound />;
+  }
 
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
@@ -157,7 +155,7 @@ function Result({
           </div>
         </div>
 
-        <div class="flex flex-col border-t border-t-light-gray max-w-[1340px] w-[95%] container">
+        <div class="flex flex-col border-t border-t-light-gray w-full gap-6">
           {sectionsSEO.map(renderSection)}
         </div>
       </div>
@@ -182,10 +180,6 @@ function Result({
       />
     </>
   );
-}
-
-function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
-  return <Result {...props} page={page} />;
 }
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
