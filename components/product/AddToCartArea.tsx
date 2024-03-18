@@ -151,7 +151,8 @@ export default function AddToCartArea({
                     </span>
                   )}
                   <span class="hidden sm:inline">
-                    <strong>10% OFF</strong> para <strong>3 ou mais</strong>{" "}
+                    <strong>10% OFF</strong> para <strong>3 ou mais</strong>
+                    {" "}
                     unidades
                   </span>
                   <span class="inline sm:hidden text-xs">
