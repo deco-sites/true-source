@@ -10,6 +10,7 @@ export interface Props {
   /** @description: sku name */
   eventParams: AddToCartParams;
   onAddItem: () => Promise<void>;
+  buttonSize?: "full" | "auto";
 }
 
 export const useAddToCart = ({ eventParams, onAddItem }: Props) => {
@@ -42,11 +43,15 @@ export const useAddToCart = ({ eventParams, onAddItem }: Props) => {
 export default function AddToCartButton(props: Props) {
   const { loading, ...btnProps } = useAddToCart(props);
 
+  const { buttonSize = "auto" } = props;
+
   return (
     <Button
       {...btnProps}
       loading={loading.value}
-      class="flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-xs sm:text-[13px] font-bold uppercase font-lemon-milk text-white border-0 h-14"
+      class={`flex items-center justify-center gap-4 bg-green hover:bg-green rounded-md text-xs sm:text-[13px] font-bold uppercase font-lemon-milk text-white border-0 ${
+        buttonSize === "full" && "w-full"
+      }`}
     >
       Comprar
       <IconButtonCart />

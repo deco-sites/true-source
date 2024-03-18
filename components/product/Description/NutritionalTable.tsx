@@ -62,7 +62,7 @@ export default function NutritionalTable({
   return (
     <div style={{ background: color }}>
       <div
-        class="flex flex-col lg:flex-row items-center min-h-[580px] py-24 lg:py-0 gap-8 lg:gap-0 px-8 lg:px-0"
+        class="flex flex-col lg:flex-row items-center py-24 lg:py-28 gap-8 lg:gap-0 px-8 lg:px-0"
         style={{
           background:
             `linear-gradient(72deg, rgba(210, 210, 210, 0.36) 9.7%, rgba(210, 210, 210, 0.00) 73.19%)`,
@@ -75,7 +75,7 @@ export default function NutritionalTable({
                 INGREDIENTES
               </h2>
               <p
-                class="text-sm lg:text-base"
+                class="text-sm lg:text-base leading-6 sm:leading-5"
                 dangerouslySetInnerHTML={{ __html: ingredients }}
               />
             </div>
@@ -126,8 +126,8 @@ export default function NutritionalTable({
                 </tbody>
               </table>
             </div>
-            <p
-              class="w-full lg:w-3/4 text-sm mt-8 text-white"
+            <div
+              class="w-full lg:w-3/4 text-sm mt-8 !text-white leading-6 sm:leading-5"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
