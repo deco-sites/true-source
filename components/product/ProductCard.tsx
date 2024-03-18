@@ -1,14 +1,14 @@
-import type { Platform } from "$store/apps/site.ts";
-import { SendEventOnClick } from "$store/components/Analytics.tsx";
-import ProductStarCard from "$store/components/product/ProductStarCard.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Loading from "$store/components/ui/Loading.tsx";
-import { clx } from "$store/sdk/clx.ts";
-import { formatPrice } from "$store/sdk/format.ts";
-import { relative } from "$store/sdk/url.ts";
-import useBuyProduct from "$store/sdk/useBuyProduct.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
-import { useUI } from "$store/sdk/useUI.ts";
+import type { Platform } from "deco-sites/true-source/apps/site.ts";
+import { SendEventOnClick } from "deco-sites/true-source/components/Analytics.tsx";
+import ProductStarCard from "deco-sites/true-source/components/product/ProductStarCard.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
+import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
+import { relative } from "deco-sites/true-source/sdk/url.ts";
+import useBuyProduct from "deco-sites/true-source/sdk/useBuyProduct.ts";
+import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
+import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
@@ -107,7 +107,7 @@ function ProductCard({
           },
         }}
       />
-      <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center">
+      <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center bg-ice rounded-[20px]">
         {/* Wishlist button */}
         <div class="absolute top-4 right-4 z-10 flex items-center">
           <WishlistButtonVtex
@@ -142,7 +142,7 @@ function ProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class=""
+            class="mix-blend-multiply"
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
