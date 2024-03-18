@@ -30,14 +30,19 @@ function QuantitySelector(
         }}
       >
         <button
-          class=" join-item py-0 pl-1 sm:pl-2 pr-0 font-bold"
+          class=" join-item py-0 pl-1 sm:pl-2 pr-0 font-bold group/minus"
           onClick={decrement}
           disabled={disabled}
         >
-          <Icon id="Minus" width={6} height={3} class="text-Dark" />
+          <Icon
+            id="Minus"
+            width={6}
+            height={3}
+            class="text-dark group-disabled/minus:text-gray"
+          />
         </button>
         <input
-          class="text-sm sm:text-base text-center p-0 font-bold outline-none w-[40px] sm:w-auto"
+          class="text-sm sm:text-base text-center p-0 font-bold outline-none w-[40px] sm:w-auto text-dark disabled:text-gray"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -50,11 +55,16 @@ function QuantitySelector(
           size={1}
         />
         <button
-          class=" join-item py-0 pr-1 sm:pr-2 pl-0 font-bold"
+          class=" join-item py-0 pr-1 sm:pr-2 pl-0 font-bold group/plus"
           onClick={increment}
           disabled={disabled}
         >
-          <Icon id="Plus" width={8} height={8} class="text-Dark" />
+          <Icon
+            id="Plus"
+            width={8}
+            height={8}
+            class="text-dark group-disabled/plus:text-gray"
+          />
         </button>
       </div>
     );
@@ -64,14 +74,19 @@ function QuantitySelector(
     return (
       <div class="join border border-1 border-solid border-Stroke rounded-full py-2 px-[14px]">
         <button
-          class=" join-item py-0 pl-1 pr-0 font-bold"
+          class=" join-item py-0 pl-1 pr-0 font-bold group/minus"
           onClick={decrement}
           disabled={disabled || quantity <= min}
         >
-          <Icon id="Minus" width={6} height={3} class="text-Dark" />
+          <Icon
+            id="Minus"
+            width={6}
+            height={3}
+            class="text-dark group-disabled/minus:text-gray"
+          />
         </button>
         <input
-          class="text-center text-xs p-0 font-bold outline-none w-[30px]"
+          class="text-center text-xs p-0 font-bold outline-none w-[30px] text-dark disabled:text-gray"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -84,11 +99,16 @@ function QuantitySelector(
           size={2}
         />
         <button
-          class=" join-item py-0 pr-1 pl-0 font-bold"
+          class=" join-item py-0 pr-1 pl-0 font-bold group/plus"
           onClick={increment}
           disabled={disabled}
         >
-          <Icon id="Plus" width={8} height={8} class="text-Dark" />
+          <Icon
+            id="Plus"
+            width={8}
+            height={8}
+            class="text-dark group-disabled/plus:text-gray"
+          />
         </button>
       </div>
     );

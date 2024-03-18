@@ -179,6 +179,7 @@ function ProductCard({
 
         <button
           type="button"
+          disabled={buyProduct.loading.value || isUnavailable}
           onClick={isInCart
             ? buyProduct.remove(productID)
             : canBuyWithSubscription

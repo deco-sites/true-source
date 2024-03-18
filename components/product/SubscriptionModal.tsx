@@ -262,7 +262,7 @@ export default function () {
   );
 }
 
-const subscriptionOptions = {
+export const subscriptionOptions = {
   "2W": "2 week",
   "1M": " 1 month",
   "2M": " 2 month",

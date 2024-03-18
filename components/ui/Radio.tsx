@@ -11,7 +11,6 @@ export type Props = {
 export default function Radio(
   { name, text, value, selected, changeHandler, type = "modal", id }: Props,
 ) {
-  // console.log(id);
   if (type === "cart") {
     return (
       <div class="flex gap-2 cursor-pointer group">
