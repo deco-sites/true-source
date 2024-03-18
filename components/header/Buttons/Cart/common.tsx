@@ -3,7 +3,6 @@ import Icon from "$store/components/ui/Icon.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import { SourceFileBase } from "https://deno.land/x/ts_morph@20.0.0/ts_morph.js";
 
 interface Props {
   loading: boolean;
@@ -11,7 +10,7 @@ interface Props {
   total: number;
   items: AnalyticsItem[];
   type?: "menu" | "header";
-  size?: "sm" | "md" | "lg"
+  size?: "sm" | "md" | "lg";
 }
 
 function CartButton(
@@ -42,32 +41,35 @@ function CartButton(
     lg: 24,
   };
 
-  const iconSize = sizeMapping[size]
+  const iconSize = sizeMapping[size];
 
   return (
     <div class={`indicator ${type === "menu" ? "w-full" : ""}`}>
       <span
-        class={`flex justify-center items-center indicator-item top-[14px] bg-brand text-white h-6 w-6 rounded-full badge-xs ${totalItems === 0 ? "hidden" : ""
-          }`}
+        class={`flex justify-center items-center indicator-item top-[14px] bg-brand text-white h-6 w-6 rounded-full badge-xs ${
+          totalItems === 0 ? "hidden" : ""
+        }`}
       >
         {totalItems > 9 ? "9+" : totalItems}
       </span>
 
       <Button
-        class={`${type === "menu" ? "flex text-[11px] uppercase w-full" : " btn-ghost"}`}
+        class={`${
+          type === "menu" ? "flex text-[11px] uppercase w-full" : " btn-ghost"
+        }`}
         aria-label="open cart"
         data-deco={displayCart.value && "open-cart"}
         loading={type === "menu" ? false : loading}
         onClick={onClick}
       >
-        {type === "menu" ? (
-          <div class='flex items-center justify-between w-full'>
-            <p>Carrinho de Compras</p>
-            <Icon id="ShoppingCart" size={iconSize} />
-          </div>
-        ) : (
-          <Icon id="ShoppingCart" size={iconSize} />
-        )}
+        {type === "menu"
+          ? (
+            <div class="flex items-center justify-between w-full">
+              <p>Carrinho de Compras</p>
+              <Icon id="ShoppingCart" size={iconSize} />
+            </div>
+          )
+          : <Icon id="ShoppingCart" size={iconSize} />}
       </Button>
     </div>
   );

@@ -11,7 +11,6 @@ import { lazy, Suspense } from "preact/compat";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
 import type { INavItem } from "$store/components/header/NavItem.tsx";
 
-
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
 
@@ -111,42 +110,7 @@ const SearchHeader = (props: HeaderProps) => {
 const MinicartHeader = (props: HeaderProps) => {
   const { closeFunction: { onClose } } = props;
 
-  return (
-    <div class="flex justify-between items-center py-4 px-6 border-b border-Stroke font-lemon-milk">
-      <div class="flex items-center gap-2 text-lg text-black uppercase font-medium">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-        >
-          <g clip-path="url(#clip0_887_10823)">
-            <path
-              d="M1.5 1.5H2.47962C2.66414 1.5 2.75639 1.5 2.83064 1.53393C2.89606 1.56383 2.95151 1.61192 2.99036 1.67246C3.03445 1.74116 3.0475 1.83249 3.07359 2.01515L3.42857 4.5M3.42857 4.5L4.21749 10.2986C4.3176 11.0344 4.36766 11.4023 4.54357 11.6793C4.69858 11.9233 4.92081 12.1173 5.18352 12.238C5.48165 12.375 5.85296 12.375 6.59558 12.375H13.014C13.7209 12.375 14.0744 12.375 14.3632 12.2478C14.6179 12.1357 14.8364 11.9549 14.9942 11.7257C15.1732 11.4657 15.2393 11.1185 15.3716 10.4241L16.3643 5.21227C16.4109 4.96786 16.4342 4.84565 16.4004 4.75012C16.3708 4.66633 16.3124 4.59576 16.2357 4.55101C16.1481 4.5 16.0237 4.5 15.7749 4.5H3.42857ZM7.5 15.75C7.5 16.1642 7.16421 16.5 6.75 16.5C6.33579 16.5 6 16.1642 6 15.75C6 15.3358 6.33579 15 6.75 15C7.16421 15 7.5 15.3358 7.5 15.75ZM13.5 15.75C13.5 16.1642 13.1642 16.5 12.75 16.5C12.3358 16.5 12 16.1642 12 15.75C12 15.3358 12.3358 15 12.75 15C13.1642 15 13.5 15.3358 13.5 15.75Z"
-              stroke="#E4003F"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_887_10823">
-              <rect width="18" height="18" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-        <span class="font-bold text-[13px] uppercase">
-          CARRINHO
-        </span>
-      </div>
-
-      <button class="text-black" onClick={onClose}>
-        <Icon id="XMark" size={24} strokeWidth={2} />
-      </button>
-
-    </div>
-  );
+  return <></>;
 };
 
 const Aside = (

@@ -14,7 +14,7 @@ export interface TimelineCalcProps {
   selected: SubscriptionOptions | null;
 }
 
-export type SubscriptionOptions = "2W" | "1M" | "2M" | "3M";
+export type SubscriptionOptions = "none" | "2W" | "1M" | "2M" | "3M";
 
 export default function SubscriptionButtonVTEX({
   productID,

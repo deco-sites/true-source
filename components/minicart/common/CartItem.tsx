@@ -3,9 +3,14 @@ import Icon from "$store/components/ui/Icon.tsx";
 import QuantitySelector from "$store/components/ui/QuantitySelector.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
-import { AnalyticsItem } from "apps/commerce/types.ts";
+import { useSignal } from "@preact/signals";
+import { AnalyticsItem, Product } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useCallback, useState } from "preact/hooks";
+import { SubscriptionOptions } from "deco-sites/true-source/components/product/Subscription.tsx";
+import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
+import Radio from "deco-sites/true-source/components/ui/Radio.tsx";
+import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
+import { useCallback, useId, useState } from "preact/hooks";
 
 export interface Item {
   image: {
@@ -20,13 +25,20 @@ export interface Item {
   };
 }
 
-export interface Props {
-  item: Item;
-  index: number;
+const SubscriptionOptionsMap = {
+  "none": "Sem recorrência",
+  "2W": "2 Semanas",
+  "1M": "1 Mês",
+  "2M": "2 Meses",
+  "3M": "3 Meses",
+};
 
+export interface Props {
+  cartQuantity: number;
+  item: Product;
+  index: number;
   locale: string;
   currency: string;
-
   onUpdateQuantity: (quantity: number, index: number) => Promise<void>;
   itemToAnalyticsItem: (index: number) => AnalyticsItem | null | undefined;
 }
@@ -37,13 +49,23 @@ function CartItem(
     index,
     locale,
     currency,
+    cartQuantity,
     onUpdateQuantity,
     itemToAnalyticsItem,
   }: Props,
 ) {
-  const { image, name, price: { sale, list }, quantity } = item;
-  const isGift = sale < 0.01;
+  const { image, name } = item;
+  const quantity = item.offers?.offers[0].inventoryLevel?.value ?? 0;
+  const { price = 1, listPrice = 1 } = useOffer(item.offers) || {};
+  const isGift = price / 100 <= 0.01;
   const [loading, setLoading] = useState(false);
+  const selected = useSignal<SubscriptionOptions | null>(null);
+  const closeCollapsable = useSignal(true);
+  const id = useId();
+
+  const itemId = `${name}-${id}`;
+
+  const canBuyWithSubscription = true;
 
   const withLoading = useCallback(
     <A,>(cb: (args: A) => Promise<void>) => async (e: A) => {
@@ -57,19 +79,30 @@ function CartItem(
     [],
   );
 
+  // @ts-ignore all inputs are checked
+  const changeHandler = (e) => {
+    const target = e.target as HTMLInputElement;
+
+    // @ts-ignore all inputs are checked
+    if (target.checked) {
+      selected.value = target.value as SubscriptionOptions;
+    }
+    closeCollapsable.value = !closeCollapsable.value;
+  };
+
   return (
     <div
-      class="grid grid-rows-1 gap-5 p-6 border-b border-solid border-[#EDEDED]"
+      class="grid grid-rows-1 gap-4 p-4 border-b border-solid border-[#EDEDED]"
       style={{
-        gridTemplateColumns: "64px auto",
+        gridTemplateColumns: "48px auto",
       }}
     >
       <Image
-        {...image}
-        src={image.src.replace("55-55", "255-255")}
+        src={image?.[0].url?.replace("55-55", "255-255") ?? ""}
         width={104}
         height={104}
         class="object-contain"
+        alt={item.name}
       />
 
       <div class="flex flex-col gap-2">
@@ -80,7 +113,7 @@ function CartItem(
           <Button
             disabled={loading || isGift}
             loading={loading}
-            class="btn-ghost btn-square -mt-[2rem]"
+            class="-mt-[18px]"
             onClick={withLoading(async () => {
               const analyticsItem = itemToAnalyticsItem(index);
 
@@ -113,34 +146,122 @@ function CartItem(
           <div>
             <QuantitySelector
               disabled={loading || isGift}
-              quantity={quantity}
+              quantity={cartQuantity}
               onChange={withLoading(async (quantity) => {
                 const analyticsItem = itemToAnalyticsItem(index);
-                const diff = quantity - item.quantity;
+                const itemQuantity =
+                  item.offers?.offers[0].inventoryLevel?.value ?? 0;
+                const diff = quantity - itemQuantity;
 
                 await onUpdateQuantity(quantity, index);
 
                 if (analyticsItem) {
                   sendEvent({
                     name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                    params: {
-                      items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
-                    },
+                    params: { items: [analyticsItem] },
                   });
                 }
               })}
             />
           </div>
           {/* */}
-          <div class="flex flex-wrap justify-end gap-x-2">
-            <span class="line-through text-sm">
-              {formatPrice(list, currency, locale)}
+          <div class="flex justify-end gap-x-2">
+            <span class="line-through text-xs text-dark">
+              {formatPrice(listPrice, currency, locale)}
             </span>
-            <span class="text-sm text-green font-bold">
-              {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+            <span class="text-xs text-green font-bold">
+              {isGift ? "Grátis" : formatPrice(price, currency, locale)}
             </span>
           </div>
         </div>
+
+        {canBuyWithSubscription && (
+          <Collapsable
+            open={!closeCollapsable.value}
+            class={`w-full border  rounded-[20px] py-2 ${
+              selected.value && selected.value !== "none"
+                ? "border-green"
+                : "border-Stroke"
+            } `}
+            title={
+              <div class="flex justify-between items-center px-[14px] text-xs">
+                {selected.value && selected.value !== "none"
+                  ? (
+                    <div class="flex items-center gap-2">
+                      <span class="bg-green w-5 h-5 rounded-full flex items-center justify-center">
+                        <Icon id="Refresh" size={10} />
+                      </span>
+                      <span class="">
+                        Frequência:{" "}
+                        <strong>
+                          {SubscriptionOptionsMap[selected.value]}
+                        </strong>
+                      </span>
+                    </div>
+                  )
+                  : <span>Assine e economize</span>}
+                <Icon
+                  id="ChevronDown"
+                  size={16}
+                  class="rotate-0 text-neutral-5 group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                />
+              </div>
+            }
+          >
+            <div class="px-[14px] flex flex-col mt-2 text-dark">
+              <div class="flex flex-col gap-y-1">
+                {selected.value && (
+                  <Radio
+                    type="cart"
+                    selected={selected.value}
+                    changeHandler={changeHandler}
+                    name="subscription_option"
+                    value="none"
+                    id={itemId + "-none"}
+                    text="Sem recorrência"
+                  />
+                )}
+
+                <Radio
+                  type="cart"
+                  selected={selected.value}
+                  changeHandler={changeHandler}
+                  name="subscription_option"
+                  value="2W"
+                  id={itemId + "-2W"}
+                  text="Frequencia:<strong>2 semanas</strong>"
+                />
+                <Radio
+                  type="cart"
+                  selected={selected.value}
+                  changeHandler={changeHandler}
+                  name="subscription_option"
+                  value="1M"
+                  id={itemId + "-1M"}
+                  text="Frequencia:<strong>1 mês</strong>"
+                />
+                <Radio
+                  type="cart"
+                  selected={selected.value}
+                  changeHandler={changeHandler}
+                  name="subscription_option"
+                  value="2M"
+                  id={itemId + "-2M"}
+                  text="Frequencia:<strong>2 meses</strong>"
+                />
+                <Radio
+                  type="cart"
+                  selected={selected.value}
+                  changeHandler={changeHandler}
+                  name="subscription_option"
+                  value="3M"
+                  id={itemId + "-3M"}
+                  text="Frequencia:<strong>3 meses</strong>"
+                />
+              </div>
+            </div>
+          </Collapsable>
+        )}
       </div>
     </div>
   );
