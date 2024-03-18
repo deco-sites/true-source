@@ -39,7 +39,7 @@ export default function InfoCardHorizontal({
         <div
           class={`flex ${
             textAlign === "right" ? "justify-end" : "justify-start"
-          } relative z-1 rounded-[35px] overflow-hidden min-h-[580px]`}
+          } lg:items-center relative z-1 rounded-[35px] overflow-hidden min-h-[580px]`}
         >
           <picture>
             <source media="(min-width:1024px)" srcset={image.desktop} />
