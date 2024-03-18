@@ -116,42 +116,43 @@ function SearchResult(
           productsCount={pageInfo.records ?? 0}
         />
 
-        <div class="flex flex-row">
+        <div class="flex">
           {filters.length > 0 && !isMobile && (
             <aside class="w-min min-w-[250px]">
               <Filters filters={filters} url={url} />
             </aside>
           )}
-          <div class="flex-grow" id={id}>
-            <ProductGallery
-              products={products}
-              offset={offset}
-              isMobile={isMobile}
-            />
-          </div>
-        </div>
-
-        <div class="flex justify-center my-4">
-          <div class="join">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost join-item">
-              Page {zeroIndexedOffsetPage + 1}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
-            </a>
+          <div>
+            <div class="flex-grow" id={id}>
+              <ProductGallery
+                products={products}
+                offset={offset}
+                isMobile={isMobile}
+              />
+            </div>
+            <div class="flex justify-center my-4">
+              <div class="join">
+                <a
+                  aria-label="previous page link"
+                  rel="prev"
+                  href={pageInfo.previousPage ?? "#"}
+                  class="btn btn-ghost join-item"
+                >
+                  <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+                </a>
+                <span class="btn btn-ghost join-item">
+                  Page {zeroIndexedOffsetPage + 1}
+                </span>
+                <a
+                  aria-label="next page link"
+                  rel="next"
+                  href={pageInfo.nextPage ?? "#"}
+                  class="btn btn-ghost join-item"
+                >
+                  <Icon id="ChevronRight" size={24} strokeWidth={2} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
