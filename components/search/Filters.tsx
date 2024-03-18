@@ -193,19 +193,6 @@ function Filters({ filters: f, url, noCollapsable }: Props) {
     )
     .sort((a, b) => a.label === "produtos" ? -1 : 1);
 
-  //   const allProducts = filters.find(({ label }) => label === "Departamento")
-  //     ?.values.find(({ label }) => label.toLowerCase() === "produtos");
-
-  //   if (allProducts) {
-  //     allProducts.label = "Todos os produtos";
-
-  //     for (const f of filters) {
-  //       if (f.label === "produtos") {
-  //         f.values.unshift(allProducts);
-  //       }
-  //     }
-  //   }
-
   return (
     <ul class="flex flex-col gap-6 lg:mr-14">
       {filters

@@ -30,9 +30,6 @@ export default function (id_?: string) {
           id={id}
           class="hidden peer"
           checked={open}
-          onChange={(e) => {
-            console.log("change", e.currentTarget.checked);
-          }}
         />
         {children}
       </div>

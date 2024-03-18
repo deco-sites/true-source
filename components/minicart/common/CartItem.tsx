@@ -50,8 +50,6 @@ function CartItem(
   const closeCollapsable = useSignal(true);
   const id = useId();
 
-  console.log(fullProduct);
-
   const itemId = `${item.name}-${id}`;
 
   const canBuyWithSubscription = fullProduct?.additionalProperty?.some(
