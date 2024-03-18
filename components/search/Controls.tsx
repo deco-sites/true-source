@@ -7,6 +7,7 @@ import Breadcrumb from "deco-sites/true-source/components/ui/Breadcrumb.tsx";
 import { useSignal } from "@preact/signals";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
+import useSwiped from "deco-sites/true-source/sdk/useSwiped.tsx";
 
 export type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
@@ -32,6 +33,19 @@ function SearchControls(
 ) {
   const sortModal = useModal();
   const filterModal = useModal();
+
+  useSwiped({
+    onSwipeLeft: () => {
+      if (filterModal.isOpen()) {
+        filterModal.close();
+      }
+    },
+    onSwipeRight: () => {
+      if (sortModal.isOpen()) {
+        sortModal.close();
+      }
+    },
+  });
 
   return (
     <div class="flex flex-col">

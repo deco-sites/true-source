@@ -14,5 +14,15 @@ export default function (_id?: string) {
         <div {...props} class={props.class} />
       </>
     ),
+    open: () => {
+      (document.getElementById(id) as HTMLInputElement).checked = true;
+    },
+    close: () => {
+      (document.getElementById(id) as HTMLInputElement).checked = false;
+    },
+    isOpen: () => {
+      return (document.getElementById(id) as HTMLInputElement).checked;
+    },
+    id,
   };
 }
