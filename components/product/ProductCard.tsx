@@ -158,7 +158,7 @@ function ProductCard({
 
         {/* Price and rating */}
         <div class="flex gap-2 h-7 lg:h-6">
-          <div class="flex flex-col lg:flex-row justify-center">
+          <div class="flex flex-col gap-x-2 lg:flex-row justify-center">
             {listPrice > price && (
               <div class="line-through text-gray text-xs lg:text-sm">
                 {formatPrice(listPrice, offers?.priceCurrency)}
@@ -211,8 +211,11 @@ function ProductCard({
                     class="text-white"
                   />
                 )
-                : !isUnavailable && (canBuyWithSubscription ||
-                  (isMobile && !canBuyWithSubscription)) &&
+                : !isUnavailable &&
+                  // Show in desktop if product have subscription
+                  ((!isMobile && canBuyWithSubscription) ||
+                    // Show in mobile if product doesn't have subscription
+                    (isMobile && !canBuyWithSubscription)) &&
                   (
                     <Icon
                       id="ShoppingCart"
