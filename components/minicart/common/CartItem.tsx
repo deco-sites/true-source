@@ -10,20 +10,8 @@ import { SubscriptionOptions } from "deco-sites/true-source/components/product/S
 import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
 import Radio from "deco-sites/true-source/components/ui/Radio.tsx";
 import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
+import { OrderFormItem } from "apps/vtex/utils/types.ts";
 import { useCallback, useId, useState } from "preact/hooks";
-
-export interface Item {
-  image: {
-    src: string;
-    alt: string;
-  };
-  name: string;
-  quantity: number;
-  price: {
-    sale: number;
-    list: number;
-  };
-}
 
 const SubscriptionOptionsMap = {
   "none": "Sem recorrência",
@@ -34,8 +22,8 @@ const SubscriptionOptionsMap = {
 };
 
 export interface Props {
-  cartQuantity: number;
-  item: Product;
+  fullProduct: Product | undefined;
+  item: OrderFormItem;
   index: number;
   locale: string;
   currency: string;
@@ -49,23 +37,26 @@ function CartItem(
     index,
     locale,
     currency,
-    cartQuantity,
+    fullProduct,
     onUpdateQuantity,
     itemToAnalyticsItem,
   }: Props,
 ) {
-  const { image, name } = item;
-  const quantity = item.offers?.offers[0].inventoryLevel?.value ?? 0;
-  const { price = 1, listPrice = 1 } = useOffer(item.offers) || {};
+  const price = item.sellingPrice / 100;
+  const listPrice = item.listPrice / 100;
   const isGift = price / 100 <= 0.01;
   const [loading, setLoading] = useState(false);
   const selected = useSignal<SubscriptionOptions | null>(null);
   const closeCollapsable = useSignal(true);
   const id = useId();
 
-  const itemId = `${name}-${id}`;
+  console.log(fullProduct);
 
-  const canBuyWithSubscription = true;
+  const itemId = `${item.name}-${id}`;
+
+  const canBuyWithSubscription = fullProduct?.additionalProperty?.some(
+    ({ name }) => name === "activeSubscriptions",
+  );
 
   const withLoading = useCallback(
     <A,>(cb: (args: A) => Promise<void>) => async (e: A) => {
@@ -98,7 +89,7 @@ function CartItem(
       }}
     >
       <Image
-        src={image?.[0].url?.replace("55-55", "255-255") ?? ""}
+        src={item.imageUrl.replace("55-55", "255-255")}
         width={104}
         height={104}
         class="object-contain"
@@ -108,7 +99,7 @@ function CartItem(
       <div class="flex flex-col gap-2">
         <div class="flex justify-between items-center gap-4">
           <span class="font-bold text-sm max-w-[223px] font-inter text-[#3C3C3B] line-clamp-2">
-            {name}
+            {item.name}
           </span>
           <Button
             disabled={loading || isGift}
@@ -145,13 +136,11 @@ function CartItem(
         <div class="flex items-center justify-between gap-2">
           <div>
             <QuantitySelector
-              disabled={loading || isGift}
-              quantity={cartQuantity}
+              disabled={canBuyWithSubscription || loading || isGift}
+              quantity={item.quantity}
               onChange={withLoading(async (quantity) => {
                 const analyticsItem = itemToAnalyticsItem(index);
-                const itemQuantity =
-                  item.offers?.offers[0].inventoryLevel?.value ?? 0;
-                const diff = quantity - itemQuantity;
+                const diff = quantity - item.quantity;
 
                 await onUpdateQuantity(quantity, index);
 

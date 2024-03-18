@@ -1,4 +1,5 @@
 import { Section } from "deco/blocks/section.ts";
+import { renderSection } from "apps/website/pages/Page.tsx";
 
 interface Props {
   sections: Section[];
@@ -7,7 +8,7 @@ interface Props {
 export default function ({ sections }: Props) {
   return (
     <div>
-      {sections.map(({ Component, props }) => <Component {...props} />)}
+      {sections.map(renderSection)}
     </div>
   );
 }

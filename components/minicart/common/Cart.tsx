@@ -2,17 +2,16 @@ import Button from "$store/components/ui/Button.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useUI } from "$store/sdk/useUI.ts";
-import { useSignal } from "@preact/signals";
 import { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { useCart } from "apps/vtex/hooks/useCart.ts";
+import { OrderFormItem } from "apps/vtex/utils/types.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import CartItem, { Props as ItemProps } from "./CartItem.tsx";
 import { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 
 interface Props {
-  cartQuantity: number[];
-  items: Product[];
+  fullProducts: (Product | undefined)[];
+  items: OrderFormItem[];
   loading: boolean;
   total: number;
   subtotal: number;
@@ -29,7 +28,7 @@ interface Props {
 }
 
 function Cart({
-  cartQuantity,
+  fullProducts,
   items,
   total,
   subtotal,
@@ -46,8 +45,6 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
-  const products = useSignal<Product[]>([]);
-  const { cart } = useCart();
 
   const onClose = () => {
     displayCart.value = false;
@@ -114,9 +111,9 @@ function Cart({
                 class="grow shrink overflow-y-auto flex flex-col w-full h-full"
               >
                 {items.map((item, index) => (
-                  <li key={item.productID}>
+                  <li>
                     <CartItem
-                      cartQuantity={cartQuantity[index]}
+                      fullProduct={fullProducts[index]}
                       item={item}
                       index={index}
                       locale={locale}

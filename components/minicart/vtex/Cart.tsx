@@ -1,13 +1,14 @@
 import { invoke } from "$store/runtime.ts";
-import { effect, useSignal } from "@preact/signals";
+import { useSignal } from "@preact/signals";
 import { Product } from "apps/commerce/types.ts";
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
 function Cart() {
-  const products = useSignal<Product[]>([]);
+  const fullProducts = useSignal<Product[]>([]);
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
-  const { items, totalizers } = cart.value ?? { items: [] };
+  const { items = [], totalizers = [] } = cart.value ?? {};
+  const cartItemsLength = useSignal(0);
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
   const discounts =
     totalizers?.find((item) => item.id === "Discounts")?.value || 0;
@@ -15,23 +16,22 @@ function Cart() {
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;
 
-  effect(async () => {
-    if (items.length && !products.value.length) {
-      const fullProducts = await invoke.vtex.loaders.intelligentSearch
-        .productList({
-          props: {
-            ids: items.map((item) => item.id),
-          },
-        });
+  if (items.length !== cartItemsLength.value) {
+    cartItemsLength.value = items.length;
 
-      products.value = fullProducts || [] as Product[];
+    if (items.length > 0) {
+      invoke.vtex.loaders.intelligentSearch.productList({
+        props: {
+          ids: items.map((item) => item.id),
+        },
+      }).then((products) => fullProducts.value = products || [] as Product[]);
     }
-  });
+  }
 
   return (
     <BaseCart
-      cartQuantity={items.map((item) => item.quantity)}
-      items={products.value}
+      fullProducts={fullProducts.value}
+      items={items}
       total={(total - discounts) / 100}
       subtotal={total / 100}
       discounts={discounts / 100}

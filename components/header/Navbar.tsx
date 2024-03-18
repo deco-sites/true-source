@@ -71,7 +71,7 @@ function Navbar(
                     <Icon id="Help" size={22} />
                   </a>
 
-                  <CartButtonVTEX size="md" />
+                  <CartButtonVTEX />
                   <MenuButton />
                 </div>
               </div>
@@ -147,7 +147,7 @@ function Navbar(
 
                   {!buttons?.hideCartButton && (
                     <div className="flex items-center text-xs font-thin">
-                      <CartButtonVTEX size="lg" />
+                      <CartButtonVTEX />
                     </div>
                   )}
                 </div>

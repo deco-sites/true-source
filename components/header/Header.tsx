@@ -1,6 +1,5 @@
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
 import Drawers from "$store/islands/Header/Drawers.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Alert from "./Alert.tsx";
 import MicroHeaderSetup from "$store/components/ui/MicroHeaderSetup.tsx";
@@ -40,14 +39,14 @@ export interface Props {
   /** @title Barra de pesquisa */
   searchbar: Omit<SearchbarProps, "platform">;
   /** @title Itens do menu de navegação */
-  navItems: INavItem[]
+  navItems: INavItem[];
   /** @title Links institucionais do menu mobile */
   institutionalItems: InstitucionalItem[];
   /** @title Redes sociais do menu mobile */
-  socials: Socials[]
+  socials: Socials[];
   theme?: Theme;
-  /** 
-   * @ignore 
+  /**
+   * @ignore
    */
   isMobile: boolean;
 }
@@ -62,36 +61,38 @@ function Header({
   theme = "light",
   isMobile,
 }: Props) {
-  const platform = usePlatform();
   const items = navItems ?? [];
 
   return (
-    <>
-      <header id="header" class="group/header h-[211px] md:h-[193px]">
-        <Drawers
-          menu={{ items, institutionalItems, socials }}
-          searchbar={searchbar}
-          platform={platform}
-        >
-          <div class="bg-white fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} theme={theme} isMobile={isMobile} />}
-            <Navbar
-              items={navItems}
-              searchbar={searchbar && { ...searchbar, platform, isMobile }}
-              logo={logo}
-              isMobile={isMobile}
-            />
-          </div>
-        </Drawers>
-        <MicroHeaderSetup rootId="header" threshold={120} />
-      </header>
-    </>
+    <header id="header" class="group/header h-[211px] md:h-[193px]">
+      <Drawers
+        menu={{ items, institutionalItems, socials }}
+        searchbar={searchbar}
+      >
+        <div class="bg-white fixed w-full z-50">
+          {alerts && alerts.length > 0 && (
+            <Alert alerts={alerts} theme={theme} isMobile={isMobile} />
+          )}
+          <Navbar
+            items={navItems}
+            searchbar={searchbar && { ...searchbar, isMobile }}
+            logo={logo}
+            isMobile={isMobile}
+          />
+        </div>
+      </Drawers>
+      <MicroHeaderSetup rootId="header" threshold={120} />
+    </header>
   );
 }
 
 export default Header;
 
-export const loader = ({ ...props }: Props, req: Request, ctx: LoaderContext) => {
+export const loader = (
+  { ...props }: Props,
+  req: Request,
+  ctx: LoaderContext,
+) => {
   const isMobile = ctx.device === "mobile";
 
   return { ...props, isMobile };

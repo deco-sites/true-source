@@ -3,7 +3,6 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
-import * as $A from "./islands/A.ts";
 import * as $AddToCartArea from "./islands/AddToCartArea.tsx";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
@@ -11,14 +10,11 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $CartItem from "./islands/CartItem.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
+import * as $Header_Cart_Cart from "./islands/Header/Cart/Cart.tsx";
 import * as $Header_Cart_common from "./islands/Header/Cart/common.tsx";
-import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
-import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
-import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
-import * as $Header_Cart_vnda from "./islands/Header/Cart/vnda.tsx";
 import * as $Header_Cart_vtex from "./islands/Header/Cart/vtex.tsx";
-import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
 import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
 import * as $Header_MyAccount from "./islands/Header/MyAccount.tsx";
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
@@ -29,6 +25,7 @@ import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PixPrice from "./islands/PixPrice.tsx";
 import * as $PriceRange from "./islands/PriceRange.tsx";
 import * as $Product_Benefits from "./islands/Product/Benefits.tsx";
+import * as $Product_ProductCard from "./islands/Product/ProductCard.tsx";
 import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
 import * as $Product_ProductStarCard from "./islands/Product/ProductStarCard.tsx";
 import * as $Product_ProductStars from "./islands/Product/ProductStars.tsx";
@@ -50,7 +47,6 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
-    "./islands/A.ts": $A,
     "./islands/AddToCartArea.tsx": $AddToCartArea,
     "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
     "./islands/AddToCartButton/nuvemshop.tsx": $AddToCartButton_nuvemshop,
@@ -58,14 +54,11 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/CartItem.tsx": $CartItem,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
+    "./islands/Header/Cart/Cart.tsx": $Header_Cart_Cart,
     "./islands/Header/Cart/common.tsx": $Header_Cart_common,
-    "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
-    "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
-    "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,
-    "./islands/Header/Cart/vnda.tsx": $Header_Cart_vnda,
     "./islands/Header/Cart/vtex.tsx": $Header_Cart_vtex,
-    "./islands/Header/Cart/wake.tsx": $Header_Cart_wake,
     "./islands/Header/Drawers.tsx": $Header_Drawers,
     "./islands/Header/MyAccount.tsx": $Header_MyAccount,
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
@@ -76,6 +69,7 @@ const manifest = {
     "./islands/PixPrice.tsx": $PixPrice,
     "./islands/PriceRange.tsx": $PriceRange,
     "./islands/Product/Benefits.tsx": $Product_Benefits,
+    "./islands/Product/ProductCard.tsx": $Product_ProductCard,
     "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,
     "./islands/Product/ProductStarCard.tsx": $Product_ProductStarCard,
     "./islands/Product/ProductStars.tsx": $Product_ProductStars,
