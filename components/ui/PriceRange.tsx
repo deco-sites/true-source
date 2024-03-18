@@ -45,11 +45,29 @@ export const Range = ({
       params.set("filter.price", `${price.value.min}:${price.value.max}`);
 
       location.search = params.toString();
-    }, 2000);
+    }, 1500);
 
-    function updateLastValue() {
+    function updateLastValue(e: MouseEvent | TouchEvent) {
       isDown = true;
-      lastValue = price.value;
+
+      let x = 0;
+      let y = 0;
+
+      if (e.type === "touchstart" || e.type === "touchend") {
+        x = (e as TouchEvent).touches[0].clientX;
+        y = (e as TouchEvent).touches[0].clientY;
+      } else {
+        x = (e as MouseEvent).clientX;
+        y = (e as MouseEvent).clientY;
+      }
+
+      const wasInInputRange = document.elementFromPoint(x, y)?.matches(
+        "input[type=range]",
+      );
+
+      if (wasInInputRange) {
+        lastValue = price.value;
+      }
     }
 
     function doPost() {
