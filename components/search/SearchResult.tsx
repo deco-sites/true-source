@@ -122,7 +122,7 @@ function SearchResult(
               <Filters filters={filters} url={url} />
             </aside>
           )}
-          <div>
+          <div class="mx-auto">
             <div class="flex-grow" id={id}>
               <ProductGallery
                 products={products}
