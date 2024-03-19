@@ -137,77 +137,78 @@ function BannerCarousel(props: Props) {
   const { images, preload, interval } = { ...DEFAULT_PROPS, ...props };
 
   return (
-    <div
-      id={id}
-      class="flex w-full px-4 relative"
-    >
-      <ul data-slider class="w-full grid grid-cols-1 grid-rows-1">
-        {images.map((image, index) => {
-          const params = { promotion_name: image.alt };
-          return (
-            <li
-              id={`${id}::${index}`}
-              data-intersecting={index === 0}
-              data-item
-              class="col-start-1 row-start-1 w-full data-[intersecting='true']:opacity-100 opacity-0 transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto"
-            >
-              <BannerItem
-                image={image}
-                lcp={index === 0 && preload}
+    <div class="mx-auto max-w-[1440px]">
+      <div
+        id={id}
+        class="flex w-full px-4 relative"
+      >
+        <ul data-slider class="w-full grid grid-cols-1 grid-rows-1">
+          {images.map((image, index) => {
+            const params = { promotion_name: image.alt };
+            return (
+              <li
                 id={`${id}::${index}`}
-              />
-              <SendEventOnClick
-                id={`${id}::${index}`}
-                event={{ name: "select_promotion", params }}
-              />
-              <SendEventOnView
-                id={`${id}::${index}`}
-                event={{ name: "view_promotion", params }}
-              />
-            </li>
-          );
-        })}
-      </ul>
-
-      <div class="absolute left-10 bottom-4 lg:bottom-6 right-10 flex justify-between lg:justify-end items-center gap-8 z-[1]">
-        <ul class="carousel justify-center gap-3">
-          {images.map((_, index) => (
-            <li data-dot={index} class="carousel-item group">
-              <div class="size-1.5 lg:size-2 rounded-full bg-white group-data-[active]:bg-gradient-to-tr from-red to-orange" />
-            </li>
-          ))}
+                data-intersecting={index === 0}
+                data-item
+                class="col-start-1 row-start-1 w-full data-[intersecting='true']:opacity-100 opacity-0 transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto"
+              >
+                <BannerItem
+                  image={image}
+                  lcp={index === 0 && preload}
+                  id={`${id}::${index}`}
+                />
+                <SendEventOnClick
+                  id={`${id}::${index}`}
+                  event={{ name: "select_promotion", params }}
+                />
+                <SendEventOnView
+                  id={`${id}::${index}`}
+                  event={{ name: "view_promotion", params }}
+                />
+              </li>
+            );
+          })}
         </ul>
-        <div class="flex justify-center items-center gap-2 text-dark">
-          <button
-            data-prev={id}
-            aria-label="Anterior"
-            class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
-          >
-            <Icon
-              class="rotate-180 size-4 lg:size-6"
-              id="BannerArrowRight"
-              strokeWidth={2}
-              strokeLinecap="round"
-            />
-          </button>
-          <button
-            data-next={id}
-            aria-label="Próximo"
-            class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
-          >
-            <Icon
-              class="size-4 lg:size-6"
-              id="BannerArrowRight"
-              strokeWidth={2}
-              strokeLinecap="round"
-            />
-          </button>
+        <div class="absolute left-10 bottom-4 lg:bottom-6 right-10 flex justify-between lg:justify-end items-center gap-8 z-[1]">
+          <ul class="carousel justify-center gap-3">
+            {images.map((_, index) => (
+              <li data-dot={index} class="carousel-item group">
+                <div class="size-1.5 lg:size-2 rounded-full bg-white group-data-[active]:bg-gradient-to-tr from-red to-orange" />
+              </li>
+            ))}
+          </ul>
+          <div class="flex justify-center items-center gap-2 text-dark">
+            <button
+              data-prev={id}
+              aria-label="Anterior"
+              class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+            >
+              <Icon
+                class="rotate-180 size-4 lg:size-6"
+                id="BannerArrowRight"
+                strokeWidth={2}
+                strokeLinecap="round"
+              />
+            </button>
+            <button
+              data-next={id}
+              aria-label="Próximo"
+              class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+            >
+              <Icon
+                class="size-4 lg:size-6"
+                id="BannerArrowRight"
+                strokeWidth={2}
+                strokeLinecap="round"
+              />
+            </button>
+          </div>
         </div>
+        <BannerCarouselJS
+          rootId={id}
+          interval={interval && interval * 1e3}
+        />
       </div>
-      <BannerCarouselJS
-        rootId={id}
-        interval={interval && interval * 1e3}
-      />
     </div>
   );
 }
