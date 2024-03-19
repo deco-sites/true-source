@@ -36,7 +36,7 @@ export interface Props {
 }
 
 export default function () {
-  const { currentSubscription } = useUI();
+  const { currentSubscription, displayCart } = useUI();
 
   if (!currentSubscription.value) {
     return null;
@@ -102,6 +102,8 @@ export default function () {
         content: SUBSCRIPTION_VALUE,
         noSplitItem: true,
       });
+
+      displayCart.value = true;
     } finally {
       loading.value = false;
       currentSubscription.value = null;
