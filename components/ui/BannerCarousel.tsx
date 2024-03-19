@@ -1,57 +1,64 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 import {
   SendEventOnClick,
   SendEventOnView,
 } from "deco-sites/true-source/components/Analytics.tsx";
-import Button from "deco-sites/true-source/components/ui/Button.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
-import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import BannerCarouselJS from "deco-sites/true-source/islands/BannerCarouselJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Image from "apps/website/components/Image.tsx";
+
+interface ImageProps {
+  /**
+   * @title Imagem
+   */
+  src: ImageWidget;
+  /**
+   * @title Largura
+   * @description Largura da imagem
+   */
+  width: number;
+  /**
+   * @title Altura
+   * @description Altura da imagem
+   */
+  height: number;
+}
 
 /**
- * @titleBy alt
+ * @title {{alt}}
  */
 export interface Banner {
-  /** @description desktop otimized image */
-  desktop: ImageWidget;
-  /** @description mobile otimized image */
-  mobile: ImageWidget;
-  /** @description Image's alt text */
+  /**
+   * @description Imagem para desktop
+   */
+  desktop: ImageProps;
+  /**
+   * @description Imagem para mobile
+   */
+  mobile: ImageProps;
+  /**
+   * @description Texto alternativo da imagem
+   */
   alt: string;
-  action?: {
-    /** @description when user clicks on the image, go to this link */
-    href: string;
-    /** @description Image text title */
-    title: string;
-    /** @description Image text subtitle */
-    subTitle: string;
-    /** @description Button label */
-    label: string;
-  };
 }
 
 export interface Props {
-  images?: Banner[];
   /**
-   * @description Check this option when this banner is the biggest image on the screen for image optimizations
+   * @title Imagens
+   */
+  images: Banner[];
+  /**
+   * @title Pré-carregar
+   * @description Ative esta opção quando esse banner é a maior imagem na tela
+   * @default false
    */
   preload?: boolean;
   /**
-   * @title Show arrows
-   * @description show arrows to navigate through the images
-   */
-  arrows?: boolean;
-  /**
-   * @title Show dots
-   * @description show dots to navigate through the images
-   */
-  dots?: boolean;
-  /**
-   * @title Autoplay interval
-   * @description time (in seconds) to start the carousel autoplay
+   * @title Intervalo
+   * @description Intervalo de tempo que cada imagem ficará na tela, desative deixando o campo vazio
    */
   interval?: number;
 }
@@ -60,12 +67,6 @@ const DEFAULT_PROPS = {
   images: [
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
@@ -73,12 +74,6 @@ const DEFAULT_PROPS = {
     },
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
@@ -86,19 +81,13 @@ const DEFAULT_PROPS = {
     },
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
   ],
-  preload: true,
+  preload: false,
 };
 
 function BannerItem(
@@ -108,116 +97,38 @@ function BannerItem(
     alt,
     mobile,
     desktop,
-    action,
   } = image;
 
   return (
-    <a
+    <div
       id={id}
-      href={action?.href ?? "#"}
-      aria-label={action?.label}
-      class="relative overflow-y-hidden w-full"
+      class="relative overflow-clip w-full rounded-[35px]"
     >
-      {action && (
-        <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
-          <span class="text-2xl font-light text-base-100">
-            {action.title}
-          </span>
-          <span class="font-normal text-4xl text-base-100">
-            {action.subTitle}
-          </span>
-          <Button
-            class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
-            aria-label={action.label}
-          >
-            {action.label}
-          </Button>
-        </div>
-      )}
       <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
-          src={mobile}
-          width={430}
-          height={590}
+          src={mobile.src}
+          width={mobile.width}
+          height={mobile.height}
         />
         <Source
           media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
-          src={desktop}
-          width={1440}
-          height={600}
+          src={desktop.src}
+          width={desktop.width}
+          height={desktop.height}
         />
         <Image
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
-          src={desktop}
+          src={desktop.src}
           alt={alt}
-          width={1440}
-          height={600}
+          width={desktop.width}
+          height={desktop.height}
         />
       </Picture>
-    </a>
-  );
-}
-
-function Dots({ images, interval = 0 }: Props) {
-  return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-          @property --dot-progress {
-            syntax: '<percentage>';
-            inherits: false;
-            initial-value: 0%;
-          }
-          `,
-        }}
-      />
-      <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
-        {images?.map((_, index) => (
-          <li class="carousel-item">
-            <Slider.Dot index={index}>
-              <div class="py-5">
-                <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
-                  style={{ animationDuration: `${interval}s` }}
-                />
-              </div>
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
-
-function Buttons() {
-  return (
-    <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
-          <Icon
-            class="text-base-100"
-            size={24}
-            id="ChevronLeft"
-            strokeWidth={3}
-          />
-        </Slider.PrevButton>
-      </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
-          <Icon
-            class="text-base-100"
-            size={24}
-            id="ChevronRight"
-            strokeWidth={3}
-          />
-        </Slider.NextButton>
-      </div>
-    </>
+    </div>
   );
 }
 
@@ -228,13 +139,18 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
+      class="flex w-full px-4 relative"
     >
-      <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {images?.map((image, index) => {
+      <ul data-slider class="w-full grid grid-cols-1 grid-rows-1">
+        {images.map((image, index) => {
           const params = { promotion_name: image.alt };
           return (
-            <Slider.Item index={index} class="carousel-item w-full">
+            <li
+              id={`${id}::${index}`}
+              data-intersecting={index === 0}
+              data-item
+              class="col-start-1 row-start-1 w-full data-[intersecting='true']:opacity-100 opacity-0 transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto"
+            >
               <BannerItem
                 image={image}
                 lcp={index === 0 && preload}
@@ -248,16 +164,50 @@ function BannerCarousel(props: Props) {
                 id={`${id}::${index}`}
                 event={{ name: "view_promotion", params }}
               />
-            </Slider.Item>
+            </li>
           );
         })}
-      </Slider>
+      </ul>
 
-      {props.arrows && <Buttons />}
-
-      {props.dots && <Dots images={images} interval={interval} />}
-
-      <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
+      <div class="absolute left-10 bottom-4 lg:bottom-6 right-10 flex justify-between lg:justify-end items-center gap-8 z-[1]">
+        <ul class="carousel justify-center gap-3">
+          {images.map((_, index) => (
+            <li data-dot={index} class="carousel-item group">
+              <div class="size-1.5 lg:size-2 rounded-full bg-white group-data-[active]:bg-gradient-to-tr from-red to-orange" />
+            </li>
+          ))}
+        </ul>
+        <div class="flex justify-center items-center gap-2 text-dark">
+          <button
+            data-prev={id}
+            aria-label="Anterior"
+            class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+          >
+            <Icon
+              class="rotate-180 size-4 lg:size-6"
+              id="BannerArrowRight"
+              strokeWidth={2}
+              strokeLinecap="round"
+            />
+          </button>
+          <button
+            data-next={id}
+            aria-label="Próximo"
+            class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+          >
+            <Icon
+              class="size-4 lg:size-6"
+              id="BannerArrowRight"
+              strokeWidth={2}
+              strokeLinecap="round"
+            />
+          </button>
+        </div>
+      </div>
+      <BannerCarouselJS
+        rootId={id}
+        interval={interval && interval * 1e3}
+      />
     </div>
   );
 }
