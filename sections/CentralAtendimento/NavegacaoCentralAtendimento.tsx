@@ -3,7 +3,7 @@ export default function MenuCentralAtendimento() {
       <div class="sticky top-0 z-20 flex h-[104px] w-full flex-row overflow-hidden bg-white px-0 py-4  sm:h-[432px] sm:w-[275px] sm:flex-col sm:border-l-2  sm:border-solid sm:border-red sm:px-14 sm:py-10">
         <div class="flex h-full w-full flex-row gap-6 sm:flex-col sm:gap-8">
           <a
-            href="https://deco-sites-pave1.deno.dev/fale-conosco"
+            href="https://deco-sites-true-source.deno.dev/fale-conosco"
             class="group flex items-center gap-4 border-b-[2px] border-b-red sm:border-b-0"
           >
             <div class="flex items-center justify-center gap-4">
@@ -29,7 +29,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/perguntas-frequentes"
+            href="https://deco-sites-true-source.deno.dev/perguntas-frequentes"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -55,7 +55,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/politica-de-privacidade"
+            href="https://deco-sites-true-source.deno.dev/politica-de-privacidade"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -82,7 +82,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/troca-e-devolucao"
+            href="https://deco-sites-true-source.deno.dev/troca-e-devolucao"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/politica-de-uso"
+            href="https://deco-sites-true-source.deno.dev/politica-de-uso"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -134,7 +134,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/politica-de-entrega"
+            href="https://deco-sites-true-source.deno.dev/politica-de-entrega"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -160,7 +160,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/frete-gratis"
+            href="https://deco-sites-true-source.deno.dev/frete-gratis"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
@@ -186,7 +186,7 @@ export default function MenuCentralAtendimento() {
           </a>
   
           <a
-            href="https://deco-sites-pave1.deno.dev/politica-de-pagamento"
+            href="https://deco-sites-true-source.deno.dev/politica-de-pagamento"
             class="group flex items-center gap-4 sm:border-b-0"
           >
             <div class="flex items-center justify-center">
