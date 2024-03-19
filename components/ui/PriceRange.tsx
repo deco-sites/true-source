@@ -6,6 +6,7 @@ import { debounce } from "std/async/debounce.ts";
 export type RangeProps = {
   max: number;
   min: number;
+  params: string;
 };
 
 type RangeValue = {
@@ -19,6 +20,7 @@ type RangeValue = {
 export const Range = ({
   max,
   min,
+  params: _params,
 }: RangeProps) => {
   const price = useSignal<RangeValue>({
     max: Number.isFinite(max) ? max : 1000,
@@ -41,8 +43,11 @@ export const Range = ({
           lastValue.max === price.value.max) || isDown
       ) return;
 
-      const params = new URLSearchParams(window.location.search);
-      params.set("filter.price", `${price.value.min}:${price.value.max}`);
+      const params = new URLSearchParams(_params);
+      params.set(
+        "filter.price",
+        `${price.value.min}:${price.value.max}`,
+      );
 
       location.search = params.toString();
     }, 1500);

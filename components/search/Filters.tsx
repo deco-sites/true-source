@@ -48,8 +48,9 @@ function ValueItem(
 }
 
 function FilterValues(
-  { key, values, label, noCollapsable }: FilterToggle & {
+  { key, values, label, noCollapsable, url }: FilterToggle & {
     noCollapsable?: boolean;
+    url: string;
   },
 ) {
   const collapsable = useCollapsable();
@@ -58,11 +59,29 @@ function FilterValues(
   const NO_DIVIDER = [/^category/, /^price/];
 
   if (label === "Preço") {
-    const [min, max] = values.map(({ value }) =>
-      parseRange(value) || { from: 0, to: 0 }
-    ).reduce((acc, curr) => {
-      return [Math.min(acc[0], curr.from), Math.max(acc[1], curr.to)];
-    }, [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]);
+    let min = 0;
+    let max = 0;
+
+    const params = new URL(url).searchParams;
+
+    if (params.has("filter.price")) {
+      const v = params
+        .get("filter.price")!
+        .split(":")
+        .map((value) => Number(value));
+
+      min = v[0];
+      max = v[1];
+    } else {
+      const v = values.map(({ value }) =>
+        parseRange(value) || { from: 0, to: 0 }
+      ).reduce((acc, curr) => {
+        return [Math.min(acc[0], curr.from), Math.max(acc[1], curr.to)];
+      }, [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]);
+
+      min = v[0];
+      max = v[1];
+    }
 
     if (Math.round(min) === Math.round(max)) {
       return null;
@@ -100,16 +119,40 @@ function FilterValues(
           >
             {(() => {
               if (label === "Preço") {
-                const [min, max] = values.map(({ value }) =>
-                  parseRange(value) || { from: 0, to: 0 }
-                ).reduce((acc, curr) => {
-                  return [
-                    Math.min(acc[0], curr.from),
-                    Math.max(acc[1], curr.to),
-                  ];
-                }, [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]);
+                let min = 0;
+                let max = 0;
 
-                return <PriceRange min={min} max={max} />;
+                const params = new URL(url).searchParams;
+
+                if (params.has("filter.price")) {
+                  const v = params
+                    .get("filter.price")!
+                    .split(":")
+                    .map((value) => Number(value));
+
+                  min = v[0];
+                  max = v[1];
+                } else {
+                  const v = values.map(({ value }) =>
+                    parseRange(value) || { from: 0, to: 0 }
+                  ).reduce((acc, curr) => {
+                    return [
+                      Math.min(acc[0], curr.from),
+                      Math.max(acc[1], curr.to),
+                    ];
+                  }, [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]);
+
+                  min = v[0];
+                  max = v[1];
+                }
+
+                return (
+                  <PriceRange
+                    min={min}
+                    max={max}
+                    params={values[0].url}
+                  />
+                );
               }
 
               if (label === "Categoria") {
@@ -197,7 +240,7 @@ function Filters({ filters: f, url, noCollapsable }: Props) {
     <ul class="flex flex-col gap-6 lg:mr-14">
       {filters
         .map((filter) => (
-          <FilterValues {...filter} noCollapsable={noCollapsable} />
+          <FilterValues {...filter} url={url} noCollapsable={noCollapsable} />
         ))}
     </ul>
   );
