@@ -76,7 +76,8 @@ function SearchResult(
     return (
       <div class="max-w-[1440px] w-[95%] mx-auto mt-6">
         <h1 class="text-sm lg:text-2xl font-bold text-dark font-lemon">
-          {title} <span class="font-light">({pageInfo.records})</span>
+          {decodeURIComponent(title).replaceAll("-", " ")}{" "}
+          <span class="font-light">({pageInfo.records})</span>
         </h1>
 
         <div class="w-full h-px bg-light-gray-200 my-6" />
