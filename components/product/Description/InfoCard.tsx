@@ -48,7 +48,10 @@ export default function InfoCard({
             >
               {title}
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: description }} />
+            <div
+              class="text-sm md:text-base leading-6 sm:leading-5"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </div>
         </div>
         <div class="w-full md:w-1/2">
@@ -90,7 +93,7 @@ export default function InfoCard({
             {title}
           </h2>
           <div
-            class="text-sm md:text-base"
+            class="text-sm md:text-base leading-6 sm:leading-5"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
@@ -103,7 +106,7 @@ export default function InfoCard({
             />
             <img
               src={image.mobile ? image.mobile : image.desktop}
-              class="w-full h-auto"
+              class="w-full h-auto max-h-[471px] object-cover object-center"
             />
           </picture>
         </div>
@@ -157,7 +160,7 @@ export default function InfoCard({
           <div
             class={`${
               !title
-                ? "text-1xl sm:text-2xl font-lemon-milk font-bold leading-6 sm:leading-7"
+                ? "text-1xl sm:text-2xl font-lemon-milk font-bold  leading-6 sm:leading-5"
                 : "text-base leading-6"
             }  ${textAlignment}`}
           >

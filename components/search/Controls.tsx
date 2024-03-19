@@ -48,7 +48,8 @@ function SearchControls(
     <div class="flex flex-col">
       <div class="flex flex-row items-center justify-between sm:gap-4 sm:border-none">
         <h1 class="text-2xl font-bold text-dark font-lemon">
-          {title} <span class="font-light">({productsCount})</span>
+          {decodeURIComponent(title).replaceAll("-", " ")}{" "}
+          <span class="font-light">({productsCount})</span>
         </h1>
         {sortOptions.length > 0 && !isMobile && (
           <Sort sortOptions={sortOptions} isMobile={isMobile} />

@@ -96,98 +96,110 @@ export default function AddToCartArea({
   });
 
   return (
-    <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4 max-w-[484px]">
-      {availability === "https://schema.org/InStock"
-        ? (
-          <>
-            <div
-              class={`flex ${
-                listPrice > price
-                  ? "flex-row-reverse sm:flex-col-reverse gap-4 sm:gap-2 justify-between items-center sm:items-stretch"
-                  : "flex-row-reverse sm:flex-row gap-4 sm:gap-6 justify-between items-center sm:items-stretch"
-              }`}
-            >
-              <span class="text-dark">
-                <PixPrice
+    <>
+      <div class="flex flex-col bg-ice rounded-3xl p-6 flex-none gap-4 max-w-[484px]">
+        {availability === "https://schema.org/InStock"
+          ? (
+            <>
+              <div
+                class={`flex ${
+                  listPrice > price
+                    ? "flex-row-reverse sm:flex-col-reverse gap-4 sm:gap-2 justify-between items-center sm:items-stretch"
+                    : "flex-row-reverse sm:flex-row gap-4 sm:gap-6 justify-between items-center sm:items-stretch"
+                }`}
+              >
+                <span class="text-dark">
+                  <PixPrice
+                    productId={productID}
+                    quantity={quantity}
+                    sellingPrice={price}
+                    listPrice={listPrice}
+                  />
+                  <p class="text-xs sm:text-sm font-regular normal-case">
+                    à vista no Pix
+                  </p>
+                </span>
+                <SellingPrice
                   productId={productID}
                   quantity={quantity}
                   sellingPrice={price}
                   listPrice={listPrice}
                 />
-                <p class="text-xs sm:text-sm font-regular normal-case">
-                  à vista no Pix
-                </p>
-              </span>
-              <SellingPrice
-                productId={productID}
-                quantity={quantity}
-                sellingPrice={price}
-                listPrice={listPrice}
-              />
-            </div>
-            <div class="flex items-center gap-4 border-2 border-light-gray rounded-md">
-              <QuantitySelector
-                type="pdp"
-                quantity={quantity}
-                onChange={(quantity) => {
-                  if (quantity < 1) return;
-                  if (quantity > 9 || quantity > inventoryLevelValue) {
-                    return;
-                  }
-                  setQuantity(quantity);
-                }}
-              />
-              <span
-                class={`flex items-center gap-3 text-sm ${
-                  quantity >= 3
-                    ? "text-green font-bold"
-                    : "text-gray font-regular"
-                }`}
-              >
-                {quantity >= 3 && (
-                  <span class="inline max-[400px]:hidden">
-                    <CheckIcon />
+              </div>
+              <div class="flex items-center gap-4 border-2 border-light-gray rounded-md">
+                <QuantitySelector
+                  type="pdp"
+                  quantity={quantity}
+                  onChange={(quantity) => {
+                    if (quantity < 1) return;
+                    if (quantity > 9 || quantity > inventoryLevelValue) {
+                      return;
+                    }
+                    setQuantity(quantity);
+                  }}
+                />
+                <span
+                  class={`flex items-center gap-3 text-sm ${
+                    quantity >= 3
+                      ? "text-green font-bold"
+                      : "text-gray font-regular"
+                  }`}
+                >
+                  {quantity >= 3 && (
+                    <span class="inline max-[400px]:hidden">
+                      <CheckIcon />
+                    </span>
+                  )}
+                  <span class="hidden sm:inline">
+                    <strong>10% OFF</strong> para <strong>3 ou mais</strong>
+                    {" "}
+                    unidades
                   </span>
-                )}
-                <span class="hidden sm:inline">
-                  <strong>10% OFF</strong> para <strong>3 ou mais</strong>{" "}
-                  unidades
+                  <span class="inline sm:hidden text-xs">
+                    <strong>10% OFF</strong> para <strong>3 ou mais</strong> un.
+                  </span>
                 </span>
-                <span class="inline sm:hidden text-xs">
-                  <strong>10% OFF</strong> para <strong>3 ou mais</strong> un.
-                </span>
-              </span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <AddToCartButtonVTEX
-                eventParams={{ items: [eventItem] }}
-                productID={productID}
-                seller={seller}
-                quantity={quantity}
-              />
-              {activeSubscription && (
-                <SubscriptionButtonVTEX
+              </div>
+              <div class="flex flex-col gap-2">
+                <AddToCartButtonVTEX
+                  eventParams={{ items: [eventItem] }}
                   productID={productID}
                   seller={seller}
                   quantity={quantity}
-                  price={price}
-                  listPrice={listPrice}
                 />
-              )}
-              <div class="flex items-center justify-between pb-2 pt-4">
-                <p class="text-xs sm:text-sm">
-                  Compre e receba até <br />
-                  <strong>
-                    {formatPrice(parseFloat((price * .05).toFixed(2)))}
-                  </strong>{" "}
-                  de volta!
-                </p>
-                <Cashback />
+                {activeSubscription && (
+                  <SubscriptionButtonVTEX
+                    productID={productID}
+                    seller={seller}
+                    quantity={quantity}
+                    price={price}
+                    listPrice={listPrice}
+                  />
+                )}
+                <div class="flex items-center justify-between pb-2 pt-4">
+                  <p class="text-xs sm:text-sm">
+                    Compre e receba até <br />
+                    <strong>
+                      {formatPrice(parseFloat((price * .05).toFixed(2)))}
+                    </strong>{" "}
+                    de volta!
+                  </p>
+                  <Cashback />
+                </div>
               </div>
-            </div>
-          </>
-        )
-        : <OutOfStock productID={productID} />}
-    </div>
+            </>
+          )
+          : <OutOfStock productID={productID} />}
+      </div>
+      <div class="flex items-center justify-center p-4 bg-white w-full z-[2] sm:hidden fixed bottom-0 left-0">
+        <AddToCartButtonVTEX
+          eventParams={{ items: [eventItem] }}
+          productID={productID}
+          seller={seller}
+          quantity={1}
+          buttonSize="full"
+        />
+      </div>
+    </>
   );
 }
