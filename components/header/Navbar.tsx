@@ -12,20 +12,32 @@ import {
 import MyAccount from "deco-sites/true-source/islands/Header/MyAccount.tsx";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { Help } from "deco-sites/true-source/components/header/Menu.tsx";
 
 export const HIGHLIGHT_ID = "destaque";
 export const HIGHLIGHT_BTN = "TODOS OS PRODUTOS";
 export const SEEALL = "ver todos";
 
+export interface Props {
+  items?: INavItem[];
+  searchbar?: SearchbarProps;
+  logo?: Logo;
+  buttons?: Buttons;
+  logoPosition?: "left" | "center";
+  isMobile: boolean;
+  helpItems: Help;
+}
+
 function Navbar(
-  { items, searchbar, logo, buttons, logoPosition = "left", isMobile }: {
-    items?: INavItem[];
-    searchbar?: SearchbarProps;
-    logo?: Logo;
-    buttons?: Buttons;
-    logoPosition?: "left" | "center";
-    isMobile: boolean;
-  },
+  {
+    items,
+    searchbar,
+    logo,
+    buttons,
+    logoPosition = "left",
+    isMobile,
+    helpItems,
+  }: Props,
 ) {
   const platform = usePlatform();
   const { user } = useUser();
@@ -39,7 +51,7 @@ function Navbar(
         ? (
           <>
             <div class="lg:hidden bg-white flex flex-col gap-[18px] w-full p-4 group-data-[micro-header='true']/header:rounded-b-[20px] 
-          group-data-[micro-header='true']/header:shadow-md group-data-[micro-header='true']/header:gap-0">
+              group-data-[micro-header='true']/header:shadow-md group-data-[micro-header='true']/header:gap-0">
               <div class="flex justify-between items-center gap-[10px] group-data-[micro-header='true']/header:h-[30px]">
                 {logo && (
                   <a
@@ -66,15 +78,14 @@ function Navbar(
                     <MyAccount />
                   </div>
 
-                  {/* TODO: get url from admin  */}
                   <a
-                    href="/"
+                    href={helpItems.url}
                     class="group-data-[micro-header='true']/header:hidden"
                   >
                     <Icon id="Help" size={22} />
                   </a>
 
-                  <CartButtonVTEX />
+                  <CartButtonVTEX size="md" />
                   <MenuButton />
                 </div>
               </div>
@@ -123,7 +134,7 @@ function Navbar(
                   {!buttons?.hideWishlistButton && (
                     <a
                       className="flex items-center text-xs gap-1"
-                      href="/precisa-de-ajuda"
+                      href={helpItems.url}
                     >
                       <button className="flex btn btn-circle btn-sm btn-ghost gap-1">
                         <svg
@@ -150,14 +161,14 @@ function Navbar(
 
                   {!buttons?.hideCartButton && (
                     <div className="flex items-center text-xs font-thin">
-                      <CartButtonVTEX />
+                      <CartButtonVTEX size="lg" />
                     </div>
                   )}
                 </div>
               </div>
 
               <div class="hidden md:block group-data-[micro-header='true']/header:hidden">
-                <ul class="w-full flex justify-between items-center max-w-[1360px] mx-auto">
+                <ul class="w-full flex justify-between items-center max-w-[1360px] mx-auto px-4">
                   {items &&
                     items.map((item) => (
                       <>

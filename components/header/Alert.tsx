@@ -1,7 +1,15 @@
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
-import type { AlertProps, Theme } from "./Header.tsx";
+import type { Theme } from "./Header.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+
+/** @titleBy text */
+export interface AlertProps {
+  text: string;
+  icons?: ImageWidget;
+  link?: string;
+}
 
 interface Props {
   alerts: AlertProps[];

@@ -1,9 +1,21 @@
-import CartButtonVTEX from "deco-sites/true-source/components/minicart/Cart.tsx";
+import CartButtonVTEX from "deco-sites/true-source/islands/Header/Cart/vtex.tsx";
 import type { INavItem } from "./NavItem.tsx";
 import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+
+export interface Help {
+  /** @description Texto de ajuda do mobile */
+  title: string;
+  /** @description Url da página de ajuda mobile e desktop */
+  url: string;
+  /** @description Items de ajuda do menu mobile */
+  children?: {
+    title: string;
+    url: string;
+  }[];
+}
 
 /** @titleBy name */
 export interface InstitucionalItem {
@@ -22,6 +34,7 @@ export interface Props {
   items: INavItem[];
   institutionalItems: InstitucionalItem[];
   socials: Socials[];
+  helpItems: Help;
 }
 
 export function Socials({ socials }: { socials: Socials[] }) {
@@ -62,7 +75,7 @@ export function MenuInstitutional(
   );
 }
 
-function Menu({ items, institutionalItems, socials }: Props) {
+function Menu({ items, institutionalItems, socials, helpItems }: Props) {
   const itemsWithChildren = items.filter((item) =>
     item.children && item.children.length > 0
   );
@@ -118,15 +131,18 @@ function Menu({ items, institutionalItems, socials }: Props) {
           </Collapsable>
         ))}
         {itemsWithoutChildren.map((item) => (
-          <span class="py-[15.5px] font-lemon-milk text-[11px] text-dark border border-Stroke px-6 uppercase font-bold last:rounded-b-[8px]">
+          <a
+            href={item.url}
+            class="py-[15.5px] font-lemon-milk text-[11px] text-dark border border-Stroke px-6 uppercase font-bold last:rounded-b-[8px]"
+          >
             {item.name}
-          </span>
+          </a>
         ))}
       </div>
 
       <div class="flex flex-col border border-Stroke rounded-[8px] divide-y divide-Stroke mt-6">
         <div class="py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold w-full">
-          <CartButtonVTEX />
+          <CartButtonVTEX type="menu" />
         </div>
 
         <div class="flex justify-between items-center py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold">
@@ -134,11 +150,45 @@ function Menu({ items, institutionalItems, socials }: Props) {
           <Icon id="Login" size={20} />
         </div>
 
-        <div class="flex justify-between items-center py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold">
-          <a href="/">
-            <span>Ajuda e suporte</span>
-          </a>
-        </div>
+        {helpItems.children
+          ? (
+            <Collapsable
+              class="w-full rounded-b-[8px]"
+              title={
+                <div class="py-[15.5px] px-6 font-lemon-milk text-[11px] text-dark font-bold group-open:border-b border-Stroke uppercase flex justify-between items-center first:border-t-0">
+                  <span>
+                    {helpItems.title}
+                  </span>
+                  <Icon
+                    id="ChevronDown"
+                    size={16}
+                    class="rotate-0 text-neutral-5 group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                  />
+                </div>
+              }
+            >
+              <div class="flex flex-col ">
+                {!!helpItems.children &&
+                  helpItems.children.map((children) => (
+                    <a
+                      href={children.url}
+                      class="py-[15.5px] pl-[40px] pr-6 font-lemon-milk text-[11px] text-dark font-medium uppercase flex justify-between items-center first:border-t-0"
+                    >
+                      {children.title}
+                      <Icon id="ChevronRight" size={16} />
+                    </a>
+                  ))}
+              </div>
+            </Collapsable>
+          )
+          : (
+            <a
+              class="flex justify-between items-center py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold"
+              href={helpItems.url}
+            >
+              <span>{helpItems.title}</span>
+            </a>
+          )}
       </div>
 
       <MenuInstitutional institutionalItems={institutionalItems} />

@@ -38,7 +38,6 @@ function getSubscriptionAttachment(
     name === "vtex.subscription.assinatura"
   )?.content["vtex.subscription.key.frequency"];
 
-
   return Object.entries(subscriptionOptions).find(([_, v]) =>
     v.trim() === subscription?.trim()
   )?.[0] as keyof typeof SubscriptionOptionsMap ?? null;
@@ -117,7 +116,7 @@ function CartItem(
         noSplitItem: true,
       });
 
-      selected.value = 'none'
+      selected.value = "none";
     } else {
       await addItemAttachment({
         index,
@@ -223,7 +222,9 @@ function CartItem(
               {formatPrice(listPrice * item.quantity, currency, locale)}
             </span>
             <span class="text-xs text-green font-bold">
-              {isGift ? "Grátis" : formatPrice(price * item.quantity, currency, locale)}
+              {isGift
+                ? "Grátis"
+                : formatPrice(price * item.quantity, currency, locale)}
             </span>
           </div>
         </div>

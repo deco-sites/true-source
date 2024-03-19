@@ -123,11 +123,6 @@ function Cart({
                     />
                   </li>
                 ))}
-                <div class="flex flex-col w-full">
-                  <span class="py-4 px-6 text-xs font-bold text-dark bg-ice">
-                    Você também pode gostar de
-                  </span>
-                </div>
               </ul>
 
               <footer

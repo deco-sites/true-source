@@ -1,12 +1,13 @@
 import type { Props as SearchbarProps } from "deco-sites/true-source/components/search/Searchbar.tsx";
 import Drawers from "deco-sites/true-source/islands/Header/Drawers.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Alert from "./Alert.tsx";
+import Alert, { AlertProps } from "./Alert.tsx";
 import MicroHeaderSetup from "deco-sites/true-source/components/ui/MicroHeaderSetup.tsx";
 import { LoaderContext } from "deco/mod.ts";
 import Navbar from "deco-sites/true-source/components/header/Navbar.tsx";
 import type { INavItem } from "deco-sites/true-source/components/header/NavItem.tsx";
 import {
+  Help,
   InstitucionalItem,
   Socials,
 } from "deco-sites/true-source/components/header/Menu.tsx";
@@ -25,13 +26,6 @@ export interface Logo {
   height?: number;
 }
 
-/** @titleBy text */
-export interface AlertProps {
-  text: string;
-  icons?: ImageWidget;
-  link?: string;
-}
-
 export type Theme = "light" | "dark";
 
 export interface Props {
@@ -41,12 +35,31 @@ export interface Props {
   alerts?: AlertProps[];
   /** @title Barra de pesquisa */
   searchbar: Omit<SearchbarProps, "platform">;
-  /** @title Itens do menu de navegação */
+  /**
+   * @title Navegação
+   * @description Itens do menu de navegação desktop e mobile
+   */
   navItems: INavItem[];
-  /** @title Links institucionais do menu mobile */
+  /**
+   * @title Institucionais
+   * @description Links institucionais do menu mobile
+   */
   institutionalItems: InstitucionalItem[];
-  /** @title Redes sociais do menu mobile */
+  /**
+   * @title Redes sociais
+   * @description Links para as redes sociais do menu mobile
+   */
   socials: Socials[];
+  /**
+   * @title Ajuda
+   * @description Links dos itens de ajuda
+   */
+  helpItems: Help;
+  /**
+   * @title Frete grátis
+   * @description Valor para ganhar frete grátis
+   */
+  freeShippingTarget?: number;
   theme?: Theme;
   /**
    * @ignore
@@ -59,7 +72,9 @@ function Header({
   searchbar,
   navItems = [],
   institutionalItems,
+  freeShippingTarget,
   socials,
+  helpItems,
   logo,
   theme = "light",
   isMobile,
@@ -69,8 +84,9 @@ function Header({
   return (
     <header id="header" class="group/header h-[211px] md:h-[193px]">
       <Drawers
-        menu={{ items, institutionalItems, socials }}
+        menu={{ items, institutionalItems, socials, helpItems }}
         searchbar={searchbar}
+        freeShippingTarget={freeShippingTarget}
       >
         <div class="bg-white fixed w-full z-50">
           {alerts && alerts.length > 0 && (
@@ -81,6 +97,7 @@ function Header({
             searchbar={searchbar && { ...searchbar, isMobile }}
             logo={logo}
             isMobile={isMobile}
+            helpItems={helpItems}
           />
         </div>
       </Drawers>

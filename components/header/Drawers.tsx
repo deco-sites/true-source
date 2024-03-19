@@ -22,6 +22,7 @@ const MINICART_TITLE = "Sacola";
 export interface Props {
   menu: MenuProps;
   searchbar?: SearchbarProps;
+  freeShippingTarget?: number;
   /**
    * @ignore_gen true
    */
@@ -143,7 +144,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children }: Props) {
+function Drawers({ menu, searchbar, children, freeShippingTarget }: Props) {
   const { displayCart, displayMenu, displaySearchDrawer } = useUI();
 
   return (
@@ -180,7 +181,7 @@ function Drawers({ menu, searchbar, children }: Props) {
             title={MINICART_TITLE}
             onClose={() => displayCart.value = false}
           >
-            <Cart />
+            <Cart freeShippingTarget={freeShippingTarget || 1000} />
           </Aside>
         }
       >
