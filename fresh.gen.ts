@@ -24,7 +24,6 @@ import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PixPrice from "./islands/PixPrice.tsx";
 import * as $PriceRange from "./islands/PriceRange.tsx";
-import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $Product_Benefits from "./islands/Product/Benefits.tsx";
 import * as $Product_ProductCard from "./islands/Product/ProductCard.tsx";
 import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
@@ -32,6 +31,7 @@ import * as $Product_ProductStarCard from "./islands/Product/ProductStarCard.tsx
 import * as $Product_ProductStars from "./islands/Product/ProductStars.tsx";
 import * as $Product_SellingPrice from "./islands/Product/SellingPrice.tsx";
 import * as $Product_Trustvox from "./islands/Product/Trustvox.tsx";
+import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $Radio from "./islands/Radio.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
@@ -68,7 +68,6 @@ const manifest = {
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/PixPrice.tsx": $PixPrice,
     "./islands/PriceRange.tsx": $PriceRange,
-    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/Product/Benefits.tsx": $Product_Benefits,
     "./islands/Product/ProductCard.tsx": $Product_ProductCard,
     "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,
@@ -76,6 +75,7 @@ const manifest = {
     "./islands/Product/ProductStars.tsx": $Product_ProductStars,
     "./islands/Product/SellingPrice.tsx": $Product_SellingPrice,
     "./islands/Product/Trustvox.tsx": $Product_Trustvox,
+    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/Radio.tsx": $Radio,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,

@@ -1,51 +1,209 @@
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
+import { Head } from "$fresh/runtime.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
 export interface Props {
-  teste?: string;
+  /**
+   * @title Número do WhatsApp
+   * @description 00 12345 6789
+   */
+  zapzap: number;
 }
 
-{
-  /* <div class="chat-container snipcss-hsU7e" style="display: none">
-  <Icon id="OpenMobile" class="open-mobile" size={24}  />
-  <Icon id="CloseMobile" class="close-mobile" size={24}  />
+export default function FloatingButtons(
+  { isMobile, zapzap }: ReturnType<typeof loader>,
+) {
+  const zapzapModal = useModal();
+  const floatingMobileModal = useModal("floating-mobile-modal");
 
-  <div class="whatsapp-container" id="whatsapp-flutuante">
-    <span>
-      Dúvidas de pedidos
-    </span>
-
-    <Icon id="IconDesktop" class='icon-desktop' size={16}  />
-
-    <Icon id="IconMobile" class='icon-mobile' size={16}  />
-
-    </div>
-</div> */
-}
-
-function FloatingButtons({ teste }: Props) {
   return (
-    <div>
-      <iframe
-        class="neoasssist-widget-frame neoasssist-widget-frame-1 h-full w-full"
-        src="https://cdn.atendimen.to/widget/f9144a485753ae5e6e66c6402fb63f27/current"
-        id="neoassist-widget-frame-1"
-        style="display: inline-block; border: 0px; overflow: hidden; bottom: 5px; right: 240px; position: fixed;"
-      >
-      </iframe>
+    <>
+      <Head>
+        <script
+          type="text/javascript"
+          async
+          src="https://cdn.atendimen.to/n.js?ntag=0&amp;d=truebrands.neoassist.com&amp;p=https%3A%2F%2Fwww.truesource.com.br%2F"
+        >
+        </script>
+        <script
+          defer
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.NeoAssistTag = {};
+            NeoAssistTag.querystring = true;
+            NeoAssistTag.pageid = '';
+            NeoAssistTag.clientdomain = 'truebrands.neoassist.com';
+            NeoAssistTag.initialize = {};
+            var na = document.createElement('script');
+            na.type = 'text/javascript';
+            na.async = true;
+            na.src = 'https://cdn.atendimen.to/n.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(na, s);
+            `,
+          }}
+        />
+      </Head>
 
-      {
-        /* <div class="fixed right-6 bottom-[10px] flex">
-        <svg class="open-mobile hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 10.5H7.51M12 10.5H12.01M16.5 10.5H16.51M7 18V20.3355C7 20.8684 7 21.1348 7.10923 21.2716C7.20422 21.3906 7.34827 21.4599 7.50054 21.4597C7.67563 21.4595 7.88367 21.2931 8.29976 20.9602L10.6852 19.0518C11.1725 18.662 11.4162 18.4671 11.6875 18.3285C11.9282 18.2055 12.1844 18.1156 12.4492 18.0613C12.7477 18 13.0597 18 13.6837 18H16.2C17.8802 18 18.7202 18 19.362 17.673C19.9265 17.3854 20.3854 16.9265 20.673 16.362C21 15.7202 21 14.8802 21 13.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V14C3 14.93 3 15.395 3.10222 15.7765C3.37962 16.8117 4.18827 17.6204 5.22354 17.8978C5.60504 18 6.07003 18 7 18ZM8 10.5C8 10.7761 7.77614 11 7.5 11C7.22386 11 7 10.7761 7 10.5C7 10.2239 7.22386 10 7.5 10C7.77614 10 8 10.2239 8 10.5ZM12.5 10.5C12.5 10.7761 12.2761 11 12 11C11.7239 11 11.5 10.7761 11.5 10.5C11.5 10.2239 11.7239 10 12 10C12.2761 10 12.5 10.2239 12.5 10.5ZM17 10.5C17 10.7761 16.7761 11 16.5 11C16.2239 11 16 10.7761 16 10.5C16 10.2239 16.2239 10 16.5 10C16.7761 10 17 10.2239 17 10.5Z" stroke="#F0E9E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><svg class="close-mobile hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 9L9 15M9 9L15 15M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#F0E9E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
+      <zapzapModal.Modal class="group transition-opacity peer-checked:z-[100] w-full h-full fixed left-0 top-0 pointer-events-none peer-checked:pointer-events-auto flex justify-center items-center">
+        <zapzapModal.Toggle class="absolute left-0 top-0 w-full h-full bg-black/30 opacity-0 peer-checked:group-[]:opacity-100" />
 
-        <div class="bg-[#8cbf3c] items-center rounded-[300px] flex gap-2 h-[40px] min-w-[207px] px-6 w-[207px] inset-0" id="whatsapp-flutuante">
-          <span class='text-[14px] text-white'>Dúvidas de pedidos</span>
-          <Icon id="WhatsApp" size={16} class='text-white' />
+        <div class="lg:fixed lg:right-6 lg:bottom-20 max-w-[400px] w-[95%] mx-auto opacity-0 peer-checked:group-[]:opacity-100 z-10">
+          <div class='bg-[image:url("https://tfcucl.vteximg.com.br/arquivos/retangulo-titulo-whatsapp.png")] py-5'>
+            <div class="text-white text-center text-[17px] font-semibold leading-5 max-w-[300px] mx-auto">
+              Olá! Preencha os campos abaixo para iniciar conversa no WhatsApp
+            </div>
+          </div>
+          <form
+            id="zapzapForm"
+            class="p-6 bg-[#ededed] flex flex-col gap-3 items-center"
+          >
+            <input
+              type="text"
+              placeholder="Nome"
+              required
+              id="wpp-client-name"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              required
+              id="wpp-client-email"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+            <input
+              type="tel"
+              placeholder="Telefone com DDD"
+              required
+              pattern="\(\d{2}\) [0-9]{5}-[0-9]{4}"
+              id="wpp-client-phone"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+
+            <div class="flex items-center gap-2">
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="medico-cupom"
+                />
+                Médico
+              </label>
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="nutricionista-cupom"
+                />
+                Nutricionista
+              </label>
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="consumidor-cupom"
+                />
+                Consumidor
+              </label>
+            </div>
+
+            <label class="flex items-center gap-1 text-dark text-sm">
+              <input type="checkbox" id="wpp-checkbox" />
+              Estou ciente que poderei receber e-mails
+            </label>
+
+            <button
+              type="submit"
+              class="bg-[#09d261] rounded-full py-2 px-4 text-white mt-4 font-medium"
+            >
+              INICIAR A CONVERSA
+            </button>
+          </form>
         </div>
-      </div> */
-      }
-    </div>
+      </zapzapModal.Modal>
+
+      <floatingMobileModal.Modal
+        class={clx(
+          "fixed right-5 bottom-[72px] lg:bottom-3 flex-col lg:flex-row justify-center items-center gap-2",
+          isMobile ? "hidden peer-checked:flex" : "flex",
+        )}
+      >
+        <zapzapModal.Toggle class="shadow bg-white lg:bg-green h-10 flex items-center gap-2 px-6 rounded-full text-dark lg:text-white font-bold text-sm cursor-pointer select-none">
+          Dúvidas de pedidos
+          <Icon
+            id="FloatingWhatsApp"
+            width={18}
+            height={18}
+            class="text-green lg:text-white"
+          />
+        </zapzapModal.Toggle>
+      </floatingMobileModal.Modal>
+
+      {isMobile && (
+        <div>
+          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-[#E9530E] to-[#E4003F] fixed bottom-3 right-5 group flex justify-center items-center">
+            <Icon
+              id="FloatingChat"
+              width={20}
+              height={20}
+              class="peer-checked:group-[]:hidden block"
+            />
+            <Icon
+              id="FloatingX"
+              width={20}
+              height={20}
+              class="hidden peer-checked:group-[]:block"
+            />
+          </floatingMobileModal.Toggle>
+        </div>
+      )}
+
+      <script
+        src={scriptAsDataURI(() => {
+          const phoneInput = document.querySelector<HTMLInputElement>(
+            "input#wpp-client-phone",
+          );
+          const form = document.querySelector<HTMLFormElement>(
+            "form#zapzapForm",
+          );
+
+          if (!phoneInput) throw new Error("Phone input not found");
+          if (!form) throw new Error("Form not found");
+
+          phoneInput.oninput = (e) => {
+            // @ts-ignore trust me
+            e.currentTarget.value = (e.currentTarget.value as string)
+              .replace(/\D/g, "")
+              .replace(
+                /^(\d?)(\d?)(\d{0,5})(\d{0,4})(.*)$/,
+                (all, $1, $2, $3, $4) => {
+                  let s = "";
+
+                  if ($1) s += `(${$1}${$2}`;
+                  if ($3) s += `) ${$3}`;
+                  if ($4) s += `-${$4}`;
+
+                  return s;
+                },
+              );
+          };
+
+          form.onsubmit = () => {
+            open(`https://api.whatsapp.com/send?phone=55${zapzap}`, "_blank");
+          };
+        })}
+      />
+    </>
   );
 }
 
-export default FloatingButtons;
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  return {
+    ...props,
+    isMobile: ctx.device !== "desktop",
+  };
+}

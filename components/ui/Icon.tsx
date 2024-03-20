@@ -22,6 +22,8 @@ export type AvailableIcons =
   | "X"
   | "ArrowRight"
   | "Linkedin"
+  | "FloatingChat"
+  | "FloatingX"
   | "Minus"
   | "MapPin"
   | "MagnifyingGlass"
@@ -59,7 +61,8 @@ export type AvailableIcons =
   | "CloseMobile"
   | "IconDesktop"
   | "IconMobile"
-  | "Refresh";
+  | "Refresh"
+  | "FloatingWhatsApp";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
