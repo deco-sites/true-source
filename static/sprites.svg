@@ -1,4 +1,8 @@
 <svg style="display:none">
+	<symbol id="StrokeArrowRight" viewBox="0 0 14 26" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M1 1L12.5 13L1 25" stroke="currentColor"/>
+	</symbol>
 	<symbol id="BannerArrowRight" viewBox="0 0 16 14" fill="none"
 		xmlns="http://www.w3.org/2000/svg">
 		<path d="M10 1L15 7M15 7L10 13M15 7H0" stroke="currentColor"/>
