@@ -61,7 +61,9 @@ export type AvailableIcons =
   | "IconDesktop"
   | "IconMobile"
   | "Refresh"
-  | "StrokeArrowRight";
+  | "StrokeArrowRight"
+  | "Check"
+  | "Warning";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
