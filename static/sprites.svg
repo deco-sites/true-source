@@ -1,4 +1,9 @@
 <svg style="display:none">
+	<symbol id="PlayCircle" viewBox="0 0 50 50" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M24.9993 48.3942C37.886 48.3942 48.3327 37.9475 48.3327 25.0609C48.3327 12.1742 37.886 1.72754 24.9993 1.72754C12.1127 1.72754 1.66602 12.1742 1.66602 25.0609C1.66602 37.9475 12.1127 48.3942 24.9993 48.3942Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+		<path d="M34 24.2703L19 14V34L34 24.2703Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
 	<symbol id="Warning" viewBox="0 0 24 25" fill="none"
 		xmlns="http://www.w3.org/2000/svg">
 		<path d="M12 16.5V12.5M12 8.5H12.01M22 12.5C22 18.0228 17.5228 22.5 12 22.5C6.47715 22.5 2 18.0228 2 12.5C2 6.97715 6.47715 2.5 12 2.5C17.5228 2.5 22 6.97715 22 12.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -39,6 +39,8 @@ import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
 import * as $Subscription from "./islands/Subscription.tsx";
 import * as $SubscriptionModal from "./islands/SubscriptionModal.tsx";
+import * as $VideoModal_Button from "./islands/VideoModal/Button.tsx";
+import * as $VideoModal_Modal from "./islands/VideoModal/Modal.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -84,6 +86,8 @@ const manifest = {
     "./islands/SliderJS.tsx": $SliderJS,
     "./islands/Subscription.tsx": $Subscription,
     "./islands/SubscriptionModal.tsx": $SubscriptionModal,
+    "./islands/VideoModal/Button.tsx": $VideoModal_Button,
+    "./islands/VideoModal/Modal.tsx": $VideoModal_Modal,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },

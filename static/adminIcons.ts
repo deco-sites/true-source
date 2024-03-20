@@ -347,4 +347,9 @@ export const Warning = `<svg id="Warning" viewBox="0 0 24 25" fill="none"
 		</defs>
 	</svg>`;
 
-export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning };
+export const PlayCircle = `<svg id="PlayCircle" viewBox="0 0 50 50" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M24.9993 48.3942C37.886 48.3942 48.3327 37.9475 48.3327 25.0609C48.3327 12.1742 37.886 1.72754 24.9993 1.72754C12.1127 1.72754 1.66602 12.1742 1.66602 25.0609C1.66602 37.9475 12.1127 48.3942 24.9993 48.3942Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>`;
+
+export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning, PlayCircle };
