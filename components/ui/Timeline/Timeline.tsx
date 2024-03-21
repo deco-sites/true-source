@@ -1,41 +1,7 @@
-import Icon, {
-  AvailableIcons,
-} from "deco-sites/true-source/components/ui/Icon.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Step, {
   Props as StepProps,
 } from "deco-sites/true-source/components/ui/Timeline/Step.tsx";
-
-/**
- * @title Com rodapé
- */
-interface Footer {
-  /**
-   * @title Texto
-   * @format html
-   */
-  text: string;
-  /**
-   * @title Ícone
-   * @format icon-select
-   * @options deco-sites/true-source/loaders/availableIcons.ts
-   */
-  icon: string;
-  /**
-   * @title Tamanho do ícone
-   * @default 24
-   */
-  iconSize?: number;
-  /**
-   * @title Cor do ícone
-   * @format color-input
-   */
-  iconColor?: string;
-}
-
-/**
- * @title Sem rodapé
- */
-type NoFooter = null;
 
 interface Props {
   /**
@@ -50,9 +16,10 @@ interface Props {
    */
   steps: StepProps[];
   /**
-   * @title Rodapé
+   * @title Texto Rodapé
+   * @description Texto que aparece no rodapé
    */
-  footer: NoFooter | Footer;
+  footer?: string;
 }
 
 export default function Timeline({ title, steps, footer }: Props) {
@@ -69,18 +36,14 @@ export default function Timeline({ title, steps, footer }: Props) {
       {footer && (
         <div class="max-w-[950px] w-full flex gap-8 justify-center items-center border-t border-t-light-gray-200 pt-8 pb-6 md:pt-14 md:pb-10">
           <Icon
-            id={footer.icon as AvailableIcons}
+            id="Warning"
             strokeWidth={2}
-            size={footer.iconSize ?? 24}
-            style={{
-              color: footer.iconColor ?? "currentColor",
-            }}
-            class="shrink-0"
+            size={24}
+            class="shrink-0 text-red"
           />
-          <div
-            class="max-w-[549px] text-sm leading-6 font-medium"
-            dangerouslySetInnerHTML={{ __html: footer.text }}
-          />
+          <p class="max-w-[549px] text-sm leading-6 font-medium text-dark">
+            {footer}
+          </p>
         </div>
       )}
     </div>
