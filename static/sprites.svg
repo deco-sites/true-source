@@ -1,4 +1,12 @@
 <svg style="display:none">
+	<symbol id="PlusCircle" viewBox="0 0 20 20" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M9.99981 6.66675V13.3334M6.6665 10.0001H13.3332M18.3332 10.0001C18.3332 14.6025 14.6022 18.3334 9.99981 18.3334C5.39746 18.3334 1.6665 14.6025 1.6665 10.0001C1.6665 5.39771 5.39746 1.66675 9.99981 1.66675C14.6022 1.66675 18.3332 5.39771 18.3332 10.0001Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
+	<symbol id="MinusCircle" viewBox="0 0 20 20" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M6.6665 10.0001H13.3332M18.3332 10.0001C18.3332 14.6025 14.6022 18.3334 9.99981 18.3334C5.39746 18.3334 1.6665 14.6025 1.6665 10.0001C1.6665 5.39771 5.39746 1.66675 9.99981 1.66675C14.6022 1.66675 18.3332 5.39771 18.3332 10.0001Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
 	<symbol id="PlayCircle" viewBox="0 0 50 50" fill="none"
 		xmlns="http://www.w3.org/2000/svg">
 		<path d="M24.9993 48.3942C37.886 48.3942 48.3327 37.9475 48.3327 25.0609C48.3327 12.1742 37.886 1.72754 24.9993 1.72754C12.1127 1.72754 1.66602 12.1742 1.66602 25.0609C1.66602 37.9475 12.1127 48.3942 24.9993 48.3942Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -306,7 +314,7 @@
 		xmlns="http://www.w3.org/2000/svg">
 		<path d="M4.3724 7.00033L6.1224 8.75033L9.6224 5.25033M12.8307 7.00033C12.8307 10.222 10.2191 12.8337 6.9974 12.8337C3.77573 12.8337 1.16406 10.222 1.16406 7.00033C1.16406 3.77866 3.77573 1.16699 6.9974 1.16699C10.2191 1.16699 12.8307 3.77866 12.8307 7.00033Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 	</symbol>
-	<symbol id="CloseCircle" width="36" height="36" viewBox="0 0 36 36" fill="none"
+	<symbol id="CloseCircle" viewBox="0 0 36 36" fill="none"
 		xmlns="http://www.w3.org/2000/svg">
 		<path d="M22.5 13.5L13.5 22.5M13.5 13.5L22.5 22.5M33 18C33 26.2843 26.2843 33 18 33C9.71573 33 3 26.2843 3 18C3 9.71573 9.71573 3 18 3C26.2843 3 33 9.71573 33 18Z" stroke="url(#paint0_linear_972_11628)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 		<defs>

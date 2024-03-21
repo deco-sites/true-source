@@ -352,4 +352,14 @@ export const PlayCircle = `<svg id="PlayCircle" viewBox="0 0 50 50" fill="none"
 		<path d="M24.9993 48.3942C37.886 48.3942 48.3327 37.9475 48.3327 25.0609C48.3327 12.1742 37.886 1.72754 24.9993 1.72754C12.1127 1.72754 1.66602 12.1742 1.66602 25.0609C1.66602 37.9475 12.1127 48.3942 24.9993 48.3942Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
 	</svg>`;
 
-export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning, PlayCircle };
+export const PlusCircle = `<svg id="PlusCircle" viewBox="0 0 20 20" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M9.99981 6.66675V13.3334M6.6665 10.0001H13.3332M18.3332 10.0001C18.3332 14.6025 14.6022 18.3334 9.99981 18.3334C5.39746 18.3334 1.6665 14.6025 1.6665 10.0001C1.6665 5.39771 5.39746 1.66675 9.99981 1.66675C14.6022 1.66675 18.3332 5.39771 18.3332 10.0001Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>`;
+
+export const MinusCircle = `<svg id="MinusCircle" viewBox="0 0 20 20" fill="none"
+		xmlns="http://www.w3.org/2000/svg">
+		<path d="M6.6665 10.0001H13.3332M18.3332 10.0001C18.3332 14.6025 14.6022 18.3334 9.99981 18.3334C5.39746 18.3334 1.6665 14.6025 1.6665 10.0001C1.6665 5.39771 5.39746 1.66675 9.99981 1.66675C14.6022 1.66675 18.3332 5.39771 18.3332 10.0001Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>`;
+
+export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning, PlayCircle, PlusCircle, MinusCircle };
