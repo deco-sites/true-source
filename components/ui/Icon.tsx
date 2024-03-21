@@ -23,6 +23,7 @@ export type AvailableIcons =
   | "ArrowRight"
   | "Linkedin"
   | "FloatingChat"
+  | "Check"
   | "FloatingX"
   | "Minus"
   | "MapPin"

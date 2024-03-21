@@ -14,14 +14,26 @@ export default function (_id?: string) {
         <div {...props} class={props.class} />
       </>
     ),
-    open: () => {
-      (document.getElementById(id) as HTMLInputElement).checked = true;
+    open() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      e.checked = true;
     },
-    close: () => {
-      (document.getElementById(id) as HTMLInputElement).checked = false;
+    close() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      e.checked = false;
     },
-    isOpen: () => {
-      return (document.getElementById(id) as HTMLInputElement).checked;
+    isOpen() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      return e.checked;
     },
     id,
   };
