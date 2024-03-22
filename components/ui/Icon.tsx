@@ -62,6 +62,7 @@ export type AvailableIcons =
   | "CloseMobile"
   | "IconDesktop"
   | "IconMobile"
+  | "HeartFill"
   | "Refresh"
   | "FloatingWhatsApp";
 

@@ -104,27 +104,44 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
   const onClickPrev = () => {
     const indices = getElementsInsideContainer();
-    // Wow! items per page is how many elements are being displayed inside the container!!
     const itemsPerPage = indices.length;
-
     const isShowingFirst = indices[0] === 0;
-    const pageIndex = Math.floor(indices[indices.length - 1] / itemsPerPage);
 
     goToItem(
-      isShowingFirst ? items.length - 1 : (pageIndex - 1) * itemsPerPage,
+      isShowingFirst
+        ? items.length - 1
+        : Math.max(-1, indices.at(-1)! - itemsPerPage),
     );
   };
 
   const onClickNext = () => {
     const indices = getElementsInsideContainer();
-    // Wow! items per page is how many elements are being displayed inside the container!!
-    const itemsPerPage = indices.length;
-
     const isShowingLast = indices[indices.length - 1] === items.length - 1;
-    const pageIndex = Math.floor(indices[0] / itemsPerPage);
 
-    goToItem(isShowingLast ? 0 : (pageIndex + 1) * itemsPerPage);
+    goToItem(
+      Math.min(
+        isShowingLast ? 0 : indices.at(-1)! + indices.length,
+        items.length - 1,
+      ),
+    );
   };
+
+  const visibleSlides = getElementsInsideContainer();
+
+  const removeAllDots = items.length <= visibleSlides.length;
+
+  const dotsIndexes = [] as number[];
+  for (let i = 0; i < (dots?.length ?? 0); i += visibleSlides.length) {
+    dotsIndexes.push(i);
+  }
+
+  for (const dot of [...dots ?? []]) {
+    const index = Number(dot.getAttribute("data-dot")) || 0;
+
+    if (removeAllDots || !dotsIndexes.includes(index)) {
+      dot.remove();
+    }
+  }
 
   const observer = new IntersectionObserver(
     (elements) =>
@@ -132,10 +149,12 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
         const index = Number(item.target.getAttribute("data-slider-item")) || 0;
         const dot = dots?.item(index);
 
-        if (item.isIntersecting) {
-          dot?.setAttribute("disabled", "");
-        } else {
-          dot?.removeAttribute("disabled");
+        if (dotsIndexes.includes(index)) {
+          if (item.isIntersecting) {
+            dot?.setAttribute("disabled", "");
+          } else {
+            dot?.removeAttribute("disabled");
+          }
         }
 
         if (!infinite) {

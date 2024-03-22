@@ -1,14 +1,15 @@
-import type { ComponentChildren, JSX } from "preact";
+import type { JSX } from "preact";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
-function Dot({ index, children }: {
+function Dot({ children, index, ...props }: JSX.IntrinsicElements["button"] & {
   index: number;
-  children: ComponentChildren;
 }) {
   return (
     <button
       data-dot={index}
       aria-label={`go to slider item ${index}`}
-      class="focus:outline-none group"
+      {...props}
+      class={clx("focus:outline-none group", props.class as string)}
     >
       {children}
     </button>

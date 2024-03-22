@@ -50,8 +50,8 @@ import * as $$$$$$40 from "./sections/Product/NotFoundChallenge.tsx";
 import * as $$$$$$41 from "./sections/Product/ProductInfo.tsx";
 import * as $$$$$$42 from "./sections/Product/ProductMain.tsx";
 import * as $$$$$$43 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$44 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$45 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$44 from "./sections/Product/ProductShelfWithImage.tsx";
+import * as $$$$$$45 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$46 from "./sections/Product/SubscriptionModal.tsx";
 import * as $$$$$$47 from "./sections/Product/Wishlist.tsx";
 import * as $$$$$$48 from "./sections/ProductDescription/ProductBenefits.tsx";
@@ -120,8 +120,9 @@ const manifest = {
     "deco-sites/true-source/sections/Product/ProductInfo.tsx": $$$$$$41,
     "deco-sites/true-source/sections/Product/ProductMain.tsx": $$$$$$42,
     "deco-sites/true-source/sections/Product/ProductShelf.tsx": $$$$$$43,
-    "deco-sites/true-source/sections/Product/SearchResult.tsx": $$$$$$44,
-    "deco-sites/true-source/sections/Product/ShelfWithImage.tsx": $$$$$$45,
+    "deco-sites/true-source/sections/Product/ProductShelfWithImage.tsx":
+      $$$$$$44,
+    "deco-sites/true-source/sections/Product/SearchResult.tsx": $$$$$$45,
     "deco-sites/true-source/sections/Product/SubscriptionModal.tsx": $$$$$$46,
     "deco-sites/true-source/sections/Product/Wishlist.tsx": $$$$$$47,
     "deco-sites/true-source/sections/ProductDescription/ProductBenefits.tsx":
