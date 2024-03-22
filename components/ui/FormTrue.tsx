@@ -3,6 +3,7 @@ import { HTMLWidget } from "apps/admin/widgets.ts";
 import { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
+import useAccordion from "deco-sites/true-source/components/ui/useAccordion.tsx";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import useCEP from "deco-sites/true-source/sdk/useCEP.ts";
 import type { JSX } from "preact";
@@ -131,8 +132,9 @@ const Radio = {
       {children}
     </label>
   ),
-  Input: ({ name, required }: {
+  Input: ({ name, required, value }: {
     name: string;
+    value: string;
     required?: boolean;
   }) => (
     <>
@@ -141,6 +143,7 @@ const Radio = {
         name={name}
         required={required}
         class="peer sr-only w-[250px] h-6"
+        value={value}
       />
       <div class="size-[18px] border border-gray rounded-full flex justify-center items-center peer-checked:bg-dark group relative peer-checked:border-0">
         <span class="size-2 absolute bg-white rounded-full peer-checked:group-[]:block hidden" />
@@ -161,12 +164,16 @@ const Checkbox = {
       {children}
     </label>
   ),
-  Input: ({ name }: { name: string }) => (
+  Input: ({ name, value }: {
+    name: string;
+    value: string;
+  }) => (
     <>
       <input
         type="checkbox"
         name={name}
         class="peer hidden"
+        value={value}
       />
       <span class="border-2 border-gray/80 w-5 h-5 rounded-md flex justify-center items-center peer-checked:border-0 peer-checked:bg-dark group">
         <Icon
@@ -183,11 +190,13 @@ const Checkbox = {
 function Select({
   placeholder,
   items,
+  name,
   class: class_,
   defaultValue,
 }: {
   placeholder: string;
   items: string[];
+  name: string;
   class?: string;
   defaultValue?: string;
 }) {
@@ -203,7 +212,7 @@ function Select({
           <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
             {placeholder}
           </label>
-          <span class="font-medium text-dark text-sm pl-4 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
+          <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
             {selectedValue}
           </span>
           <span class="ml-auto border-l border-Stroke h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
@@ -220,6 +229,11 @@ function Select({
         ref={hiddenSelect}
         class="sr-only w-full peer/select"
         required
+        name={name}
+        value={selectedValue.value}
+        onChange={(e) => {
+          selectedValue.value = e.currentTarget.value;
+        }}
       >
         <option value="">{placeholder}</option>
         {items.map((i) => (
@@ -251,9 +265,7 @@ function Select({
   );
 }
 
-export default function (
-  { topText, specialties, supplements, services }: Props,
-) {
+function Form2() {
   const { cep, loading, data, error } = useCEP();
 
   const showLocation = useSignal(false);
@@ -267,358 +279,505 @@ export default function (
   }, 300);
 
   return (
-    <div class="max-w-[848px] mx-auto py-36 bg-ice">
-      <div
-        dangerouslySetInnerHTML={{ __html: topText }}
-        class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-10 text-gray font-medium leading-7 mb-16"
-      />
+    <formAccordions.Accordion
+      id="2"
+      class="bg-white p-6 rounded-xl shadow-md"
+    >
+      <formAccordions.Trigger for="2" class="flex items-center gap-4 group">
+        <span class="w-8 h-8 border-2 border-dark bg-white text-dark peer-checked:group-[]:bg-dark peer-checked:group-[]:text-white flex justify-center items-center font-lemon font-bold rounded-full transition-colors">
+          2
+        </span>
+        <span class="text-dark font-lemon font-bold">
+          SUA LOCALIZAÇÃO
+        </span>
+      </formAccordions.Trigger>
+      <formAccordions.ContentWrapper>
+        <formAccordions.Content>
+          <form
+            class="bg-white rounded-xl"
+            onSubmit={(e) => {
+              e.preventDefault();
 
-      <div class="flex flex-col gap-2">
-        <form
-          class="bg-white p-6 rounded-xl"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 bg-dark flex justify-center items-center text-white font-lemon font-bold rounded-full">
-              1
-            </span>
-            <span class="text-dark font-lemon font-bold">
-              SOBRE VOCÊ
-            </span>
-          </div>
+              const form3 = document.querySelectorAll<HTMLInputElement>(
+                "[name=forms]",
+              )
+                .item(2);
 
-          <div class="grid grid-cols-2 gap-2 mt-6 w-full">
-            <Input.Container class="col-span-2">
-              <Input.Input type="text" name="name" required />
-              <Input.Label>Seu nome completo *</Input.Label>
-            </Input.Container>
-
-            <Select
-              placeholder="Especialidade *"
-              items={specialties.map(({ label }) => label)}
-            />
-
-            <Input.Container>
-              <Input.Input type="text" name="area" required />
-              <Input.Label>Área de atuação *</Input.Label>
-            </Input.Container>
-
-            <Input.Container>
-              <Input.Input
-                type="text"
-                name="cpf"
-                required
-                pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
-                onInput={(e) => {
-                  e.currentTarget.value = (e.currentTarget.value as string)
-                    .replace(/\D/g, "")
-                    .replace(
-                      /(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})(.*)/,
-                      (all, $1, $2, $3, $4) => {
-                        let s = "";
-
-                        if ($1) s += $1;
-                        if ($2) s += `.${$2}`;
-                        if ($3) s += `.${$3}`;
-                        if ($4) s += `-${$4}`;
-
-                        return s;
-                      },
-                    );
-                }}
-              />
-              <Input.Label>CPF *</Input.Label>
-            </Input.Container>
-
-            <Input.Container>
-              <Input.Input
-                type="email"
-                name="email"
-                required
-              />
-              <Input.Label>E-mail *</Input.Label>
-            </Input.Container>
-
-            <Input.Container>
-              <Input.Input
-                type="tel"
-                name="tel"
-                required
-                pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
-                onInput={(e) => {
-                  e.currentTarget.value = e.currentTarget.value
-                    .replace(/\D/g, "")
-                    .replace(
-                      /^(\d?)(\d?)(\d{0,5})(\d{0,4})(.*)$/,
-                      (all, $1, $2, $3, $4) => {
-                        let s = "";
-
-                        if ($1) s += `(${$1}${$2}`;
-                        if ($3) s += `) ${$3}`;
-                        if ($4) s += `-${$4}`;
-
-                        return s;
-                      },
-                    );
-                }}
-              />
-              <Input.Label>Telefone com WhatsApp *</Input.Label>
-            </Input.Container>
-
-            <Input.Container>
-              <Input.Input
-                type="text"
-                name="instagram"
-                required
-              />
-              <Input.Label>Instagram</Input.Label>
-            </Input.Container>
-          </div>
-
-          <button
-            type="submit"
-            class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+              form3.checked = true;
+            }}
           >
-            Avançar
-          </button>
-        </form>
+            <div class="mt-6 w-full">
+              <div class="flex items-center gap-4">
+                <Input.Container class="w-1/2 sm:max-w-[150px]">
+                  <Input.Input
+                    type="text"
+                    name="cep"
+                    required
+                    pattern="[0-9]{5}-[0-9]{3}"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/,
+                        "",
+                      ).replace(
+                        /(\d{5})(\d{0,3})(.*)/,
+                        (all, $1, $2) => {
+                          let s = "";
 
-        <form
-          class="bg-white p-6 rounded-xl"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 bg-dark flex justify-center items-center text-white font-lemon font-bold rounded-full">
-              2
-            </span>
-            <span class="text-dark font-lemon font-bold">
-              SUA LOCALIZAÇÃO
-            </span>
-          </div>
+                          if ($1) s += $1;
+                          if ($2) s += `-${$2}`;
 
-          <div class="mt-6 w-full">
-            <div class="flex items-center gap-4">
-              <Input.Container class="max-w-[150px]">
-                <Input.Input
-                  type="text"
-                  name="cep"
-                  required
-                  pattern="[0-9]{5}-[0-9]{3}"
-                  onInput={(e) => {
-                    e.currentTarget.value = e.currentTarget.value.replace(
-                      /\D/,
-                      "",
-                    ).replace(
-                      /(\d{5})(\d{0,3})(.*)/,
-                      (all, $1, $2) => {
-                        let s = "";
-
-                        if ($1) s += $1;
-                        if ($2) s += `-${$2}`;
-
-                        return s;
-                      },
-                    );
-
-                    error.value = null;
-
-                    if (/^\d{5}-\d{3}$/.test(e.currentTarget.value)) {
-                      cepDebounced(
-                        Number(e.currentTarget.value.replace("-", "")),
+                          return s;
+                        },
                       );
-                    }
-                  }}
-                />
-                <Input.Label>CEP *</Input.Label>
-              </Input.Container>
-              {loading.value
-                ? <Loading />
-                : error.value
-                ? (
-                  <span class="text-red font-sm">
-                    {error.value === "NOT_FOUND"
-                      ? "Não encontramos esse CEP :/"
-                      : "Tivemos um problema inesperado :0"}
-                  </span>
-                )
-                : null}
-            </div>
 
-            {showLocation.value && (
-              <>
-                <div class="text-gray font-sm font-medium my-4">
-                  Complete as informações do seu endereço
-                </div>
+                      error.value = null;
 
-                <div class="flex flex-wrap gap-2 w-full">
-                  <Input.Container class="w-[70%]">
-                    <Input.Input
-                      type="text"
-                      name="city"
-                      required
-                      defaultValue={data.value?.city}
-                    />
-                    <Input.Label>Cidade *</Input.Label>
-                  </Input.Container>
-
-                  <Select
-                    placeholder="Estado *"
-                    items={UFs}
-                    class="w-[calc(30%-8px)]"
-                    defaultValue={data.value?.state}
+                      if (/^\d{5}-\d{3}$/.test(e.currentTarget.value)) {
+                        cepDebounced(
+                          Number(e.currentTarget.value.replace("-", "")),
+                        );
+                      }
+                    }}
                   />
+                  <Input.Label>CEP *</Input.Label>
+                </Input.Container>
+                {loading.value
+                  ? <Loading />
+                  : error.value
+                  ? (
+                    <span class="text-red font-sm">
+                      {error.value === "NOT_FOUND"
+                        ? "Não encontramos esse CEP :/"
+                        : "Tivemos um problema inesperado :0"}
+                    </span>
+                  )
+                  : null}
+              </div>
 
-                  <Input.Container class="w-[70%]">
-                    <Input.Input
-                      type="text"
-                      name="street"
-                      required
-                      defaultValue={data.value?.street}
+              {showLocation.value && (
+                <>
+                  <div class="text-gray font-sm font-medium my-4">
+                    Complete as informações do seu endereço
+                  </div>
+
+                  <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
+                    <Input.Container class="w-full sm:w-[70%]">
+                      <Input.Input
+                        type="text"
+                        name="city"
+                        required
+                        defaultValue={data.value?.city}
+                      />
+                      <Input.Label>Cidade *</Input.Label>
+                    </Input.Container>
+
+                    <Select
+                      placeholder="Estado *"
+                      items={UFs}
+                      class="w-full sm:w-[calc(30%-8px)]"
+                      name="state"
+                      defaultValue={data.value?.state}
                     />
-                    <Input.Label>Rua *</Input.Label>
-                  </Input.Container>
 
-                  <Input.Container class="w-[calc(30%-8px)]">
-                    <Input.Input
-                      type="text"
-                      name="number"
-                      required
-                      onInput={(e) => {
-                        e.currentTarget.value = e.currentTarget.value
-                          .replace(/\D/g, "");
-                      }}
-                    />
-                    <Input.Label>Número *</Input.Label>
-                  </Input.Container>
+                    <Input.Container class="w-full sm:w-[70%]">
+                      <Input.Input
+                        type="text"
+                        name="street"
+                        required
+                        defaultValue={data.value?.street}
+                      />
+                      <Input.Label>Rua *</Input.Label>
+                    </Input.Container>
 
-                  <Input.Container class="w-1/2">
-                    <Input.Input
-                      type="text"
-                      name="complement"
-                      required
-                    />
-                    <Input.Label>Complemento</Input.Label>
-                  </Input.Container>
+                    <Input.Container class="w-full sm:w-[calc(30%-8px)]">
+                      <Input.Input
+                        type="text"
+                        name="number"
+                        required
+                        onInput={(e) => {
+                          e.currentTarget.value = e.currentTarget.value
+                            .replace(/\D/g, "");
+                        }}
+                      />
+                      <Input.Label>Número *</Input.Label>
+                    </Input.Container>
 
-                  <Input.Container class="w-[calc(50%-8px)]">
-                    <Input.Input
-                      type="text"
-                      name="neighborhood"
-                      required
-                      defaultValue={data.value?.neighborhood}
-                    />
-                    <Input.Label>Bairro *</Input.Label>
-                  </Input.Container>
-                </div>
-              </>
-            )}
-          </div>
+                    <Input.Container class="w-full sm:w-1/2">
+                      <Input.Input
+                        type="text"
+                        name="complement"
+                      />
+                      <Input.Label>Complemento</Input.Label>
+                    </Input.Container>
 
-          <button
-            type="submit"
-            class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+                    <Input.Container class="w-full sm:w-[calc(50%-8px)]">
+                      <Input.Input
+                        type="text"
+                        name="neighborhood"
+                        required
+                        defaultValue={data.value?.neighborhood}
+                      />
+                      <Input.Label>Bairro *</Input.Label>
+                    </Input.Container>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+            >
+              Avançar
+            </button>
+          </form>
+        </formAccordions.Content>
+      </formAccordions.ContentWrapper>
+    </formAccordions.Accordion>
+  );
+}
+
+const formAccordions = useAccordion("forms");
+
+export default function (
+  { topText, specialties, supplements, services }: Props,
+) {
+  function afterAllForms() {
+    function get<T extends HTMLElement>(s: string): T | never {
+      const el = document.querySelector<T>(s);
+
+      if (!el) throw new Error(`Element not found: ${s}`);
+
+      return el;
+    }
+
+    function getAll<T extends HTMLElement>(s: string): T[] | never {
+      const els = document.querySelectorAll<T>(s);
+
+      if (!els.length) throw new Error(`Element not found: ${s}`);
+
+      return [...els];
+    }
+
+    // Form 1
+    const name = get<HTMLInputElement>("[name=name]").value;
+    const specialty = get<HTMLSelectElement>("[name=specialty]").value;
+    const area = get<HTMLInputElement>("[name=area]").value;
+    const cpf = get<HTMLInputElement>("[name=cpf]").value.replace(/-|\./g, "");
+    const email = get<HTMLInputElement>("[name=email]").value;
+    const tel = get<HTMLInputElement>("[name=tel]").value.replace(
+      / |-|\(|\)/g,
+      "",
+    );
+    const instagram = get<HTMLInputElement>("[name=instagram]").value;
+
+    // Form 2
+    const cep = get<HTMLInputElement>("[name=cep]").value.replaceAll("-", "");
+    const city = get<HTMLInputElement>("[name=city]").value;
+    const state = get<HTMLSelectElement>("[name=state]").value;
+    const street = get<HTMLInputElement>("[name=street]").value;
+    const number = get<HTMLInputElement>("[name=number]").value;
+    const complement = get<HTMLInputElement>("[name=complement]").value;
+    const neighborhood = get<HTMLInputElement>("[name=neighborhood]").value;
+
+    // Form 3
+    const prescribe = get<HTMLInputElement>("[name=prescribe]:checked").value;
+    const supplements = getAll<HTMLInputElement>("[name=supplements]:checked")
+      .map(({ value }) => value);
+    const service = get<HTMLInputElement>("[name=service]:checked").value;
+    const stores = get<HTMLTextAreaElement>("[name=stores]").value;
+    const partnerships = get<HTMLInputElement>("[name=partnerships]").value;
+    const meet = get<HTMLTextAreaElement>("[name=meet]").value;
+
+    console.log({
+      name,
+      specialty,
+      area,
+      cpf,
+      email,
+      tel,
+      instagram,
+      cep,
+      city,
+      state,
+      street,
+      number,
+      complement,
+      neighborhood,
+      prescribe,
+      supplements,
+      service,
+      stores,
+      partnerships,
+      meet,
+    });
+  }
+
+  return (
+    <div class="py-36 bg-ice">
+      <div class="max-w-[848px] mx-auto">
+        <div
+          dangerouslySetInnerHTML={{ __html: topText }}
+          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
+        />
+
+        <div class="flex flex-col gap-2 w-[95%] mx-auto">
+          <formAccordions.Accordion
+            id="1"
+            open
+            class="bg-white p-6 rounded-xl shadow-md"
           >
-            Avançar
-          </button>
-        </form>
-        <form
-          class="bg-white p-6 rounded-xl flex flex-col gap-6"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 bg-dark flex justify-center items-center text-white font-lemon font-bold rounded-full">
-              3
-            </span>
-            <span class="text-dark font-lemon font-bold">
-              SOBRE SEU ATENDIMENTO
-            </span>
-          </div>
-
-          <div class="w-full flex flex-col gap-6">
-            <div>
-              <span class="text-sm text-dark font-medium">
-                Você já prescreve nossa marca? *
+            <formAccordions.Trigger
+              for="1"
+              class="flex items-center gap-4 group"
+            >
+              <span class="w-8 h-8 border-2 border-dark bg-white text-dark peer-checked:group-[]:bg-dark peer-checked:group-[]:text-white flex justify-center items-center font-lemon font-bold rounded-full transition-colors">
+                1
               </span>
-
-              <div class="flex items-center gap-2 mt-4">
-                <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
-                  <Radio.Input required name="pescribe" />
-                  Sim
-                </Radio.Container>
-
-                <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
-                  <Radio.Input required name="pescribe" />
-                  Não
-                </Radio.Container>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
-            <div class="flex flex-col gap-6 max-w-[350px] w-full">
-              <span class="text-sm text-dark font-medium">
-                Quais suplementos mais prescreve?
+              <span class="text-dark font-lemon font-bold">
+                SOBRE VOCÊ
               </span>
+            </formAccordions.Trigger>
 
-              <div class="grid grid-cols-2 gap-4">
-                {supplements.map(({ label }) => (
-                  <Checkbox.Container>
-                    <Checkbox.Input name={label} />
-                    {label}
-                  </Checkbox.Container>
-                ))}
-              </div>
-            </div>
-            <div class="flex flex-col gap-6">
-              <span class="text-sm text-dark font-medium">
-                Qual sua média de atendimentos mensal?
-              </span>
+            <formAccordions.ContentWrapper>
+              <formAccordions.Content>
+                <form
+                  class="bg-white rounded-xl"
+                  onSubmit={(e) => {
+                    e.preventDefault();
 
-              <div class="flex flex-col gap-4">
-                {services.map(({ label }) => (
-                  <Radio.Container>
-                    <Radio.Input name="service" />
-                    {label}
-                  </Radio.Container>
-                ))}
-              </div>
-            </div>
-          </div>
+                    const form2 = document.querySelectorAll<HTMLInputElement>(
+                      "[name=forms]",
+                    )
+                      .item(1);
 
-          <TextArea.Container>
-            <TextArea.Input required name="stores" />
-            <TextArea.Label>
-              Quais lojas de suplementos tem perto da sua localidade?
-            </TextArea.Label>
-          </TextArea.Container>
+                    form2.checked = true;
+                  }}
+                >
+                  <div class="grid sm:grid-cols-2 gap-2 mt-6 w-full">
+                    <Input.Container class="sm:col-span-2">
+                      <Input.Input type="text" name="name" required />
+                      <Input.Label>Seu nome completo *</Input.Label>
+                    </Input.Container>
 
-          <div class="flex flex-col gap-6">
-            <span class="text-sm text-dark font-medium">
-              Possui parceria com alguma loja?
-            </span>
+                    <Select
+                      placeholder="Especialidade *"
+                      name="specialty"
+                      items={specialties.map(({ label }) => label)}
+                    />
 
-            <div class="flex flex-col gap-4">
-              <Input.Container>
-                <Input.Input name="partnerships" />
-                <Input.Label>Se sim, qual(is) loja(s)?</Input.Label>
-              </Input.Container>
-            </div>
-          </div>
+                    <Input.Container>
+                      <Input.Input type="text" name="area" required />
+                      <Input.Label>Área de atuação *</Input.Label>
+                    </Input.Container>
 
-          <TextArea.Container>
-            <TextArea.Input required name="meet" />
-            <TextArea.Label>
-              Conta pra gente! Como conheceu nossa marca? *
-            </TextArea.Label>
-          </TextArea.Container>
+                    <Input.Container>
+                      <Input.Input
+                        type="text"
+                        name="cpf"
+                        required
+                        pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                        onInput={(e) => {
+                          e.currentTarget.value =
+                            (e.currentTarget.value as string)
+                              .replace(/\D/g, "")
+                              .replace(
+                                /(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})(.*)/,
+                                (all, $1, $2, $3, $4) => {
+                                  let s = "";
 
-          <button
-            type="submit"
-            class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+                                  if ($1) s += $1;
+                                  if ($2) s += `.${$2}`;
+                                  if ($3) s += `.${$3}`;
+                                  if ($4) s += `-${$4}`;
+
+                                  return s;
+                                },
+                              );
+                        }}
+                      />
+                      <Input.Label>CPF *</Input.Label>
+                    </Input.Container>
+
+                    <Input.Container>
+                      <Input.Input
+                        type="email"
+                        name="email"
+                        required
+                      />
+                      <Input.Label>E-mail *</Input.Label>
+                    </Input.Container>
+
+                    <Input.Container>
+                      <Input.Input
+                        type="tel"
+                        name="tel"
+                        required
+                        pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
+                        onInput={(e) => {
+                          e.currentTarget.value = e.currentTarget.value
+                            .replace(/\D/g, "")
+                            .replace(
+                              /^(\d?)(\d?)(\d{0,5})(\d{0,4})(.*)$/,
+                              (all, $1, $2, $3, $4) => {
+                                let s = "";
+
+                                if ($1) s += `(${$1}${$2}`;
+                                if ($3) s += `) ${$3}`;
+                                if ($4) s += `-${$4}`;
+
+                                return s;
+                              },
+                            );
+                        }}
+                      />
+                      <Input.Label>Telefone com WhatsApp *</Input.Label>
+                    </Input.Container>
+
+                    <Input.Container>
+                      <Input.Input
+                        type="text"
+                        name="instagram"
+                      />
+                      <Input.Label>Instagram</Input.Label>
+                    </Input.Container>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+                  >
+                    Avançar
+                  </button>
+                </form>
+              </formAccordions.Content>
+            </formAccordions.ContentWrapper>
+          </formAccordions.Accordion>
+
+          <Form2 />
+
+          <formAccordions.Accordion
+            id="3"
+            class="bg-white p-6 rounded-xl shadow-md"
           >
-            Finalizar
-          </button>
-        </form>
+            <formAccordions.Trigger
+              for="3"
+              class="flex items-center gap-4 group"
+            >
+              <span class="w-8 h-8 border-2 border-dark bg-white text-dark peer-checked:group-[]:bg-dark peer-checked:group-[]:text-white flex justify-center items-center font-lemon font-bold rounded-full transition-colors">
+                3
+              </span>
+              <span class="text-dark font-lemon font-bold">
+                SOBRE SEU ATENDIMENTO
+              </span>
+            </formAccordions.Trigger>
+            <formAccordions.ContentWrapper>
+              <formAccordions.Content>
+                <form
+                  class="bg-white rounded-xl flex flex-col gap-6"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+
+                    afterAllForms();
+                  }}
+                >
+                  <div class="w-full flex flex-col gap-6 mt-6">
+                    <div>
+                      <span class="text-sm text-dark font-medium">
+                        Você já prescreve nossa marca? *
+                      </span>
+
+                      <div class="flex items-center gap-2 mt-4">
+                        <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
+                          <Radio.Input value="true" required name="prescribe" />
+                          Sim
+                        </Radio.Container>
+
+                        <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
+                          <Radio.Input
+                            value="false"
+                            required
+                            name="prescribe"
+                          />
+                          Não
+                        </Radio.Container>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-6 max-w-[350px] w-full">
+                      <span class="text-sm text-dark font-medium">
+                        Quais suplementos mais prescreve?
+                      </span>
+
+                      <div class="grid grid-cols-2 gap-4">
+                        {supplements.map(({ label }) => (
+                          <Checkbox.Container>
+                            <Checkbox.Input value={label} name="supplements" />
+                            {label}
+                          </Checkbox.Container>
+                        ))}
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                      <span class="text-sm text-dark font-medium">
+                        Qual sua média de atendimentos mensal? *
+                      </span>
+
+                      <div class="flex flex-col gap-4">
+                        {services.map(({ label }) => (
+                          <Radio.Container>
+                            <Radio.Input
+                              value={label}
+                              name="service"
+                              required
+                            />
+                            {label}
+                          </Radio.Container>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <TextArea.Container>
+                    <TextArea.Input required name="stores" />
+                    <TextArea.Label>
+                      Quais lojas de suplementos tem perto da sua localidade?
+                    </TextArea.Label>
+                  </TextArea.Container>
+
+                  <div class="flex flex-col gap-6">
+                    <span class="text-sm text-dark font-medium">
+                      Possui parceria com alguma loja?
+                    </span>
+
+                    <div class="flex flex-col gap-4">
+                      <Input.Container>
+                        <Input.Input name="partnerships" />
+                        <Input.Label>Se sim, qual(is) loja(s)?</Input.Label>
+                      </Input.Container>
+                    </div>
+                  </div>
+
+                  <TextArea.Container>
+                    <TextArea.Input required name="meet" />
+                    <TextArea.Label>
+                      Conta pra gente! Como conheceu nossa marca? *
+                    </TextArea.Label>
+                  </TextArea.Container>
+
+                  <button
+                    type="submit"
+                    class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+                  >
+                    Finalizar
+                  </button>
+                </form>
+              </formAccordions.Content>
+            </formAccordions.ContentWrapper>
+          </formAccordions.Accordion>
+        </div>
       </div>
     </div>
   );
