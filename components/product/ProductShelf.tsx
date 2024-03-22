@@ -33,7 +33,7 @@ function ProductShelf({
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class="carousel-item w-[calc(50%-18px+(18px/2))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
+              class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/3))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
             >
               <ProductCard
                 product={product}
@@ -45,11 +45,11 @@ function ProductShelf({
           ))}
         </Slider>
 
-        <Slider.PrevButton class="absolute top-1/2 -left-8 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full flex justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+        <Slider.PrevButton class="hidden lg:flex absolute top-1/2 -left-8 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
           <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
         </Slider.PrevButton>
 
-        <Slider.NextButton class="absolute top-1/2 -right-4 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full flex justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+        <Slider.NextButton class="hidden lg:flex absolute top-1/2 -right-4 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
           <Icon size={24} id="ArrowRight" class="text-dark" />
         </Slider.NextButton>
 
