@@ -90,9 +90,9 @@ export default function NutritionalTable({
     vD3: "5",
   }],
   ingredients =
-  "Colágeno hidrolisado, peptídeos bioativos de colágeno hidrolisado com peso molecular médio de 2kDa (Verisol®), goma acácia, cacau alcalino lecitinado em pó, edulcorantes naturais stévia e taumatina.",
+    "Colágeno hidrolisado, peptídeos bioativos de colágeno hidrolisado com peso molecular médio de 2kDa (Verisol®), goma acácia, cacau alcalino lecitinado em pó, edulcorantes naturais stévia e taumatina.",
   description =
-  "(*) % Valores Diários de referência com base em uma dieta de 2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou menores, dependendo das suas necessidades energéticas. (**) Valores diários não estabelecidos.",
+    "(*) % Valores Diários de referência com base em uma dieta de 2.000kcal ou 8.400kJ. Seus valores diários podem ser maiores ou menores, dependendo das suas necessidades energéticas. (**) Valores diários não estabelecidos.",
   showIngredients = true,
   showTable = true,
   color = "#3C3C3B",

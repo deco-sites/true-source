@@ -19,6 +19,7 @@ import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
 import * as $Header_MyAccount from "./islands/Header/MyAccount.tsx";
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
+import * as $MyAccount from "./islands/MyAccount.tsx";
 import * as $NavbarWrapper from "./islands/NavbarWrapper.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
@@ -63,6 +64,7 @@ const manifest = {
     "./islands/Header/MyAccount.tsx": $Header_MyAccount,
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
+    "./islands/MyAccount.tsx": $MyAccount,
     "./islands/NavbarWrapper.tsx": $NavbarWrapper,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
