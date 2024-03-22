@@ -19,6 +19,7 @@ const MyAccount = () => {
           } else {
             const execute = () => {
               vtexIdScriptsLoaded.value = true;
+              // @ts-expect-error vtexId is a global variable
               window.vtexid.start({
                 returnUrl: window.location.origin + "/account",
                 userEmail: "",
