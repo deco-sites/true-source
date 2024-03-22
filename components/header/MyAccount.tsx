@@ -41,16 +41,17 @@ const MyAccount = () => {
         <Icon id="Login" size={24} />
         {user.value?.email
           ? (
-            <p className={`text-xs hidden lg:block`}>
+            <p className="text-xs w-24 text-ellipsis text-left hidden">
               Olá,<br />
-              {user.value?.name
-                ? <b>{user.value?.name}</b>
+              {user.value?.givenName
+                ? <b>{user.value?.givenName}</b>
                 : <b>{user.value?.email}</b>}
             </p>
           )
           : (
-            <p className={`text-xs hidden lg:block`}>
-              Faça seu <b>login</b> <br />ou <b>cadastre-se</b>
+            <p className="text-xs hidden lg:block">
+              Faça seu <b>login</b><br />
+              ou <b>cadastre-se</b>
             </p>
           )}
       </button>
