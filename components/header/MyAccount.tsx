@@ -7,9 +7,11 @@ const MyAccount = () => {
   const { user } = useUser();
   const vtexIdScriptsLoaded = useSignal(false);
 
+  console.log("USER", user.value);
+
   return (
     <>
-      <a
+      <button
         class={`flex items-center gap-2`}
         onClick={async () => {
           if (user.value?.email) {
@@ -36,10 +38,21 @@ const MyAccount = () => {
         }}
       >
         <Icon id="Login" size={24} />
-        <p className={`text-xs hidden lg:block`}>
-          Faça seu <b>login</b> <br />ou <b>cadastre-se</b>
-        </p>
-      </a>
+        {user.value?.email
+          ? (
+            <p className={`text-xs hidden lg:block`}>
+              Olá,<br />
+              {user.value?.name
+                ? <b>{user.value?.name}</b>
+                : <b>{user.value?.email}</b>}
+            </p>
+          )
+          : (
+            <p className={`text-xs hidden lg:block`}>
+              Faça seu <b>login</b> <br />ou <b>cadastre-se</b>
+            </p>
+          )}
+      </button>
     </>
   );
 };

@@ -58,13 +58,14 @@ import * as $$$$$$48 from "./sections/ProductDescription/ProductComparison.tsx";
 import * as $$$$$$49 from "./sections/ProductDescription/ProductContainer.tsx";
 import * as $$$$$$50 from "./sections/ProductDescription/ProductGallery.tsx";
 import * as $$$$$$51 from "./sections/ProductDescription/ProductInfoCard.tsx";
-import * as $$$$$$52 from "./sections/ProductDescription/ProductNutritionalHighlights.tsx";
-import * as $$$$$$53 from "./sections/ProductDescription/ProductNutritionalTable.tsx";
-import * as $$$$$$54 from "./sections/ProductDescription/ProductNutritionalTable2.tsx";
-import * as $$$$$$55 from "./sections/ProductDescription/ProductSpace.tsx";
-import * as $$$$$$56 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$57 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$58 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$52 from "./sections/ProductDescription/ProductInfoCard1WithBackground.tsx";
+import * as $$$$$$53 from "./sections/ProductDescription/ProductNutritionalHighlights.tsx";
+import * as $$$$$$54 from "./sections/ProductDescription/ProductNutritionalTable.tsx";
+import * as $$$$$$55 from "./sections/ProductDescription/ProductNutritionalTable2.tsx";
+import * as $$$$$$56 from "./sections/ProductDescription/ProductSpace.tsx";
+import * as $$$$$$57 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$58 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$59 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -133,17 +134,19 @@ const manifest = {
       $$$$$$50,
     "deco-sites/true-source/sections/ProductDescription/ProductInfoCard.tsx":
       $$$$$$51,
-    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalHighlights.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductInfoCard1WithBackground.tsx":
       $$$$$$52,
-    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalHighlights.tsx":
       $$$$$$53,
-    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable2.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable.tsx":
       $$$$$$54,
-    "deco-sites/true-source/sections/ProductDescription/ProductSpace.tsx":
+    "deco-sites/true-source/sections/ProductDescription/ProductNutritionalTable2.tsx":
       $$$$$$55,
-    "deco-sites/true-source/sections/Social/InstagramPosts.tsx": $$$$$$56,
-    "deco-sites/true-source/sections/Social/WhatsApp.tsx": $$$$$$57,
-    "deco-sites/true-source/sections/Theme/Theme.tsx": $$$$$$58,
+    "deco-sites/true-source/sections/ProductDescription/ProductSpace.tsx":
+      $$$$$$56,
+    "deco-sites/true-source/sections/Social/InstagramPosts.tsx": $$$$$$57,
+    "deco-sites/true-source/sections/Social/WhatsApp.tsx": $$$$$$58,
+    "deco-sites/true-source/sections/Theme/Theme.tsx": $$$$$$59,
   },
   "apps": {
     "deco-sites/true-source/apps/decohub.ts": $$$$$$$$$$$0,
