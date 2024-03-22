@@ -50,7 +50,8 @@ const MyAccount = () => {
           )
           : (
             <p className="text-xs hidden lg:block">
-              Faça seu <b>login</b><br />
+              Faça seu <b>login</b>
+              <br />
               ou <b>cadastre-se</b>
             </p>
           )}
