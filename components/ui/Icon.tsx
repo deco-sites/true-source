@@ -66,7 +66,8 @@ export type AvailableIcons =
   | "Warning"
   | "PlayCircle"
   | "MinusCircle"
-  | "PlusCircle";
+  | "PlusCircle"
+  | "StarIcon";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
