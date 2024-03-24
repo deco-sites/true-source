@@ -83,7 +83,7 @@ export default function InfoCard({
 
     return (
       <div
-        class={`w-full px-6 md:max-w-[80vw] md:px-0 flex ${alignment} items-center gap-8 sm:gap-24 mx-auto`}
+        class={`w-full px-6 md:max-w-[70vw] md:px-0 flex ${alignment} items-center gap-8 sm:gap-24 mx-auto`}
       >
         <div>
           <h2
@@ -93,7 +93,7 @@ export default function InfoCard({
             {title}
           </h2>
           <div
-            class="text-sm md:text-base leading-6 sm:leading-5"
+            class="text-sm md:text-base leading-7 sm:leading-6"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
@@ -160,8 +160,8 @@ export default function InfoCard({
           <div
             class={`${
               !title
-                ? "text-1xl sm:text-2xl font-lemon-milk font-bold  leading-6 sm:leading-5"
-                : "text-base leading-6"
+                ? "text-1xl sm:text-2xl font-lemon-milk font-bold"
+                : "text-base leading-6 sm:leading-5"
             }  ${textAlignment}`}
           >
             <p dangerouslySetInnerHTML={{ __html: description }} />

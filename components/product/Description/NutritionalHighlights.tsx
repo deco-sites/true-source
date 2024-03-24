@@ -64,7 +64,7 @@ export default function NutritionalHighlights({
                 }`}
               >
                 <div
-                  class="w-24 h-24 flex items-center justify-center p-2 font-bold text-base text-dark border font-lemon-milk uppercase rounded-full"
+                  class="w-24 h-24 flex items-center justify-center p-2 font-bold text-base text-dark border font-lemon-milk rounded-full"
                   style={{ borderColor: color }}
                 >
                   {highlight.value}
