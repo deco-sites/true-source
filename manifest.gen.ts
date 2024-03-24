@@ -31,9 +31,9 @@ import * as $$$$$$20 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$21 from "./sections/Gallery.tsx";
 import * as $$$$$$22 from "./sections/Header/Header.tsx";
 import * as $$$$$$23 from "./sections/Images/AccordionWithImages.tsx";
-import * as $$$$$$24 from "./sections/Images/BannerGrid.tsx";
-import * as $$$$$$25 from "./sections/Images/Carousel.tsx";
-import * as $$$$$$26 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$24 from "./sections/Images/Carousel.tsx";
+import * as $$$$$$25 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$26 from "./sections/Images/ImageGrid.tsx";
 import * as $$$$$$27 from "./sections/Images/ShoppableBanner.tsx";
 import * as $$$$$$28 from "./sections/Layout/Container.tsx";
 import * as $$$$$$29 from "./sections/Layout/Flex.tsx";
@@ -103,9 +103,9 @@ const manifest = {
     "deco-sites/true-source/sections/Gallery.tsx": $$$$$$21,
     "deco-sites/true-source/sections/Header/Header.tsx": $$$$$$22,
     "deco-sites/true-source/sections/Images/AccordionWithImages.tsx": $$$$$$23,
-    "deco-sites/true-source/sections/Images/BannerGrid.tsx": $$$$$$24,
-    "deco-sites/true-source/sections/Images/Carousel.tsx": $$$$$$25,
-    "deco-sites/true-source/sections/Images/ImageGallery.tsx": $$$$$$26,
+    "deco-sites/true-source/sections/Images/Carousel.tsx": $$$$$$24,
+    "deco-sites/true-source/sections/Images/ImageGallery.tsx": $$$$$$25,
+    "deco-sites/true-source/sections/Images/ImageGrid.tsx": $$$$$$26,
     "deco-sites/true-source/sections/Images/ShoppableBanner.tsx": $$$$$$27,
     "deco-sites/true-source/sections/Layout/Container.tsx": $$$$$$28,
     "deco-sites/true-source/sections/Layout/Flex.tsx": $$$$$$29,
