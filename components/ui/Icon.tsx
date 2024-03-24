@@ -59,7 +59,12 @@ export type AvailableIcons =
   | "CloseMobile"
   | "IconDesktop"
   | "IconMobile"
-  | "Refresh";
+  | "Refresh"
+  | "LogoIcon"
+  | "ThinUser"
+  | "ThinShoppingCart"
+  | "CashBack"
+  | "RatingStar";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
