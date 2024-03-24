@@ -216,14 +216,19 @@ export default function AccordionWithImages(
   }
 
   return (
-    <ul class="flex px-10 text-ice max-w-[1400px] mx-auto h-[600px]">
+    <ul
+      style={{
+        "--flex": `${sections.length}`,
+      }}
+      class="flex px-10 text-ice max-w-[1400px] mx-auto h-[600px]"
+    >
       {sections.map((section, index) => (
         <li
-          class={"w-full relative transition-all ease-in-out duration-1000 group first:rounded-l-[20px] last:rounded-r-[20px] overflow-clip" +
+          class={"relative transition-all duration-500 group first:rounded-l-[20px] last:rounded-r-[20px] overflow-clip" +
             (
               index === 0
-                ? " has-[~:hover]:max-w-[160px] lg:has-[~:hover]:max-w-[248px] max-w-full"
-                : " max-w-[160px] lg:max-w-[248px] hover:max-w-full"
+                ? " has-[~:hover]:flex-[1] flex-[var(--flex)]"
+                : " flex-[1] hover:flex-[var(--flex)]"
             )}
         >
           <span
@@ -265,8 +270,8 @@ export default function AccordionWithImages(
             class={"bg-gradient-to-t from-black/30 inset-0 absolute pointer-events-none" +
               (
                 index === 0
-                  ? " group-has-[~:hover]:to-black/30 to-transparent"
-                  : " to-black/30 group-hover:to-transparent"
+                  ? " group-has-[~:hover]:to-black/50 group-has-[~:hover]:from-black/50 to-transparent"
+                  : " to-black/50 group-hover:from-black/50 group-hover:to-transparent"
               )}
           />
           <Image
