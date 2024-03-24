@@ -189,20 +189,25 @@
     }
 
     .custom-category-title {
-        @apply text-base md:text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
+        @apply text-2xl lg:text-4xl uppercase font-bold font-lemon-milk leading-6 lg:leading-[44px] mb-8;
     }
 
     .custom-category-title strong {
         @apply font-bold text-red;
+
+        background-image: linear-gradient(to right, #e4003f, #e9530e);
+        background-clip: text;
+        color: transparent;
     }
 
-    /* .custom-category-text {
-    @apply text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
-  } */
+    .custom-category-text {
+        @apply font-medium leading-7 text-dark;
+    }
 
     .custom-category-text a {
         @apply underline text-red;
     }
+
 }
 
 .group:disabled .group-disabled\:animate-progress {
