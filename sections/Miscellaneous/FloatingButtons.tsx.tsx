@@ -145,7 +145,7 @@ export default function FloatingButtons(
 
       {isMobile && (
         <div>
-          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] fixed bottom-3 right-5 group flex justify-center items-center">
+          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center">
             <Icon
               id="FloatingChat"
               width={20}

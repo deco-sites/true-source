@@ -75,7 +75,7 @@ const Input = {
       placeholder=" "
       {...props}
       class={clx(
-        "peer rounded-md border border-Stroke pt-5 pb-1.5 px-4 shadow outline-0 focus:border-dark text-sm w-full",
+        "peer rounded-md border border-Stroke pt-5 pb-1.5 px-4 shadow outline-0 focus:border-dark text-sm w-full valid:border-green [&:not(:focus):invalid:not(:placeholder-shown)]:border-red",
         props.class as string,
       )}
     />
@@ -103,7 +103,7 @@ const TextArea = {
       placeholder=" "
       {...props}
       class={clx(
-        "peer rounded-md border border-Stroke pt-7 pb-2 px-4 shadow-md outline-0 focus:border-dark text-sm w-full min-h-[200px]",
+        "peer rounded-md border border-Stroke pt-7 pb-2 px-4 shadow-md outline-0 focus:border-dark text-sm w-full min-h-[200px] valid:border-green [&:not(:focus):invalid:not(:placeholder-shown)]:border-red",
         props.class as string,
       )}
     />

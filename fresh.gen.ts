@@ -10,7 +10,9 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $BannerCarouselJS from "./islands/BannerCarouselJS.tsx";
 import * as $CartItem from "./islands/CartItem.tsx";
+import * as $CouponPopup from "./islands/CouponPopup.tsx";
 import * as $FormTrue from "./islands/FormTrue.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_Cart from "./islands/Header/Cart/Cart.tsx";
@@ -40,6 +42,9 @@ import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
 import * as $Subscription from "./islands/Subscription.tsx";
 import * as $SubscriptionModal from "./islands/SubscriptionModal.tsx";
+import * as $SubscriptionPopup from "./islands/SubscriptionPopup.tsx";
+import * as $VideoModal_Button from "./islands/VideoModal/Button.tsx";
+import * as $VideoModal_Modal from "./islands/VideoModal/Modal.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -56,7 +61,9 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/BannerCarouselJS.tsx": $BannerCarouselJS,
     "./islands/CartItem.tsx": $CartItem,
+    "./islands/CouponPopup.tsx": $CouponPopup,
     "./islands/FormTrue.tsx": $FormTrue,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/Cart.tsx": $Header_Cart_Cart,
@@ -86,6 +93,9 @@ const manifest = {
     "./islands/SliderJS.tsx": $SliderJS,
     "./islands/Subscription.tsx": $Subscription,
     "./islands/SubscriptionModal.tsx": $SubscriptionModal,
+    "./islands/SubscriptionPopup.tsx": $SubscriptionPopup,
+    "./islands/VideoModal/Button.tsx": $VideoModal_Button,
+    "./islands/VideoModal/Modal.tsx": $VideoModal_Modal,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },

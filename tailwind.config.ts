@@ -10,6 +10,7 @@ export default {
       screens: {},
     },
     colors: {
+      "terra-clara": "#F0E9E9",
       ice: "#F0F0EE",
       dark: "#3C3C3B",
       white: "#fff",

@@ -3,6 +3,7 @@ import type { JSX } from "preact";
 
 export type AvailableIcons =
   | "ArrowsPointingOut"
+  | "BannerArrowRight"
   | "Bars3"
   | "ChevronLeft"
   | "ChevronRight"
@@ -54,6 +55,7 @@ export type AvailableIcons =
   | "AlertSuccess"
   | "AlertWarning"
   | "AlertError"
+  | "StarIconWhite"
   | "share"
   | "ArrowNarrowRight"
   | "Help"
@@ -64,7 +66,15 @@ export type AvailableIcons =
   | "IconMobile"
   | "HeartFill"
   | "Refresh"
-  | "FloatingWhatsApp";
+  | "FloatingWhatsApp"
+  | "Refresh"
+  | "StrokeArrowRight"
+  | "Check"
+  | "Warning"
+  | "PlayCircle"
+  | "MinusCircle"
+  | "PlusCircle"
+  | "StarIcon";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

@@ -37,7 +37,7 @@ function NotFound() {
 
         <a
           href="/produtos"
-          class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-full"
+          class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-red to-orange rounded-full"
         >
           VER TODOS OS PRODUTOS
           <Icon id="ArrowRight" width={16} height={16} class="text-white" />
@@ -93,7 +93,7 @@ function SearchResult(
 
           <a
             href="/produtos"
-            class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-full"
+            class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-red to-orange rounded-full"
           >
             VER TODOS OS PRODUTOS
             <Icon id="ArrowRight" width={16} height={16} class="text-white" />
