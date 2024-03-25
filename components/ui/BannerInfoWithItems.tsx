@@ -18,42 +18,12 @@ export interface Banner {
   alt: string;
 }
 
-const roundedMapping = {
-  bottom: "rounded-b-[20px]",
-  top: "rounded-t-[20px]",
-  full: "rounded-[20px]",
-};
-
-const tagSizeMapping = {
-  small: "text-[14px] md:text-[16px]",
-  medium: "text-[14px] md:text-[18px]",
-};
-
-const tagColorMapping = {
-  white: "text-ice",
-  gradientRed: "fontWithGradient",
-};
-
-const titleSizeMapping = {
-  medium: "text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]",
-  large: "text-[24px] md:text-[50px] leading-[24px] md:leading-[52px]",
-};
-
 export interface Content {
   /** @title Texto de destaque acima do título */
-  tag?: {
-    text?: string;
-    color?: "white" | "gradientRed";
-    size?: "small" | "medium";
-    /** @title Letras em caixa alta */
-    upperCase?: boolean;
-    /** @title Letras em caixa alta */
-    divider?: boolean;
-  };
+  tag?: string;
   /** @title Título */
   title?: HTMLWidget;
-  /** @title Tamanho do título */
-  titleSize?: "medium" | "large";
+
   /** @title Descrição */
   description?: HTMLWidget;
   /** @title Botão de cta */
@@ -68,8 +38,6 @@ export interface Props {
   banner: Banner;
   /** @title Conteúdo do banner */
   content?: Content;
-  /** @title Banner é arredondado? */
-  rounded?: "bottom" | "top" | "full";
   /** @title Items que ficam ao lado do banner */
   items?: string[];
   /** @description Check this option when this banner is the biggest image on the screen for image optimizations */
@@ -78,14 +46,14 @@ export interface Props {
 }
 
 function BannerInfoWithItems(
-  { banner, preload, isMobile, rounded, content, items }: Props,
+  { banner, preload, isMobile, content, items }: Props,
 ) {
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
   const height = isMobile ? mobileHeight : desktopHeight;
 
   return (
     <div
-      class={"w-full max-w-[1440px] mx-auto relative"}
+      class={"w-full  relative"}
     >
       <Picture preload={preload}>
         <Source
@@ -100,12 +68,10 @@ function BannerInfoWithItems(
           fetchPriority={preload ? "high" : "auto"}
           src={desktopSrc}
           width={1440}
-          height={600}
+          height={desktopHeight}
         />
         <img
-          class={`object-cover w-full 
-          ${rounded && roundedMapping[rounded]} 
-          `}
+          class="object-cover w-full rounded-b-[20px]"
           loading={preload ? "eager" : "lazy"}
           src={desktopSrc}
           alt={alt}
@@ -114,46 +80,23 @@ function BannerInfoWithItems(
       </Picture>
 
       <div
-        class={"absolute top-0 w-full h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[126px]"}
+        class={"absolute top-0 w-full max-w-[1440px] mx-auto h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[182px]"}
       >
         <div
           class={"flex flex-col items-start"}
         >
           {content?.tag &&
             (
-              <span
-                class={`font-inter font-medium mb-6 
-                ${content.tag.upperCase && "font-lemon-milk font-bold"}
-                ${
-                  content.tag.size
-                    ? tagSizeMapping[content.tag.size]
-                    : "text-[18px]"
-                }
-                ${
-                  content.tag.color
-                    ? tagColorMapping[content.tag.color]
-                    : "text-ice"
-                }
-              `}
-              >
-                {content.tag.text}
+              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] fontWithGradient">
+                {content.tag}
               </span>
             )}
-
-          {content?.tag?.divider && (
-            <div class="w-full max-w-[475] border-b border-light-gray mb-8" />
-          )}
 
           {content?.title &&
             (
               <RenderHTML
                 html={content.title}
-                class={`font-lemon-milk font-bold text-ice mb-8 
-                ${
-                  content.titleSize
-                    ? titleSizeMapping[content.titleSize]
-                    : "text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]"
-                }`}
+                class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]"
               />
             )}
 
