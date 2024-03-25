@@ -1,7 +1,6 @@
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { LoaderContext } from "deco/mod.ts";
-import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 /**  @titleBy alt */
@@ -21,10 +20,16 @@ export interface Banner {
 export interface Content {
   /** @title Texto de destaque acima do título */
   tag?: string;
-  /** @title Título */
-  title?: HTMLWidget;
-  /** @title Descrição */
-  description?: HTMLWidget;
+  /**
+   * @title Título
+   * @format textarea
+   */
+  title?: string;
+  /**
+   * @title Descrição
+   * @format textarea
+   */
+  description?: string;
   /** @title Botão de cta */
   cta?: {
     text: string;
@@ -87,18 +92,16 @@ function BannerInfoWithDivider(
 
           {content?.title &&
             (
-              <RenderHTML
-                html={content.title}
-                class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]"
-              />
+              <h2 class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
+                {content.title}
+              </h2>
             )}
 
           {content?.description &&
             (
-              <RenderHTML
-                html={content.description}
-                class="font-inter text-sm font-medium leading-[22px] md:leading-[27px] text-ice mb-8"
-              />
+              <p class="font-inter text-sm font-medium leading-[22px] md:leading-[27px] text-ice mb-8">
+                {content.description}
+              </p>
             )}
 
           {content?.cta && (
