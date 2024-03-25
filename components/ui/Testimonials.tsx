@@ -299,4 +299,6 @@ function script({ rootId, isMobile }: ScriptProps) {
   if (next) {
     next.addEventListener("click", nextClick);
   }
+
+  computeScroll();
 }
