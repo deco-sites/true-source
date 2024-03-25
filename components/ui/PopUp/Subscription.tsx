@@ -298,7 +298,7 @@ const Input = {
       placeholder=" "
       {...props}
       class={clx(
-        "peer rounded-md border border-Stroke pt-5 pb-1.5 px-4 shadow outline-0 focus:border-dark text-sm w-full valid:border-green [&:not(:focus):invalid:not(:placeholder-shown)]:border-red",
+        "peer rounded-md border border-Stroke pt-5 pb-1.5 px-4 shadow outline-0 focus:border-dark text-sm w-full [&:valid:not(:placeholder-shown)]:border-green [&:not(:focus):invalid:not(:placeholder-shown)]:border-red",
         props.class as string,
       )}
     />
