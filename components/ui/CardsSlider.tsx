@@ -22,8 +22,6 @@ export interface Props {
 function CardsSlider({ title, cards, isMobile, hasBackgroundColor }: Props) {
   const id = useId();
 
-  const dotIsPage = isMobile ? false : true;
-
   return (
     <div
       id={id}
@@ -98,7 +96,7 @@ function CardsSlider({ title, cards, isMobile, hasBackgroundColor }: Props) {
             </ul>
           </div>
         </>
-        <SliderJS rootId={id} dotIsPage={dotIsPage} />
+        <SliderJS rootId={id} dotIsPage={!isMobile} />
       </div>
     </div>
   );

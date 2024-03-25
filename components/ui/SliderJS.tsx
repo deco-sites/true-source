@@ -99,7 +99,7 @@ const setup = ({ rootId, interval, infinite, dotIsPage }: Props) => {
     goToItem(
       isShowingFirst
         ? items.length - 1
-        : Math.max(-1, indices.at(-1) as number - itemsPerPage),
+        : Math.max(0, indices[0] - itemsPerPage),
     );
   };
 
@@ -109,7 +109,7 @@ const setup = ({ rootId, interval, infinite, dotIsPage }: Props) => {
 
     goToItem(
       Math.min(
-        isShowingLast ? 0 : indices.at(-1) as number + indices.length,
+        isShowingLast ? 0 : indices.at(-1) as number + 1,
         items.length - 1,
       ),
     );

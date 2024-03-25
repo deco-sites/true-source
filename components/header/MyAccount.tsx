@@ -7,8 +7,6 @@ const MyAccount = () => {
   const { user } = useUser();
   const vtexIdScriptsLoaded = useSignal(false);
 
-  console.log("USER", user.value);
-
   return (
     <>
       <button

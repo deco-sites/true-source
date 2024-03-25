@@ -41,7 +41,10 @@ function ProductShelf({
   }
 
   return (
-    <div class="flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-4 pt-16 pb-24">
+    <div
+      class="flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-4 pt-16 pb-24"
+      id={id}
+    >
       <div class="relative rounded-[20px] overflow-hidden -translate-y-4 max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]">
         <Image
           src={isMobile ? mobile.src : desktop.src}
@@ -56,7 +59,7 @@ function ProductShelf({
       </div>
 
       <div class="w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px] flex flex-col gap-8">
-        <div id={id} class="relative mx-auto w-[95%]">
+        <div class="relative mx-auto w-[95%]">
           <Slider class="carousel gap-4 w-full">
             {products?.map((product, index) => (
               <Slider.Item
