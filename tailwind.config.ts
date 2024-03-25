@@ -1,4 +1,4 @@
-import daisyui, { Config } from "daisyui";
+import daisyui, { type Config } from "daisyui";
 
 export default {
   plugins: [daisyui],

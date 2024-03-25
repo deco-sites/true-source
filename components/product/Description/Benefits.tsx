@@ -72,6 +72,7 @@ export default function Benefits({
                   <div class="w-[48px] sm:w-[80px] flex-none">
                     <img
                       class="w-[48px] sm:w-[80px] h-auto"
+                      alt=""
                       width={80}
                       height={80}
                       src={icon}

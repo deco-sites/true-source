@@ -4,7 +4,7 @@
  * License: MIT (https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/LICENSE)
  * https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/src/docs/src/routes/theme-generator.svelte
  */
-import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
+import SiteTheme, { type Font } from "apps/website/components/Theme.tsx";
 import Color from "npm:colorjs.io";
 
 export interface ThemeColors {
@@ -14,23 +14,23 @@ export interface ThemeColors {
    */
   "base-100"?: string;
   /** @format color */
-  "primary"?: string;
+  primary?: string;
   /** @format color */
-  "secondary"?: string;
+  secondary?: string;
   /**
    * @title Accent
    * @format color */
-  "tertiary"?: string;
+  tertiary?: string;
   /** @format color */
-  "neutral"?: string;
+  neutral?: string;
   /** @format color */
-  "success"?: string;
+  success?: string;
   /** @format color */
-  "warning"?: string;
+  warning?: string;
   /** @format color */
-  "error"?: string;
+  error?: string;
   /** @format color */
-  "info"?: string;
+  info?: string;
 }
 
 export interface ComplementaryColors {
@@ -160,34 +160,34 @@ const toVariables = (
   };
 
   const colorVariables = Object.entries({
-    "--p": t["primary"],
-    "--pc": t["primary-content"] ?? contrasted(t["primary"]),
+    "--p": t.primary,
+    "--pc": t["primary-content"] ?? contrasted(t.primary),
 
-    "--s": t["secondary"],
-    "--sc": t["secondary-content"] ?? contrasted(t["secondary"]),
+    "--s": t.secondary,
+    "--sc": t["secondary-content"] ?? contrasted(t.secondary),
 
-    "--a": t["tertiary"],
-    "--ac": t["tertiary-content"] ?? contrasted(t["tertiary"]),
+    "--a": t.tertiary,
+    "--ac": t["tertiary-content"] ?? contrasted(t.tertiary),
 
-    "--n": t["neutral"],
-    "--nc": t["neutral-content"] ?? contrasted(t["neutral"]),
+    "--n": t.neutral,
+    "--nc": t["neutral-content"] ?? contrasted(t.neutral),
 
     "--b1": t["base-100"],
     "--b2": t["base-200"] ?? darken(t["base-100"], 0.07),
     "--b3": t["base-300"] ?? darken(t["base-100"], 0.14),
     "--bc": t["base-content"] ?? contrasted(t["base-100"]),
 
-    "--su": t["success"],
-    "--suc": t["success-content"] ?? contrasted(t["success"]),
+    "--su": t.success,
+    "--suc": t["success-content"] ?? contrasted(t.success),
 
-    "--wa": t["warning"],
-    "--wac": t["warning-content"] ?? contrasted(t["warning"]),
+    "--wa": t.warning,
+    "--wac": t["warning-content"] ?? contrasted(t.warning),
 
-    "--er": t["error"],
-    "--erc": t["error-content"] ?? contrasted(t["error"]),
+    "--er": t.error,
+    "--erc": t["error-content"] ?? contrasted(t.error),
 
-    "--in": t["info"],
-    "--inc": t["info-content"] ?? contrasted(t["info"]),
+    "--in": t.info,
+    "--inc": t["info-content"] ?? contrasted(t.info),
   }).map(([key, color]) => [key, toValue(color)] as [string, string]);
 
   const miscellaneousVariables = Object.entries({
@@ -206,15 +206,15 @@ const toVariables = (
 };
 
 const defaultTheme = {
-  "primary": "oklch(1 0 0)",
-  "secondary": "oklch(1 0 0)",
-  "tertiary": "oklch(1 0 0)",
-  "neutral": "oklch(1 0 0)",
+  primary: "oklch(1 0 0)",
+  secondary: "oklch(1 0 0)",
+  tertiary: "oklch(1 0 0)",
+  neutral: "oklch(1 0 0)",
   "base-100": "oklch(1 0 0)",
-  "info": "oklch(1 0 0)",
-  "success": "oklch(0.9054 0.1546 194.7689)",
-  "warning": "oklch(1 0 0)",
-  "error": "oklch(1 0 0)",
+  info: "oklch(1 0 0)",
+  success: "oklch(0.9054 0.1546 194.7689)",
+  warning: "oklch(1 0 0)",
+  error: "oklch(1 0 0)",
 
   "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
   "--rounded-btn": "0.2rem" as const, // border radius rounded-btn utility class, used in buttons and similar element
@@ -279,21 +279,32 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-base-100 text-base-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
               {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -316,20 +327,30 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-base-content text-base-100">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -352,19 +373,27 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-primary text-primary-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
               {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -385,18 +414,24 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-secondary text-secondary-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -417,18 +452,27 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-accent text-accent-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>
               {" "}
             </div>
             {" "}

@@ -1,4 +1,4 @@
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
@@ -34,7 +34,7 @@ function GalleryFrontBack(props: Props) {
             class="w-screen sm:w-[24vw]"
             sizes="(max-width: 640px) 100vw, 24vw"
             style={{ aspectRatio }}
-            src={img.url!}
+            src={img.url ?? ""}
             alt={img.alternateName}
             width={width}
             height={height}

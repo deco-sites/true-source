@@ -66,8 +66,7 @@ function FilterValues(
 
     if (params.has("filter.price")) {
       const v = params
-        .get("filter.price")!
-        .split(":")
+        .get("filter.price")!.split(":")
         .map((value) => Number(value));
 
       min = v[0];
@@ -126,8 +125,7 @@ function FilterValues(
 
                 if (params.has("filter.price")) {
                   const v = params
-                    .get("filter.price")!
-                    .split(":")
+                    .get("filter.price")!.split(":")
                     .map((value) => Number(value));
 
                   min = v[0];

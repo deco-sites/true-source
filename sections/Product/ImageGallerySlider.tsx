@@ -1,1 +1,1 @@
-export { default } from "../../components/product/Gallery/ImageSlider.tsx";
+export { default } from "deco-sites/true-source/components/product/Gallery/ImageSlider.tsx";

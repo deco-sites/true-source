@@ -121,7 +121,7 @@ export default function desktopScript({ rootId }: ScriptProps) {
     if (!slide) {
       return;
     }
-    const carouselMargin = parseInt(
+    const carouselMargin = Number.parseInt(
       getComputedStyle(carousel).getPropertyValue("margin-left"),
     ) || 0;
     const nextPos = slide.offsetLeft - carousel.offsetLeft + carouselMargin;
@@ -135,7 +135,8 @@ export default function desktopScript({ rootId }: ScriptProps) {
     const item = getElementsInsideContainer()[0];
     if (!item) return;
 
-    const nextIndex = parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") + 1;
+    const nextIndex =
+      Number.parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") + 1;
     if (nextIndex > items.length - elementsInsideContainer) {
       computeScroll(0);
       return;
@@ -148,7 +149,8 @@ export default function desktopScript({ rootId }: ScriptProps) {
     const item = getElementsInsideContainer()[0];
     if (!item) return;
 
-    const index = parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") - 1;
+    const index = Number.parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") -
+      1;
 
     if (index < 0) {
       const lastIndex = items.length - 1;

@@ -1,5 +1,5 @@
 import Icon, {
-  AvailableIcons,
+  type AvailableIcons,
 } from "deco-sites/true-source/components/ui/Icon.tsx";
 
 /**

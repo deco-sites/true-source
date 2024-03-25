@@ -8,9 +8,9 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery from "../product/ProductGallery.tsx";
 import { renderSection } from "apps/website/pages/Page.tsx";
-import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
-import { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
+import type { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
 
 export interface Props {
   /** @title Integration */

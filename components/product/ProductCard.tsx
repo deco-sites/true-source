@@ -138,7 +138,7 @@ function ProductCard({
           aria-label="view product"
         >
           <Image
-            src={front.url!}
+            src={front.url ?? ""}
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
@@ -183,14 +183,15 @@ function ProductCard({
           onClick={isInCart
             ? buyProduct.remove(productID)
             : canBuyWithSubscription
-            ? () =>
+            ? () => {
               currentSubscription.value = {
                 productID,
                 seller,
                 quantity: 1,
                 listPrice,
                 price,
-              }
+              };
+            }
             : buyProduct.add}
           class={clx(
             "flex justify-center items-center gap-4 rounded text-xs sm:text-sm font-bold h-10 group/card",

@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";

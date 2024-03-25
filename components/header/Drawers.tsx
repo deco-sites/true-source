@@ -43,7 +43,7 @@ const HeaderLogin = (props: HeaderProps) => {
   return (
     <div class="flex justify-end items-center py-6 px-4">
       {onClose && (
-        <button onClick={onClose}>
+        <button type="button" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -100,7 +100,7 @@ const SearchHeader = (props: HeaderProps) => {
         Buscar
       </div>
       {onClose && (
-        <button class="py-3 text-white" onClick={onClose}>
+        <button type="button" class="py-3 text-white" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
         </button>
       )}
@@ -175,11 +175,15 @@ function Drawers({ menu, searchbar, children, freeShippingTarget }: Props) {
       <Drawer // right drawer
         class="drawer-end"
         open={displayCart.value !== false}
-        onClose={() => displayCart.value = false}
+        onClose={() => {
+          displayCart.value = false;
+        }}
         aside={
           <Aside
             title={MINICART_TITLE}
-            onClose={() => displayCart.value = false}
+            onClose={() => {
+              displayCart.value = false;
+            }}
           >
             <Cart freeShippingTarget={freeShippingTarget || 1000} />
           </Aside>

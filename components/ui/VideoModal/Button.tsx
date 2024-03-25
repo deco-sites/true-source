@@ -10,9 +10,12 @@ export default function VideoButton({ children, modalId, ...props }: Props) {
 
   return (
     <button
+      type="button"
       {...props}
       aria-haspopup={true}
-      onClick={() => (displayVideoModal.value = modalId)}
+      onClick={() => {
+        displayVideoModal.value = modalId;
+      }}
     >
       {children}
     </button>

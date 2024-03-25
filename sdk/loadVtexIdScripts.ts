@@ -23,7 +23,7 @@ function handleSetScope() {
 }
 
 export function loadVtexIdScripts(callBack: () => void) {
-  handleLoadCss(``);
+  handleLoadCss("");
   handleLoadScript(
     "https://io.vtex.com.br/front-libs/jquery/1.8.3/jquery-1.8.3.min.js?v=*",
     () => {

@@ -35,6 +35,7 @@ export default function Gallery({
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="w-full h-[240px] sm:h-[425px] object-cover object-center"
+            alt=""
           />
         </picture>
       ))}

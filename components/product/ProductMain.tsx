@@ -1,6 +1,6 @@
-import { Section } from "deco/blocks/section.ts";
+import type { Section } from "deco/blocks/section.ts";
 import { searchSlugify } from "deco-sites/true-source/components/utils/slugify.ts";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
 
 import ProductInfo from "./ProductInfo.tsx";
 import Description from "./Description/Description.tsx";
@@ -9,7 +9,7 @@ import Trustvox from "deco-sites/true-source/islands/Product/Trustvox.tsx";
 /**
  * @titleBy matcher
  */
-interface Description {
+interface TypeDescription {
   matcher: string;
   sections: Section[];
 }
@@ -17,7 +17,7 @@ interface Description {
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-  descriptions: Description[];
+  descriptions: TypeDescription[];
 }
 
 export default function ProductMain(props: ReturnType<typeof loader>) {

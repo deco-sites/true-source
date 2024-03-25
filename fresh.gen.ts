@@ -4,12 +4,7 @@
 
 import * as $_app from "./routes/_app.tsx";
 import * as $AddToCartArea from "./islands/AddToCartArea.tsx";
-import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
-import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
-import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";
-import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
-import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
 import * as $BannerCarouselJS from "./islands/BannerCarouselJS.tsx";
 import * as $CartItem from "./islands/CartItem.tsx";
 import * as $CouponPopup from "./islands/CouponPopup.tsx";
@@ -46,7 +41,6 @@ import * as $SubscriptionPopup from "./islands/SubscriptionPopup.tsx";
 import * as $VideoModal_Button from "./islands/VideoModal/Button.tsx";
 import * as $VideoModal_Modal from "./islands/VideoModal/Modal.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
-import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -55,12 +49,7 @@ const manifest = {
   },
   islands: {
     "./islands/AddToCartArea.tsx": $AddToCartArea,
-    "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
-    "./islands/AddToCartButton/nuvemshop.tsx": $AddToCartButton_nuvemshop,
-    "./islands/AddToCartButton/shopify.tsx": $AddToCartButton_shopify,
-    "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
-    "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
     "./islands/BannerCarouselJS.tsx": $BannerCarouselJS,
     "./islands/CartItem.tsx": $CartItem,
     "./islands/CouponPopup.tsx": $CouponPopup,
@@ -97,7 +86,6 @@ const manifest = {
     "./islands/VideoModal/Button.tsx": $VideoModal_Button,
     "./islands/VideoModal/Modal.tsx": $VideoModal_Modal,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
-    "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

@@ -1,4 +1,4 @@
-import { Section } from "deco/blocks/section.ts";
+import type { Section } from "deco/blocks/section.ts";
 
 interface Props {
   children: Section;

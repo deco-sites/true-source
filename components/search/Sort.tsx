@@ -1,5 +1,5 @@
 import { useMemo } from "preact/hooks";
-import { ProductListingPage } from "apps/commerce/types.ts";
+import type { ProductListingPage } from "apps/commerce/types.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";

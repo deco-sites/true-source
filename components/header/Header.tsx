@@ -1,12 +1,12 @@
 import type { Props as SearchbarProps } from "deco-sites/true-source/components/search/Searchbar.tsx";
 import Drawers from "deco-sites/true-source/islands/Header/Drawers.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Alert, { AlertProps } from "./Alert.tsx";
+import Alert, { type AlertProps } from "./Alert.tsx";
 import MicroHeaderSetup from "deco-sites/true-source/components/ui/MicroHeaderSetup.tsx";
-import { LoaderContext } from "deco/mod.ts";
+import type { LoaderContext } from "deco/mod.ts";
 import Navbar from "deco-sites/true-source/components/header/Navbar.tsx";
 import type { INavItem } from "deco-sites/true-source/components/header/NavItem.tsx";
-import {
+import type {
   Help,
   InstitucionalItem,
   Socials,

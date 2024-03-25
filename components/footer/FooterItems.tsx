@@ -21,11 +21,10 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
         <>
           {/* Tablet and Desktop view */}
           <ul
-            className={`hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]`}
+            className={"hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]"}
           >
             {sections.map((section, index) => (
               <li
-                key={index}
                 className={index === 3
                   ? "font-bold font-lemon-milk text-[13px]"
                   : ""}
@@ -38,9 +37,9 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                   )}
                   <div className="flex gap-[32px]">
                     {/* Renderizando primeira coluna */}
-                    <ul className={`flex flex-col gap-5 text-sm leading-4`}>
-                      {section.items.slice(0, 7).map((item, idx) => (
-                        <li key={idx}>
+                    <ul className={"flex flex-col gap-5 text-sm leading-4"}>
+                      {section.items.slice(0, 7).map((item) => (
+                        <li>
                           <a href={item.href} className="block hover:underline">
                             {item.label}
                           </a>
@@ -49,9 +48,9 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                     </ul>
                     {/* Renderizando segunda coluna se houver mais de 7 itens */}
                     {section.items.length > 7 && (
-                      <ul className={`flex flex-col gap-5 text-sm leading-4`}>
-                        {section.items.slice(7).map((item, idx) => (
-                          <li key={idx}>
+                      <ul className={"flex flex-col gap-5 text-sm leading-4"}>
+                        {section.items.slice(7).map((item) => (
+                          <li>
                             <a
                               href={item.href}
                               className="block hover:underline"
@@ -77,12 +76,12 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                 </span>
                 <div className="flex gap-[32px]">
                   {/* Renderizando primeira coluna */}
-                  <ul className={`flex flex-col gap-5 text-sm`}>
+                  <ul className={"flex flex-col gap-5 text-sm"}>
                     {sections[0].items.slice(
                       0,
                       Math.ceil(sections[0].items.length / 2),
-                    ).map((item, idx) => (
-                      <li key={idx}>
+                    ).map((item) => (
+                      <li>
                         <a href={item.href} className="block">
                           {item.label}
                         </a>
@@ -90,11 +89,11 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                     ))}
                   </ul>
                   {/* Renderizando segunda coluna */}
-                  <ul className={`flex flex-col gap-5 text-sm`}>
+                  <ul className={"flex flex-col gap-5 text-sm"}>
                     {sections[0].items.slice(
                       Math.ceil(sections[0].items.length / 2),
-                    ).map((item, idx) => (
-                      <li key={idx}>
+                    ).map((item) => (
+                      <li>
                         <a href={item.href} className="block">
                           {item.label}
                         </a>
@@ -121,9 +120,9 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
               }
             >
               <div class="flex flex-col gap-5 pb-5">
-                {sections[1].items.map((item, idx) => (
-                  <li key={idx}>
-                    <a href={item.href} class={`flex text-sm`}>
+                {sections[1].items.map((item) => (
+                  <li>
+                    <a href={item.href} class={"flex text-sm"}>
                       {item.label}
                     </a>
                   </li>
@@ -147,9 +146,9 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
               }
             >
               <div class="flex flex-col gap-5 pb-5">
-                {sections[2].items.map((item, idx) => (
-                  <li key={idx}>
-                    <a href={item.href} class={`flex text-sm`}>
+                {sections[2].items.map((item) => (
+                  <li>
+                    <a href={item.href} class={"flex text-sm"}>
                       {item.label}
                     </a>
                   </li>
@@ -160,9 +159,9 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
             <li>
               <div className="flex flex-col pt-[40px] pb-[32px]">
                 <div className="flex gap-[32px]">
-                  <ul className={`flex flex-col gap-[14px]`}>
-                    {sections[3].items.map((item, idx) => (
-                      <li key={idx}>
+                  <ul className={"flex flex-col gap-[14px]"}>
+                    {sections[3].items.map((item) => (
+                      <li>
                         <a
                           href={item.href}
                           className="block text-sm font-bold font-lemon-milk"

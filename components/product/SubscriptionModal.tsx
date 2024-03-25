@@ -6,7 +6,7 @@ import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 import Modal from "deco-sites/true-source/components/ui/Modal.tsx";
 import Radio from "deco-sites/true-source/components/ui/Radio.tsx";
 import SellingPrice from "deco-sites/true-source/components/product/SellingPrice.tsx";
-import {
+import type {
   SubscriptionOptions,
   TimelineCalcProps,
 } from "deco-sites/true-source/components/product/Subscription.tsx";
@@ -123,7 +123,9 @@ export default function () {
     <Modal
       loading="lazy"
       open={!!currentSubscription.value}
-      onClose={() => currentSubscription.value = null}
+      onClose={() => {
+        currentSubscription.value = null;
+      }}
     >
       {!!currentSubscription.value && (
         <div
@@ -141,7 +143,12 @@ export default function () {
               <span>
                 <span>ASSINE E COMPRE COM</span> <span>ATÉ 20% OFF</span>
               </span>
-              <button onClick={() => currentSubscription.value = null}>
+              <button
+                type="button"
+                onClick={() => {
+                  currentSubscription.value = null;
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -252,6 +259,7 @@ export default function () {
               </a>
             </div>
             <button
+              type="submit"
               disabled={!selected.value}
               class="disabled:bg-light-gray bg-green rounded-md text-white font-bold border-0 h-14 shrink-0 text-[13px] font-lemon-milk uppercase"
             >
@@ -296,6 +304,7 @@ function TimelineCalc({
       <p class="text-sm text-dark font-bold">Simulação de envios</p>
       <div class="flex items-center justify-between">
         {daySimulation.map((d, i) => {
+          // biome-ignore lint/style/noParameterAssign:
           const shippingDay = ++i;
           if (selected === "2W") {
             const actualDate = new Date(
@@ -320,35 +329,34 @@ function TimelineCalc({
                 </span>
               </div>
             );
-          } else {
-            if (i > 1 && selected === "1M") {
-              cumulativeMonth = cumulativeMonth + 1;
-            }
-            if (i > 1 && selected === "2M") {
-              cumulativeMonth = cumulativeMonth + 2;
-            }
-            if (i > 1 && selected === "3M") {
-              cumulativeMonth = cumulativeMonth + 3;
-            }
-            const actualDate = new Date(
-              cumulativeMonth > 11 ? actualYear + 1 : actualYear,
-              cumulativeMonth > 11 ? cumulativeMonth - 11 : cumulativeMonth,
-              actualDay,
-            );
-            const day = actualDate.getDate();
-            const month = actualDate.getMonth() + 1;
-            const year = actualDate.getFullYear();
-            return (
-              <div class="flex flex-col font-bold text-sm text-red">
-                {shippingDay}º ENVIO
-                <span class="text-dark font-light">
-                  {day <= 9 ? `0${day}` : day}/
-                  {month <= 9 ? `0${month}` : month}/
-                  {year}
-                </span>
-              </div>
-            );
           }
+          if (i > 1 && selected === "1M") {
+            cumulativeMonth = cumulativeMonth + 1;
+          }
+          if (i > 1 && selected === "2M") {
+            cumulativeMonth = cumulativeMonth + 2;
+          }
+          if (i > 1 && selected === "3M") {
+            cumulativeMonth = cumulativeMonth + 3;
+          }
+          const actualDate = new Date(
+            cumulativeMonth > 11 ? actualYear + 1 : actualYear,
+            cumulativeMonth > 11 ? cumulativeMonth - 11 : cumulativeMonth,
+            actualDay,
+          );
+          const day = actualDate.getDate();
+          const month = actualDate.getMonth() + 1;
+          const year = actualDate.getFullYear();
+          return (
+            <div class="flex flex-col font-bold text-sm text-red">
+              {shippingDay}º ENVIO
+              <span class="text-dark font-light">
+                {day <= 9 ? `0${day}` : day}/
+                {month <= 9 ? `0${month}` : month}/
+                {year}
+              </span>
+            </div>
+          );
         })}
       </div>
       <Timeline />

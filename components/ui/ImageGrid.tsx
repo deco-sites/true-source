@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 /**
  * @title {{alt}}

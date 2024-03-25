@@ -2,7 +2,7 @@ import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import SliderJS from "deco-sites/true-source/components/ui/SliderJS.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import { LoaderContext } from "deco/mod.ts";
+import type { LoaderContext } from "deco/mod.ts";
 
 export interface Card {
   title?: string;

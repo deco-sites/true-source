@@ -179,6 +179,7 @@ function BannerCarousel(props: Props) {
           </ul>
           <div class="flex justify-center items-center gap-2 text-dark">
             <button
+              type="button"
               data-prev={id}
               aria-label="Anterior"
               class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
@@ -191,6 +192,7 @@ function BannerCarousel(props: Props) {
               />
             </button>
             <button
+              type="button"
               data-next={id}
               aria-label="Próximo"
               class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"

@@ -6,8 +6,8 @@ const outputFilePath = "static/adminIcons.ts";
 async function generateIconsFile() {
   const svgContent = await Deno.readTextFile(svgFilePath);
   let existingContent = '';
-  let existingIcons = new Set();
-  let newIcons = [];
+  const existingIcons = new Set();
+  const newIcons = [];
   
   // Verifies if adminIcons.ts already exists and reads the icons from there
   if (existsSync(outputFilePath)) {

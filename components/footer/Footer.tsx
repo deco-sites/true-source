@@ -1,14 +1,10 @@
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Divider from "deco-sites/true-source/components/footer/Divider.tsx";
 import FooterItems from "deco-sites/true-source/components/footer/FooterItems.tsx";
-import Logo from "deco-sites/true-source/components/footer/Logo.tsx";
-import MobileApps from "deco-sites/true-source/components/footer/MobileApps.tsx";
 import PaymentMethods from "deco-sites/true-source/components/footer/PaymentMethods.tsx";
-import RegionSelector from "deco-sites/true-source/components/footer/RegionSelector.tsx";
 import Social from "deco-sites/true-source/components/footer/Social.tsx";
-import Newsletter from "deco-sites/true-source/islands/Newsletter.tsx";
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
-import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 import TextSEO from "deco-sites/true-source/components/footer/TextSEO.tsx.tsx";
+import Newsletter from "deco-sites/true-source/islands/Newsletter.tsx";
 
 export type Item = {
   label: string;
@@ -109,9 +105,7 @@ function Footer({
   copyrightText,
 }: Props) {
   return (
-    <footer
-      class={`w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice rounded-t-[35px]`}
-    >
+    <footer class="w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice rounded-t-[35px]">
       <div class="lg:container px-4 lg:mx-auto">
         <div class="flex flex-col items-center px-4">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full max-w-[326px] md:max-w-full lg:pb-6 lg:px-[72px] gap-x-4">

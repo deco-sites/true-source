@@ -1,6 +1,6 @@
 import { invoke } from "deco-sites/true-source/runtime.ts";
 import { useSignal } from "@preact/signals";
-import { Product } from "apps/commerce/types.ts";
+import type { Product } from "apps/commerce/types.ts";
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
@@ -28,7 +28,9 @@ function Cart({ freeShippingTarget }: Props) {
         props: {
           ids: items.map((item) => item.id),
         },
-      }).then((products) => fullProducts.value = products || [] as Product[]);
+      }).then((products) => {
+        fullProducts.value = products || [] as Product[];
+      });
     }
   }
 

@@ -37,6 +37,7 @@ export default function VideoModal({ url, modalId }: Props) {
         {isOpen && (
           <div class="w-full flex relative pt-5 pr-5">
             <button
+              type="button"
               onClick={close}
               class="text-white bg-black rounded-full p-1 w-10 h-10 flex justify-center items-center shadow-xl absolute top-0 right-0"
             >

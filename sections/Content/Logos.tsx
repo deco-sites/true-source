@@ -3,7 +3,7 @@ import Header from "deco-sites/true-source/components/ui/SectionHeader.tsx";
 import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
-export interface Image {
+export interface ImageProps {
   image: ImageWidget;
   altText: string;
 }
@@ -11,7 +11,7 @@ export interface Image {
 export interface Props {
   title?: string;
   description?: string;
-  images?: Image[];
+  images?: ImageProps[];
   layout?: {
     headerAlignment?: "center" | "left";
   };

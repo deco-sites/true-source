@@ -3,7 +3,7 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import desktopScript from "deco-sites/true-source/components/ui/CategoryList/DesktopScript.ts";
 import mobileScript from "deco-sites/true-source/components/ui/CategoryList/MobileScript.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 interface Category {
   /**
@@ -31,19 +31,19 @@ interface Props {
 }
 
 const DEFAULT: ReturnType<typeof loader> = {
-  "title": "SUPLEMENTOS PARA TODAS AS FASES DA SUA VIDA",
-  "categories": [
+  title: "SUPLEMENTOS PARA TODAS AS FASES DA SUA VIDA",
+  categories: [
     {
-      "label": "Todos os produtos",
-      "href": "/produtos?O=OrderByTopSaleDESC",
+      label: "Todos os produtos",
+      href: "/produtos?O=OrderByTopSaleDESC",
     },
     {
-      "label": "Whey Protein",
-      "href": "/produtos/whey-protein?O=OrderByTopSaleDESC",
+      label: "Whey Protein",
+      href: "/produtos/whey-protein?O=OrderByTopSaleDESC",
     },
     {
-      "label": "Proteína Vegana",
-      "href": "/produtos/proteina-vegana?O=OrderByTopSaleDESC",
+      label: "Proteína Vegana",
+      href: "/produtos/proteina-vegana?O=OrderByTopSaleDESC",
     },
   ],
   isMobile: false,
@@ -73,6 +73,7 @@ export default function CategoryList(
       <div class="flex gap-4 h-[88px] justify-center mt-8 overflow-y-clip w-full items-center">
         {!isMobile && (
           <button
+            type="button"
             data-prev
             aria-label="Categoria Anterior"
             class="justify-center items-center size-12 hidden lg:flex"
@@ -100,7 +101,7 @@ export default function CategoryList(
             <li
               data-item={index}
               class="group/item shrink-0 rounded-full flex justify-center items-center h-[88px] bg-light-gray-200 hover:bg-gradient-to-r from-red to-orange transition-all duration-300 w-[calc((100%/var(--items,3))-var(--gap,8px)+(var(--gap,8px)/var(--items,3)))] min-[769px]:[--items:var(--items-md)] min-[1100px]:[--items:var(--items-lg)] xl:[--items:var(--items-xl)]"
-              key={category.href + index}
+              key={category.href}
             >
               <a
                 class="group-hover/item:bg-white transition-all duration-300 h-[calc(100%_-_4px)] w-[calc(100%_-_4px)] float-left flex cursor-pointer bg-ice rounded-full justify-center items-center px-6"
@@ -113,6 +114,7 @@ export default function CategoryList(
         </ul>
         {!isMobile && (
           <button
+            type="button"
             data-next
             aria-label="Próxima Categoria"
             class="justify-center items-center size-12 hidden lg:flex"

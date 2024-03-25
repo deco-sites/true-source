@@ -1,6 +1,6 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import { LoaderContext } from "deco/mod.ts";
+import type { LoaderContext } from "deco/mod.ts";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
@@ -85,7 +85,7 @@ function BannerInfoWithItems(
 
   return (
     <div
-      class={`w-full max-w-[1440px] mx-auto relative`}
+      class={"w-full max-w-[1440px] mx-auto relative"}
     >
       <Picture preload={preload}>
         <Source
@@ -114,10 +114,10 @@ function BannerInfoWithItems(
       </Picture>
 
       <div
-        class={`absolute top-0 w-full h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[126px]`}
+        class={"absolute top-0 w-full h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[126px]"}
       >
         <div
-          class={`flex flex-col items-start`}
+          class={"flex flex-col items-start"}
         >
           {content?.tag &&
             (

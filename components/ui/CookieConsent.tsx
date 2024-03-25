@@ -11,13 +11,12 @@ const script = (id: string) => {
 
     if (consent !== ACCEPTED && elem) {
       const accept = elem.querySelector("[data-button-cc-accept]");
-      accept && accept.addEventListener("click", () => {
+      accept?.addEventListener("click", () => {
         localStorage.setItem(KEY, ACCEPTED);
         elem.classList.add(HIDDEN);
       });
       const close = elem.querySelector("[data-button-cc-close]");
-      close &&
-        close.addEventListener("click", () => elem.classList.add(HIDDEN));
+      close?.addEventListener("click", () => elem.classList.add(HIDDEN));
       elem.classList.remove(HIDDEN);
     }
   };
@@ -127,10 +126,10 @@ function CookieConsent(props: Props) {
                 : ""
             }`}
           >
-            <button class="btn" data-button-cc-accept>
+            <button type="button" class="btn" data-button-cc-accept>
               {buttons.allowText}
             </button>
-            <button class="btn btn-outline" data-button-cc-close>
+            <button type="button" class="btn btn-outline" data-button-cc-close>
               {buttons.cancelText}
             </button>
           </div>

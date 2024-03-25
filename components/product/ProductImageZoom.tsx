@@ -22,7 +22,9 @@ function ProductImageZoom({ images, width, height }: Props) {
     <>
       <Button
         class="hidden sm:inline-flex btn-ghost"
-        onClick={() => open.value = true}
+        onClick={() => {
+          open.value = true;
+        }}
       >
         <Icon id="Zoom" size={24} />
       </Button>
@@ -30,7 +32,9 @@ function ProductImageZoom({ images, width, height }: Props) {
         <Modal
           loading="lazy"
           open={open.value}
-          onClose={() => open.value = false}
+          onClose={() => {
+            open.value = false;
+          }}
         >
           <div class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center">
             <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
@@ -41,7 +45,7 @@ function ProductImageZoom({ images, width, height }: Props) {
                 >
                   <Image
                     style={{ aspectRatio: `${width} / ${height}` }}
-                    src={image.url!}
+                    src={image.url ?? ""}
                     alt={image.alternateName}
                     width={width}
                     height={height}

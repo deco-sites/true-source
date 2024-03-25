@@ -1,11 +1,9 @@
-import Icon, {
-  AvailableIcons,
-} from "deco-sites/true-source/components/ui/Icon.tsx";
 import {
   IconInstagram,
   IconTiktok,
   IconYoutube,
 } from "deco-sites/true-source/components/ui/CustomIcons.tsx";
+import type { JSX } from "preact";
 
 // Definindo a interface SocialItem
 export interface SocialItem {
@@ -30,7 +28,8 @@ export default function Social(
             }`}
           >
             {content.map((item) => {
-              let iconComponent;
+              let iconComponent: JSX.Element | null = null;
+
               switch (item.label) {
                 case "Instagram":
                   iconComponent = <IconInstagram />;

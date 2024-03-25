@@ -2,7 +2,7 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
 export interface Props {

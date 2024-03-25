@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
 interface Image {
   desktop: ImageWidget;
@@ -50,6 +50,7 @@ export default function InfoCardHorizontal({
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="absolute-center object-cover object-center w-full max-w-unset h-full"
+              alt=""
             />
           </picture>
           <div
@@ -75,52 +76,51 @@ export default function InfoCardHorizontal({
         </div>
       </div>
     );
-  } else {
-    const cardTextLeft = "gap-12 flex-col-reverse md:gap-0 md:flex-row";
-    const cardTextRight =
-      "gap-12 flex-col-reverse md:gap-0 md:flex-row-reverse";
+  }
+  const cardTextLeft = "gap-12 flex-col-reverse md:gap-0 md:flex-row";
+  const cardTextRight = "gap-12 flex-col-reverse md:gap-0 md:flex-row-reverse";
 
-    const alignment = textAlign === "left"
-      ? cardTextLeft
-      : textAlign === "right"
-      ? cardTextRight
-      : cardTextLeft;
+  const alignment = textAlign === "left"
+    ? cardTextLeft
+    : textAlign === "right"
+    ? cardTextRight
+    : cardTextLeft;
 
-    return (
-      <div className="md:container">
-        <div
-          class={`flex ${alignment} items-stretch p-6 md:p-12 rounded-[35px]`}
-          style={{ backgroundColor }}
-        >
-          <div class="w-full md:w-1/2 flex items-center justify-center">
-            <div class="w-full md:w-3/4">
-              {title && (
-                <h2
-                  class="custom-category-title"
-                  style={{ color }}
-                  dangerouslySetInnerHTML={{ __html: title }}
-                />
-              )}
-              <div class="custom-category-text text-sm lg:text-base leading-6">
-                <div dangerouslySetInnerHTML={{ __html: description }} />
-              </div>
+  return (
+    <div className="md:container">
+      <div
+        class={`flex ${alignment} items-stretch p-6 md:p-12 rounded-[35px]`}
+        style={{ backgroundColor }}
+      >
+        <div class="w-full md:w-1/2 flex items-center justify-center">
+          <div class="w-full md:w-3/4">
+            {title && (
+              <h2
+                class="custom-category-title"
+                style={{ color }}
+                dangerouslySetInnerHTML={{ __html: title }}
+              />
+            )}
+            <div class="custom-category-text text-sm lg:text-base leading-6">
+              <div dangerouslySetInnerHTML={{ __html: description }} />
             </div>
           </div>
-          <div class="w-full md:w-1/2">
-            <picture>
-              <source media="(min-width:1024px)" srcset={image.desktop} />
-              <source
-                media="(min-width:640px)"
-                srcset={image.tablet ? image.tablet : image.desktop}
-              />
-              <img
-                src={image.mobile ? image.mobile : image.desktop}
-                class="w-full h-auto md:h-full object-cover object-center rounded-[11px]"
-              />
-            </picture>
-          </div>
+        </div>
+        <div class="w-full md:w-1/2">
+          <picture>
+            <source media="(min-width:1024px)" srcset={image.desktop} />
+            <source
+              media="(min-width:640px)"
+              srcset={image.tablet ? image.tablet : image.desktop}
+            />
+            <img
+              src={image.mobile ? image.mobile : image.desktop}
+              class="w-full h-auto md:h-full object-cover object-center rounded-[11px]"
+              alt=""
+            />
+          </picture>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

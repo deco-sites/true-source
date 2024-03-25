@@ -1,9 +1,9 @@
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { useSignal, useSignalEffect } from "@preact/signals";
-import { TargetedEvent } from "preact/compat";
+import type { TargetedEvent } from "preact/compat";
 import { getCookies } from "std/http/cookie.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import type { JSX } from "preact";
@@ -22,7 +22,7 @@ interface Props {
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
   const cookies = getCookies(req.headers);
-  const timestamp = parseInt(cookies["lastCouponPopup"] ?? "0");
+  const timestamp = Number.parseInt(cookies.lastCouponPopup ?? "0");
   // Indicates whether the coupon is expired or not.
   const isExpired = Date.now() - timestamp > 1000 * 60 * 60 * 24;
 
@@ -127,14 +127,17 @@ export default function Coupon(
   return (
     <>
       <button
+        type="button"
         onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
-        class={"z-[9] bg-black/30 inset-0 fixed transition-all" +
-          (displayPopup.value ? "" : " opacity-0 pointer-events-none")}
+        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+          displayPopup.value ? "" : " opacity-0 pointer-events-none"
+        }`}
       />
       <div
-        class={"md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10" +
-          (displayPopup.value ? "" : " opacity-0 pointer-events-none")}
+        class={`md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+          displayPopup.value ? "" : " opacity-0 pointer-events-none"
+        }`}
         style={{
           "box-shadow":
             "0px 2.767256498336792px 2.2138051986694336px 0px #00000009,0px 6.650102138519287px 5.32008171081543px 0px #0000000D,0px 12.521552085876465px 10.017241477966309px 0px #00000011,0px 22.3363094329834px 17.869047164916992px 0px #00000014,0px 41.777610778808594px 33.422088623046875px 0px #00000018,0px 100px 80px 0px #00000021",
@@ -142,10 +145,9 @@ export default function Coupon(
       >
         <div class="relative">
           <div
-            class={"absolute inset-0 flex justify-center items-center flex-col text-dark transition-all opacity-0 pointer-events-none gap-3 text-center -z-[1]" +
-              (
-                finishedForm.value ? " opacity-100 pointer-events-auto" : ""
-              )}
+            class={`absolute inset-0 flex justify-center items-center flex-col text-dark transition-all opacity-0 pointer-events-none gap-3 text-center -z-[1]${
+              finishedForm.value ? " opacity-100 pointer-events-auto" : ""
+            }`}
           >
             <Icon id="StarIcon" class="shrink-0 size-[30px] md:size-[43px]" />
             <p class="text-sm leading-[18px] md:text-lg md:leading-6 font-bold font-lemon uppercase">
@@ -157,8 +159,9 @@ export default function Coupon(
           </div>
           <div class="flex justify-between">
             <div
-              class={"flex gap-4 justify-center text-dark transition-all" +
-                (finishedForm.value ? " opacity-0 pointer-events-none" : "")}
+              class={`flex gap-4 justify-center text-dark transition-all${
+                finishedForm.value ? " opacity-0 pointer-events-none" : ""
+              }`}
             >
               <Icon id="StarIcon" class="shrink-0 size-[30px] md:size-[43px]" />
               <div>
@@ -177,6 +180,7 @@ export default function Coupon(
               </div>
             </div>
             <button
+              type="button"
               aria-label="Fechar pop-up de cupom"
               onClick={handlePopupClose}
               class="size-6 flex justify-center items-center cursor-pointer"
@@ -185,8 +189,9 @@ export default function Coupon(
             </button>
           </div>
           <form
-            class={"mt-4 transition-all" +
-              (finishedForm.value ? " opacity-0 pointer-events-none" : "")}
+            class={`mt-4 transition-all${
+              finishedForm.value ? " opacity-0 pointer-events-none" : ""
+            }`}
             onSubmit={handleFormSubmit}
           >
             <div class="space-y-2">
@@ -270,6 +275,7 @@ export default function Coupon(
               Estou ciente que poderei receber comunicações.
             </label>
             <button
+              type="button"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8E8E8D, #8E8E8D, #e4003f, #E9530E)",

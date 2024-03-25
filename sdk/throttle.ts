@@ -1,6 +1,5 @@
 // https://github.com/martinstark/throttle-ts/blob/main/src/index.ts
-// deno-lint-ignore no-explicit-any
-export const throttle = <R, A extends any[]>(
+export const throttle = <R, A extends unknown[]>(
   fn: (...args: A) => R,
   delay: number,
 ): [(...args: A) => R | undefined, () => void] => {

@@ -12,7 +12,8 @@ const MyAccount = () => {
   return (
     <>
       <button
-        class={`flex items-center gap-2`}
+        type="button"
+        class={"flex items-center gap-2"}
         onClick={async () => {
           if (user.value?.email) {
             globalThis.window.location.pathname = "/account";
@@ -21,7 +22,7 @@ const MyAccount = () => {
               vtexIdScriptsLoaded.value = true;
               // @ts-expect-error vtexId is a global variable
               window.vtexid.start({
-                returnUrl: window.location.origin + "/account",
+                returnUrl: `${window.location.origin}/account`,
                 userEmail: "",
                 locale: "pt-BR",
                 forceReload: true,

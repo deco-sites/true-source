@@ -1,6 +1,6 @@
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Step, {
-  Props as StepProps,
+  type Props as StepProps,
 } from "deco-sites/true-source/components/ui/Timeline/Step.tsx";
 
 interface Props {
@@ -29,9 +29,7 @@ export default function Timeline({ title, steps, footer }: Props) {
         {title}
       </h2>
       <div class="flex justify-between w-full max-w-[1100px] flex-col md:flex-row">
-        {steps.map((step, index) => (
-          <Step key={index} {...step} index={index + 1} />
-        ))}
+        {steps.map((step, index) => <Step {...step} index={index + 1} />)}
       </div>
       {footer && (
         <div class="max-w-[950px] w-full flex gap-8 justify-center items-center border-t border-t-light-gray-200 pt-8 pb-6 md:pt-14 md:pb-10">

@@ -160,12 +160,12 @@ export default function mobileScript({ rootId }: ScriptProps) {
 
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         const isIntersecting = entry.intersectionRatio >= 0.9;
         if (isIntersecting) {
           entry.target.setAttribute(ATTRIBUTES.IS_INTERSECTING, "true");
           const pages = getItemsInViewport().map((el) =>
-            parseInt(el.getAttribute(ATTRIBUTES.PAGE) ?? "0")
+            Number.parseInt(el.getAttribute(ATTRIBUTES.PAGE) ?? "0")
           );
           const page = pages.find((page) =>
             pages.filter((p) => p === page).length > (pages.length / 2)
@@ -176,7 +176,7 @@ export default function mobileScript({ rootId }: ScriptProps) {
         } else {
           entry.target.removeAttribute(ATTRIBUTES.IS_INTERSECTING);
         }
-      });
+      }
     },
     { root: carousel, threshold: [0, 0.9, 1] },
   );
@@ -197,7 +197,7 @@ export default function mobileScript({ rootId }: ScriptProps) {
     if (!slide) {
       return;
     }
-    const carouselMargin = parseInt(
+    const carouselMargin = Number.parseInt(
       getComputedStyle(carousel).getPropertyValue("margin-left"),
     ) || 0;
     const nextPos = slide.offsetLeft - carousel.offsetLeft + carouselMargin;
@@ -218,7 +218,7 @@ export default function mobileScript({ rootId }: ScriptProps) {
     const item = getItemsInViewport()[0];
     if (!item) return;
     computeScroll(
-      parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") +
+      Number.parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") +
         elementsInsideContainer,
     );
   }
@@ -232,7 +232,7 @@ export default function mobileScript({ rootId }: ScriptProps) {
     const item = getItemsInViewport()[0];
     if (!item) return;
     computeScroll(
-      parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") -
+      Number.parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0") -
         elementsInsideContainer,
     );
   }
@@ -254,7 +254,7 @@ export default function mobileScript({ rootId }: ScriptProps) {
   const dots = root.querySelectorAll<HTMLLIElement>(`[${ATTRIBUTES.DOT}]`);
 
   if (dots.length) {
-    dots.forEach((dot) => {
+    for (const dot of dots) {
       dot.addEventListener("click", () => {
         if (!carousel) {
           return;
@@ -264,17 +264,19 @@ export default function mobileScript({ rootId }: ScriptProps) {
             dot.getAttribute(ATTRIBUTES.DOT)
         );
         if (!item) return;
-        computeScroll(parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0"));
+        computeScroll(
+          Number.parseInt(item.getAttribute(ATTRIBUTES.ITEM) ?? "0"),
+        );
       });
-    });
+    }
   }
 
   function setPage(page: number) {
-    dots.forEach((dot) =>
+    for (const dot of dots) {
       dot.getAttribute(ATTRIBUTES.DOT) === String(page)
         ? dot.setAttribute("data-active", "")
-        : dot.removeAttribute("data-active")
-    );
+        : dot.removeAttribute("data-active");
+    }
   }
 
   const prevClick = throttle(handlePrevClick, 500);

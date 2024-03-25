@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
-import { AddToCartParams } from "apps/commerce/types.ts";
+import type { AddToCartParams } from "apps/commerce/types.ts";
 
 type Props = {
   seller: string;

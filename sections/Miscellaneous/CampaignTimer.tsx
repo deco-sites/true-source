@@ -60,8 +60,8 @@ const snippet = (expiresAt: string, rootId: string) => {
         const expired = document.getElementById(`${rootId}::expired`);
         const counter = document.getElementById(`${rootId}::counter`);
 
-        expired && expired.classList.remove("hidden");
-        counter && counter.classList.add("hidden");
+        expired?.classList.remove("hidden");
+        counter?.classList.add("hidden");
       } else {
         setValue(`${rootId}::days`, days);
         setValue(`${rootId}::hours`, hours);

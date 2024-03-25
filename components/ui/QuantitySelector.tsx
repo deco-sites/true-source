@@ -30,7 +30,8 @@ function QuantitySelector(
         }}
       >
         <button
-          class=" join-item py-0 pl-1 sm:pl-2 pr-0 font-bold group/minus"
+          type="button"
+          class="join-item py-0 pl-1 sm:pl-2 pr-0 font-bold group/minus"
           onClick={decrement}
           disabled={disabled}
         >
@@ -55,7 +56,8 @@ function QuantitySelector(
           size={1}
         />
         <button
-          class=" join-item py-0 pr-1 sm:pr-2 pl-0 font-bold group/plus"
+          type="button"
+          class="join-item py-0 pr-1 sm:pr-2 pl-0 font-bold group/plus"
           onClick={increment}
           disabled={disabled}
         >
@@ -74,7 +76,8 @@ function QuantitySelector(
     return (
       <div class="join border border-1 border-solid border-Stroke rounded-full py-2 px-[14px]">
         <button
-          class=" join-item py-0 pl-1 pr-0 font-bold group/minus"
+          type="button"
+          class="join-item py-0 pl-1 pr-0 font-bold group/minus"
           onClick={decrement}
           disabled={disabled || quantity <= min}
         >
@@ -99,7 +102,8 @@ function QuantitySelector(
           size={2}
         />
         <button
-          class=" join-item py-0 pr-1 pl-0 font-bold group/plus"
+          type="button"
+          class="join-item py-0 pr-1 pl-0 font-bold group/plus"
           onClick={increment}
           disabled={disabled}
         >

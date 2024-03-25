@@ -156,11 +156,11 @@ function setup(
   }
 
   function setPage(page: number) {
-    dots.forEach((dot) =>
+    for (const dot of dots) {
       dot.getAttribute(ATTRIBUTES.DOT) === String(page)
         ? dot.setAttribute("data-active", "")
-        : dot.removeAttribute("data-active")
-    );
+        : dot.removeAttribute("data-active");
+    }
   }
 
   setPage(0);

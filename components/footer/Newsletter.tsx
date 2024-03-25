@@ -41,12 +41,12 @@ function Newsletter(
 
   return (
     <div
-      class={`flex flex-col items-center gap-4 md:flex-row w-full md:justify-between`}
+      class={"flex flex-col items-center gap-4 md:flex-row w-full md:justify-between"}
     >
       <div class="flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-[326px] md:max-w-full">
         {content?.title && (
           <p
-            style={`line-height:normal;`}
+            style={"line-height:normal;"}
             class="text-lg w-full max-w-[206px] font-bold font-lemon-milk"
           >
             {content?.title}

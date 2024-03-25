@@ -1,6 +1,6 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import { LoaderContext } from "deco/mod.ts";
+import type { LoaderContext } from "deco/mod.ts";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
@@ -176,7 +176,7 @@ function BannerInfo(
                 width={content?.image.width || 0}
                 height={content?.image.height || 0}
                 alt=""
-                class={`mb-6`}
+                class={"mb-6"}
               />
             )}
 

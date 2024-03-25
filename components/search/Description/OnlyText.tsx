@@ -1,4 +1,4 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 interface CTA {

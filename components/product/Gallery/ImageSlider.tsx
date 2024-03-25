@@ -3,7 +3,7 @@ import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 // import ProductImageZoom from "deco-sites/true-source/islands/ProductImageZoom.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 
 export interface Props {

@@ -6,6 +6,7 @@ export default function MenuButton() {
 
   return (
     <button
+      type="button"
       class="bg-brand rounded-full flex justify-center items-center size-[36px] group-data-[micro-header='true']/header:size-[24px]"
       aria-label="open menu"
       onClick={() => {

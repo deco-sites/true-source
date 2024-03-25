@@ -1,6 +1,6 @@
 import Image from "apps/website/components/Image.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import BannerCarouselJS from "deco-sites/true-source/islands/BannerCarouselJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
@@ -184,6 +184,7 @@ export default function AccordionWithImages(
             </ul>
             <div class="flex justify-center items-center gap-2 text-dark">
               <button
+                type="button"
                 data-prev={id}
                 aria-label="Anterior"
                 class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
@@ -196,6 +197,7 @@ export default function AccordionWithImages(
                 />
               </button>
               <button
+                type="button"
                 data-next={id}
                 aria-label="Próximo"
                 class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
@@ -224,30 +226,27 @@ export default function AccordionWithImages(
     >
       {sections.map((section, index) => (
         <li
-          class={"relative transition-all duration-500 group first:rounded-l-[20px] last:rounded-r-[20px] overflow-clip" +
-            (
-              index === 0
-                ? " has-[~:hover]:flex-[1] flex-[var(--flex)]"
-                : " flex-[1] hover:flex-[var(--flex)]"
-            )}
+          class={`relative transition-all duration-500 group first:rounded-l-[20px] last:rounded-r-[20px] overflow-clip${
+            index === 0
+              ? " has-[~:hover]:flex-[1] flex-[var(--flex)]"
+              : " flex-[1] hover:flex-[var(--flex)]"
+          }`}
         >
           <span
-            class={"absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] p-3 rounded-full top-10 left-10 font-lemon transition-all z-[1]" +
-              (
-                index === 0
-                  ? " group-has-[~:hover]:opacity-0 opacity-100"
-                  : " opacity-0 group-hover:opacity-100"
-              )}
+            class={`absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] p-3 rounded-full top-10 left-10 font-lemon transition-all z-[1]${
+              index === 0
+                ? " group-has-[~:hover]:opacity-0 opacity-100"
+                : " opacity-0 group-hover:opacity-100"
+            }`}
           >
             {section.tag}
           </span>
           <div
-            class={"absolute bottom-10 z-[1] transition-all" +
-              (
-                index === 0
-                  ? " group-has-[~:hover]:left-[25px] left-10 group-has-[~:hover]:max-w-[185px] max-w-full"
-                  : " left-[25px] max-w-[185px] group-hover:max-w-full group-hover:left-10"
-              )}
+            class={`absolute bottom-10 z-[1] transition-all${
+              index === 0
+                ? " group-has-[~:hover]:left-[25px] left-10 group-has-[~:hover]:max-w-[185px] max-w-full"
+                : " left-[25px] max-w-[185px] group-hover:max-w-full group-hover:left-10"
+            }`}
           >
             <h2 class="font-bold text-lg leading-6 font-lemon mb-2">
               {section.title}
@@ -255,24 +254,22 @@ export default function AccordionWithImages(
             <p class="text-sm leading-4">{section.description}</p>
           </div>
           <a
-            class={"bg-gradient-to-r from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 absolute right-10 bottom-10 transition-all z-[1] py-3 px-6 rounded-full" +
-              (
-                index === 0
-                  ? " group-has-[~:hover]:opacity-0 opacity-100"
-                  : " opacity-0 group-hover:opacity-100"
-              )}
+            class={`bg-gradient-to-r from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 absolute right-10 bottom-10 transition-all z-[1] py-3 px-6 rounded-full${
+              index === 0
+                ? " group-has-[~:hover]:opacity-0 opacity-100"
+                : " opacity-0 group-hover:opacity-100"
+            }`}
             href={section.button.href}
           >
             {section.button.text}
             <Icon id="BannerArrowRight" strokeWidth={2} size={16} />
           </a>
           <span
-            class={"bg-gradient-to-t from-black/30 inset-0 absolute pointer-events-none" +
-              (
-                index === 0
-                  ? " group-has-[~:hover]:to-black/50 group-has-[~:hover]:from-black/50 to-transparent"
-                  : " to-black/50 group-hover:from-black/50 group-hover:to-transparent"
-              )}
+            class={`bg-gradient-to-t from-black/30 inset-0 absolute pointer-events-none${
+              index === 0
+                ? " group-has-[~:hover]:to-black/50 group-has-[~:hover]:from-black/50 to-transparent"
+                : " to-black/50 group-hover:from-black/50 group-hover:to-transparent"
+            }`}
           />
           <Image
             class="w-full h-full object-cover"

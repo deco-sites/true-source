@@ -110,10 +110,7 @@ export default function FAQ({ titles, questions }: Props) {
       <div class="flex flex-col gap-2 justify-center">
         <CloseRadioState id={id} />
         {questions.map(({ question, answer }, index) => (
-          <div
-            key={index}
-            class="peer-checked/close:[--close-all:hidden] grid grid-rows-[auto_0fr] [&:has(>input[type='radio']:checked)]:grid-rows-[auto_1fr] transition-[grid-template-rows] duration-200 overflow-hidden relative group bg-ice rounded-[15px] text-xs leading-[18px] md:text-sm md:leading-[25px]"
-          >
+          <div class="peer-checked/close:[--close-all:hidden] grid grid-rows-[auto_0fr] [&:has(>input[type='radio']:checked)]:grid-rows-[auto_1fr] transition-[grid-template-rows] duration-200 overflow-hidden relative group bg-ice rounded-[15px] text-xs leading-[18px] md:text-sm md:leading-[25px]">
             <OpenRadioState id={id} index={index} />
             <CloseButton id={id} />
             <OpenButton id={id} index={index} />

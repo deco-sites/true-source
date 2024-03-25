@@ -9,7 +9,10 @@ import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
 import { SendEventOnView } from "deco-sites/true-source/components/Analytics.tsx";
-import { BreadcrumbList, ProductDetailsPage } from "apps/commerce/types.ts";
+import {
+  BreadcrumbList,
+  type ProductDetailsPage,
+} from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 interface Props {

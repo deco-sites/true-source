@@ -2,7 +2,7 @@ import Image from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Button from "deco-sites/true-source/components/ui/VideoModal/Button.tsx";
 import Modal from "deco-sites/true-source/components/ui/VideoModal/Modal.tsx";
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { useId } from "preact/hooks";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 

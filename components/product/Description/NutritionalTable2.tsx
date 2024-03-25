@@ -103,7 +103,7 @@ export default function NutritionalTable({
         class="flex flex-col lg:flex-row items-center py-24 lg:py-28 gap-8 lg:gap-0 px-8 lg:px-0"
         style={{
           background:
-            `linear-gradient(72deg, rgba(210, 210, 210, 0.36) 9.7%, rgba(210, 210, 210, 0.00) 73.19%)`,
+            "linear-gradient(72deg, rgba(210, 210, 210, 0.36) 9.7%, rgba(210, 210, 210, 0.00) 73.19%)",
         }}
       >
         {showIngredients && (
@@ -169,7 +169,7 @@ export default function NutritionalTable({
                         {/^_{2,2}/.test(item.title)
                           ? (
                             <>
-                              <td width={24} class="py-2"></td>
+                              <td width={24} class="py-2" />
                               <td class="py-2">
                                 {item.title.replace(/^_{2,2}/, "")}
                               </td>

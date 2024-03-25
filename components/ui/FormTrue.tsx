@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
-import { HTMLWidget } from "apps/admin/widgets.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
 import useAccordion from "deco-sites/true-source/components/ui/useAccordion.tsx";

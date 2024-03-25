@@ -1,5 +1,5 @@
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import { AvailableIcons } from "deco-sites/true-source/components/ui/Icon.tsx";
+import type { AvailableIcons } from "deco-sites/true-source/components/ui/Icon.tsx";
 
 export interface Shortcut {
   label?: string;
@@ -53,6 +53,7 @@ export default function Shortcuts({
               onHover === "Show tooltip" && "tooltip tooltip-left"
             }`}
             data-tip={shortcut.label}
+            rel="noreferrer"
           >
             <div class="w-10 flex justify-center">
               {shortcut.icon && <Icon id={shortcut.icon} size={24} />}

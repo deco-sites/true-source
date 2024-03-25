@@ -8,6 +8,7 @@ import {
   RaSeal,
   SslSeal,
 } from "deco-sites/true-source/components/ui/CustomIcons.tsx";
+import type { JSX } from "preact";
 
 export interface PaymentItem {
   label: "Visa" | "Mastercard" | "Dinners" | "Boleto" | "Pix";
@@ -18,12 +19,12 @@ export default function PaymentMethods(
 ) {
   return (
     <>
-      {content && content.items && content.items.length > 0 && (
+      {content?.items && content.items.length > 0 && (
         <div className="flex flex-row w-full space-x-4">
           <div className="flex flex-col lg:flex-row items-center gap-4 lg:justify-between w-full">
             <div className="flex gap-4">
               {content.items.map((item) => {
-                let iconComponent;
+                let iconComponent: JSX.Element | null = null;
                 switch (item.label) {
                   case "Visa":
                     iconComponent = <IconVisa />;
@@ -60,17 +61,17 @@ export default function PaymentMethods(
               )}
             </div>
             <div className="flex gap-6 lg:gap-[34px] list-none">
-              <li class={`flex items-center`}>
+              <li class={"flex items-center"}>
                 <span className="block max-w-[57px] h-auto">
                   <SslSeal />
                 </span>
               </li>
-              <li class={`flex items-center`}>
+              <li class={"flex items-center"}>
                 <span className="block max-w-[73px] h-auto">
                   <GoogleSeal />
                 </span>
               </li>
-              <li class={`flex items-center`}>
+              <li class={"flex items-center"}>
                 <span className="block max-w-[155px] h-auto">
                   <RaSeal />
                 </span>

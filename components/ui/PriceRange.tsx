@@ -163,7 +163,7 @@ input[type="range"]:focus::-moz-range-thumb {
         }}
       />
       <div className="flex flex-col gap-[1.25rem] w-full">
-        <span></span>
+        <span />
         <div className="flex items-center relative w-full">
           <div className="bg-light-gray-200 flex h-0.5 items-center relative w-full">
             <div
@@ -186,7 +186,7 @@ input[type="range"]:focus::-moz-range-thumb {
               min={min}
               onChange={(event) => {
                 const target = event.target as HTMLInputElement;
-                const float = parseFloat(target.value);
+                const float = Number.parseFloat(target.value);
 
                 if (float >= price.value.max - nearest) {
                   price.value = {
@@ -216,7 +216,7 @@ input[type="range"]:focus::-moz-range-thumb {
               min={min}
               onChange={(event) => {
                 const target = event.target as HTMLInputElement;
-                const float = parseFloat(target.value);
+                const float = Number.parseFloat(target.value);
 
                 if (float <= price.value.min + nearest) {
                   price.value = {

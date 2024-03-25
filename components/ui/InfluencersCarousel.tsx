@@ -1,10 +1,10 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/components/ui/SliderJS.tsx";
-import { LoaderContext } from "deco/mod.ts";
+import type { LoaderContext } from "deco/mod.ts";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 
 /** @titleBy name */

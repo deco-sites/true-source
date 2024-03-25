@@ -2,7 +2,7 @@ import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { HIGHLIGHT_BTN, HIGHLIGHT_ID, SEEALL } from "./Navbar.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
 /** @titleBy name */
 export interface Children {

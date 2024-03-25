@@ -6,6 +6,7 @@ function Dot({ children, index, ...props }: JSX.IntrinsicElements["button"] & {
 }) {
   return (
     <button
+      type="button"
       data-dot={index}
       aria-label={`go to slider item ${index}`}
       {...props}
@@ -28,11 +29,20 @@ function Item({
 }
 
 function NextButton(props: JSX.IntrinsicElements["button"]) {
-  return <button data-slide="next" aria-label="Next item" {...props} />;
+  return (
+    <button type="button" data-slide="next" aria-label="Next item" {...props} />
+  );
 }
 
 function PrevButton(props: JSX.IntrinsicElements["button"]) {
-  return <button data-slide="prev" aria-label="Previous item" {...props} />;
+  return (
+    <button
+      type="button"
+      data-slide="prev"
+      aria-label="Previous item"
+      {...props}
+    />
+  );
 }
 
 Slider.Dot = Dot;

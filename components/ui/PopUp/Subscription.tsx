@@ -1,9 +1,9 @@
 import { useSignal } from "@preact/signals";
-import { HTMLWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import type { JSX } from "preact";
-import { TargetedEvent } from "preact/compat";
+import type { TargetedEvent } from "preact/compat";
 
 interface Props {
   /**
@@ -28,14 +28,19 @@ export default function Coupon(
   return (
     <>
       <button
-        onClick={() => displayPopup.value = false}
+        type="button"
+        onClick={() => {
+          displayPopup.value = false;
+        }}
         aria-label="Fechar pop-up de cupom"
-        class={"z-[9] bg-black/30 inset-0 fixed transition-all" +
-          (displayPopup.value ? "" : " opacity-0 pointer-events-none")}
+        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+          displayPopup.value ? "" : " opacity-0 pointer-events-none"
+        }`}
       />
       <div
-        class={"max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10" +
-          (displayPopup.value ? "" : " opacity-0 pointer-events-none")}
+        class={`max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+          displayPopup.value ? "" : " opacity-0 pointer-events-none"
+        }`}
         style={{
           "box-shadow":
             "0px 2.767256498336792px 2.2138051986694336px 0px #00000009,0px 6.650102138519287px 5.32008171081543px 0px #0000000D,0px 12.521552085876465px 10.017241477966309px 0px #00000011,0px 22.3363094329834px 17.869047164916992px 0px #00000014,0px 41.777610778808594px 33.422088623046875px 0px #00000018,0px 100px 80px 0px #00000021",
@@ -43,8 +48,9 @@ export default function Coupon(
       >
         <div class="relative">
           <div
-            class={"flex gap-4 p-10 text-dark transition-all bg-gradient-to-r from-red to-orange" +
-              (finishedForm.value ? " opacity-0 pointer-events-none" : "")}
+            class={`flex gap-4 p-10 text-dark transition-all bg-gradient-to-r from-red to-orange${
+              finishedForm.value ? " opacity-0 pointer-events-none" : ""
+            }`}
           >
             <Icon
               id="StarIconWhite"
@@ -56,7 +62,10 @@ export default function Coupon(
             />
           </div>
           <button
-            onClick={() => displayPopup.value = false}
+            type="button"
+            onClick={() => {
+              displayPopup.value = false;
+            }}
             aria-label="Fechar pop-up de cupom"
             class="absolute top-10 right-10 size-6 flex justify-center items-center cursor-pointer"
           >
@@ -64,8 +73,9 @@ export default function Coupon(
           </button>
 
           <form
-            class={"m-10 mt-8 transition-all" +
-              (finishedForm.value ? " opacity-0 pointer-events-none" : "")}
+            class={`m-10 mt-8 transition-all${
+              finishedForm.value ? " opacity-0 pointer-events-none" : ""
+            }`}
             onSubmit={handleFormSubmit}
           >
             <div class="space-y-2">
@@ -149,6 +159,7 @@ export default function Coupon(
               Estou ciente que poderei receber comunicações.
             </label>
             <button
+              type="button"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8E8E8D, #8E8E8D, #e4003f, #E9530E)",

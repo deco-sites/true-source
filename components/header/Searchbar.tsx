@@ -1,6 +1,6 @@
 import { headerHeight } from "deco-sites/true-source/components/header/constants.ts";
 import Searchbar, {
-  Props as SearchbarProps,
+  type Props as SearchbarProps,
 } from "deco-sites/true-source/components/search/Searchbar.tsx";
 import Modal from "deco-sites/true-source/components/ui/Modal.tsx";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";

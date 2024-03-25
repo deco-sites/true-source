@@ -1,7 +1,7 @@
 import Button from "deco-sites/true-source/components/ui/Button.tsx";
 import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
-import { AddToCartParams } from "apps/commerce/types.ts";
+import type { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
 import { IconButtonCart } from "../../ui/CustomIcons.tsx";
 import { useSignal } from "@preact/signals";
