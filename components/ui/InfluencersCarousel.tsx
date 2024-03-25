@@ -4,7 +4,6 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/components/ui/SliderJS.tsx";
-import type { LoaderContext } from "deco/mod.ts";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
 
 /** @titleBy name */
@@ -25,13 +24,10 @@ export interface Props {
   title?: string;
   /** @title Cards */
   cards: Card[];
-  isMobile?: boolean;
 }
 
-function InfluencersCarousel({ title, cards, isMobile }: Props) {
+function InfluencersCarousel({ title, cards }: Props) {
   const id = useId();
-
-  const dotIsPage = isMobile ? false : true;
 
   return (
     <div
@@ -125,20 +121,10 @@ function InfluencersCarousel({ title, cards, isMobile }: Props) {
             </ul>
           </div>
         </>
-        <SliderJS rootId={id} dotIsPage={dotIsPage} />
+        <SliderJS rootId={id} dotIsPage />
       </div>
     </div>
   );
 }
 
 export default InfluencersCarousel;
-
-export const loader = (
-  { ...props }: Props,
-  req: Request,
-  ctx: LoaderContext,
-) => {
-  const isMobile = ctx.device === "mobile";
-
-  return { ...props, isMobile };
-};

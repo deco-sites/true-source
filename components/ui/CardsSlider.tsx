@@ -32,7 +32,9 @@ function CardsSlider({ title, cards, isMobile, hasBackgroundColor }: Props) {
       }`}
     >
       {title && (
-        <h2 class="text-dark font-bold text-[18px] font-lemon-milk">{title}</h2>
+        <h2 class="text-dark font-bold text-[18px] font-lemon-milk text-center px-6 md:px-0">
+          {title}
+        </h2>
       )}
       <div class="relative w-full max-w-[1440px] mx-auto pl-4 md:pl-[40px] overflow-x-hidden">
         <Slider class="carousel gap-6 md:gap-[12px] col-span-full max-w-full md:max-w-[1440px] mx-auto mt-[32px] md:mt-[40px]">

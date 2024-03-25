@@ -20,7 +20,7 @@ export default function TextSEO(
           class="max-w-[527px] text-dark text-[11px] leading-[18px]"
         />
       </div>
-      <div class="flex flex-col md:flex-row justify-between items-center w-full">
+      <div class="flex flex-col gap-y-10 md:flex-row justify-between items-center w-full">
         <p class=" text-dark text-[11px] leading-[13px] text-center">
           {copyrightText}
         </p>
