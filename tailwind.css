@@ -46,41 +46,45 @@
     .font-lemon-milk {
         font-family: 'Lemon Milk', sans-serif;
     }
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-  }
 
-  progress {
-    width: 260px;
-    height: 8px;
-    border-radius: 200px;
-    background-color: #8E8E8D;
-  }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
 
-  /* Estilos da barra de progresso interna */
-  progress::-webkit-progress-bar {
-    background-color: #8E8E8D;
-    border-radius: 200px;
-  }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
 
-  /* Estilos da barra de progresso preenchida */
-  progress::-webkit-progress-value {
-    background-color: #8CBF3C;
-    border-radius: 200px;
-  }
+    progress {
+        width: 260px;
+        height: 8px;
+        border-radius: 200px;
+        background-color: #8E8E8D;
+    }
+
+    /* Estilos da barra de progresso interna */
+    progress::-webkit-progress-bar {
+        background-color: #8E8E8D;
+        border-radius: 200px;
+    }
+
+    /* Estilos da barra de progresso preenchida */
+    progress::-webkit-progress-value {
+        background-color: #8CBF3C;
+        border-radius: 200px;
+    }
 
 
 
 
-  .font-lemon-milk {
-    font-family: 'Lemon Milk', sans-serif;
-  }
+    .font-lemon-milk {
+        font-family: 'Lemon Milk', sans-serif;
+    }
 
     .between {
         justify-content: space-between;
@@ -168,37 +172,42 @@
         @apply bg-light-gray;
     }
 
-  #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
-    @apply bg-dark;
-  }
+    #benefitsSlider .swiper-pagination .swiper-pagination-bullet-active {
+        @apply bg-dark;
+    }
 
-  .swiper-pagination {
-    @apply !static flex justify-center mt-8;
-  }
+    .swiper-pagination {
+        @apply !static flex justify-center mt-8;
+    }
 
-  .swiper-pagination .swiper-pagination-bullet {
-    @apply bg-light-gray;
-  }
+    .swiper-pagination .swiper-pagination-bullet {
+        @apply bg-light-gray;
+    }
 
-  .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    @apply bg-dark;
-  }
+    .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        @apply bg-dark;
+    }
 
-  .custom-category-title {
-    @apply text-base md:text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
-  }
+    .custom-category-title {
+        @apply text-2xl lg:text-4xl uppercase font-bold font-lemon-milk leading-6 lg:leading-[44px] mb-8;
+    }
 
-  .custom-category-title strong {
-    @apply font-bold text-red;
-  }
+    .custom-category-title strong {
+        @apply font-bold text-red;
 
-  /* .custom-category-text {
-    @apply text-2xl lg:text-4xl uppercase font-bold font-lemon-milk mb-8;
-  } */
+        background-image: linear-gradient(to right, #e4003f, #e9530e);
+        background-clip: text;
+        color: transparent;
+    }
 
-  .custom-category-text a {
-    @apply underline text-red;
-  }
+    .custom-category-text {
+        @apply font-medium leading-7 text-dark;
+    }
+
+    .custom-category-text a {
+        @apply underline text-red;
+    }
+
 }
 
 .group:disabled .group-disabled\:animate-progress {
@@ -643,19 +652,19 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #E2E2E2; 
-  border-radius: 5px;
+    background: #E2E2E2;
+    border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #D2D2D2; 
-  border-radius: 5px;
+    background: #D2D2D2;
+    border-radius: 5px;
 }
 
 /* Handle on hover */
@@ -699,4 +708,23 @@
 
 .outline {
     outline: 1px red dashed;
+}
+
+.neoasssist-widget-frame {
+    bottom: 6px !important;
+    right: 239px !important;
+    z-index: 99 !important;
+}
+
+
+@media (max-width: 1024px) {
+    .neoasssist-widget-frame {
+        right: 14px !important;
+        bottom: 120px !important;
+    }
+
+    body:not(:has(#floating-mobile-modal:checked)) .neoasssist-widget-frame {
+        opacity: 0;
+        pointer-events: none;
+    }
 }

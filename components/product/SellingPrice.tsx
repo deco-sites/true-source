@@ -48,7 +48,7 @@ export default function SellingPrice({
 
   useEffect(() => {
     const getData = async () => {
-      const id = parseInt(productId);
+      const id = Number.parseInt(productId);
       const response = await simulate({
         items: [{
           id,

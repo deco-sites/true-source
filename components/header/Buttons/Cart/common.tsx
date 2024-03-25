@@ -1,7 +1,7 @@
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
-import { AnalyticsItem } from "apps/commerce/types.ts";
+import type { AnalyticsItem } from "apps/commerce/types.ts";
 import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 import Button from "deco-sites/true-source/components/ui/Button.tsx";
 

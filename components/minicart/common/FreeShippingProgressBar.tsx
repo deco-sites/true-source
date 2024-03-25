@@ -12,7 +12,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
   const remaining = target - total;
   const percent = Math.floor((total / target) * 100);
 
-  const progressClasses = `w-full bg-gray-200 rounded-full`;
+  const progressClasses = "w-full bg-gray-200 rounded-full";
 
   return (
     <div class="flex flex-col w-full gap-4">

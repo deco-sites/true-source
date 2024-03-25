@@ -180,7 +180,7 @@ export default function AddToCartArea({
                   <p class="text-xs sm:text-sm">
                     Compre e receba até <br />
                     <strong>
-                      {formatPrice(parseFloat((price * .05).toFixed(2)))}
+                      {formatPrice(Number.parseFloat((price * .05).toFixed(2)))}
                     </strong>{" "}
                     de volta!
                   </p>

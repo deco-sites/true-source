@@ -118,8 +118,8 @@ function getPossibilities(
   const sizes = newPossibilities.filter((p) => {
     return p.name.indexOf(flavour) !== -1;
   }).sort((a, b) => {
-    const nameA = parseInt(a.name.replace(/[^0-9]/gi, ""));
-    const nameB = parseInt(b.name.replace(/[^0-9]/gi, ""));
+    const nameA = Number.parseInt(a.name.replace(/[^0-9]/gi, ""));
+    const nameB = Number.parseInt(b.name.replace(/[^0-9]/gi, ""));
     if (nameA < nameB) return -1;
     if (nameA > nameB) return 1;
     return 0;

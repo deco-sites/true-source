@@ -35,7 +35,7 @@ export const grid = {
       "10": "grid-cols-10",
       "11": "grid-cols-11",
       "12": "grid-cols-12",
-      "None": "grid-cols-none",
+      None: "grid-cols-none",
     },
     desktop: {
       "1": "lg:grid-cols-1",
@@ -50,7 +50,7 @@ export const grid = {
       "10": "lg:grid-cols-10",
       "11": "lg:grid-cols-11",
       "12": "lg:grid-cols-12",
-      "None": "lg:grid-cols-none",
+      None: "lg:grid-cols-none",
     },
   },
   rows: {
@@ -61,7 +61,7 @@ export const grid = {
       "4": "grid-cols-4",
       "5": "grid-cols-5",
       "6": "grid-cols-6",
-      "None": "grid-cols-none",
+      None: "grid-cols-none",
     },
     desktop: {
       "1": "lg:grid-cols-1",
@@ -70,39 +70,39 @@ export const grid = {
       "4": "lg:grid-cols-4",
       "5": "lg:grid-cols-5",
       "6": "lg:grid-cols-6",
-      "None": "lg:grid-cols-none",
+      None: "lg:grid-cols-none",
     },
   },
   flow: {
     mobile: {
-      "Col": "grid-flow-col",
-      "Row": "grid-flow-row",
-      "Dense": "grid-flow-dense",
+      Col: "grid-flow-col",
+      Row: "grid-flow-row",
+      Dense: "grid-flow-dense",
       "Col-dense": "grid-flow-col-dense",
       "Row-dense": "grid-flow-row-dense",
     },
     desktop: {
-      "Col": "lg:grid-flow-col",
-      "Row": "lg:grid-flow-row",
-      "Dense": "lg:grid-flow-dense",
+      Col: "lg:grid-flow-col",
+      Row: "lg:grid-flow-row",
+      Dense: "lg:grid-flow-dense",
       "Col-dense": "lg:grid-flow-col-dense",
       "Row-dense": "lg:grid-flow-row-dense",
     },
   },
   placeItems: {
     mobile: {
-      "Center": "place-items-center",
-      "Start": "place-items-start",
-      "End": "place-items-end",
-      "Baseline": "place-items-baseline",
-      "Stretch": "place-items-stretch",
+      Center: "place-items-center",
+      Start: "place-items-start",
+      End: "place-items-end",
+      Baseline: "place-items-baseline",
+      Stretch: "place-items-stretch",
     },
     desktop: {
-      "Center": "lg:place-items-center",
-      "Start": "lg:place-items-start",
-      "End": "lg:place-items-end",
-      "Baseline": "lg:place-items-baseline",
-      "Stretch": "lg:place-items-stretch",
+      Center: "lg:place-items-center",
+      Start: "lg:place-items-start",
+      End: "lg:place-items-end",
+      Baseline: "lg:place-items-baseline",
+      Stretch: "lg:place-items-stretch",
     },
   },
   rowStart: {
@@ -114,7 +114,7 @@ export const grid = {
       "5": "row-start-5",
       "6": "row-start-6",
       "7": "row-start-7",
-      "Auto": "row-start-auto",
+      Auto: "row-start-auto",
     },
     desktop: {
       "1": "lg:row-start-1",
@@ -124,7 +124,7 @@ export const grid = {
       "5": "lg:row-start-5",
       "6": "lg:row-start-6",
       "7": "lg:row-start-7",
-      "Auto": "lg:row-start-auto",
+      Auto: "lg:row-start-auto",
     },
   },
   rowSpan: {
@@ -135,7 +135,7 @@ export const grid = {
       "4": "row-span-4",
       "5": "row-span-5",
       "6": "row-span-6",
-      "Full": "row-span-full",
+      Full: "row-span-full",
     },
     desktop: {
       "1": "lg:row-span-1",
@@ -144,7 +144,7 @@ export const grid = {
       "4": "lg:row-span-4",
       "5": "lg:row-span-5",
       "6": "lg:row-span-6",
-      "Full": "lg:row-span-full",
+      Full: "lg:row-span-full",
     },
   },
   colStart: {
@@ -156,7 +156,7 @@ export const grid = {
       "5": "col-start-5",
       "6": "col-start-6",
       "7": "col-start-7",
-      "Auto": "col-start-auto",
+      Auto: "col-start-auto",
     },
     desktop: {
       "1": "lg:col-start-1",
@@ -166,7 +166,7 @@ export const grid = {
       "5": "lg:col-start-5",
       "6": "lg:col-start-6",
       "7": "lg:col-start-7",
-      "Auto": "lg:col-start-auto",
+      Auto: "lg:col-start-auto",
     },
   },
   colSpan: {
@@ -177,7 +177,7 @@ export const grid = {
       "4": "col-span-4",
       "5": "col-span-5",
       "6": "col-span-6",
-      "Full": "col-span-full",
+      Full: "col-span-full",
     },
     desktop: {
       "1": "lg:col-span-1",
@@ -186,7 +186,7 @@ export const grid = {
       "4": "lg:col-span-4",
       "5": "lg:col-span-5",
       "6": "lg:col-span-6",
-      "Full": "lg:col-span-full",
+      Full: "lg:col-span-full",
     },
   },
 };
@@ -194,12 +194,12 @@ export const grid = {
 export const divide = {
   axis: {
     mobile: {
-      "x": "divide-x",
-      "y": "divide-y",
+      x: "divide-x",
+      y: "divide-y",
     },
     desktop: {
-      "x": "lg:divide-x",
-      "y": "lg:divide-y",
+      x: "lg:divide-x",
+      y: "lg:divide-y",
     },
   },
   size: {
@@ -239,73 +239,73 @@ export const flex = {
   },
   direction: {
     mobile: {
-      "Row": "flex-row",
-      "Col": "flex-col",
+      Row: "flex-row",
+      Col: "flex-col",
     },
     desktop: {
-      "Row": "lg:flex-row",
-      "Col": "lg:flex-col",
+      Row: "lg:flex-row",
+      Col: "lg:flex-col",
     },
   },
   justify: {
     mobile: {
-      "Start": "justify-start",
-      "Center": "justify-center",
-      "End": "justify-end",
-      "Between": "justify-between",
+      Start: "justify-start",
+      Center: "justify-center",
+      End: "justify-end",
+      Between: "justify-between",
     },
     desktop: {
-      "Start": "lg:justify-start",
-      "Center": "lg:justify-center",
-      "End": "lg:justify-end",
-      "Between": "lg:justify-between",
+      Start: "lg:justify-start",
+      Center: "lg:justify-center",
+      End: "lg:justify-end",
+      Between: "lg:justify-between",
     },
   },
   align: {
     mobile: {
-      "Start": "items-start",
-      "Center": "items-center",
-      "End": "items-end",
-      "Baseline": "items-baseline",
-      "Stretch": "items-stretch",
+      Start: "items-start",
+      Center: "items-center",
+      End: "items-end",
+      Baseline: "items-baseline",
+      Stretch: "items-stretch",
     },
     desktop: {
-      "Start": "lg:items-start",
-      "Center": "lg:items-center",
-      "End": "lg:items-end",
-      "Baseline": "lg:items-baseline",
-      "Stretch": "lg:items-stretch",
+      Start: "lg:items-start",
+      Center: "lg:items-center",
+      End: "lg:items-end",
+      Baseline: "lg:items-baseline",
+      Stretch: "lg:items-stretch",
     },
   },
   wrap: {
     mobile: {
-      "Wrap": "flex-wrap",
-      "Nowrap": "flex-nowrap",
+      Wrap: "flex-wrap",
+      Nowrap: "flex-nowrap",
       "Wrap-reverse": "flex-wrap-reverse",
     },
     desktop: {
-      "Wrap": "lg:flex-wrap",
-      "Nowrap": "lg:flex-nowrap",
+      Wrap: "lg:flex-wrap",
+      Nowrap: "lg:flex-nowrap",
       "Wrap-reverse": "flex-wrap-reverse",
     },
   },
   item: {
     mobile: {
       "1": "flex-1",
-      "Auto": "flex-auto",
-      "Initial": "flex-inicial",
-      "None": "flex-none",
+      Auto: "flex-auto",
+      Initial: "flex-inicial",
+      None: "flex-none",
     },
     desktop: {
       "1": "lg:flex-1",
-      "Auto": "lg:flex-auto",
-      "Initial": "lg:flex-inicial",
-      "None": "lg:flex-none",
+      Auto: "lg:flex-auto",
+      Initial: "lg:flex-inicial",
+      None: "lg:flex-none",
     },
   },
   position: {
-    "Left": "",
-    "Right": "lg:flex-row-reverse",
+    Left: "",
+    Right: "lg:flex-row-reverse",
   },
 };
 
@@ -370,7 +370,7 @@ export type BorderWidth =
   | "8";
 
 export const borderWidthClasses = {
-  "None": "border-none",
+  None: "border-none",
   "1": "border",
   "2": "border-2",
   "4": "border-4",
@@ -378,32 +378,32 @@ export const borderWidthClasses = {
 };
 
 export const borderRadiusClasses = {
-  "None": "rounded-none",
-  "Small": "rounded-sm",
-  "Normal": "rounded",
-  "Medium": "rounded-md",
-  "Large": "rounded-lg",
+  None: "rounded-none",
+  Small: "rounded-sm",
+  Normal: "rounded",
+  Medium: "rounded-md",
+  Large: "rounded-lg",
   "Extra large": "rounded-3xl",
-  "Full": "rounded-full",
+  Full: "rounded-full",
 };
 
 export const shadowClasses = {
-  "None": "drop-shadow-none",
-  "Small": "drop-shadow-sm",
-  "Normal": "drop-shadow",
-  "Medium": "drop-shadow-md",
-  "Large": "drop-shadow-lg",
+  None: "drop-shadow-none",
+  Small: "drop-shadow-sm",
+  Normal: "drop-shadow",
+  Medium: "drop-shadow-md",
+  Large: "drop-shadow-lg",
   "Extra large": "drop-shadow-2xl",
 };
 
 export const layoutClasses = {
   "100%": "",
-  "Contained": "lg:container",
+  Contained: "lg:container",
   "2/3": "lg:mx-auto lg:w-2/3",
 };
 
 export const imgPh = {
-  "sq":
+  sq:
     "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1818/ff6bb37e-0eab-40e1-a454-86856efc278e",
   "rct-sm":
     "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1818/b0f8ca2d-9c83-48f7-88de-1a6e6d1e9eb7",
@@ -412,57 +412,57 @@ export const imgPh = {
 };
 
 export const colorClasses = {
-  "Transparent": "",
+  Transparent: "",
   "Backdrop opacity": "backdrop-opacity-30 bg-white/40",
-  "Primary": "bg-primary text-primary-content",
-  "Secondary": "bg-secondary text-secondary-content",
-  "Tertiary": "bg-accent text-accent-content",
-  "Base": "bg-base-100 text-base-content",
+  Primary: "bg-primary text-primary-content",
+  Secondary: "bg-secondary text-secondary-content",
+  Tertiary: "bg-accent text-accent-content",
+  Base: "bg-base-100 text-base-content",
   "Base inverted": "bg-base-content text-base-100",
 };
 
 export const borderColorClasses = {
-  "Transparent": "",
+  Transparent: "",
   "Backdrop opacity": "border-base-100",
-  "Primary": "border-primary-content",
-  "Secondary": "border-secondary-content",
-  "Tertiary": "border-accent-content",
-  "Base": "border-base-content",
+  Primary: "border-primary-content",
+  Secondary: "border-secondary-content",
+  Tertiary: "border-accent-content",
+  Base: "border-base-content",
   "Base inverted": "border-base-100",
 };
 
 export const borderColorClasses2 = {
-  "Transparent": "border-transparent",
-  "Primary": "border-primary",
-  "Secondary": "border-secondary",
-  "Tertiary": "border-accent",
-  "Base": "border-base",
+  Transparent: "border-transparent",
+  Primary: "border-primary",
+  Secondary: "border-secondary",
+  Tertiary: "border-accent",
+  Base: "border-base",
   "Base inverted": "border-base-content",
 };
 
 export const lineColorClasses = {
-  "Auto": "",
-  "Primary": "border-primary",
-  "Secondary": "border-secondary",
-  "Tertiary": "border-accent",
-  "Base": "border-base",
+  Auto: "",
+  Primary: "border-primary",
+  Secondary: "border-secondary",
+  Tertiary: "border-accent",
+  Base: "border-base",
   "Base inverted": "border-base-content",
 };
 
 export const textColorClasses = {
-  "Auto": "",
-  "Primary": "text-primary",
-  "Secondary": "text-secondary",
-  "Tertiary": "text-accent",
-  "Base": "text-base-100",
+  Auto: "",
+  Primary: "text-primary",
+  Secondary: "text-secondary",
+  Tertiary: "text-accent",
+  Base: "text-base-100",
   "Base inverted": "text-base-content",
 };
 
 export const buttonClasses = {
-  "Default": "",
-  "Primary": "btn-primary",
-  "Secondary": "btn-secondary",
-  "Tertiary": "btn-accent",
+  Default: "",
+  Primary: "btn-primary",
+  Secondary: "btn-secondary",
+  Tertiary: "btn-accent",
 };
 
 export function getButtonClasses(style: ButtonType) {

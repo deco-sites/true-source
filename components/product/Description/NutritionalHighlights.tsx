@@ -83,6 +83,7 @@ export default function NutritionalHighlights({
             frameBorder="0"
             allowFullScreen={true}
             allowTransparency={true}
+            title="YouTube video player"
           />
         </div>
       )}

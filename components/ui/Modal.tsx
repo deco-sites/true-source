@@ -1,6 +1,6 @@
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import { useSignal } from "@preact/signals";
-import { ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 interface Props {

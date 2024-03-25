@@ -1,7 +1,7 @@
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon, {
-  AvailableIcons,
+  type AvailableIcons,
 } from "deco-sites/true-source/components/ui/Icon.tsx";
 import type { ComponentChildren } from "preact";
 
@@ -114,7 +114,7 @@ function Links(props: Props) {
   );
 
   const maybeLink = header?.logo?.link
-    ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
+    ? <a href={header?.logo?.link!} target="_blank" rel="noreferrer">{logo}</a>
     : logo;
 
   const ColorsNeutralAndHover = {
@@ -162,6 +162,7 @@ function Links(props: Props) {
                 href={link.href}
                 class="group h-[52px] px-6 rounded-full flex justify-start items-center font-bold gap-4"
                 style={ColorsNeutralAndHover}
+                rel="noreferrer"
               >
                 {Boolean(link.icon) && (
                   <Icon
@@ -196,6 +197,7 @@ function Links(props: Props) {
                 href={link.href}
                 title={link.label}
                 class="text-white block rounded"
+                rel="noreferrer"
               >
                 <Icon
                   size={20}
@@ -215,6 +217,7 @@ function Links(props: Props) {
               href={props.footer.url}
               class="text-xs flex flex-row items-center justify-center gap-1"
               target="_blank"
+              rel="noreferrer"
             >
               {props.footer.text && (
                 <p

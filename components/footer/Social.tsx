@@ -1,11 +1,9 @@
-import Icon, {
-  AvailableIcons,
-} from "deco-sites/true-source/components/ui/Icon.tsx";
 import {
   IconInstagram,
   IconTiktok,
   IconYoutube,
 } from "deco-sites/true-source/components/ui/CustomIcons.tsx";
+import type { JSX } from "preact";
 
 // Definindo a interface SocialItem
 export interface SocialItem {
@@ -16,22 +14,22 @@ export interface SocialItem {
 // Função Social
 export default function Social(
   { content, vertical = false }: {
-    content?: { title?: string; items?: SocialItem[] };
+    content?: SocialItem[];
     vertical?: boolean;
   },
 ) {
   return (
     <>
-      {content && content.items && content.items.length > 0 && (
+      {content && content && content.length > 0 && (
         <div className="flex flex-col gap-4 items-center m-[auto 0] py-6 lg:py-0 lg:items-end">
-          {content.title && <h3 className="text-lg">{content.title}</h3>}
           <ul
             className={`flex gap-4 ${
               vertical ? "lg:flex-col lg:items-start" : "items-center"
             }`}
           >
-            {content.items.map((item) => {
-              let iconComponent;
+            {content.map((item) => {
+              let iconComponent: JSX.Element | null = null;
+
               switch (item.label) {
                 case "Instagram":
                   iconComponent = <IconInstagram />;
@@ -55,7 +53,7 @@ export default function Social(
                     aria-label={`${item.label} Logo`}
                     className="flex gap-2 items-center"
                   >
-                    <span className="block p-2 border border-[#e8530e]  rounded-full">
+                    <span className="block p-2 border border-red rounded-full">
                       {iconComponent}
                     </span>
                     {vertical && (

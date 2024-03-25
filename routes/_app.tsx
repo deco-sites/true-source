@@ -4,9 +4,7 @@ import Theme from "deco-sites/true-source/sections/Theme/Theme.tsx";
 import { Context } from "deco/deco.ts";
 
 const sw = () =>
-  addEventListener("load", () =>
-    navigator && navigator.serviceWorker &&
-    navigator.serviceWorker.register("/sw.js"));
+  addEventListener("load", () => navigator?.serviceWorker?.register("/sw.js"));
 
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();

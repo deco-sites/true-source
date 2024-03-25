@@ -61,6 +61,7 @@ export default function InfoCard1WithBackground({
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="w-full h-auto md:h-full object-cover object-center"
+            alt=""
           />
         </picture>
       </div>

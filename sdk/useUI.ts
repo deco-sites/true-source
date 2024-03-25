@@ -11,6 +11,7 @@ const displayMenu = signal(false);
 const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
 const displaySubscriptionPopup = signal(false);
+const displayVideoModal = signal<null | string>(null);
 
 const currentSubscription = signal<Props | null>(null);
 
@@ -20,6 +21,7 @@ const state = {
   displaySearchPopup,
   displaySearchDrawer,
   displaySubscriptionPopup,
+  displayVideoModal,
   currentSubscription,
 };
 

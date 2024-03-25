@@ -64,6 +64,7 @@ export default function InfoCard({
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="w-full h-auto md:h-full object-cover object-center"
+              alt=""
             />
           </picture>
         </div>
@@ -107,6 +108,7 @@ export default function InfoCard({
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="w-full h-auto max-h-[471px] object-cover object-center"
+              alt=""
             />
           </picture>
         </div>
@@ -144,6 +146,7 @@ export default function InfoCard({
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="object-cover object-center w-full h-[712px] max-w-unset"
+            alt=""
           />
         </picture>
         <div

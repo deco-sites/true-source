@@ -71,5 +71,27 @@ export default function (id_?: string) {
         )}
       />
     ),
+    close() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      e.checked = false;
+    },
+    open() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      e.checked = true;
+    },
+    isOpen() {
+      const e = document.getElementById(id) as HTMLInputElement;
+
+      if (!e) throw new Error(`Collapsable ${id} not found`);
+
+      return e.checked;
+    },
+    id,
   };
 }

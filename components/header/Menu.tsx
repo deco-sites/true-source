@@ -2,7 +2,7 @@ import CartButtonVTEX from "deco-sites/true-source/islands/Header/Cart/vtex.tsx"
 import type { INavItem } from "./NavItem.tsx";
 import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
 export interface Help {

@@ -29,15 +29,17 @@ export default function SubscriptionButtonVTEX({
 
   return (
     <button
+      type="button"
       class="flex items-center justify-center gap-4 bg-dark-green text-white font-bold text-xs sm:text-[13px] h-12 px-4 rounded-md font-lemon-milk"
-      onClick={() =>
+      onClick={() => {
         currentSubscription.value = {
           productID,
           seller,
           quantity,
           listPrice,
           price,
-        }}
+        };
+      }}
     >
       ASSINE COM {formatPrice(discount * quantity)} de desconto
       <span class="flex-none max-[400px]:hidden">

@@ -1,5 +1,5 @@
 import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
-import { Product } from "apps/commerce/types.ts";
+import type { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   products: Product[] | null;

@@ -1,4 +1,4 @@
-import { Signal, useSignal } from "@preact/signals";
+import { type Signal, useSignal } from "@preact/signals";
 import { useCallback } from "preact/hooks";
 import Button from "deco-sites/true-source/components/ui/Button.tsx";
 import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
@@ -125,7 +125,7 @@ function ShippingSimulation({ items }: Props) {
           </button>
         </form>
         <a
-          href="#"
+          href="#/"
           class="text-xs sm:text-sm underline font-regular w-full sm:w-[65px] uppercase"
         >
           Descobrir meu cep

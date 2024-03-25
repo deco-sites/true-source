@@ -1,4 +1,4 @@
-import { Section } from "deco/blocks/section.ts";
+import type { Section } from "deco/blocks/section.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 const animationClasses = {
@@ -47,7 +47,7 @@ function Animation(
       <div
         id={id}
         class="opacity-0"
-        style={{ animationDuration: duration + "s" }}
+        style={{ animationDuration: `${duration}s` }}
       >
         <Component {...props} />
       </div>

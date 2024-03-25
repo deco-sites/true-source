@@ -1,5 +1,5 @@
 import Icon, {
-  AvailableIcons,
+  type AvailableIcons,
 } from "deco-sites/true-source/components/ui/Icon.tsx";
 import Header from "deco-sites/true-source/components/ui/SectionHeader.tsx";
 
@@ -51,7 +51,7 @@ export default function Benefits(
         class={`${
           reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
         } flex gap-4 ${
-          benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
+          benefitLayout === "piledup" ? "flex-col items-center text-center" : ""
         } ${
           showDivider && benefitLayout !== "piledup"
             ? "border-b border-neutral-300"
@@ -81,7 +81,7 @@ export default function Benefits(
           <p
             class={`text-sm leading-5 ${
               reverse ? "text-base-100" : "text-neutral"
-            } ${benefitLayout == "piledup" ? "hidden lg:block" : ""}`}
+            } ${benefitLayout === "piledup" ? "hidden lg:block" : ""}`}
           >
             {benefit.description}
           </p>

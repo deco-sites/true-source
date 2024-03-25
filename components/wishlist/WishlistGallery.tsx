@@ -1,7 +1,7 @@
 import SearchResult, {
-  Props as SearchResultProps,
+  type Props as SearchResultProps,
 } from "deco-sites/true-source/components/search/SearchResult.tsx";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 export type Props = SearchResultProps;
 

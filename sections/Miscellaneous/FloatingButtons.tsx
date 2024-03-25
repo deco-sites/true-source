@@ -1,0 +1,209 @@
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
+import { Head } from "$fresh/runtime.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
+
+export interface Props {
+  /**
+   * @title Número do WhatsApp
+   * @description 00 12345 6789
+   */
+  zapzap: number;
+}
+
+export default function FloatingButtons(
+  { isMobile, zapzap }: ReturnType<typeof loader>,
+) {
+  const zapzapModal = useModal();
+  const floatingMobileModal = useModal("floating-mobile-modal");
+
+  return (
+    <>
+      <Head>
+        <script
+          type="text/javascript"
+          async
+          src="https://cdn.atendimen.to/n.js?ntag=0&amp;d=truebrands.neoassist.com&amp;p=https%3A%2F%2Fwww.truesource.com.br%2F"
+        >
+        </script>
+        <script
+          defer
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.NeoAssistTag = {};
+            NeoAssistTag.querystring = true;
+            NeoAssistTag.pageid = '';
+            NeoAssistTag.clientdomain = 'truebrands.neoassist.com';
+            NeoAssistTag.initialize = {};
+            var na = document.createElement('script');
+            na.type = 'text/javascript';
+            na.async = true;
+            na.src = 'https://cdn.atendimen.to/n.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(na, s);
+            `,
+          }}
+        />
+      </Head>
+
+      <zapzapModal.Modal class="group transition-opacity peer-checked:z-[100] w-full h-full fixed left-0 top-0 pointer-events-none peer-checked:pointer-events-auto flex justify-center items-center">
+        <zapzapModal.Toggle class="absolute left-0 top-0 w-full h-full bg-black/30 opacity-0 peer-checked:group-[]:opacity-100" />
+
+        <div class="lg:fixed lg:right-6 lg:bottom-20 max-w-[400px] w-[95%] mx-auto opacity-0 peer-checked:group-[]:opacity-100 z-10">
+          <div class='bg-[image:url("https://tfcucl.vteximg.com.br/arquivos/retangulo-titulo-whatsapp.png")] py-5'>
+            <div class="text-white text-center text-[17px] font-semibold leading-5 max-w-[300px] mx-auto">
+              Olá! Preencha os campos abaixo para iniciar conversa no WhatsApp
+            </div>
+          </div>
+          <form
+            id="zapzapForm"
+            class="p-6 bg-[#ededed] flex flex-col gap-3 items-center"
+          >
+            <input
+              type="text"
+              placeholder="Nome"
+              required
+              id="wpp-client-name"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              required
+              id="wpp-client-email"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+            <input
+              type="tel"
+              placeholder="Telefone com DDD"
+              required
+              pattern="\(\d{2}\) [0-9]{5}-[0-9]{4}"
+              id="wpp-client-phone"
+              class="rounded-full bg-white text-black text-italic outline-[transparent] focus:outline-[#ea6426] outline-1 invalid:text-[#ea6426] transition-all py-2 px-4 h-12 text-sm w-full"
+            />
+
+            <div class="flex items-center gap-2">
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="medico-cupom"
+                />
+                Médico
+              </label>
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="nutricionista-cupom"
+                />
+                Nutricionista
+              </label>
+              <label class="flex items-center gap-1 text-dark text-sm">
+                <input
+                  type="radio"
+                  name="typeOfClientWpp"
+                  value="consumidor-cupom"
+                />
+                Consumidor
+              </label>
+            </div>
+
+            <label class="flex items-center gap-1 text-dark text-sm">
+              <input type="checkbox" id="wpp-checkbox" />
+              Estou ciente que poderei receber e-mails
+            </label>
+
+            <button
+              type="submit"
+              class="bg-[#09d261] rounded-full py-2 px-4 text-white mt-4 font-medium"
+            >
+              INICIAR A CONVERSA
+            </button>
+          </form>
+        </div>
+      </zapzapModal.Modal>
+
+      <floatingMobileModal.Modal
+        class={clx(
+          "fixed right-5 bottom-[72px] lg:bottom-3 flex-col lg:flex-row justify-center items-center gap-2",
+          isMobile ? "hidden peer-checked:flex" : "flex",
+        )}
+      >
+        <zapzapModal.Toggle class="shadow bg-white lg:bg-green h-10 flex items-center gap-2 px-6 rounded-full text-dark lg:text-white font-bold text-sm cursor-pointer select-none">
+          Dúvidas de pedidos
+          <Icon
+            id="FloatingWhatsApp"
+            width={18}
+            height={18}
+            class="text-green lg:text-white"
+          />
+        </zapzapModal.Toggle>
+      </floatingMobileModal.Modal>
+
+      {isMobile && (
+        <div>
+          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center">
+            <Icon
+              id="FloatingChat"
+              width={20}
+              height={20}
+              class="peer-checked:group-[]:hidden block"
+            />
+            <Icon
+              id="FloatingX"
+              width={20}
+              height={20}
+              class="hidden peer-checked:group-[]:block"
+            />
+          </floatingMobileModal.Toggle>
+        </div>
+      )}
+
+      <script
+        src={scriptAsDataURI(() => {
+          const phoneInput = document.querySelector<HTMLInputElement>(
+            "input#wpp-client-phone",
+          );
+          const form = document.querySelector<HTMLFormElement>(
+            "form#zapzapForm",
+          );
+
+          if (!phoneInput) throw new Error("Phone input not found");
+          if (!form) throw new Error("Form not found");
+
+          phoneInput.oninput = (e) => {
+            // @ts-ignore trust me
+            e.currentTarget.value = (e.currentTarget.value as string)
+              .replace(/\D/g, "")
+              .replace(
+                /^(\d?)(\d?)(\d{0,5})(\d{0,4})(.*)$/,
+                (all, $1, $2, $3, $4) => {
+                  let s = "";
+
+                  if ($1) s += `(${$1}${$2}`;
+                  if ($3) s += `) ${$3}`;
+                  if ($4) s += `-${$4}`;
+
+                  return s;
+                },
+              );
+          };
+
+          form.onsubmit = () => {
+            open(`https://api.whatsapp.com/send?phone=55${zapzap}`, "_blank");
+          };
+        })}
+      />
+    </>
+  );
+}
+
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  return {
+    ...props,
+    isMobile: ctx.device !== "desktop",
+  };
+}

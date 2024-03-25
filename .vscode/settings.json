@@ -17,12 +17,9 @@
     "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "denoland.vscode-deno"
   }
 }

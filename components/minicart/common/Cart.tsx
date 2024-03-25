@@ -2,11 +2,11 @@ import Button from "deco-sites/true-source/components/ui/Button.tsx";
 import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
-import { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { OrderFormItem } from "apps/vtex/utils/types.ts";
+import type { AnalyticsItem, Product } from "apps/commerce/types.ts";
+import type { OrderFormItem } from "apps/vtex/utils/types.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import CartItem, { Props as ItemProps } from "./CartItem.tsx";
-import { Props as CouponProps } from "./Coupon.tsx";
+import CartItem, { type Props as ItemProps } from "./CartItem.tsx";
+import type { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 
 interface Props {
@@ -81,7 +81,7 @@ function Cart({
           </span>
         </div>
 
-        <button class="text-black" onClick={onClose}>
+        <button type="button" class="text-black" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
         </button>
       </div>
@@ -106,10 +106,7 @@ function Cart({
           : (
             <>
               {/* Cart Items */}
-              <ul
-                role="list"
-                class="grow shrink overflow-y-auto flex flex-col w-full h-full"
-              >
+              <ul class="grow shrink overflow-y-auto flex flex-col w-full h-full">
                 {items.map((item, index) => (
                   <li>
                     <CartItem

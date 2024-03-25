@@ -5,8 +5,7 @@ interface Props {
   threshold?: number;
 }
 
-// deno-lint-ignore no-explicit-any
-const debounce = <T extends (...args: any[]) => any>(fn: T) => {
+const debounce = <T extends (...args: unknown[]) => unknown>(fn: T) => {
   let frame: number;
 
   return (...params: Parameters<T>): void => {
@@ -31,7 +30,7 @@ const storeHasScrolledPast = (root: HTMLElement, threshold: number) => {
 };
 
 const storeIsScrollingUp = (root: HTMLElement, scrollY: number) => {
-  const isScrollingUp = scrollY < scrollY;
+  const isScrollingUp = globalThis.scrollY < scrollY;
 
   const previousValue = root.getAttribute("data-micro-header-up");
 

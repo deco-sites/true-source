@@ -31,7 +31,7 @@ function WishlistButton({
       variant={variant}
       productGroupID={productGroupID}
       productID={productID}
-      removeItem={() => removeItem({ id: listItem.value!.id }!)}
+      removeItem={() => removeItem({ id: listItem.value?.id ?? "" })}
       addItem={() =>
         addItem({ sku: productID, productId: productGroupID || productID })}
     />

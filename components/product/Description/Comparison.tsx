@@ -56,6 +56,7 @@ export default function Comparison({
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="w-full h-auto"
+            alt=""
           />
         </picture>
       </div>

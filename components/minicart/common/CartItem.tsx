@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
-import { AnalyticsItem, Product } from "apps/commerce/types.ts";
+import type { AnalyticsItem, Product } from "apps/commerce/types.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
-import { OrderFormItem } from "apps/vtex/utils/types.ts";
+import type { OrderFormItem } from "apps/vtex/utils/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { subscriptionOptions } from "deco-sites/true-source/components/product/SubscriptionModal.tsx";
 import Button from "deco-sites/true-source/components/ui/Button.tsx";
@@ -14,7 +14,7 @@ import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 import { useCallback, useId, useState } from "preact/hooks";
 
 const SubscriptionOptionsMap = {
-  "none": "Sem recorrência",
+  none: "Sem recorrência",
   "2W": "2 Semanas",
   "1M": "1 Mês",
   "2M": "2 Meses",
@@ -94,7 +94,7 @@ function CartItem(
     const items = cart.value?.items || [];
 
     const index = items.findIndex((i) => {
-      return i.id === fullProduct!.productID;
+      return i.id === fullProduct?.productID;
     });
 
     if (index === -1) return null;
@@ -271,7 +271,7 @@ function CartItem(
                     changeHandler={changeHandler}
                     name="subscription_option"
                     value="none"
-                    id={itemId + "-none"}
+                    id={`${itemId}-none`}
                     text="Sem recorrência"
                   />
                 )}
@@ -282,7 +282,7 @@ function CartItem(
                   changeHandler={changeHandler}
                   name="subscription_option"
                   value="2W"
-                  id={itemId + "-2W"}
+                  id={`${itemId}-2W`}
                   text="Frequencia: <strong>2 semanas</strong>"
                 />
                 <Radio
@@ -291,7 +291,7 @@ function CartItem(
                   changeHandler={changeHandler}
                   name="subscription_option"
                   value="1M"
-                  id={itemId + "-1M"}
+                  id={`${itemId}-1M`}
                   text="Frequencia: <strong>1 mês</strong>"
                 />
                 <Radio
@@ -300,7 +300,7 @@ function CartItem(
                   changeHandler={changeHandler}
                   name="subscription_option"
                   value="2M"
-                  id={itemId + "-2M"}
+                  id={`${itemId}-2M`}
                   text="Frequencia: <strong>2 meses</strong>"
                 />
                 <Radio
@@ -309,7 +309,7 @@ function CartItem(
                   changeHandler={changeHandler}
                   name="subscription_option"
                   value="3M"
-                  id={itemId + "-3M"}
+                  id={`${itemId}-3M`}
                   text="Frequencia: <strong>3 meses</strong>"
                 />
               </div>

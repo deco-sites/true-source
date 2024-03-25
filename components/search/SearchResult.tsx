@@ -8,9 +8,9 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery from "../product/ProductGallery.tsx";
 import { renderSection } from "apps/website/pages/Page.tsx";
-import { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
-import { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
+import type { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
 
 export interface Props {
   /** @title Integration */
@@ -37,10 +37,10 @@ function NotFound() {
 
         <a
           href="/produtos"
-          class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E9530E] to-[#E4003F] rounded-full"
+          class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-red to-orange rounded-full"
         >
           VER TODOS OS PRODUTOS
-          <Icon id="ArrowRight" width={16} height={16} />
+          <Icon id="ArrowRight" width={16} height={16} class="text-white" />
         </a>
       </div>
     </>
@@ -93,10 +93,10 @@ function SearchResult(
 
           <a
             href="/produtos"
-            class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-[#E9530E] to-[#E4003F] rounded-full"
+            class="flex items-center gap-2 py-3 px-6 text-sm font-bold font-lemon text-white bg-gradient-to-r from-red to-orange rounded-full"
           >
             VER TODOS OS PRODUTOS
-            <Icon id="ArrowRight" width={16} height={16} />
+            <Icon id="ArrowRight" width={16} height={16} class="text-white" />
           </a>
         </div>
       </div>

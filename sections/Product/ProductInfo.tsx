@@ -1,1 +1,1 @@
-export { default } from "../../components/product/ProductInfo.tsx";
+export { default } from "deco-sites/true-source/components/product/ProductInfo.tsx";

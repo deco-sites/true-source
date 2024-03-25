@@ -13,7 +13,7 @@ export default function RegionSelector(
 ) {
   return (
     <>
-      {content && content.language && content.currency &&
+      {content?.language && content.currency &&
         (content?.language?.length > 0 || content?.currency?.length > 0) && (
         <div class="flex flex-wrap gap-4 text-base-content">
           {content?.currency?.length > 0 && (

@@ -10,6 +10,7 @@ export default function MobileApps(
               href={content?.apple}
               target="_blank"
               aria-label={`Download on the App Store at link ${content?.apple}`}
+              rel="noreferrer"
             >
               <img
                 loading="lazy"
@@ -25,6 +26,7 @@ export default function MobileApps(
               href={content?.android}
               target="_blank"
               aria-label={`Get it on Google Play at link ${content?.android}`}
+              rel="noreferrer"
             >
               <img
                 loading="lazy"

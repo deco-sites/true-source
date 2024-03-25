@@ -43,7 +43,9 @@ function Notify({ productID }: Props) {
         name="email"
       />
 
-      <button class="btn disabled:loading" disabled={loading}>Enviar</button>
+      <button type="submit" class="btn disabled:loading" disabled={loading}>
+        Enviar
+      </button>
     </form>
   );
 }

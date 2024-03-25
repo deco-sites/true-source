@@ -1,4 +1,4 @@
-import { Section } from "deco/blocks/section.ts";
+import type { Section } from "deco/blocks/section.ts";
 import { renderSection } from "apps/website/pages/Page.tsx";
 
 interface Props {

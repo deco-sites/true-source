@@ -1,35 +1,19 @@
-import { SendEventOnView } from "deco-sites/true-source/components/Analytics.tsx";
+import type { Product } from "apps/commerce/types.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import Header from "deco-sites/true-source/components/ui/SectionHeader.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
-import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 export interface Props {
   products: Product[] | null;
   title?: string;
-  description?: string;
-  layout?: {
-    numberOfSliders?: {
-      mobile?: 1 | 2 | 3 | 4 | 5;
-      desktop?: 1 | 2 | 3 | 4 | 5;
-    };
-    headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large" | "Small";
-    showArrows?: boolean;
-  };
 }
 
 function ProductShelf({
   products,
   title,
-  description,
-  layout,
   isMobile,
 }: ReturnType<typeof loader>) {
   const id = useId();
@@ -37,43 +21,19 @@ function ProductShelf({
   if (!products || products.length === 0) {
     return null;
   }
-  const slideDesktop = {
-    1: "md:w-full",
-    2: "md:w-1/2",
-    3: "md:w-1/3",
-    4: "md:w-1/4",
-    5: "md:w-1/5",
-  };
 
-  const slideMobile = {
-    1: "w-full",
-    2: "w-1/2",
-    3: "w-1/3",
-    4: "w-1/4",
-    5: "w-1/5",
-  };
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
+    <div class="w-full max-w-[1364px] mx-auto flex flex-col gap-8 pt-16 pb-24">
+      <h2 class="text-dark font-bold text-lg font-lemon text-center">
+        {title}
+      </h2>
 
-      <div
-        id={id}
-        class={`grid ${
-          layout?.showArrows ? "grid-cols-[48px_1fr_48px]" : ""
-        } px-0 md:px-5 container`}
-      >
-        <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
+      <div id={id} class="relative mx-auto w-[95%]">
+        <Slider class="carousel gap-4 w-full">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class={`carousel-item ${
-                slideDesktop[layout?.numberOfSliders?.desktop ?? 3]
-              } ${slideMobile[layout?.numberOfSliders?.mobile ?? 1]}`}
+              class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/3))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
             >
               <ProductCard
                 product={product}
@@ -85,37 +45,23 @@ function ProductShelf({
           ))}
         </Slider>
 
-        {layout?.showArrows && (
-          <>
-            <div class="relative block z-10 col-start-1 row-start-3">
-              <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
-              </Slider.PrevButton>
-            </div>
-            <div class="relative block z-10 col-start-3 row-start-3">
-              <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
-              </Slider.NextButton>
-            </div>
-          </>
-        )}
-        <SliderJS rootId={id} />
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_item_list",
-            params: {
-              item_list_name: title,
-              items: products.map((product, index) =>
-                mapProductToAnalyticsItem({
-                  index,
-                  product,
-                  ...(useOffer(product.offers)),
-                })
-              ),
-            },
-          }}
-        />
+        <Slider.PrevButton class="hidden lg:flex absolute top-1/2 -left-8 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+          <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
+        </Slider.PrevButton>
+
+        <Slider.NextButton class="hidden lg:flex absolute top-1/2 -right-4 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+          <Icon size={24} id="ArrowRight" class="text-dark" />
+        </Slider.NextButton>
+
+        <div class="absolute top-[calc(100%+48px)] left-1/2 -translate-x-1/2 flex items-center gap-3">
+          {products.map((_, index) => (
+            <Slider.Dot index={index} class="group">
+              <div class="w-2 h-2 rounded-full bg-ice group-data-[active]:bg-dark transition-colors" />
+            </Slider.Dot>
+          ))}
+        </div>
+
+        <SliderJS rootId={id} dotIsPage />
       </div>
     </div>
   );

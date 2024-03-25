@@ -1,6 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { invoke } from "deco-sites/true-source/runtime.ts";
 import type { JSX } from "preact";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 export interface Form {
   placeholder?: string;
@@ -16,15 +17,11 @@ export interface Props {
     description?: string;
     form?: Form;
   };
-  layout?: {
-    tiled?: boolean;
-  };
 }
 
 function Newsletter(
-  { content, layout = {} }: Props,
+  { content }: Props,
 ) {
-  const { tiled = false } = layout;
   const loading = useSignal(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
@@ -44,61 +41,55 @@ function Newsletter(
 
   return (
     <div
-      class={`flex ${
-        tiled
-          ? "flex-col gap-4 lg:flex-row lg:w-full lg:justify-between"
-          : "flex-col gap-4"
-      }`}
+      class={"flex flex-col items-center gap-4 md:flex-row w-full md:justify-between"}
     >
-      <div class="flex flex-col lg:flex-row gap-4 lg:items-center bg-black">
-        <div class="flex flex-col gap-4">
-          {content?.title && (
-            <p
-              style={`line-height:normal;`}
-              class={tiled
-                ? "text-lg max-w-[206px] font-bold font-lemon-milk"
-                : "text-lg"}
-            >
-              {content?.title}
-            </p>
-          )}
-          {content?.description && <div>{content?.description}</div>}
-        </div>
+      <div class="flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-[326px] md:max-w-full">
+        {content?.title && (
+          <p
+            style={"line-height:normal;"}
+            class="text-lg w-full max-w-[206px] font-bold font-lemon-milk"
+          >
+            {content?.title}
+          </p>
+        )}
         <form
-          class="form-control"
+          class="form-control w-full "
           onSubmit={handleSubmit}
         >
-          <div class="flex flex-wrap gap-3 pr-0 h-[unset] ">
-            <div className="pr-0 pl-[32px] bg-white flex items-center border border-light-gray-200 rounded-[300px]">
+          <div class="relative w-full bg-white rounded-full max-w-[326px] md:max-w-[480px] border border-light-gray-200">
+            <input
+              name="email"
+              class="pr-0 pl-[32px] flex-1 text-base-content bg-transparent outline-none border-none w-full h-12"
+              placeholder={content?.form?.placeholder || "seu@email.com.br"}
+            />
+            <button
+              type="submit"
+              class="disabled:loading rounded-full uppercase px-6 py-3 bg-brand text-white text-[13px] h-12 font-lemon-milk flex items-center gap-[10px] absolute top-0 right-0"
+              disabled={loading}
+            >
+              {content?.form?.buttonText || "assinar"}
+              <Icon id="ArrowNarrowRight" size={16} class="text-white" />
+            </button>
+          </div>
+          {
+            /* <div class="flex flex-wrap gap-3 pr-0 h-[unset] w-full max-w-[151px] lg:max-w-[480px]">
+            <div className=" bg-white flex items-center border border-light-gray-200 rounded-[300px] w-full">
               <input
                 name="email"
-                class="flex-auto md:flex-none text-base-content bg-transparent outline-none border-none w-[151px] lg:w-[305px]"
+                class="pr-0 pl-[32px] flex-auto text-base-content bg-transparent outline-none border-none w-full"
                 placeholder={content?.form?.placeholder || "seu@email.com.br"}
               />
-              <button
+               <button
                 type="submit"
                 class="btn disabled:loading rounded-[300px] uppercase px-6 py-3 bg-brand text-white text-[13px] font-lemon-milk"
                 disabled={loading}
               >
                 {content?.form?.buttonText || "assinar"}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M2.66406 8H13.3307M13.3307 8L9.33073 4M13.3307 8L9.33073 12"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                <Icon id="ArrowNarrowRight" size={16} class="text-white" />
               </button>
             </div>
-          </div>
+          </div> */
+          }
         </form>
       </div>
     </div>

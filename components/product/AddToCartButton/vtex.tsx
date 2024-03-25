@@ -1,5 +1,5 @@
 import { useCart } from "apps/vtex/hooks/useCart.ts";
-import Button, { Props as BtnProps } from "./common.tsx";
+import Button, { type Props as BtnProps } from "./common.tsx";
 
 export interface Props extends Omit<BtnProps, "onAddItem"> {
   seller: string;

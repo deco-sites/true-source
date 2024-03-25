@@ -2,6 +2,7 @@ import Icon, {
   AvailableIcons,
 } from "deco-sites/true-source/components/ui/Icon.tsx";
 import ExtraLinks from "deco-sites/true-source/components/footer/ExtraLinks.tsx";
+import Collapsable from "deco-sites/true-source/components/ui/Collapsable.tsx";
 
 export type Item = {
   label?: string;
@@ -13,22 +14,17 @@ export type Section = {
   items: Item[];
 };
 
-export default function FooterItems(
-  { sections }: {
-    sections: Section[];
-  },
-) {
+export default function FooterItems({ sections }: { sections: Section[] }) {
   return (
     <>
       {sections.length > 0 && (
         <>
           {/* Tablet and Desktop view */}
           <ul
-            className={`hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] pb-[48px]`}
+            className={"hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]"}
           >
             {sections.map((section, index) => (
               <li
-                key={index}
                 className={index === 3
                   ? "font-bold font-lemon-milk text-[13px]"
                   : ""}
@@ -41,10 +37,10 @@ export default function FooterItems(
                   )}
                   <div className="flex gap-[32px]">
                     {/* Renderizando primeira coluna */}
-                    <ul className={`flex flex-col gap-5 text-sm`}>
-                      {section.items.slice(0, 7).map((item, idx) => (
-                        <li key={idx}>
-                          <a href={item.href} className="block">
+                    <ul className={"flex flex-col gap-5 text-sm leading-4"}>
+                      {section.items.slice(0, 7).map((item) => (
+                        <li>
+                          <a href={item.href} className="block hover:underline">
                             {item.label}
                           </a>
                         </li>
@@ -52,10 +48,13 @@ export default function FooterItems(
                     </ul>
                     {/* Renderizando segunda coluna se houver mais de 7 itens */}
                     {section.items.length > 7 && (
-                      <ul className={`flex flex-col gap-5 text-sm`}>
-                        {section.items.slice(7).map((item, idx) => (
-                          <li key={idx}>
-                            <a href={item.href} className="block">
+                      <ul className={"flex flex-col gap-5 text-sm leading-4"}>
+                        {section.items.slice(7).map((item) => (
+                          <li>
+                            <a
+                              href={item.href}
+                              className="block hover:underline"
+                            >
                               {item.label}
                             </a>
                           </li>
@@ -69,20 +68,20 @@ export default function FooterItems(
           </ul>
 
           {/* Mobile view */}
-          <ul className="flex flex-col md:hidden gap-4">
+          <ul className="flex flex-col md:hidden ">
             <li>
-              <div className="flex flex-col py-[40px]">
+              <div className="flex flex-col">
                 <span className="font-bold text-[13px] pb-[32px] font-lemon-milk">
                   {sections[0].label}
                 </span>
                 <div className="flex gap-[32px]">
                   {/* Renderizando primeira coluna */}
-                  <ul className={`flex flex-col gap-5 text-sm`}>
+                  <ul className={"flex flex-col gap-5 text-sm"}>
                     {sections[0].items.slice(
                       0,
                       Math.ceil(sections[0].items.length / 2),
-                    ).map((item, idx) => (
-                      <li key={idx}>
+                    ).map((item) => (
+                      <li>
                         <a href={item.href} className="block">
                           {item.label}
                         </a>
@@ -90,11 +89,11 @@ export default function FooterItems(
                     ))}
                   </ul>
                   {/* Renderizando segunda coluna */}
-                  <ul className={`flex flex-col gap-5 text-sm`}>
+                  <ul className={"flex flex-col gap-5 text-sm"}>
                     {sections[0].items.slice(
                       Math.ceil(sections[0].items.length / 2),
-                    ).map((item, idx) => (
-                      <li key={idx}>
+                    ).map((item) => (
+                      <li>
                         <a href={item.href} className="block">
                           {item.label}
                         </a>
@@ -104,46 +103,65 @@ export default function FooterItems(
                 </div>
               </div>
             </li>
-            <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
-              <input type="checkbox" />
-              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
-                {sections[1].label}
+
+            <Collapsable
+              class="w-full border-b border-light-gray"
+              title={
+                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between">
+                  <span>
+                    {sections[1].label}
+                  </span>
+                  <Icon
+                    id="ChevronDown"
+                    size={16}
+                    class="rotate-0 text-neutral-5 group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                  />
+                </div>
+              }
+            >
+              <div class="flex flex-col gap-5 pb-5">
+                {sections[1].items.map((item) => (
+                  <li>
+                    <a href={item.href} class={"flex text-sm"}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
               </div>
-              <div className="collapse-content px-0">
-                <ul>
-                  {sections[1].items.map((item, idx) => (
-                    <li class={`flex gap-5`} key={idx}>
-                      <a href={item.href} class={`flex mb-5 text-sm`}>
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            </Collapsable>
+
+            <Collapsable
+              class="w-full border-b border-light-gray "
+              title={
+                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between">
+                  <span>
+                    {sections[2].label}
+                  </span>
+                  <Icon
+                    id="ChevronDown"
+                    size={16}
+                    class="rotate-0 text-neutral-5 group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                  />
+                </div>
+              }
+            >
+              <div class="flex flex-col gap-5 pb-5">
+                {sections[2].items.map((item) => (
+                  <li>
+                    <a href={item.href} class={"flex text-sm"}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
               </div>
-            </div>
-            <div className="collapse collapse-arrow border-b border-light-gray rounded-none">
-              <input type="checkbox" />
-              <div className="collapse-title px-0 font-bold font-lemon-milk text-[13px]">
-                {sections[2].label}
-              </div>
-              <div className="collapse-content px-0">
-                <ul>
-                  {sections[2].items.map((item, idx) => (
-                    <li key={idx}>
-                      <a href={item.href} class={`flex mb-5 text-sm`}>
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            </Collapsable>
+
             <li>
               <div className="flex flex-col pt-[40px] pb-[32px]">
                 <div className="flex gap-[32px]">
-                  <ul className={`flex flex-col gap-5`}>
-                    {sections[3].items.map((item, idx) => (
-                      <li key={idx}>
+                  <ul className={"flex flex-col gap-[14px]"}>
+                    {sections[3].items.map((item) => (
+                      <li>
                         <a
                           href={item.href}
                           className="block text-sm font-bold font-lemon-milk"
