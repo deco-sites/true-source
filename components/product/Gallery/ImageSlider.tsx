@@ -1,6 +1,5 @@
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
-// import ProductImageZoom from "deco-sites/true-source/islands/ProductImageZoom.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { ProductDetailsPage } from "apps/commerce/types.ts";
@@ -29,9 +28,7 @@ export default function GallerySlider(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    // layout: { width, height },
   } = props;
-  // const aspectRatio = `${width} / ${height}`;
 
   return (
     <div id={id} class="flex flex-col w-full">
@@ -62,32 +59,6 @@ export default function GallerySlider(props: Props) {
             );
           })}
         </Slider>
-
-        {
-          /* <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-          disabled
-        >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-        </Slider.PrevButton>
-
-        <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-          disabled={images.length < 2}
-        >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
-        </Slider.NextButton> */
-        }
-
-        {
-          /* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-          <ProductImageZoom
-            images={images}
-            width={664}
-            height={664}
-          />
-        </div> */
-        }
       </div>
 
       {/* Dots */}
