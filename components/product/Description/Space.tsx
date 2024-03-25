@@ -1,9 +1,11 @@
 interface Props {
   size?: "small" | "medium" | "large" | "xlarge" | "xxlarge";
+  backgroundColor?: "white" | "gray";
 }
 
 export default function Space({
   size = "small",
+  backgroundColor = "white",
 }: Props) {
   const sizes = {
     small: "1rem",
@@ -13,5 +15,15 @@ export default function Space({
     xxlarge: "6rem",
   };
 
-  return <div style={{ height: sizes[size] }} />;
+  const backgroundColors = {
+    white: "bg-white",
+    gray: "bg-ice",
+  };
+
+  return (
+    <div
+      class={`${backgroundColors[backgroundColor]}`}
+      style={{ height: sizes[size] }}
+    />
+  );
 }

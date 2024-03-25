@@ -104,7 +104,7 @@ function Navbar(
           <>
             <div class="relative bg-white w-full group-data-[micro-header='true']/header:rounded-b-[20px] 
           group-data-[micro-header='true']/header:shadow-md px-2 xl:px-0">
-              <div class="hidden md:flex gap-1 xl:gap-[32px] items-center pt-[24.5px] mb-[18.5px] group-data-[micro-header='true']/header:py-2 w-full max-w-[1360px] mx-auto">
+              <div class="hidden md:flex gap-1 xl:gap-[32px] items-center pt-[24.5px] group-data-[micro-header='true']/header:py-2 w-full max-w-[1360px] mx-auto">
                 <div className="flex-none">
                   <a href="/" aria-label="Store logo" className="block">
                     <Image
@@ -167,7 +167,7 @@ function Navbar(
                 </div>
               </div>
 
-              <div class="hidden md:block group-data-[micro-header='true']/header:hidden">
+              <div class="hidden md:block group-data-[micro-header='true']/header:hidden mt-[18.5px]">
                 <ul class="w-full flex justify-between items-center max-w-[1360px] mx-auto px-4">
                   {items &&
                     items.map((item) => (

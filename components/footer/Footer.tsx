@@ -1,5 +1,3 @@
-import BackToTop from "deco-sites/true-source/components/footer/BackToTop.tsx";
-import ColorClasses from "deco-sites/true-source/components/footer/ColorClasses.tsx";
 import Divider from "deco-sites/true-source/components/footer/Divider.tsx";
 import FooterItems from "deco-sites/true-source/components/footer/FooterItems.tsx";
 import Logo from "deco-sites/true-source/components/footer/Logo.tsx";
@@ -8,8 +6,9 @@ import PaymentMethods from "deco-sites/true-source/components/footer/PaymentMeth
 import RegionSelector from "deco-sites/true-source/components/footer/RegionSelector.tsx";
 import Social from "deco-sites/true-source/components/footer/Social.tsx";
 import Newsletter from "deco-sites/true-source/islands/Newsletter.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import TextSEO from "deco-sites/true-source/components/footer/TextSEO.tsx.tsx";
 
 export type Item = {
   label: string;
@@ -78,153 +77,61 @@ export interface Layout {
 }
 
 export interface Props {
-  logo?: {
-    image: ImageWidget;
-    description?: string;
-  };
+  /** @title Logo */
+  logo: ImageWidget;
+  /** @title Texto SEO */
+  seoText: HTMLWidget;
+  /** @title Newsletter */
   newsletter?: {
     title?: string;
-    /** @format textarea */
-    description?: string;
     form?: NewsletterForm;
   };
-  sections?: Section[];
-  extraLinks?: Item[];
-  social?: {
-    title?: string;
-    items: SocialItem[];
-  };
+  /** @title Redes sociais */
+  social?: SocialItem[];
+  /** @title Seções */
+  sections: Section[];
+  /** @title Métodos de pagamento */
   payments?: {
     title?: string;
     items: PaymentItem[];
   };
-  mobileApps?: MobileApps;
-  regionOptions?: RegionOptions;
-
-  backToTheTop?: {
-    text?: string;
-  };
-  layout?: Layout;
+  /** @title Texto de direitos reservados */
+  copyrightText: string;
 }
 
 function Footer({
   logo,
-  newsletter = {
-    title: "Newsletter",
-    description: "",
-    form: { placeholder: "", buttonText: "", helpText: "" },
-  },
-  sections = [{
-    "label": "Sobre",
-    "items": [
-      {
-        "href": "/quem-somos",
-        "label": "Quem somos",
-      },
-      {
-        "href": "/termos-de-uso",
-        "label": "Termos de uso",
-      },
-      {
-        "href": "/trabalhe-conosco",
-        "label": "Trabalhe conosco",
-      },
-    ],
-  }, {
-    "label": "Atendimento",
-    "items": [
-      {
-        "href": "/centraldeatendimento",
-        "label": "Central de atendimento",
-      },
-      {
-        "href": "/whatsapp",
-        "label": "Fale conosco pelo WhatsApp",
-      },
-      {
-        "href": "/trocaedevolucao",
-        "label": "Troca e devolução",
-      },
-    ],
-  }],
-  social = {
-    title: "Redes sociais",
-    items: [{ label: "Instagram", link: "/" }, { label: "Tiktok", link: "/" }],
-  },
-  payments = {
-    title: "Formas de pagamento",
-    items: [{ label: "Visa" }, { label: "Mastercard" }, { label: "Dinners" }, {
-      label: "Boleto",
-    }, { label: "Pix" }],
-  },
-  mobileApps = { apple: "/", android: "/" },
-  regionOptions = { currency: [], language: [] },
-  backToTheTop,
-  layout = {
-    backgroundColor: "Primary",
-    variation: "Variation 1",
-    hide: {
-      logo: false,
-      newsletter: false,
-      sectionLinks: false,
-      socialLinks: false,
-      paymentMethods: false,
-      mobileApps: false,
-      regionOptions: false,
-      backToTheTop: false,
-    },
-  },
+  newsletter,
+  social,
+  sections,
+  payments,
+  seoText,
+  copyrightText,
 }: Props) {
-  const _logo = layout?.hide?.logo ? <></> : <Logo logo={logo} />;
-  const _newsletter = layout?.hide?.newsletter ? <></> : (
-    <Newsletter
-      content={newsletter}
-      layout={{
-        tiled: layout?.variation == "Variation 4" ||
-          layout?.variation == "Variation 5",
-      }}
-    />
-  );
-
-  const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
-    <FooterItems
-      sections={sections}
-    />
-  );
-
-  const _social = layout?.hide?.socialLinks
-    ? <></>
-    : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
-  const _payments = layout?.hide?.paymentMethods
-    ? <></>
-    : <PaymentMethods content={payments} />;
-  const _apps = layout?.hide?.mobileApps
-    ? <></>
-    : <MobileApps content={mobileApps} />;
-  const _region = layout?.hide?.regionOptions
-    ? <></>
-    : <RegionSelector content={regionOptions} />;
-
   return (
     <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 bg-ice rounded-t-[35px]`}
+      class={`w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice rounded-t-[35px]`}
     >
       <div class="lg:container px-4 lg:mx-auto">
-        {layout?.variation == "Variation 4" && (
-          <div class="flex flex-col items-center px-4">
-            <div class="flex flex-col lg:flex-row justify-between w-full lg:pb-6 lg:pt-8 lg:px-[72px]">
-              {_newsletter}
-              {_social}
-            </div>
-            <Divider />
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full lg:py-10">
-              {_sectionLinks}
-            </div>
-            <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]">
-              {_payments}
-            </div>
+        <div class="flex flex-col items-center px-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full max-w-[326px] md:max-w-full lg:pb-6 lg:px-[72px] gap-x-4">
+            {newsletter && <Newsletter content={newsletter} />}
+            <Social content={social} />
           </div>
-        )}
+          <Divider />
+          <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full pt-8 md:py-10">
+            <FooterItems sections={sections} />
+          </div>
+          <Divider />
+          <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] py-8 md:py-10">
+            <PaymentMethods content={payments} />
+          </div>
+          <TextSEO
+            copyrightText={copyrightText}
+            logo={logo}
+            seoText={seoText}
+          />
+        </div>
       </div>
     </footer>
   );

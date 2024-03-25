@@ -2,9 +2,9 @@ import { useEffect } from "preact/hooks";
 
 export interface Props {
   rootId: string;
-  scroll?: "smooth" | "auto";
   interval?: number;
   infinite?: boolean;
+  dotIsPage?: boolean;
 }
 
 const ATTRIBUTES = {
@@ -41,26 +41,23 @@ const intersectionX = (element: DOMRect, container: DOMRect): number => {
   return element.width;
 };
 
-// as any are ok in typeguard functions
-const isHTMLElement = (x: Element): x is HTMLElement =>
-  // deno-lint-ignore no-explicit-any
-  typeof (x as any).offsetLeft === "number";
-
-const setup = ({ rootId, scroll, interval, infinite }: Props) => {
+const setup = ({ rootId, interval, infinite, dotIsPage }: Props) => {
   const root = document.getElementById(rootId);
-  const slider = root?.querySelector(`[${ATTRIBUTES["data-slider"]}]`);
-  const items = root?.querySelectorAll(`[${ATTRIBUTES["data-slider-item"]}]`);
-  const prev = root?.querySelector(`[${ATTRIBUTES['data-slide="prev"']}]`);
-  const next = root?.querySelector(`[${ATTRIBUTES['data-slide="next"']}]`);
-  const dots = root?.querySelectorAll(`[${ATTRIBUTES["data-dot"]}]`);
 
-  if (!root || !slider || !items || items.length === 0) {
-    console.warn(
-      "Missing necessary slider attributes. It will not work as intended. Necessary elements:",
-      { root, slider, items, rootId },
-    );
+  if (!root) throw new Error(`Element with id ${rootId} not found`);
 
-    return;
+  const slider = root.querySelector(`[${ATTRIBUTES["data-slider"]}]`);
+  const items = root.querySelectorAll<HTMLElement>(
+    `[${ATTRIBUTES["data-slider-item"]}]`,
+  );
+  const prev = root.querySelector(`[${ATTRIBUTES['data-slide="prev"']}]`);
+  const next = root.querySelector(`[${ATTRIBUTES['data-slide="next"']}]`);
+  const dots = root.querySelectorAll<HTMLElement>(
+    `[${ATTRIBUTES["data-dot"]}]`,
+  );
+
+  if (!slider) {
+    throw new Error(`Element with ${ATTRIBUTES["data-slider"]} not found`);
   }
 
   const getElementsInsideContainer = () => {
@@ -87,17 +84,9 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
   const goToItem = (index: number) => {
     const item = items.item(index);
 
-    if (!isHTMLElement(item)) {
-      console.warn(
-        `Element at index ${index} is not an html element. Skipping carousel`,
-      );
-
-      return;
-    }
-
     slider.scrollTo({
       top: 0,
-      behavior: scroll,
+      behavior: "smooth",
       left: item.offsetLeft - root.offsetLeft,
     });
   };
@@ -110,7 +99,7 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     goToItem(
       isShowingFirst
         ? items.length - 1
-        : Math.max(-1, indices.at(-1)! - itemsPerPage),
+        : Math.max(-1, indices.at(-1) as number - itemsPerPage),
     );
   };
 
@@ -120,14 +109,13 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
     goToItem(
       Math.min(
-        isShowingLast ? 0 : indices.at(-1)! + indices.length,
+        isShowingLast ? 0 : indices.at(-1) as number + indices.length,
         items.length - 1,
       ),
     );
   };
 
   const visibleSlides = getElementsInsideContainer();
-
   const removeAllDots = items.length <= visibleSlides.length;
 
   const dotsIndexes = [] as number[];
@@ -135,25 +123,28 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     dotsIndexes.push(i);
   }
 
-  for (const dot of [...dots ?? []]) {
-    const index = Number(dot.getAttribute("data-dot")) || 0;
+  // Remove dots
+  if (dotIsPage) {
+    for (const dot of [...dots ?? []]) {
+      const index = Number(dot.getAttribute("data-dot"));
 
-    if (removeAllDots || !dotsIndexes.includes(index)) {
-      dot.remove();
+      if (removeAllDots || !dotsIndexes.includes(index)) {
+        dot.remove();
+      }
     }
   }
 
   const observer = new IntersectionObserver(
-    (elements) =>
-      elements.forEach((item) => {
-        const index = Number(item.target.getAttribute("data-slider-item")) || 0;
+    (elements) => {
+      for (const item of elements) {
+        const index = Number(item.target.getAttribute("data-slider-item"));
         const dot = dots?.item(index);
 
-        if (dotsIndexes.includes(index)) {
+        if (dotsIndexes.includes(index) && dot) {
           if (item.isIntersecting) {
-            dot?.setAttribute("disabled", "");
+            dot.setAttribute("data-active", "");
           } else {
-            dot?.removeAttribute("disabled");
+            dot.removeAttribute("data-active");
           }
         }
 
@@ -173,11 +164,14 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
             }
           }
         }
-      }),
+      }
+    },
     { threshold: THRESHOLD, root: slider },
   );
 
-  items.forEach((item) => observer.observe(item));
+  for (const item of items) {
+    observer.observe(item);
+  }
 
   for (let it = 0; it < (dots?.length ?? 0); it++) {
     dots?.item(it).addEventListener("click", () => goToItem(it));
@@ -186,37 +180,13 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
   prev?.addEventListener("click", onClickPrev);
   next?.addEventListener("click", onClickNext);
 
-  const timeout = interval && setInterval(onClickNext, interval);
-
-  // Unregister callbacks
-  return () => {
-    for (let it = 0; it < (dots?.length ?? 0); it++) {
-      dots?.item(it).removeEventListener("click", () => goToItem(it));
-    }
-
-    prev?.removeEventListener("click", onClickPrev);
-    next?.removeEventListener("click", onClickNext);
-
-    observer.disconnect();
-
-    clearInterval(timeout);
-  };
+  interval && setInterval(onClickNext, interval);
 };
 
-function Slider({
-  rootId,
-  scroll = "smooth",
-  interval,
-  infinite = false,
-}: Props) {
-  useEffect(() => setup({ rootId, scroll, interval, infinite }), [
-    rootId,
-    scroll,
-    interval,
-    infinite,
-  ]);
+function Slider(props: Props) {
+  useEffect(() => setup(props), []);
 
-  return <div data-slider-controller-js />;
+  return null;
 }
 
 export default Slider;

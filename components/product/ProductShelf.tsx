@@ -1,5 +1,5 @@
 import type { Product } from "apps/commerce/types.ts";
-import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
@@ -56,12 +56,12 @@ function ProductShelf({
         <div class="absolute top-[calc(100%+48px)] left-1/2 -translate-x-1/2 flex items-center gap-3">
           {products.map((_, index) => (
             <Slider.Dot index={index} class="group">
-              <div class="w-2 h-2 rounded-full bg-ice group-disabled:bg-dark transition-colors" />
+              <div class="w-2 h-2 rounded-full bg-ice group-data-[active]:bg-dark transition-colors" />
             </Slider.Dot>
           ))}
         </div>
 
-        <SliderJS rootId={id} />
+        <SliderJS rootId={id} dotIsPage />
       </div>
     </div>
   );
