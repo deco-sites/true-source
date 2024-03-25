@@ -41,7 +41,7 @@ const MyAccount = () => {
         <Icon id="Login" size={24} />
         {user.value?.email
           ? (
-            <p className="text-xs w-24 text-ellipsis text-left hidden">
+            <p className="text-xs w-24 text-ellipsis text-left overflow-hidden">
               Olá,<br />
               {user.value?.givenName
                 ? <b>{user.value?.givenName}</b>
