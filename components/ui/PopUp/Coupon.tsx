@@ -21,74 +21,88 @@ interface Props {
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
   const cookies = getCookies(req.headers);
-  const timestamp = parseInt(cookies["lastCouponPopup"] ?? "0");
-  // Indicates whether the coupon is expired or not.
-  const isExpired = Date.now() - timestamp > 1000 * 60 * 60 * 24;
+  const alreadySeenPopup = cookies["hasSeenPopup"] === "true";
 
-  return { ...props, isExpired };
+  return { ...props, alreadySeenPopup };
 }
 
 export default function Coupon(
-  { discountPercentage, couponCode, isExpired }: ReturnType<typeof loader>,
+  { discountPercentage, couponCode, alreadySeenPopup }: ReturnType<
+    typeof loader
+  >,
 ) {
   const { user } = useUser();
-  const { addCouponsToCart, cart } = useCart();
-  const displayPopup = useSignal(true);
+  const { addCouponsToCart } = useCart();
+  const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
   const loadingFormSubmit = useSignal(false);
 
-  // const fetchUserOrdersByEmail = useCallback(async () => {
-  //   if (!user.value || !user.value.email) return;
+  const fetchUserOrdersByEmail = useCallback(async () => {
+    if (!user.value || !user.value.email) return;
 
-  //   const email = user.value.email;
+    const email = user.value.email;
 
-  //   return await invoke.vtex.loaders.orders({
-  //     q: `-%20Client%20email:%20${email}`,
-  //   });
-  // }, [user.value?.email]);
+    if (
+      !("orders" in invoke.vtex.loaders) ||
+      typeof invoke.vtex.loaders.orders !== "function"
+    ) {
+      return console.error("Orders loader not available");
+    }
 
+    return await invoke.vtex.loaders.orders({
+      q: `- Client email: ${email}`,
+    });
+  }, [user.value?.email]);
+
+  /**
+   * Sets the popup as seen by setting a cookie with an expiration date.
+   */
   const setPopupAsSeen = () => {
     if (!globalThis.document) {
       return;
     }
 
-    globalThis.document.cookie = `lastCouponPopup=${Date.now()}`;
+    globalThis.document.cookie = `hasSeenPopup=true;${
+      "expires=" + new Date(Date.now() + 1000 * 60 * 60 * 24).toUTCString()
+    };path=/`;
   };
 
   useSignalEffect(() => {
-    console.log({ cart: cart.value, user: user.value, isExpired });
+    if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
+      return;
+    }
+
+    if (!user.value && !displayPopup.peek()) {
+      displayPopup.value = true;
+      return;
+    }
 
     /**
-     * Fetches user orders by email and displays a pop-up if the user has at least one order.
+     * Fetches user orders by email and displays a popup if the user has never made a purchase.
      */
-    if (
-      user.value && isExpired && displayPopup.value === false &&
-      finishedForm.value === false
-    ) {
-      // const fetch = async () => {
-      //   try {
-      //     const orders = await fetchUserOrdersByEmail();
-      //     console.log({ orders });
+    const fetch = async () => {
+      try {
+        const orders = await fetchUserOrdersByEmail();
 
-      //     if (!orders) {
-      //       return;
-      //     }
+        if (!orders) {
+          displayPopup.value = true;
+          return;
+        }
 
-      //     const hasAtLeastOneOrder = orders.list.length > 0;
+        const neverBoughtBefore = orders.length === 0;
 
-      //     if (hasAtLeastOneOrder) {
-      //       displayPopup.value = true;
-      //     }
-      //   } catch (err) {
-      //     console.error(err);
-      //     displayPopup.value = false;
-      //   } finally {
-      //     setPopupAsSeen();
-      //   }
-      // };
+        if (neverBoughtBefore) {
+          displayPopup.value = true;
+        }
+      } catch (err) {
+        console.error(err);
+        displayPopup.value = false;
+      } finally {
+        setPopupAsSeen();
+      }
+    };
 
-      // fetch();
-    }
+    fetch();
   });
 
   const handleFormSubmit = async (e: TargetedEvent<HTMLFormElement>) => {
@@ -97,13 +111,13 @@ export default function Coupon(
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log({ data });
 
     try {
-      // await invoke.vtex.actions.masterdata.createDocument({
-      //   acronym: "CL",
-      //   data,
-      // });
+      await invoke.vtex.actions.masterdata.createDocument({
+        acronym: "CL",
+        data,
+        isPrivateEntity: true,
+      });
 
       await addCouponsToCart({
         text: couponCode,
