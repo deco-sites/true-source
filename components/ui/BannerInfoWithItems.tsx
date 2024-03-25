@@ -183,7 +183,7 @@ function BannerInfoWithItems(
         </div>
         <div class="flex flex-col md:flex-row items-center gap-x-4">
           {items?.map((item) => (
-            <div class="grid grid-cols-[auto_1fr] md:grid-cols-1 md:grid-rows-[auto_1fr] border-b last:border-b-0 md:last:border-b md:border border-ice md:rounded-[20px] py-6 md:px-6 text-sm md:text-[16px] text-ice leading-[19px] font-medium md:font-bold gap-6 w-full md:w-[185px] min-h-fit">
+            <div class="grid grid-cols-[auto_1fr] md:grid-cols-1 md:grid-rows-[auto_1fr] border-b last:border-b-0 md:last:border-b md:border border-ice md:rounded-[20px] py-6 md:px-6 text-sm md:text-[16px] text-ice leading-[19px] font-medium md:font-bold gap-6 w-full md:w-[185px] md:h-[185px]">
               <Icon id="CheckCircle" size={24} class="text-red md:text-ice" />
               <span>
                 {item}

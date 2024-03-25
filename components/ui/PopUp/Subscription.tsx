@@ -1,9 +1,14 @@
-import { useSignal } from "@preact/signals";
+import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
+import { useUser } from "apps/vtex/hooks/useUser.ts";
+import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import type { JSX } from "preact";
 import type { TargetedEvent } from "preact/compat";
+import { useCallback } from "preact/hooks";
+import { getCookies } from "std/http/cookie.ts";
 
 interface Props {
   /**
@@ -12,17 +17,114 @@ interface Props {
   topText: HTMLWidget;
 }
 
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  const cookies = getCookies(req.headers);
+  const alreadySeenPopup = cookies.hasSeenPopup === "true";
+
+  return { ...props, alreadySeenPopup };
+}
+
 export default function Coupon(
-  { topText }: Props,
+  { topText, alreadySeenPopup }: ReturnType<typeof loader>,
 ) {
-  const displayPopup = useSignal(true);
+  const { user } = useUser();
+  const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
   const loadingFormSubmit = useSignal(false);
 
+  const fetchUserOrdersByEmail = useCallback(async () => {
+    if (!user.value || !user.value.email) return;
+
+    const email = user.value.email;
+
+    return await invoke.vtex.loaders.orders({
+      clientEmail: email,
+    });
+  }, [user.value?.email]);
+
+  /**
+   * Sets the popup as seen by setting a cookie with an expiration date.
+   */
+  const setPopupAsSeen = () => {
+    if (!globalThis.document) {
+      return;
+    }
+
+    globalThis.document.cookie = `hasSeenPopup=true;${`expires=${
+      new Date(Date.now() + 1000 * 60 * 60 * 24).toUTCString()
+    }`};path=/`;
+  };
+
+  useSignalEffect(() => {
+    if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
+      return;
+    }
+
+    if (!user.value && !displayPopup.peek()) {
+      displayPopup.value = true;
+      return;
+    }
+
+    /**
+     * Fetches user orders by email and displays a popup if the user has never made a purchase.
+     */
+    const fetch = async () => {
+      try {
+        const data = await fetchUserOrdersByEmail();
+
+        console.log(data);
+
+        if (!data || !data.list) {
+          displayPopup.value = true;
+          return;
+        }
+
+        const neverBoughtBefore = data.list.length === 0;
+
+        if (neverBoughtBefore) {
+          displayPopup.value = true;
+        }
+
+        // globalThis.window.location.href = "/assinaturas";
+      } catch (err) {
+        console.error(err);
+        displayPopup.value = false;
+      } finally {
+        setPopupAsSeen();
+      }
+    };
+
+    fetch();
+  });
+
   const handleFormSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
+    loadingFormSubmit.value = true;
 
-    globalThis.window.location.href = "/assinaturas";
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(data);
+
+    try {
+      // await invoke.vtex.actions.masterdata.createDocument({
+      //   acronym: "CL",
+      //   data,
+      //   isPrivateEntity: true,
+      // });
+
+      finishedForm.value = true;
+      setPopupAsSeen();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      loadingFormSubmit.value = false;
+    }
+  };
+
+  const handlePopupClose = () => {
+    displayPopup.value = false;
+    setPopupAsSeen();
   };
 
   return (
@@ -159,7 +261,7 @@ export default function Coupon(
               Estou ciente que poderei receber comunicações.
             </label>
             <button
-              type="button"
+              type="submit"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8E8E8D, #8E8E8D, #e4003f, #E9530E)",

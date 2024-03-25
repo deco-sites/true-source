@@ -31,7 +31,10 @@ function DescriptionWithCta(
     >
       <div
         class={`flex flex-col items-center w-full py-[80px] gap-8 md:gap-10 
-      ${hasContainer && "max-w-[1440px] mx-auto rounded-[20px] bg-white "}
+      ${
+          hasContainer &&
+          "max-w-[1440px] mx-auto rounded-[20px] bg-white px-4 md:px-0"
+        }
       `}
       >
         {hasIcon && (

@@ -5,6 +5,7 @@ export interface Props {
   interval?: number;
   infinite?: boolean;
   dotIsPage?: boolean;
+  startFrom?: number;
 }
 
 const ATTRIBUTES = {
@@ -41,7 +42,7 @@ const intersectionX = (element: DOMRect, container: DOMRect): number => {
   return element.width;
 };
 
-const setup = ({ rootId, interval, infinite, dotIsPage }: Props) => {
+const setup = ({ rootId, interval, infinite, dotIsPage, startFrom }: Props) => {
   const root = document.getElementById(rootId);
 
   if (!root) throw new Error(`Element with id ${rootId} not found`);
@@ -181,6 +182,8 @@ const setup = ({ rootId, interval, infinite, dotIsPage }: Props) => {
   next?.addEventListener("click", onClickNext);
 
   interval && setInterval(onClickNext, interval);
+
+  startFrom && goToItem(startFrom);
 };
 
 function Slider(props: Props) {
