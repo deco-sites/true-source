@@ -50,7 +50,7 @@ export default function Coupon(
     }
 
     return await invoke.vtex.loaders.orders({
-      q: `- Client email: ${email}`,
+      clientEmail: email,
     });
   }, [user.value?.email]);
 
@@ -82,14 +82,14 @@ export default function Coupon(
      */
     const fetch = async () => {
       try {
-        const orders = await fetchUserOrdersByEmail();
+        const data = await fetchUserOrdersByEmail();
 
-        if (!orders) {
+        if (!data || !data.list) {
           displayPopup.value = true;
           return;
         }
 
-        const neverBoughtBefore = orders.length === 0;
+        const neverBoughtBefore = data.list.length === 0;
 
         if (neverBoughtBefore) {
           displayPopup.value = true;
