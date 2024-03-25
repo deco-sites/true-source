@@ -7,17 +7,45 @@ interface Image {
 }
 
 export interface Props {
-  /** @default 1 */
+  /**
+   * @title Tipo
+   * @default 1
+   */
   type: "1" | "full";
+  /**
+   * @title Título
+   */
   title?: HTMLWidget;
+  /**
+   * @title Cor do texto
+   * @format color-input
+   */
   color?: string;
+  /**
+   * @title Imagem
+   */
   image?: Image;
-  /** @default left */
+  /**
+   * @title Alinhamento do texto
+   * @default left
+   */
   textAlign?: "left" | "right";
-  /** @default false */
+  /**
+   * @title Descrição
+   * @default false
+   */
   description: HTMLWidget;
-  /** @default #F0F0EE */
-  backgroundColor: string;
+  /**
+   * @title Cor de fundo
+   * @default #F0F0EE
+   * @format color-input
+   */
+  backgroundColor?: string;
+  /**
+   * @title Arredondado
+   * @default true
+   */
+  rounded?: boolean;
 }
 
 export default function InfoCardHorizontal({
@@ -32,14 +60,16 @@ export default function InfoCardHorizontal({
   backgroundColor = "#F0F0EE",
   description =
     "Os suplementos ajudam a melhorar a resistência física, auxiliam no ganho de massa magra e também na recuperação muscular, além de diversos outros benefícios para você que busca hipertrofia ou definição muscular.\n\nProduzidos com substâncias naturais, nossos produtos são desenvolvidos por especialistas de peso e formulados com produtos altamente eficientes e, claro, muito saborosos. Para te ajudar a alcançar seus objetivos de treino, a True Source dispõe de tudo o que você precisa em proteínas, aminoácidos, termogênicos e vitaminas e minerais. Venha com a gente e conheça um pouco mais de nossos suplementos!",
+  rounded = true,
 }: Props) {
   if (type === "full") {
     return (
-      <div className="md:container">
+      <div class="md:container">
         <div
           class={`flex ${
             textAlign === "right" ? "justify-end" : "justify-start"
-          } lg:items-center relative z-1 rounded-[35px] overflow-hidden min-h-[580px]`}
+          } lg:items-center relative z-1 overflow-hidden min-h-[580px]` +
+            (rounded ? " rounded-[35px]" : "")}
         >
           <picture>
             <source media="(min-width:1024px)" srcset={image.desktop} />
@@ -87,9 +117,10 @@ export default function InfoCardHorizontal({
     : cardTextLeft;
 
   return (
-    <div className="md:container">
+    <div class="md:container">
       <div
-        class={`flex ${alignment} items-stretch p-6 md:p-12 rounded-[35px]`}
+        class={`flex ${alignment} items-stretch p-6 md:p-12` +
+          (rounded ? " rounded-[35px]" : "")}
         style={{ backgroundColor }}
       >
         <div class="w-full md:w-1/2 flex items-center justify-center">
