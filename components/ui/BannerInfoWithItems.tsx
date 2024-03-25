@@ -87,7 +87,7 @@ function BannerInfoWithItems(
         class={"absolute top-0 w-full max-w-[1440px] mx-auto h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[182px]"}
       >
         <div
-          class={"flex flex-col items-start"}
+          class={"flex flex-col items-start w-full max-w-[441px]"}
         >
           {content?.tag &&
             (
