@@ -105,7 +105,7 @@ function Footer({
   copyrightText,
 }: Props) {
   return (
-    <footer class="w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice rounded-t-[35px]">
+    <footer class="w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice">
       <div class="lg:container px-4 lg:mx-auto">
         <div class="flex flex-col items-center px-4">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full max-w-[326px] md:max-w-full lg:pb-6 lg:px-[72px] gap-x-4">
