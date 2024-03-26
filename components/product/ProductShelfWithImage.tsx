@@ -26,6 +26,11 @@ export interface Props {
   products: Product[] | null;
   desktop: ImageProps;
   mobile: ImageProps;
+  /**
+   * @title Banner URL
+   * @description URL do banner
+   */
+  bannerUrl?: string;
 }
 
 function ProductShelf({
@@ -33,6 +38,7 @@ function ProductShelf({
   isMobile,
   desktop,
   mobile,
+  bannerUrl,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -40,12 +46,18 @@ function ProductShelf({
     return null;
   }
 
+  const Wrapper = bannerUrl ? "a" : "div";
+  const props = bannerUrl ? { href: bannerUrl } : {};
+
   return (
     <div
       class="flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-4 pt-16 pb-24"
       id={id}
     >
-      <div class="relative rounded-[20px] overflow-hidden -translate-y-4 max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]">
+      <Wrapper
+        {...props}
+        class="block relative rounded-[20px] overflow-hidden -translate-y-4 max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]"
+      >
         <Image
           src={isMobile ? mobile.src : desktop.src}
           alt={isMobile ? mobile.title : desktop.title}
@@ -56,7 +68,7 @@ function ProductShelf({
         <span class="text-white font-bold font-lemon text-lg leading-6 max-w-[200px] absolute bottom-10 left-10">
           {isMobile ? mobile.title : desktop.title}
         </span>
-      </div>
+      </Wrapper>
 
       <div class="w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px] flex flex-col gap-8">
         <div class="relative mx-auto w-[95%]">
