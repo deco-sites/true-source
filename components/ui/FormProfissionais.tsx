@@ -206,7 +206,7 @@ function Select({
   const hiddenSelect = useRef<HTMLSelectElement>(null);
 
   effect(() => {
-    console.log(selectedValue.value, 'aaaaaaaaaaaaa');
+    console.log(selectedValue.value, "aaaaaaaaaaaaa");
   });
 
   return (
@@ -510,7 +510,7 @@ export default function (
   }
 
   return (
-    <div class="py-36 bg-ice">
+    <div class="py-36 bg-ice rounded-[40px]">
       <div class="max-w-[848px] mx-auto">
         <div
           dangerouslySetInnerHTML={{ __html: topText }}
