@@ -78,7 +78,7 @@ function BannerInfo(
   const height = isMobile ? mobileHeight : desktopHeight;
 
   return (
-    <div class="w-full max-w-[1440px] mx-auto relative">
+    <div class="w-full relative">
       <Picture preload={preload}>
         <Source
           media="(max-width: 767px)"
@@ -106,7 +106,7 @@ function BannerInfo(
       </Picture>
 
       <div
-        class={`absolute top-0 w-full h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[126px]
+        class={`absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[152px]
         ${
           textPosition
             ? textPositionMapping[textPosition]
@@ -117,7 +117,7 @@ function BannerInfo(
           class={`flex flex-col w-full 
         ${
             textPosition === "center"
-              ? "items-center max-w-[50%]"
+              ? "items-center md:max-w-[50%]"
               : "items-start max-w-[390px]"
           }`}
         >

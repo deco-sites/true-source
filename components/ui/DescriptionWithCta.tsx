@@ -46,13 +46,13 @@ function DescriptionWithCta(
         {title && (
           <RenderHTML
             html={title}
-            class="text-dark font-bold text-[16px] md:text-[40px] font-lemon-milk uppercase leading-[21px] md:leading-[42px] [&_strong]:text-red text-center"
+            class="text-dark font-bold text-[16px] md:text-[40px] font-lemon-milk uppercase leading-[21px] md:leading-[42px] [&_strong]:text-red text-center max-w-[580px]"
           />
         )}
         {description && (
           <RenderHTML
             html={description}
-            class="text-dark font-medium text-center [&_a]:hover:underline [&_a]:text-red"
+            class="text-dark font-medium text-center [&_a]:hover:underline [&_a]:text-red max-w-[580px]"
           />
         )}
         {cta && (
@@ -60,7 +60,7 @@ function DescriptionWithCta(
             href={cta.url}
             class="flex items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
           bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% max-w-fit group hover:bg-white border 
-          border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px]"
+          border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px] whitespace-nowrap"
           >
             {cta.text}
             <Icon
