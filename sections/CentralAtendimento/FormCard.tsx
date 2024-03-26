@@ -7,7 +7,7 @@ export default function FormCard({ titleCard, buttonCard }: FormCardProps) {
   return (
     <>
       <div class="flex lg:h-[637px] w-full flex-col justify-start gap-6 rounded-xl bg-ice p-6 align-top">
-        <h2 class="font-lemon-milk justify-start text-[16px] font-bold text-[#3C3C3B]">
+        <h2 class="font-lemon justify-start text-[16px] font-bold text-[#3C3C3B]">
           {titleCard}
         </h2>
 

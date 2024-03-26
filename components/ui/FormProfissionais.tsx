@@ -1,15 +1,15 @@
-import { effect, useSignal } from "@preact/signals";
+import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
+import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 import useAccordion from "deco-sites/true-source/components/ui/useAccordion.tsx";
+import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import useCEP from "deco-sites/true-source/sdk/useCEP.ts";
 import type { JSX } from "preact";
 import { useRef } from "preact/hooks";
 import { debounce } from "std/async/debounce.ts";
-import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 
 interface Specialty {
   label: string;
@@ -192,90 +192,98 @@ function Select({
   items,
   name,
   class: class_,
-  defaultValue,
+  value,
+  onChange,
 }: {
   placeholder: string;
   items: string[];
   name: string;
   class?: string;
-  defaultValue?: string;
+  value: string;
+  onChange: (value: string) => void;
 }) {
   const { Collapsable, Content, Trigger, ContentWrapper, close } =
     useCollapsable();
-  const selectedValue = useSignal(defaultValue ?? "");
   const hiddenSelect = useRef<HTMLSelectElement>(null);
 
-  effect(() => {
-    console.log(selectedValue.value, "aaaaaaaaaaaaa");
-  });
-
   return (
-    <Collapsable class={clx("relative group/select-collapsable", class_)}>
-      <Trigger class="group/select">
-        <div class="rounded-md border border-Stroke group-has-[select:valid]:border-green group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
-          <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
-            {placeholder}
-          </label>
-          <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
-            {selectedValue}
-          </span>
-          <span class="ml-auto border-l border-Stroke group-has-[select:valid]:border-green h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
-            <Icon
-              id="ChevronDown"
-              width={16}
-              height={16}
-            />
-          </span>
-        </div>
-      </Trigger>
+    <>
+      <Collapsable class={clx("relative group/select-collapsable", class_)}>
+        <Trigger class="group/select">
+          <div class="rounded-md border border-Stroke group-has-[select:valid]:border-green group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
+            <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
+              {placeholder}
+            </label>
+            <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
+              {value}
+            </span>
+            <span class="ml-auto border-l border-Stroke group-has-[select:valid]:border-green h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
+              <Icon
+                id="ChevronDown"
+                width={16}
+                height={16}
+              />
+            </span>
+          </div>
+        </Trigger>
 
-      <select
-        ref={hiddenSelect}
-        class="sr-only w-full peer/select"
-        required
-        name={name}
-        onChange={(e) => {
-          selectedValue.value = e.currentTarget.value;
-        }}
-      >
-        <option value="">{placeholder}</option>
-        {items.map((i) => (
-          <option value={i} selected={i === defaultValue}>{i}</option>
-        ))}
-      </select>
-
-      <ContentWrapper class="absolute top-full left-0 z-10 bg-white w-full rounded-bl-md rounded-br-md shadow-lg text-gray text-sm border border-Stroke">
-        <Content class="flex flex-col items-start max-h-[300px] overflow-y-auto overscroll-contain">
+        <select
+          ref={hiddenSelect}
+          class="sr-only w-full peer/select"
+          required
+          name={name}
+          onChange={(e) => {
+            onChange(e.currentTarget.value);
+          }}
+        >
+          <option value="">{placeholder}</option>
           {items.map((i) => (
-            <button
-              type="button"
-              onClick={(e) => {
-                hiddenSelect.current!.value = i;
-                selectedValue.value = i;
-                close();
-              }}
-              class={clx(
-                "w-full text-start pl-4 py-2 hover:bg-ice cursor-pointer",
-                selectedValue.value === i && "bg-ice",
-              )}
-            >
-              {i}
-            </button>
+            <option value={i} selected={i === value}>{i}</option>
           ))}
-        </Content>
-      </ContentWrapper>
-    </Collapsable>
+        </select>
+
+        <ContentWrapper class="absolute top-full left-0 z-10 bg-white w-full rounded-bl-md rounded-br-md shadow-lg text-gray text-sm border border-Stroke">
+          <Content class="flex flex-col items-start max-h-[300px] overflow-y-auto overscroll-contain">
+            {items.map((i) => (
+              <button
+                type="button"
+                onClick={(e) => {
+                  hiddenSelect.current!.value = i;
+                  hiddenSelect.current!.dispatchEvent(
+                    new Event("change", { bubbles: true }),
+                  );
+
+                  close();
+                }}
+                class={clx(
+                  "w-full text-start pl-4 py-2 hover:bg-ice cursor-pointer",
+                  hiddenSelect.current?.textContent === i && "bg-ice",
+                )}
+              >
+                {i}
+              </button>
+            ))}
+          </Content>
+        </ContentWrapper>
+      </Collapsable>
+    </>
   );
 }
 
 function Form2() {
   const { cep, loading, data, error } = useCEP();
 
-  console.log(data.value);
-
   const cepDebounced = debounce((s: number) => {
     cep.value = s;
   }, 300);
+
+  const ufSignal = useSignal("");
+
+  useSignalEffect(() => {
+    if (data.value?.uf) {
+      ufSignal.value = data.value?.uf;
+    }
+  });
 
   return (
     <formAccordions.Accordion
@@ -373,7 +381,10 @@ function Form2() {
                   items={UFs}
                   class="w-full sm:w-[calc(30%-8px)]"
                   name="state"
-                  defaultValue={data.value?.uf}
+                  value={ufSignal.value}
+                  onChange={(s) => {
+                    ufSignal.value = s;
+                  }}
                 />
 
                 <Input.Container class="w-full sm:w-[70%]">
@@ -438,6 +449,8 @@ const formAccordions = useAccordion("forms");
 export default function (
   { topText, specialties, supplements, services }: Props,
 ) {
+  const specialtySignal = useSignal("");
+
   function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
@@ -560,6 +573,10 @@ export default function (
                       placeholder="Especialidade *"
                       name="specialty"
                       items={specialties.map(({ label }) => label)}
+                      value={specialtySignal.value}
+                      onChange={(s) => {
+                        specialtySignal.value = s;
+                      }}
                     />
 
                     <Input.Container>

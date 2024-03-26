@@ -290,15 +290,17 @@ function Form2() {
     }
 
     // Form 1
-    const name = get<HTMLInputElement>("[name=name]").value;
-    const specialty = get<HTMLSelectElement>("[name=specialty]").value;
-    const area = get<HTMLInputElement>("[name=area]").value;
-    const cpf = get<HTMLInputElement>("[name=cpf]").value.replace(/-|\./g, "");
-    const email = get<HTMLInputElement>("[name=email]").value;
+    const socialRatio = get<HTMLInputElement>("[name=social-ratio]").value;
+    const fantasyName = get<HTMLSelectElement>("[name=fantasy-name]").value;
+    const cnpj = get<HTMLInputElement>("[name=cnpj]").value;
+    const federalRegistration =
+      get<HTMLInputElement>("[name=federal-registration]").value;
+    const contact = get<HTMLInputElement>("[name=contact]").value;
     const tel = get<HTMLInputElement>("[name=tel]").value.replace(
       / |-|\(|\)/g,
       "",
     );
+    const email = get<HTMLInputElement>("[name=email]").value;
     const instagram = get<HTMLInputElement>("[name=instagram]").value;
 
     // Form 2
@@ -311,10 +313,11 @@ function Form2() {
     const neighborhood = get<HTMLInputElement>("[name=neighborhood]").value;
 
     console.log({
-      name,
-      specialty,
-      area,
-      cpf,
+      socialRatio,
+      fantasyName,
+      cnpj,
+      federalRegistration,
+      contact,
       email,
       tel,
       instagram,
@@ -527,27 +530,55 @@ export default function (
                 >
                   <div class="grid sm:grid-cols-2 gap-2 mt-6 w-full">
                     <Input.Container class="sm:col-span-2">
-                      <Input.Input type="text" name="name" required />
+                      <Input.Input type="text" name="social-ratio" required />
                       <Input.Label>Razão Social *</Input.Label>
                     </Input.Container>
 
                     <Input.Container>
-                      <Input.Input type="text" name="name" required />
+                      <Input.Input type="text" name="fantasy-name" required />
                       <Input.Label>Nome fantasia *</Input.Label>
                     </Input.Container>
 
                     <Input.Container>
-                      <Input.Input type="text" name="name" required />
+                      <Input.Input
+                        type="text"
+                        name="cnpj"
+                        required
+                        pattern={"[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}"}
+                        onInput={(e) => {
+                          e.currentTarget.value =
+                            (e.currentTarget.value as string)
+                              .replace(/\D/g, "")
+                              .replace(
+                                /(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})(.*)/,
+                                (all, $1, $2, $3, $4, $5) => {
+                                  let s = "";
+
+                                  if ($1) s += $1;
+                                  if ($2) s += `.${$2}`;
+                                  if ($3) s += `.${$3}`;
+                                  if ($4) s += `/${$4}`;
+                                  if ($5) s += `-${$5}`;
+
+                                  return s;
+                                },
+                              );
+                        }}
+                      />
                       <Input.Label>CNPJ *</Input.Label>
                     </Input.Container>
 
                     <Input.Container>
-                      <Input.Input type="text" name="area" required />
+                      <Input.Input
+                        type="text"
+                        name="federal-registration"
+                        required
+                      />
                       <Input.Label>Inscrição Estadual *</Input.Label>
                     </Input.Container>
 
                     <Input.Container>
-                      <Input.Input type="text" name="area" required />
+                      <Input.Input type="text" name="contact" required />
                       <Input.Label>Contato *</Input.Label>
                     </Input.Container>
 
@@ -597,7 +628,7 @@ export default function (
                     <Input.Container>
                       <Input.Input
                         type="text"
-                        name="instagram"
+                        name="site"
                       />
                       <Input.Label>Site</Input.Label>
                     </Input.Container>
