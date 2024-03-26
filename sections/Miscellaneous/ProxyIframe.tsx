@@ -11,10 +11,7 @@ const runOnMount = () => {
     if (!iFrame) {
       return console.error("Couldn't find iframe");
     }
-    iFrame.height = `${
-      iFrame.contentWindow?.document.querySelector(".vtex-account")
-        ?.scrollHeight
-    }`;
+    iFrame.height = `${iFrame.contentWindow?.document.body.scrollHeight}`;
   };
 };
 
