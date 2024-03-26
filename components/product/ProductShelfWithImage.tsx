@@ -51,7 +51,7 @@ function ProductShelf({
 
   return (
     <div
-      class="flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-4 pt-16 pb-24"
+      class="flex flex-col lg:flex-row items-center justify-between gap-x-10 gap-y-4 pt-16 pb-24 max-w-[1366px] mx-auto"
       id={id}
     >
       <Wrapper

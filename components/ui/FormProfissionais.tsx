@@ -10,6 +10,7 @@ import useCEP from "deco-sites/true-source/sdk/useCEP.ts";
 import type { JSX } from "preact";
 import { useRef } from "preact/hooks";
 import { debounce } from "std/async/debounce.ts";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 
 interface Specialty {
   label: string;
@@ -451,7 +452,7 @@ export default function (
 ) {
   const specialtySignal = useSignal("");
 
-  function afterAllForms() {
+  async function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
 
@@ -498,6 +499,33 @@ export default function (
     const partnerships = get<HTMLInputElement>("[name=partnerships]").value;
     const meet = get<HTMLTextAreaElement>("[name=meet]").value;
 
+    await invoke.vtex.actions.masterdata.createDocument({
+      acronym: "PR",
+      data: {
+        name,
+        specialty,
+        occupationArea: area,
+        id: cpf,
+        email,
+        whatsapp: tel,
+        instagram,
+        cep,
+        city,
+        uf: state,
+        street,
+        number,
+        complement,
+        neighborhood,
+        prescribe,
+        supplements: supplements.join(", "),
+        services: service,
+        nearbyStores: stores,
+        partnerships,
+        howDidYouMeet: meet,
+      },
+      isPrivateEntity: true,
+    });
+
     console.log({
       name,
       specialty,
@@ -523,7 +551,7 @@ export default function (
   }
 
   return (
-    <div class="py-36 bg-ice rounded-[40px]">
+    <div id="form-profissionais" class="py-36 bg-ice rounded-[40px]">
       <div class="max-w-[848px] mx-auto">
         <div
           dangerouslySetInnerHTML={{ __html: topText }}

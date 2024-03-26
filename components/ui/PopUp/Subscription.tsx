@@ -131,9 +131,7 @@ export default function Coupon(
     <>
       <button
         type="button"
-        onClick={() => {
-          displayPopup.value = false;
-        }}
+        onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
         class={`z-[9] bg-black/30 inset-0 fixed transition-all${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
@@ -165,9 +163,7 @@ export default function Coupon(
           </div>
           <button
             type="button"
-            onClick={() => {
-              displayPopup.value = false;
-            }}
+            onClick={handlePopupClose}
             aria-label="Fechar pop-up de cupom"
             class="absolute top-10 right-10 size-6 flex justify-center items-center cursor-pointer"
           >
