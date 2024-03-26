@@ -81,7 +81,7 @@ function CategoryCarousel({
       class="w-full max-w-[1440px] py-6 mx-auto"
     >
       {title && (
-        <h2 class="text-center font-lemon text-dark font-bold text-[14px] leading-[18px] mb-12 uppercase">
+        <h2 class="text-center font-lemon text-dark font-bold text-[14px] leading-[18px] md:text-[18px] md:leading-6 mb-12 uppercase">
           {title}
         </h2>
       )}
