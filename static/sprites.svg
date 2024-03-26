@@ -45,7 +45,8 @@
 		<path d="M1 1L12.5 13L1 25" stroke="currentColor" />
 	</symbol>
 	<symbol id="BannerArrowRight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+		<path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+			stroke-linejoin="round" />
 	</symbol>
 	<symbol id="ChevronLeft" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 		<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -551,7 +552,8 @@
 		</symbol>
 
 		<symbol id="Bars3" viewBox="0 0 20 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-			<path d="M1 7H19M1 1H19M1 13H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			<path d="M1 7H19M1 1H19M1 13H19" stroke="white" stroke-width="2" stroke-linecap="round"
+				stroke-linejoin="round" />
 		</symbol>
 
 		<symbol id="CashBack" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -572,8 +574,9 @@
 				d="M6.52437 1.30205C6.67803 0.990755 6.75486 0.835109 6.85916 0.78538C6.9499 0.742113 7.05533 0.742113 7.14607 0.78538C7.25037 0.835109 7.3272 0.990755 7.48086 1.30205L8.93864 4.25536C8.98401 4.34726 9.00669 4.39321 9.03984 4.42889C9.06919 4.46048 9.10438 4.48607 9.14348 4.50425C9.18764 4.52479 9.23834 4.5322 9.33975 4.54702L12.6006 5.02364C12.944 5.07383 13.1157 5.09893 13.1951 5.1828C13.2643 5.25577 13.2968 5.35603 13.2836 5.45569C13.2685 5.57022 13.1442 5.69129 12.8956 5.93342L10.5369 8.23078C10.4634 8.3024 10.4266 8.33821 10.4029 8.38081C10.3819 8.41854 10.3684 8.45998 10.3632 8.50284C10.3573 8.55125 10.366 8.60183 10.3834 8.703L10.9399 11.9479C10.9986 12.2902 11.028 12.4613 10.9728 12.5628C10.9248 12.6512 10.8395 12.7132 10.7406 12.7315C10.627 12.7525 10.4734 12.6717 10.166 12.5101L7.25086 10.9771C7.16003 10.9293 7.11461 10.9054 7.06677 10.896C7.0244 10.8877 6.98083 10.8877 6.93847 10.896C6.89062 10.9054 6.8452 10.9293 6.75438 10.9771L3.83922 12.5101C3.53188 12.6717 3.37821 12.7525 3.26459 12.7315C3.16573 12.7132 3.08042 12.6512 3.03243 12.5628C2.97727 12.4613 3.00662 12.2902 3.06532 11.9479L3.62186 8.703C3.63921 8.60183 3.64789 8.55125 3.64202 8.50284C3.63682 8.45998 3.62335 8.41854 3.60234 8.38081C3.57862 8.33821 3.54186 8.3024 3.46833 8.23078L1.10964 5.93342C0.861046 5.69129 0.736747 5.57022 0.721622 5.45569C0.708462 5.35603 0.740973 5.25577 0.810105 5.1828C0.889561 5.09893 1.06125 5.07383 1.40463 5.02364L4.66548 4.54702C4.76689 4.5322 4.81759 4.52479 4.86175 4.50425C4.90085 4.48607 4.93605 4.46048 4.96539 4.42889C4.99854 4.39321 5.02122 4.34726 5.06659 4.25536L6.52437 1.30205Z"
 				fill="#E9B90E" />
 		</symbol>
-
-
+		<symbol id="CheckboxCheck" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M9 1L3.5 6.5L1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+				stroke-linejoin="round" />
 </svg>
 
 </svg>

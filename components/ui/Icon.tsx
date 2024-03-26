@@ -4,6 +4,7 @@ import type { JSX } from "preact";
 export type AvailableIcons =
   | "Alert"
   | "AlertError"
+  | "CheckboxCheck"
   | "AlertInfo"
   | "AlertSuccess"
   | "AlertWarning"

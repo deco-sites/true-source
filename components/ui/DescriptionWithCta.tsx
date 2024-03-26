@@ -46,7 +46,7 @@ function DescriptionWithCta(
         {title && (
           <RenderHTML
             html={title}
-            class="text-dark font-bold text-[16px] md:text-[40px] font-lemon-milk uppercase leading-[21px] md:leading-[42px] [&_strong]:text-red text-center max-w-[580px]"
+            class="text-dark font-bold text-2xl md:text-[40px] font-lemon-milk uppercase leading-8 md:leading-[42px] [&_strong]:text-red text-center max-w-[580px]"
           />
         )}
         {description && (

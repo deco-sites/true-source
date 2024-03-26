@@ -276,6 +276,7 @@ function Form2() {
   }, 300);
 
   const ufSignal = useSignal("");
+  const formMessage = useSignal<"success" | "error" | null>(null);
 
   useSignalEffect(() => {
     if (data.value?.uf) {
@@ -283,7 +284,7 @@ function Form2() {
     }
   });
 
-  async function afterAllForms() {
+  function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
 
@@ -316,28 +317,30 @@ function Form2() {
     const complement = get<HTMLInputElement>("[name=complement]").value;
     const neighborhood = get<HTMLInputElement>("[name=neighborhood]").value;
 
-    await invoke.vtex.actions.masterdata.createDocument({
-      acronym: "LJ",
-      data: {
-        id: cnpj,
-        name: socialRatio,
-        fantasyName,
-        ie: federalRegistration,
-        contact,
-        phone: tel,
-        email,
-        instagram,
-        site,
-        cep,
-        city,
-        uf: state,
-        street,
-        number,
-        complement,
-        neighborhood,
-      },
-      isPrivateEntity: true,
-    });
+    // await invoke.vtex.actions.masterdata.createDocument({
+    //   acronym: "LJ",
+    //   data: {
+    //     id: cnpj,
+    //     name: socialRatio,
+    //     fantasyName,
+    //     ie: federalRegistration,
+    //     contact,
+    //     phone: tel,
+    //     email,
+    //     instagram,
+    //     site,
+    //     cep,
+    //     city,
+    //     uf: state,
+    //     street,
+    //     number,
+    //     complement,
+    //     neighborhood,
+    //   },
+    //   isPrivateEntity: true,
+    // });
+
+    formMessage.value = "success";
 
     console.log({
       socialRatio,
@@ -505,6 +508,17 @@ function Form2() {
             >
               ENVIAR SOLICITAÇÃO
             </button>
+            {formMessage.value === "success" && (
+              <span class="block mt-5 text-green">
+                Sua solicitação foi enviada com sucesso!
+              </span>
+            )}
+            {formMessage.value === "error" && (
+              <span class="block mt-5 text-red">
+                Ocorreu um erro ao enviar sua solicitação, tente novamente mais
+                tarde!
+              </span>
+            )}
           </form>
         </formAccordions.Content>
       </formAccordions.ContentWrapper>
@@ -522,7 +536,7 @@ export default function (
       <div class="max-w-[848px] mx-auto">
         <div
           dangerouslySetInnerHTML={{ __html: topText }}
-          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
+          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-2xl md:[&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
         />
 
         <div class="flex flex-col gap-2 w-[95%] mx-auto">
@@ -651,16 +665,18 @@ export default function (
                       <Input.Input
                         type="text"
                         name="instagram"
+                        required
                       />
-                      <Input.Label>Instagram da loja</Input.Label>
+                      <Input.Label>Instagram da loja *</Input.Label>
                     </Input.Container>
 
                     <Input.Container>
                       <Input.Input
                         type="text"
                         name="site"
+                        required
                       />
-                      <Input.Label>Site</Input.Label>
+                      <Input.Label>Site *</Input.Label>
                     </Input.Container>
                   </div>
 

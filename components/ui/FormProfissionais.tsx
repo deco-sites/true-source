@@ -178,7 +178,7 @@ const Checkbox = {
       />
       <span class="border-2 border-gray/80 w-5 h-5 rounded-md flex justify-center items-center peer-checked:border-0 peer-checked:bg-dark group">
         <Icon
-          id="Check"
+          id="CheckboxCheck"
           width={10}
           height={8}
           class="text-white hidden peer-checked:group-[]:block"
@@ -451,8 +451,9 @@ export default function (
   { topText, specialties, supplements, services }: Props,
 ) {
   const specialtySignal = useSignal("");
+  const formMessage = useSignal<"success" | "error" | null>(null);
 
-  async function afterAllForms() {
+  function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
 
@@ -499,32 +500,34 @@ export default function (
     const partnerships = get<HTMLInputElement>("[name=partnerships]").value;
     const meet = get<HTMLTextAreaElement>("[name=meet]").value;
 
-    await invoke.vtex.actions.masterdata.createDocument({
-      acronym: "PR",
-      data: {
-        name,
-        specialty,
-        occupationArea: area,
-        id: cpf,
-        email,
-        whatsapp: tel,
-        instagram,
-        cep,
-        city,
-        uf: state,
-        street,
-        number,
-        complement,
-        neighborhood,
-        prescribe,
-        supplements: supplements.join(", "),
-        services: service,
-        nearbyStores: stores,
-        partnerships,
-        howDidYouMeet: meet,
-      },
-      isPrivateEntity: true,
-    });
+    // await invoke.vtex.actions.masterdata.createDocument({
+    //   acronym: "PR",
+    //   data: {
+    //     name,
+    //     specialty,
+    //     occupationArea: area,
+    //     id: cpf,
+    //     email,
+    //     whatsapp: tel,
+    //     instagram,
+    //     cep,
+    //     city,
+    //     uf: state,
+    //     street,
+    //     number,
+    //     complement,
+    //     neighborhood,
+    //     prescribe,
+    //     supplements: supplements.join(", "),
+    //     services: service,
+    //     nearbyStores: stores,
+    //     partnerships,
+    //     howDidYouMeet: meet,
+    //   },
+    //   isPrivateEntity: true,
+    // });
+
+    formMessage.value = "success";
 
     console.log({
       name,
@@ -555,7 +558,7 @@ export default function (
       <div class="max-w-[848px] mx-auto">
         <div
           dangerouslySetInnerHTML={{ __html: topText }}
-          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
+          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-2xl md:[&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
         />
 
         <div class="flex flex-col gap-2 w-[95%] mx-auto">
@@ -679,8 +682,9 @@ export default function (
                       <Input.Input
                         type="text"
                         name="instagram"
+                        required
                       />
-                      <Input.Label>Instagram</Input.Label>
+                      <Input.Label>Instagram *</Input.Label>
                     </Input.Container>
                   </div>
 
@@ -814,6 +818,18 @@ export default function (
                   >
                     Finalizar
                   </button>
+
+                  {formMessage.value === "success" && (
+                    <span class="block mt-5 text-green">
+                      Sua solicitação foi enviada com sucesso!
+                    </span>
+                  )}
+                  {formMessage.value === "error" && (
+                    <span class="block mt-5 text-red">
+                      Ocorreu um erro ao enviar sua solicitação, tente novamente
+                      mais tarde!
+                    </span>
+                  )}
                 </form>
               </formAccordions.Content>
             </formAccordions.ContentWrapper>
