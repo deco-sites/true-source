@@ -8,7 +8,8 @@ import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $BannerCarouselJS from "./islands/BannerCarouselJS.tsx";
 import * as $CartItem from "./islands/CartItem.tsx";
 import * as $CouponPopup from "./islands/CouponPopup.tsx";
-import * as $FormTrue from "./islands/FormTrue.tsx";
+import * as $FormLojistas from "./islands/FormLojistas.tsx";
+import * as $FormProfissionais from "./islands/FormProfissionais.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_Cart from "./islands/Header/Cart/Cart.tsx";
 import * as $Header_Cart_common from "./islands/Header/Cart/common.tsx";
@@ -52,7 +53,8 @@ const manifest = {
     "./islands/BannerCarouselJS.tsx": $BannerCarouselJS,
     "./islands/CartItem.tsx": $CartItem,
     "./islands/CouponPopup.tsx": $CouponPopup,
-    "./islands/FormTrue.tsx": $FormTrue,
+    "./islands/FormLojistas.tsx": $FormLojistas,
+    "./islands/FormProfissionais.tsx": $FormProfissionais,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/Cart.tsx": $Header_Cart_Cart,
     "./islands/Header/Cart/common.tsx": $Header_Cart_common,

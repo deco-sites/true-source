@@ -2,22 +2,12 @@ import { useSignal, useSignalEffect } from "@preact/signals";
 
 type Cep = {
   cep: string;
-  state: string;
-  city: string;
-  neighborhood: string;
-  street: string;
-  service: string;
-  location: Location;
-};
-
-type Location = {
-  type: string;
-  coordinates: Coordinates;
-};
-
-type Coordinates = {
-  longitude: string;
-  latitude: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+  ibge: string;
 };
 
 type Errors = "NOT_FOUND" | "EXPLODED";
@@ -33,9 +23,9 @@ export default function () {
 
     loading.value = true;
 
-    fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+    fetch(`https://opencep.com/v1/${cep}`)
       .then((r) => {
-        if (!r.ok) throw new Error("NOT_FOUND");
+        if (r.status === 404) throw new Error("NOT_FOUND");
 
         return r.json();
       })

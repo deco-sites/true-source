@@ -1,4 +1,4 @@
-import { useSignal } from "@preact/signals";
+import { effect, useSignal } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
@@ -205,17 +205,21 @@ function Select({
   const selectedValue = useSignal(defaultValue ?? "");
   const hiddenSelect = useRef<HTMLSelectElement>(null);
 
+  effect(() => {
+    console.log(selectedValue.value, 'aaaaaaaaaaaaa');
+  });
+
   return (
     <Collapsable class={clx("relative group/select-collapsable", class_)}>
       <Trigger class="group/select">
-        <div class="rounded-md border border-Stroke group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
+        <div class="rounded-md border border-Stroke group-has-[select:valid]:border-green group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
           <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
             {placeholder}
           </label>
           <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
             {selectedValue}
           </span>
-          <span class="ml-auto border-l border-Stroke h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
+          <span class="ml-auto border-l border-Stroke group-has-[select:valid]:border-green h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
             <Icon
               id="ChevronDown"
               width={16}
@@ -230,7 +234,6 @@ function Select({
         class="sr-only w-full peer/select"
         required
         name={name}
-        value={selectedValue.value}
         onChange={(e) => {
           selectedValue.value = e.currentTarget.value;
         }}
@@ -268,11 +271,7 @@ function Select({
 function Form2() {
   const { cep, loading, data, error } = useCEP();
 
-  const showLocation = useSignal(false);
-
-  if (data.value) {
-    showLocation.value = true;
-  }
+  console.log(data.value);
 
   const cepDebounced = debounce((s: number) => {
     cep.value = s;
@@ -354,74 +353,71 @@ function Form2() {
                   : null}
               </div>
 
-              {showLocation.value && (
-                <>
-                  <div class="text-gray font-sm font-medium my-4">
-                    Complete as informações do seu endereço
-                  </div>
+              <div class="text-gray font-sm font-medium my-4">
+                Complete as informações do seu endereço
+              </div>
 
-                  <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
-                    <Input.Container class="w-full sm:w-[70%]">
-                      <Input.Input
-                        type="text"
-                        name="city"
-                        required
-                        defaultValue={data.value?.city}
-                      />
-                      <Input.Label>Cidade *</Input.Label>
-                    </Input.Container>
+              <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
+                <Input.Container class="w-full sm:w-[70%]">
+                  <Input.Input
+                    type="text"
+                    name="city"
+                    required
+                    defaultValue={data.value?.localidade}
+                  />
+                  <Input.Label>Cidade *</Input.Label>
+                </Input.Container>
 
-                    <Select
-                      placeholder="Estado *"
-                      items={UFs}
-                      class="w-full sm:w-[calc(30%-8px)]"
-                      name="state"
-                      defaultValue={data.value?.state}
-                    />
+                <Select
+                  placeholder="Estado *"
+                  items={UFs}
+                  class="w-full sm:w-[calc(30%-8px)]"
+                  name="state"
+                  defaultValue={data.value?.uf}
+                />
 
-                    <Input.Container class="w-full sm:w-[70%]">
-                      <Input.Input
-                        type="text"
-                        name="street"
-                        required
-                        defaultValue={data.value?.street}
-                      />
-                      <Input.Label>Rua *</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-[70%]">
+                  <Input.Input
+                    type="text"
+                    name="street"
+                    required
+                    defaultValue={data.value?.logradouro}
+                  />
+                  <Input.Label>Rua *</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-[calc(30%-8px)]">
-                      <Input.Input
-                        type="text"
-                        name="number"
-                        required
-                        onInput={(e) => {
-                          e.currentTarget.value = e.currentTarget.value
-                            .replace(/\D/g, "");
-                        }}
-                      />
-                      <Input.Label>Número *</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-[calc(30%-8px)]">
+                  <Input.Input
+                    type="text"
+                    name="number"
+                    required
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value
+                        .replace(/\D/g, "");
+                    }}
+                  />
+                  <Input.Label>Número *</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-1/2">
-                      <Input.Input
-                        type="text"
-                        name="complement"
-                      />
-                      <Input.Label>Complemento</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-1/2">
+                  <Input.Input
+                    type="text"
+                    name="complement"
+                    defaultValue={data.value?.complemento}
+                  />
+                  <Input.Label>Complemento</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-[calc(50%-8px)]">
-                      <Input.Input
-                        type="text"
-                        name="neighborhood"
-                        required
-                        defaultValue={data.value?.neighborhood}
-                      />
-                      <Input.Label>Bairro *</Input.Label>
-                    </Input.Container>
-                  </div>
-                </>
-              )}
+                <Input.Container class="w-full sm:w-[calc(50%-8px)]">
+                  <Input.Input
+                    type="text"
+                    name="neighborhood"
+                    required
+                    defaultValue={data.value?.bairro}
+                  />
+                  <Input.Label>Bairro *</Input.Label>
+                </Input.Container>
+              </div>
             </div>
 
             <button
