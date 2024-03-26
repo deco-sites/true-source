@@ -7,15 +7,30 @@ import Image from "apps/website/components/Image.tsx";
 
 /**  @titleBy alt */
 export interface Banner {
-  /** @description Imagem para desktop */
+  /**
+   * @description Imagem para desktop
+   * @title Imagem para desktop
+   */
   desktopSrc: ImageWidget;
-  /** @description Altura da imagem para desktop */
+  /**
+   * @description Altura da imagem para desktop
+   * @title Altura da imagem
+   */
   desktopHeight: number;
-  /** @description Imagem para mobile */
+  /**
+   * @description Imagem para mobile
+   * @title Imagem para mobile
+   */
   mobileSrc: ImageWidget;
-  /** @description Altura da imagem para mobile */
+  /**
+   * @description Altura da imagem para mobile
+   * @title Altura da imagem
+   */
   mobileHeight: number;
-  /** @description Texto alternativo da imagem */
+  /**
+   * @description Texto alternativo da imagem
+   * @title Texto alternativo
+   */
   alt: string;
 }
 
@@ -79,6 +94,9 @@ export interface Props {
   content?: Content;
   /** @description Check this option when this banner is the biggest image on the screen for image optimizations */
   preload?: boolean;
+  /**
+   * @ignore
+   */
   isMobile?: boolean;
 }
 
@@ -88,8 +106,14 @@ function BannerInfoContainer(
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
   const height = isMobile ? mobileHeight : desktopHeight;
 
+  const Wrapper = content?.cta?.link ? "a" : "div";
+  const props = content?.cta?.link ? { href: content.cta.link } : {};
+
   return (
-    <div class="w-full max-w-[1440px] mx-auto relative px-[17px] md:px-10">
+    <Wrapper
+      {...props}
+      class="w-full block max-w-[1440px] mx-auto relative px-[17px] md:px-10"
+    >
       <Picture preload={preload}>
         <Source
           media="(max-width: 767px)"
@@ -177,23 +201,20 @@ function BannerInfoContainer(
             )}
 
           {content?.cta && (
-            <a
-              href={content.cta.link}
-              class="flex items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
+            <span class="flex items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
                 bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% max-w-fit group hover:bg-white border 
-                border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px]"
-            >
+                border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px]">
               {content.cta.text}
               <Icon
                 id="ArrowRight"
                 size={16}
                 class="text-white group-hover:text-red"
               />
-            </a>
+            </span>
           )}
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 

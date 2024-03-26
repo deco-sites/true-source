@@ -6,7 +6,6 @@ import {
   SendEventOnView,
 } from "deco-sites/true-source/components/Analytics.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import BannerCarouselJS from "deco-sites/true-source/islands/BannerCarouselJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
@@ -43,6 +42,10 @@ export interface Banner {
    * @description Texto alternativo da imagem
    */
   alt: string;
+  /**
+   * @title URL
+   */
+  href?: string;
 }
 
 export interface Props {
@@ -63,33 +66,6 @@ export interface Props {
   interval?: number;
 }
 
-const DEFAULT_PROPS = {
-  images: [
-    {
-      alt: "/feminino",
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-    {
-      alt: "/feminino",
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-    {
-      alt: "/feminino",
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-  ],
-  preload: false,
-};
-
 function BannerItem(
   { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
 ) {
@@ -97,10 +73,15 @@ function BannerItem(
     alt,
     mobile,
     desktop,
+    href,
   } = image;
 
+  const Wrapper = href ? "a" : "div";
+  const props = href ? { href } : {};
+
   return (
-    <div
+    <Wrapper
+      {...props}
       id={id}
       class="relative overflow-clip w-full rounded-[35px]"
     >
@@ -120,7 +101,7 @@ function BannerItem(
           height={desktop.height}
         />
         <Image
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-full rounded-[35px]"
           loading={lcp ? "eager" : "lazy"}
           src={desktop.src}
           alt={alt}
@@ -128,13 +109,77 @@ function BannerItem(
           height={desktop.height}
         />
       </Picture>
-    </div>
+    </Wrapper>
   );
 }
 
-function BannerCarousel(props: Props) {
+function BannerCarousel({
+  images = [
+    {
+      alt: "Mês do consumidor",
+      mobile: {
+        src:
+          "https://www.truesource.com.br/arquivos/MOBILE-consumidor.png?v=638452562818730000",
+        width: 326,
+        height: 313,
+      },
+      desktop: {
+        src:
+          "https://www.truesource.com.br/arquivos/DESKTOP-consumidor.png?v=638451736675770000",
+        width: 1400,
+        height: 425,
+      },
+    },
+    {
+      alt: "Mês das mulheres",
+      mobile: {
+        src:
+          "https://www.truesource.com.br/arquivos/MOBILE-mulheres.png?v=638449097246330000",
+        width: 326,
+        height: 313,
+      },
+      desktop: {
+        src:
+          "https://www.truesource.com.br/arquivos/DESKTOP-mulheres.png?v=638449097253100000",
+        width: 1400,
+        height: 425,
+      },
+    },
+    {
+      alt: "Assinatura",
+      mobile: {
+        src:
+          "https://www.truesource.com.br/arquivos/MOBILE-assinatura-6.png?v=638452558069400000",
+        width: 326,
+        height: 313,
+      },
+      desktop: {
+        src:
+          "https://www.truesource.com.br/arquivos/DESKTOP-assinatura-6.png?v=638452558061270000",
+        width: 1400,
+        height: 425,
+      },
+    },
+    {
+      alt: "Novidades",
+      mobile: {
+        src:
+          "https://www.truesource.com.br/arquivos/MOBILE-lancamentos.png?v=638424053075370000",
+        width: 326,
+        height: 313,
+      },
+      desktop: {
+        src:
+          "https://www.truesource.com.br/arquivos/DESKTOP-lancamentos.png?v=638424053077700000",
+        width: 1400,
+        height: 425,
+      },
+    },
+  ],
+  preload = false,
+  interval = 0,
+}: Props) {
   const id = useId();
-  const { images, preload, interval } = { ...DEFAULT_PROPS, ...props };
 
   return (
     <div class="mx-auto max-w-[1440px]">

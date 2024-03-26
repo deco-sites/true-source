@@ -127,7 +127,8 @@ export default function AccordionWithImages(
                 data-item
                 class="col-start-1 row-start-1 w-full group data-[intersecting='true']:opacity-100 opacity-0 transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto"
               >
-                <div
+                <a
+                  href={section.button.href}
                   id={id}
                   class="relative overflow-clip w-full h-full"
                 >
@@ -140,13 +141,10 @@ export default function AccordionWithImages(
                       {section.title}
                     </h2>
                     <p class="text-sm leading-4 mb-2">{section.description}</p>
-                    <a
-                      class="bg-gradient-to-r w-fit from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 transition-all py-3 px-6 rounded-full"
-                      href={section.button.href}
-                    >
+                    <span class="bg-gradient-to-r w-fit from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 transition-all py-3 px-6 rounded-full">
                       {section.button.text}
                       <Icon id="BannerArrowRight" strokeWidth={2} size={16} />
-                    </a>
+                    </span>
                   </div>
                   <Picture preload={preload}>
                     <Source
@@ -170,7 +168,7 @@ export default function AccordionWithImages(
                       alt={section.image.alt}
                     />
                   </Picture>
-                </div>
+                </a>
               </li>
             ))}
           </ul>
@@ -232,6 +230,11 @@ export default function AccordionWithImages(
               : " flex-[1] hover:flex-[var(--flex)]"
           }`}
         >
+          <a
+            href={section.button.href}
+            aria-label={section.button.text}
+            class="absolute inset-0"
+          />
           <span
             class={`absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] p-3 rounded-full top-10 left-10 font-lemon transition-all z-[1]${
               index === 0
@@ -253,17 +256,16 @@ export default function AccordionWithImages(
             </h2>
             <p class="text-sm leading-4">{section.description}</p>
           </div>
-          <a
+          <span
             class={`bg-gradient-to-r from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 absolute right-10 bottom-10 transition-all z-[1] py-3 px-6 rounded-full${
               index === 0
                 ? " group-has-[~:hover]:opacity-0 opacity-100"
                 : " opacity-0 group-hover:opacity-100"
             }`}
-            href={section.button.href}
           >
             {section.button.text}
             <Icon id="BannerArrowRight" strokeWidth={2} size={16} />
-          </a>
+          </span>
           <span
             class={`bg-gradient-to-t from-black/30 inset-0 absolute pointer-events-none${
               index === 0

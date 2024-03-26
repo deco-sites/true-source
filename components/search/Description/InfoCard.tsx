@@ -11,7 +11,7 @@ export interface Props {
    * @title Tipo
    * @default 1
    */
-  type: "1" | "full";
+  type: "1" | "2" | "full" | "full 2";
   /**
    * @title Título
    */
@@ -62,14 +62,13 @@ export default function InfoCardHorizontal({
     "Os suplementos ajudam a melhorar a resistência física, auxiliam no ganho de massa magra e também na recuperação muscular, além de diversos outros benefícios para você que busca hipertrofia ou definição muscular.\n\nProduzidos com substâncias naturais, nossos produtos são desenvolvidos por especialistas de peso e formulados com produtos altamente eficientes e, claro, muito saborosos. Para te ajudar a alcançar seus objetivos de treino, a True Source dispõe de tudo o que você precisa em proteínas, aminoácidos, termogênicos e vitaminas e minerais. Venha com a gente e conheça um pouco mais de nossos suplementos!",
   rounded = true,
 }: Props) {
-  if (type === "full") {
+  if (type === "full" || type === "full 2") {
     return (
       <div class="md:container">
         <div
-          class={`flex ${
-            textAlign === "right" ? "justify-end" : "justify-start"
-          } lg:items-center relative z-1 overflow-hidden min-h-[580px]` +
-            (rounded ? " rounded-[35px]" : "")}
+          class={`flex lg:items-center relative z-1 overflow-hidden min-h-[580px]` +
+            (rounded ? " rounded-[35px]" : "") +
+            (textAlign === "right" ? " justify-end" : " justify-start")}
         >
           <picture>
             <source media="(min-width:1024px)" srcset={image.desktop} />
@@ -84,21 +83,31 @@ export default function InfoCardHorizontal({
             />
           </picture>
           <div
-            class="w-full lg:w-2/5 p-12 relative z-1"
+            class={"w-full lg:w-2/5 relative z-1" + (
+              type === "full"
+                ? " p-12"
+                : " py-[56px] px-[48px] md:py-[79px] md:px-[125px]"
+            )}
             style={{ color }}
           >
             {title && (
               <h2
-                class="custom-category-title text-left"
+                class={"custom-category-title text-left" + (
+                  type === "full 2"
+                    ? " text-[16px] leading-5 md:text-[24px] md:leading-[32px] md:mb-6"
+                    : ""
+                )}
                 dangerouslySetInnerHTML={{ __html: title }}
               />
             )}
             <div
-              class={`custom-category-text ${
-                !title
-                  ? "text-1xl sm:text-2xl font-lemon-milk font-bold leading-6 sm:leading-7"
-                  : "text-sm lg:text-base leading-6"
-              }`}
+              class={"custom-category-text" +
+                (!title
+                  ? " text-1xl sm:text-2xl font-lemon-milk font-bold leading-6 sm:leading-7"
+                  : " text-sm lg:text-base leading-6") +
+                (
+                  type === "full 2" ? " md:w-[398px]" : ""
+                )}
             >
               <p dangerouslySetInnerHTML={{ __html: description }} />
             </div>
@@ -127,7 +136,9 @@ export default function InfoCardHorizontal({
           <div class="w-full md:w-3/4">
             {title && (
               <h2
-                class="custom-category-title"
+                class={"custom-category-title" + (type === "2"
+                  ? " text-[16px] leading-[21px] md:text-[24px] md:leading-[32px]"
+                  : "")}
                 style={{ color }}
                 dangerouslySetInnerHTML={{ __html: title }}
               />
