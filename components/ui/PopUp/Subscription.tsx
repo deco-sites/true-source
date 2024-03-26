@@ -19,7 +19,7 @@ interface Props {
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
   const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies.hasSeenPopup === "true";
+  const alreadySeenPopup = cookies.hasSeenSubscriptionPopup === "true";
 
   return { ...props, alreadySeenPopup };
 }
@@ -50,42 +50,32 @@ export default function Coupon(
       return;
     }
 
-    globalThis.document.cookie = `hasSeenPopup=true;${`expires=${
+    globalThis.document.cookie = `hasSeenSubscriptionPopup=true;expires=${
       new Date(Date.now() + 1000 * 60 * 60 * 24).toUTCString()
-    }`};path=/`;
+    };path=/`;
   };
 
   useSignalEffect(() => {
-    if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
+    if (
+      alreadySeenPopup || displayPopup.peek() || finishedForm.peek() ||
+      !user.value
+    ) {
       return;
     }
 
-    if (!user.value && !displayPopup.peek()) {
-      displayPopup.value = true;
-      return;
-    }
-
-    /**
-     * Fetches user orders by email and displays a popup if the user has never made a purchase.
-     */
     const fetch = async () => {
       try {
         const data = await fetchUserOrdersByEmail();
 
-        console.log(data);
-
         if (!data || !data.list) {
-          displayPopup.value = true;
           return;
         }
 
-        const neverBoughtBefore = data.list.length === 0;
+        const boughtBefore = data.list.length > 0;
 
-        if (neverBoughtBefore) {
+        if (boughtBefore) {
           displayPopup.value = true;
         }
-
-        // globalThis.window.location.href = "/assinaturas";
       } catch (err) {
         console.error(err);
         displayPopup.value = false;
@@ -97,24 +87,23 @@ export default function Coupon(
     fetch();
   });
 
-  const handleFormSubmit = (e: TargetedEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
     loadingFormSubmit.value = true;
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
-
     try {
-      // await invoke.vtex.actions.masterdata.createDocument({
-      //   acronym: "CL",
-      //   data,
-      //   isPrivateEntity: true,
-      // });
+      await invoke.vtex.actions.masterdata.createDocument({
+        acronym: "CL",
+        data,
+        isPrivateEntity: true,
+      });
 
       finishedForm.value = true;
       setPopupAsSeen();
+      globalThis.window.location.href = "/assinatura";
     } catch (err) {
       console.error(err);
     } finally {

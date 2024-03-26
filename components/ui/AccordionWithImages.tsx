@@ -3,6 +3,7 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import BannerCarouselJS from "deco-sites/true-source/islands/BannerCarouselJS.tsx";
+import { GrayBackgroundProps } from "deco-sites/true-source/sdk/types.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 interface DesktopImage {
@@ -94,7 +95,7 @@ interface Section {
   image: ImageProps;
 }
 
-interface Props {
+interface Props extends GrayBackgroundProps {
   sections: Section[];
   /**
    * @title Pré-carregar imagens
@@ -108,7 +109,8 @@ export function loader(props: Props, _req: Request, ctx: AppContext) {
 }
 
 export default function AccordionWithImages(
-  { sections, preload, isMobile }: ReturnType<typeof loader>,
+  { sections, preload, isMobile, bottomRounded, grayBackground, topRounded }:
+    ReturnType<typeof loader>,
 ) {
   if (isMobile) {
     const id = useId();
@@ -220,7 +222,13 @@ export default function AccordionWithImages(
       style={{
         "--flex": `${sections.length}`,
       }}
-      class="flex px-10 text-ice max-w-[1400px] mx-auto h-[600px]"
+      class={"flex p-10 text-ice max-w-[1448px] mx-auto h-[600px]" + (
+        bottomRounded ? " rounded-b-[35px] md:rounded-b-[40px]" : ""
+      ) + (
+        grayBackground ? " bg-ice" : ""
+      ) + (
+        topRounded ? " rounded-t-[35px] md:rounded-t-[40px]" : ""
+      )}
     >
       {sections.map((section, index) => (
         <li

@@ -86,7 +86,7 @@ function CategoryCarousel({
         </h2>
       )}
       <div class="relative w-full max-w-[1232px] mx-auto">
-        <Slider class="carousel gap-4 max-w-full md:max-w-[1232px] mx-auto mt-[32px] text-ice">
+        <Slider class="carousel gap-4 max-w-full md:max-w-[1232px] mx-auto mt-[32px] text-ice w-full">
           {categories.map(({ image, name, description, url }, index) => (
             <Slider.Item index={index} class="flex carousel-item group">
               <a

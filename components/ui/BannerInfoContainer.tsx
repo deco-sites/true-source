@@ -112,7 +112,7 @@ function BannerInfoContainer(
   return (
     <Wrapper
       {...props}
-      class="w-full block max-w-[1440px] mx-auto relative px-[17px] md:px-10"
+      class="w-full block max-w-[1448px] mx-auto relative px-[17px] md:px-10"
     >
       <Picture preload={preload}>
         <Source

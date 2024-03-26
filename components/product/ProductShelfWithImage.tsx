@@ -6,6 +6,7 @@ import ProductCard from "deco-sites/true-source/components/product/ProductCard.t
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import { GrayBackgroundProps } from "deco-sites/true-source/sdk/types.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 interface ImageProps {
@@ -19,7 +20,7 @@ interface ImageProps {
   title: string;
 }
 
-export interface Props {
+export interface Props extends GrayBackgroundProps {
   /**
    * @title Produtos
    */
@@ -39,6 +40,9 @@ function ProductShelf({
   desktop,
   mobile,
   bannerUrl,
+  bottomRounded,
+  grayBackground,
+  topRounded,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -51,7 +55,14 @@ function ProductShelf({
 
   return (
     <div
-      class="flex flex-col lg:flex-row items-center justify-between gap-x-10 gap-y-4 pt-16 pb-24 max-w-[1366px] mx-auto"
+      class={"flex flex-col lg:flex-row items-center justify-between md:px-10 px-4 gap-x-10 gap-y-4 pt-16 pb-24 max-w-[1448px] mx-auto" +
+        (
+          grayBackground ? " bg-ice" : ""
+        ) + (
+          topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""
+        ) + (
+          bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
+        )}
       id={id}
     >
       <Wrapper
@@ -98,7 +109,12 @@ function ProductShelf({
           <div class="absolute top-[calc(100%+48px)] left-1/2 -translate-x-1/2 flex items-center gap-3">
             {products.map((_, index) => (
               <Slider.Dot index={index} class="group">
-                <div class="w-2 h-2 rounded-full bg-ice group-data-[active]:bg-dark transition-colors" />
+                <div
+                  class={"w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors" +
+                    (
+                      grayBackground ? " bg-gray" : " bg-ice"
+                    )}
+                />
               </Slider.Dot>
             ))}
           </div>
