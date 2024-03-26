@@ -5,14 +5,25 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 /**  @titleBy alt */
 export interface Banner {
-  /** @description Imagem para desktop */
+  /**
+   * @title Imagem para desktop
+   */
   desktopSrc: ImageWidget;
-  /** @description Altura da imagem para desktop */
-  desktopHeight: number;
-  /** @description Imagem para mobile */
-  mobileSrc: ImageWidget;
-  /** @description Altura da imagem para mobile */
-  mobileHeight: number;
+  /**
+   * @title Altura da imagem para desktop
+   * @description Deixar vazio para altura máxima da imagem
+   */
+  desktopHeight?: number;
+  /**
+   * @title Imagem para mobile
+   * @description Imagem para mobile caso seja diferente da imagem para desktop
+   */
+  mobileSrc?: ImageWidget;
+  /**
+   * @title Altura da imagem para mobile
+   * @description Deixar vazio para altura máxima da imagem
+   */
+  mobileHeight?: number;
   /** @description Texto alternativo da imagem */
   alt: string;
 }
@@ -53,7 +64,10 @@ function BannerInfoWithItems(
   { banner, preload, isMobile, content, items }: Props,
 ) {
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
-  const height = isMobile ? mobileHeight : desktopHeight;
+
+  const heightStyle = isMobile
+    ? (mobileHeight ? `${mobileHeight}px` : "auto")
+    : (desktopHeight ? `${desktopHeight}px` : "auto");
 
   return (
     <div
@@ -63,7 +77,7 @@ function BannerInfoWithItems(
         <Source
           media="(max-width: 767px)"
           fetchPriority={preload ? "high" : "auto"}
-          src={mobileSrc}
+          src={mobileSrc || desktopSrc}
           width={360}
           height={mobileHeight}
         />
@@ -79,7 +93,7 @@ function BannerInfoWithItems(
           loading={preload ? "eager" : "lazy"}
           src={desktopSrc}
           alt={alt}
-          style={{ height: `${height}px` }}
+          style={{ height: heightStyle }}
         />
       </Picture>
 
