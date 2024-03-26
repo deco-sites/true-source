@@ -46,11 +46,11 @@ function CardsWithCta(
       {title && (
         <RenderHTML
           html={title}
-          class="text-dark font-bold text-2xl md:text-[40px] uppercase font-lemon-milk md:leading-[42px] [&_strong]:text-red text-center"
+          class="text-dark font-bold text-2xl md:text-[40px] uppercase font-lemon-milk md:leading-[42px] [&_strong]:text-red text-center max-w-[580px]"
         />
       )}
       {description && (
-        <h2 class="font-lemon-milk text-dark font-bold text-center text-sm md:text-[18px] leading-[24px] mt-6">
+        <h2 class="font-lemon-milk text-dark font-bold text-center text-sm md:text-[18px] leading-[24px] mt-6 max-w-[580px]">
           {description}
         </h2>
       )}
