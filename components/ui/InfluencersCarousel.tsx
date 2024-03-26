@@ -32,7 +32,7 @@ function InfluencersCarousel({ title, cards }: Props) {
   return (
     <div
       id={id}
-      class="w-full max-w-[1440px] py-6 mx-auto flex flex-col pl-4 md:pl-0"
+      class="w-full max-w-[1440px] py-6 mx-auto flex flex-col"
     >
       {title && (
         <div class="flex flex-col items-center gap-5">
@@ -53,7 +53,10 @@ function InfluencersCarousel({ title, cards }: Props) {
             { image, name, occupation, user, description },
             index,
           ) => (
-            <Slider.Item index={index} class="flex carousel-item group">
+            <Slider.Item
+              index={index}
+              class="flex carousel-item group first:pl-4 last:pr-4"
+            >
               <div class="relative">
                 <Image
                   src={image}

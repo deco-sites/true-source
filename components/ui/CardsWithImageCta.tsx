@@ -51,12 +51,12 @@ function CardsWithImageCta({ title, cta, cards, description }: Props) {
         </h2>
       )}
 
-      <div class="flex items-center gap-6 mt-8 md:mt-14 relative max-w-full pl-[37px] md:pl-0 ">
+      <div class="flex items-center gap-6 mt-8 md:mt-14 relative max-w-full">
         <Slider className="carousel gap-4" role="list">
           {cards?.map((card, index) => (
             <Slider.Item
               index={index}
-              className="carousel-item group flex items-center justify-center"
+              className="carousel-item group flex items-center justify-center first:pl-[37px] last:pr-[37px]"
               role="listitem"
             >
               <div class="w-[315px] h-full flex flex-col justify-between bg-ice rounded-[20px] p-6">
