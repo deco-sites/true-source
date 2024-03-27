@@ -91,6 +91,24 @@ export default defineApp(async (_req, ctx) => {
         name="google-site-verification"
         content="iCJbdQEMujVQaR4D4m-PwH-WzpdHbHtviMn0ReC6h4Y"
       />
+
+      <script 
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html:
+            `
+              var smarthintkey = "SH-565232";
+              (function () {
+                  var script = document.createElement('script');
+                  script.type = 'text/javascript';
+                  script.async = true;
+                  script.src = 'https://service.smarthint.co/Scripts/i/Vtex.min.js';
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(script, s);
+              })();
+            `
+          }}
+      />
     </>
   );
 });
