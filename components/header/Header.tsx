@@ -78,11 +78,13 @@ function Header({
   logo,
   theme = "light",
   isMobile,
-}: Props) {
+  isHome,
+}: ReturnType<typeof loader>) {
   const items = navItems ?? [];
 
   return (
     <header id="header" class="group/header h-[211px] md:h-[193px]">
+      {isHome && <h1 class='sr-only'>True Source</h1>}
       <Drawers
         menu={{ items, institutionalItems, socials, helpItems }}
         searchbar={searchbar}
@@ -114,6 +116,7 @@ export const loader = (
   ctx: LoaderContext,
 ) => {
   const isMobile = ctx.device === "mobile";
+  const isHome = new URL(req.url).pathname === "/";
 
-  return { ...props, isMobile };
+  return { ...props, isMobile, isHome };
 };

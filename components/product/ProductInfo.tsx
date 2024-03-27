@@ -17,6 +17,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 
 interface Props {
   page: ProductDetailsPage | null;
+  isMobile: boolean;
 }
 
 interface ProductDataProps {
@@ -80,7 +81,7 @@ function ProductData({
   );
 }
 
-function ProductInfo({ page }: Props) {
+function ProductInfo({ page, isMobile }: Props) {
   const id = useId();
 
   if (page === null) {
@@ -137,17 +138,8 @@ function ProductInfo({ page }: Props) {
       <div class="flex-none order-2 sm:order-1 max-[1000px]:w-full max-[1280px]:w-[500px] w-[664px] mx-auto">
         <GallerySlider page={page} />
       </div>
-      <div class="flex md:hidden flex-col gap-y-4 order-1 sm:order-2 pt-6">
-        <Breadcrumb itemListElement={breadcrumb.itemListElement} />
-        <ProductData
-          name={productName}
-          brandName={brandName}
-          productID={productID}
-          productGroupID={productGroupID}
-        />
-      </div>
-      <div class="flex flex-col gap-y-4 order-3">
-        <div class="hidden md:flex flex-col gap-y-4">
+      {isMobile && (
+        <div class="flex flex-col gap-y-4 order-1 sm:order-2 pt-6">
           <Breadcrumb itemListElement={breadcrumb.itemListElement} />
           <ProductData
             name={productName}
@@ -156,38 +148,54 @@ function ProductInfo({ page }: Props) {
             productGroupID={productGroupID}
           />
         </div>
-        {/* Sku Selector */}
-        <ProductSimilars product={product} current={currentVariantProperties} />
-        {/* Add to Cart and Favorites button | Prices */}
-        <AddToCartArea
-          product={product}
-          breadcrumbList={breadcrumbList}
-          price={price}
-          listPrice={listPrice}
-        />
-        {/* Shipping Simulation */}
-        <ShippingSimulation
-          items={[
-            {
-              id: Number(product.sku),
-              quantity: 1,
-              seller: seller,
-            },
-          ]}
-        />
-        {/* Analytics Event */}
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_item",
-            params: {
-              item_list_id: "product",
-              item_list_name: "Product",
-              items: [eventItem],
-            },
-          }}
-        />
-      </div>
+      )}
+      {!isMobile && (
+        <div class="flex flex-col gap-y-4 order-3">
+          <div class="flex-col gap-y-4">
+            <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+            <ProductData
+              name={productName}
+              brandName={brandName}
+              productID={productID}
+              productGroupID={productGroupID}
+            />
+          </div>
+          {/* Sku Selector */}
+          <ProductSimilars
+            product={product}
+            current={currentVariantProperties}
+          />
+          {/* Add to Cart and Favorites button | Prices */}
+          <AddToCartArea
+            product={product}
+            breadcrumbList={breadcrumbList}
+            price={price}
+            listPrice={listPrice}
+          />
+          {/* Shipping Simulation */}
+          <ShippingSimulation
+            items={[
+              {
+                id: Number(product.sku),
+                quantity: 1,
+                seller: seller,
+              },
+            ]}
+          />
+          {/* Analytics Event */}
+          <SendEventOnView
+            id={id}
+            event={{
+              name: "view_item",
+              params: {
+                item_list_id: "product",
+                item_list_name: "Product",
+                items: [eventItem],
+              },
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

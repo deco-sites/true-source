@@ -52,7 +52,7 @@ export default function FloatingButtons(
         <zapzapModal.Toggle class="absolute left-0 top-0 w-full h-full bg-black/30 opacity-0 peer-checked:group-[]:opacity-100" />
 
         <div class="lg:fixed lg:right-6 lg:bottom-20 max-w-[400px] w-[95%] mx-auto opacity-0 peer-checked:group-[]:opacity-100 z-10">
-          <div class='bg-[image:url("https://tfcucl.vteximg.com.br/arquivos/retangulo-titulo-whatsapp.png")] py-5'>
+          <div class='bg-[image:url("/image/fundo-zapzap.png")] py-5'>
             <div class="text-white text-center text-[17px] font-semibold leading-5 max-w-[300px] mx-auto">
               Olá! Preencha os campos abaixo para iniciar conversa no WhatsApp
             </div>

@@ -5,6 +5,7 @@ import type { ProductDetailsPage } from "apps/commerce/types.ts";
 import ProductInfo from "./ProductInfo.tsx";
 import Description from "./Description/Description.tsx";
 import Trustvox from "deco-sites/true-source/islands/Product/Trustvox.tsx";
+import { AppContext } from "deco-sites/true-source/apps/site.ts";
 
 /**
  * @titleBy matcher
@@ -42,7 +43,7 @@ export default function ProductMain(props: ReturnType<typeof loader>) {
   return (
     <div>
       <div class="container">
-        <ProductInfo page={props.page} />
+        <ProductInfo page={props.page} isMobile={props.isMobile} />
       </div>
       <Description sections={props.description?.sections ?? []} />
       <Trustvox
@@ -55,7 +56,7 @@ export default function ProductMain(props: ReturnType<typeof loader>) {
   );
 }
 
-export function loader(props: Props, req: Request) {
+export function loader(props: Props, req: Request, ctx: AppContext) {
   const description = (props.descriptions ?? []).find(
     (d) =>
       new URLPattern({ pathname: d.matcher }).test(
@@ -66,5 +67,6 @@ export function loader(props: Props, req: Request) {
   return {
     ...props,
     description,
+    isMobile: ctx.device !== "desktop",
   };
 }

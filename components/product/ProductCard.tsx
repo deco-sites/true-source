@@ -119,9 +119,9 @@ function ProductCard({
         <div class="absolute top-2.5 left-2.5 flex flex-col items-start gap-2">
           {/* Best seller */}
           {isBestSeller && (
-            <div class="rounded-full bg-orange text-white text-xs font-bold px-3 py-1.5 whitespace-nowrap">
+            <h2 class="rounded-full bg-orange text-white text-xs font-bold px-3 py-1.5 whitespace-nowrap">
               Mais vendidos
-            </div>
+            </h2>
           )}
 
           {/* Discount % */}
@@ -152,9 +152,9 @@ function ProductCard({
       </figure>
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col gap-2 lg:px-4 lg:gap-4 mt-4">
-        <h2 class="text-dark text-sm text-ellipsis font-bold line-clamp-2 h-10">
+        <h3 class="text-dark text-sm text-ellipsis font-bold line-clamp-2 h-10">
           {name}
-        </h2>
+        </h3>
 
         {/* Price and rating */}
         <div class="flex gap-2 h-7 lg:h-6">
