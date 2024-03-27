@@ -86,6 +86,8 @@ export interface Props {
   social?: SocialItem[];
   /** @title Seções */
   sections: Section[];
+  /** @title Links institucionais */
+  institutionalItems: Item[];
   /** @title Métodos de pagamento */
   payments?: {
     title?: string;
@@ -103,6 +105,7 @@ function Footer({
   payments,
   seoText,
   copyrightText,
+  institutionalItems,
 }: Props) {
   return (
     <footer class="w-full flex flex-col pt-14 pb-2 lg:pb-10 bg-ice">
@@ -114,7 +117,10 @@ function Footer({
           </div>
           <Divider />
           <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full pt-8 lg:py-10">
-            <FooterItems sections={sections} />
+            <FooterItems
+              sections={sections}
+              institutionalItems={institutionalItems}
+            />
           </div>
           <Divider />
           <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] py-8 lg:py-10">
