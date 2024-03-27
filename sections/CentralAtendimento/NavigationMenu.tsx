@@ -3,7 +3,7 @@ export default function Navigation() {
     <div class="sticky top-0 z-20 flex h-[104px] w-full flex-row overflow-hidden bg-white px-0 py-4  md:h-[432px] md:w-[275px] md:flex-col md:border-l-2  md:border-solid md:border-red md:px-14 md:py-10">
       <div class="flex h-full w-full flex-row gap-6 md:flex-col md:gap-8">
         <a
-          href="https://deco-sites-pave1.deno.dev/fale-conosco"
+          href="/fale-conosco"
           class="group flex items-center gap-4 border-b-[2px] border-b-red md:border-b-0"
         >
           <div class="flex items-center justify-center gap-4">
@@ -29,7 +29,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/perguntas-frequentes"
+          href="/perguntas-frequentes"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -55,7 +55,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/politica-de-privacidade"
+          href="/politica-de-privacidade"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -82,7 +82,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/troca-e-devolucao"
+          href="/troca-e-devolucao"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/politica-de-uso"
+          href="/politica-de-uso"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -134,7 +134,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/politica-de-entrega"
+          href="/politica-de-entrega"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -160,7 +160,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/frete-gratis"
+          href="/frete-gratis"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
@@ -186,7 +186,7 @@ export default function Navigation() {
         </a>
 
         <a
-          href="https://deco-sites-pave1.deno.dev/politica-de-pagamento"
+          href="/politica-de-pagamento"
           class="group flex items-center gap-4 md:border-b-0"
         >
           <div class="flex items-center justify-center">
