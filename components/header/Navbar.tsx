@@ -34,15 +34,10 @@ function Navbar(
     searchbar,
     logo,
     buttons,
-    logoPosition = "left",
     isMobile,
     helpItems,
   }: Props,
 ) {
-  const platform = usePlatform();
-  const { user } = useUser();
-  const isUserLoggedIn = Boolean(user.value?.email);
-
   const shortcutItems = items?.filter((item) => item.isShortcut);
 
   return (
@@ -50,9 +45,8 @@ function Navbar(
       {isMobile
         ? (
           <>
-            <div class="lg:hidden bg-white flex flex-col gap-[18px] w-full p-4 group-data-[micro-header='true']/header:rounded-b-[20px] 
-              group-data-[micro-header='true']/header:shadow-md group-data-[micro-header='true']/header:gap-0">
-              <div class="flex justify-between items-center gap-[10px] group-data-[micro-header='true']/header:h-[30px]">
+            <div class="group-data-[micro-header='true']/header:gap-0 flex flex-col gap-[18px] lg:hidden bg-white group-data-[micro-header='true']/header:shadow-md p-4 group-data-[micro-header='true']/header:rounded-b-[20px] w-full">
+              <div class="group-data-[micro-header='true']/header:h-[30px] flex justify-between items-center gap-[10px]">
                 {logo && (
                   <a
                     href="/"
@@ -64,16 +58,16 @@ function Navbar(
                       alt={logo.alt}
                       width={100}
                       height={36}
-                      class="min-w-[100px] group-data-[micro-header='true']/header:max-h-[30px] group-data-[micro-header='true']/header:max-w-[86px]"
+                      class="min-w-[100px] group-data-[micro-header='true']/header:max-w-[86px] group-data-[micro-header='true']/header:max-h-[30px]"
                     />
                   </a>
                 )}
 
-                <div class="w-full max-w-full hidden group-data-[micro-header='true']/header:block">
+                <div class="group-data-[micro-header='true']/header:block hidden w-full max-w-full">
                   <Searchbar searchbar={searchbar} />
                 </div>
 
-                <div class="flex items-center justify-between gap-[24px] group-data-[micro-header='true']/header:gap-4">
+                <div class="group-data-[micro-header='true']/header:gap-4 flex justify-between items-center gap-[24px]">
                   <div class="group-data-[micro-header='true']/header:hidden">
                     <MyAccount />
                   </div>
@@ -90,11 +84,11 @@ function Navbar(
                 </div>
               </div>
 
-              <div class="w-full max-w-full mx-auto group-data-[micro-header='true']/header:hidden">
+              <div class="group-data-[micro-header='true']/header:hidden mx-auto w-full max-w-full">
                 <Searchbar searchbar={searchbar} />
               </div>
 
-              <div class="w-full flex justify-between items-center gap-4 overflow-x-scroll no-scrollbar group-data-[micro-header='true']/header:hidden">
+              <div class="flex justify-between items-center gap-4 group-data-[micro-header='true']/header:hidden w-full overflow-x-scroll no-scrollbar">
                 {items?.map((item) => <NavItem item={item} />)}
               </div>
             </div>
@@ -102,9 +96,8 @@ function Navbar(
         )
         : (
           <>
-            <div class="relative bg-white w-full group-data-[micro-header='true']/header:rounded-b-[20px] 
-          group-data-[micro-header='true']/header:shadow-md px-2 xl:px-0">
-              <div class="hidden md:flex gap-1 xl:gap-[32px] items-center pt-[24.5px] group-data-[micro-header='true']/header:py-2 w-full max-w-[1360px] mx-auto">
+            <div class="relative bg-white group-data-[micro-header='true']/header:shadow-md px-2 xl:px-0 group-data-[micro-header='true']/header:rounded-b-[20px] w-full">
+              <div class="group-data-[micro-header='true']/header:py-2 md:flex items-center gap-1 xl:gap-[32px] hidden mx-auto pt-[24.5px] w-full max-w-[1360px]">
                 <div className="flex-none">
                   <a href="/" aria-label="Store logo" className="block">
                     <Image
@@ -112,12 +105,12 @@ function Navbar(
                       alt={logo?.alt ?? ""}
                       width={140}
                       height={49}
-                      class="lg:w-[140px] lg:h-[49px] w-[200px] group-data-[micro-header='true']/header:h-[34px] group-data-[micro-header='true']/header:w-[98px] "
+                      class="group-data-[micro-header='true']/header:h-[34px] group-data-[micro-header='true']/header:w-[98px] w-[200px] lg:w-[140px] lg:h-[49px]"
                     />
                   </a>
                 </div>
 
-                <div class="hidden group-data-[micro-header='true']/header:flex">
+                <div class="group-data-[micro-header='true']/header:flex hidden">
                   <ul className="flex gap-1 xl:gap-[32px] w-full">
                     {shortcutItems?.map((item) => <NavItem item={item} />)}
                   </ul>
@@ -127,17 +120,17 @@ function Navbar(
                   <Searchbar searchbar={searchbar} />
                 </div>
 
-                <div className="flex-none flex items-center justify-end gap-6 col-span-1 z-50">
+                <div className="z-50 flex flex-none justify-end items-center gap-6 col-span-1">
                   <MyAccount />
 
                   {!buttons?.hideWishlistButton && (
                     <a
-                      className="flex items-center text-xs gap-1"
+                      className="flex items-center gap-1 text-xs"
                       href={helpItems.url}
                     >
                       <button
                         type="button"
-                        className="flex btn btn-circle btn-sm btn-ghost gap-1"
+                        className="flex gap-1 btn btn-circle btn-ghost btn-sm"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -162,19 +155,19 @@ function Navbar(
                   )}
 
                   {!buttons?.hideCartButton && (
-                    <div className="flex items-center text-xs font-thin">
+                    <div className="flex items-center font-thin text-xs">
                       <CartButtonVTEX size="lg" />
                     </div>
                   )}
                 </div>
               </div>
 
-              <div class="hidden md:block group-data-[micro-header='true']/header:hidden mt-[18.5px]">
-                <ul class="w-full flex justify-between items-center max-w-[1360px] mx-auto px-4">
+              <div class="md:block hidden group-data-[micro-header='true']/header:hidden mt-[18.5px] mb-3">
+                <ul class="flex justify-between items-center mx-auto px-4 w-full max-w-[1360px]">
                   {items?.map((item) => (
                     <>
                       <NavItem item={item} />
-                      <li class={"benefitdot list-none last:hidden"} />
+                      <li class="last:hidden list-none benefitdot" />
                     </>
                   ))}
                 </ul>
