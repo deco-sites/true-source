@@ -8,10 +8,10 @@ interface Props {
 
 export default function NavigationPage({ sections }: Props) {
   return (
-    <div class="flex h-auto w-full flex-col sm:flex-row justify-center gap-8 px-10 pt-8 max-w-[1440px] mx-auto">
+    <div class="flex h-auto w-full flex-col sm:flex-row justify-center gap-8 px-10 py-8 max-w-[1440px] mx-auto">
       <Navigation />
 
-      <div class="flex h-[1606px] w-full flex-col justify-start gap-6">
+      <div class="flex w-full flex-col justify-start gap-6">
         {sections.map(renderSection)}
       </div>
     </div>
