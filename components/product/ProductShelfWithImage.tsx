@@ -55,7 +55,7 @@ function ProductShelf({
 
   return (
     <div
-      class={"flex flex-col lg:flex-row items-center justify-between md:px-10 px-4 gap-x-10 gap-y-6 pt-16 pb-24 max-w-[1448px] mx-auto" +
+      class={"flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pt-16 pb-24 max-w-[1448px] mx-auto" +
         (
           grayBackground ? " bg-ice" : ""
         ) + (
