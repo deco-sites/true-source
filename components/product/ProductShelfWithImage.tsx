@@ -6,6 +6,7 @@ import ProductCard from "deco-sites/true-source/components/product/ProductCard.t
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import { GrayBackgroundProps } from "deco-sites/true-source/sdk/types.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 interface ImageProps {
@@ -19,13 +20,18 @@ interface ImageProps {
   title: string;
 }
 
-export interface Props {
+export interface Props extends GrayBackgroundProps {
   /**
    * @title Produtos
    */
   products: Product[] | null;
   desktop: ImageProps;
   mobile: ImageProps;
+  /**
+   * @title Banner URL
+   * @description URL do banner
+   */
+  bannerUrl?: string;
 }
 
 function ProductShelf({
@@ -33,6 +39,10 @@ function ProductShelf({
   isMobile,
   desktop,
   mobile,
+  bannerUrl,
+  bottomRounded,
+  grayBackground,
+  topRounded,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -40,12 +50,31 @@ function ProductShelf({
     return null;
   }
 
+  const Wrapper = bannerUrl ? "a" : "div";
+  const props = bannerUrl ? { href: bannerUrl } : {};
+
   return (
     <div
-      class="flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-4 pt-16 pb-24"
+      class={"flex flex-col lg:flex-row items-center justify-between md:px-10 px-4 gap-x-10 gap-y-6 pt-16 pb-24 max-w-[1448px] mx-auto" +
+        (
+          grayBackground ? " bg-ice" : ""
+        ) + (
+          topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""
+        ) + (
+          bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
+        )}
       id={id}
     >
-      <div class="relative rounded-[20px] overflow-hidden -translate-y-4 max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]">
+      <Wrapper
+        {...props}
+        class="block relative rounded-[20px] overflow-hidden max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]"
+      >
+        <Icon
+          id="ShelfWithImageChevron"
+          width={30}
+          height={60}
+          class="text-white absolute top-1/2 -translate-y-1/2 right-10"
+        />
         <Image
           src={isMobile ? mobile.src : desktop.src}
           alt={isMobile ? mobile.title : desktop.title}
@@ -56,7 +85,7 @@ function ProductShelf({
         <span class="text-white font-bold font-lemon text-lg leading-6 max-w-[200px] absolute bottom-10 left-10">
           {isMobile ? mobile.title : desktop.title}
         </span>
-      </div>
+      </Wrapper>
 
       <div class="w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px] flex flex-col gap-8">
         <div class="relative mx-auto w-[95%]">
@@ -86,7 +115,12 @@ function ProductShelf({
           <div class="absolute top-[calc(100%+48px)] left-1/2 -translate-x-1/2 flex items-center gap-3">
             {products.map((_, index) => (
               <Slider.Dot index={index} class="group">
-                <div class="w-2 h-2 rounded-full bg-ice group-data-[active]:bg-dark transition-colors" />
+                <div
+                  class={"w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors" +
+                    (
+                      grayBackground ? " bg-gray" : " bg-ice"
+                    )}
+                />
               </Slider.Dot>
             ))}
           </div>

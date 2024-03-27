@@ -14,7 +14,7 @@ const MyAccount = () => {
         class={"flex items-center gap-2"}
         onClick={async () => {
           if (user.value?.email) {
-            globalThis.window.location.pathname = "/account";
+            globalThis.window.location.pathname = "/my-account";
           } else {
             const execute = () => {
               vtexIdScriptsLoaded.value = true;
@@ -40,7 +40,7 @@ const MyAccount = () => {
         <Icon id="Login" size={24} />
         {user.value?.email
           ? (
-            <p className="text-xs w-24 text-ellipsis text-left overflow-hidden">
+            <p className="text-xs w-24 text-ellipsis text-left overflow-hidden hidden lg:block">
               Olá,<br />
               {user.value?.givenName
                 ? <b>{user.value?.givenName}</b>

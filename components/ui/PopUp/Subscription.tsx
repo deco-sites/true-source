@@ -1,14 +1,12 @@
 import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
-import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { invoke } from "deco-sites/true-source/runtime.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import type { JSX } from "preact";
 import type { TargetedEvent } from "preact/compat";
 import { useCallback } from "preact/hooks";
-import { getCookies } from "std/http/cookie.ts";
 
 interface Props {
   /**
@@ -17,16 +15,7 @@ interface Props {
   topText: HTMLWidget;
 }
 
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies.hasSeenPopup === "true";
-
-  return { ...props, alreadySeenPopup };
-}
-
-export default function Coupon(
-  { topText, alreadySeenPopup }: ReturnType<typeof loader>,
-) {
+export default function Coupon({ topText }: Props) {
   const { user } = useUser();
   const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
@@ -50,42 +39,36 @@ export default function Coupon(
       return;
     }
 
-    globalThis.document.cookie = `hasSeenPopup=true;${`expires=${
+    globalThis.document.cookie = `hasSeenSubscriptionPopup=true;expires=${
       new Date(Date.now() + 1000 * 60 * 60 * 24).toUTCString()
-    }`};path=/`;
+    };path=/`;
   };
 
   useSignalEffect(() => {
-    if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
+    const alreadySeenPopup = document.cookie.includes(
+      "hasSeenSubscriptionPopup=true",
+    );
+
+    if (
+      alreadySeenPopup || displayPopup.peek() || finishedForm.peek() ||
+      !user.value
+    ) {
       return;
     }
 
-    if (!user.value && !displayPopup.peek()) {
-      displayPopup.value = true;
-      return;
-    }
-
-    /**
-     * Fetches user orders by email and displays a popup if the user has never made a purchase.
-     */
     const fetch = async () => {
       try {
         const data = await fetchUserOrdersByEmail();
 
-        console.log(data);
-
         if (!data || !data.list) {
-          displayPopup.value = true;
           return;
         }
 
-        const neverBoughtBefore = data.list.length === 0;
+        const boughtBefore = data.list.length > 0;
 
-        if (neverBoughtBefore) {
+        if (boughtBefore) {
           displayPopup.value = true;
         }
-
-        // globalThis.window.location.href = "/assinaturas";
       } catch (err) {
         console.error(err);
         displayPopup.value = false;
@@ -97,24 +80,23 @@ export default function Coupon(
     fetch();
   });
 
-  const handleFormSubmit = (e: TargetedEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
     loadingFormSubmit.value = true;
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
-
     try {
-      // await invoke.vtex.actions.masterdata.createDocument({
-      //   acronym: "CL",
-      //   data,
-      //   isPrivateEntity: true,
-      // });
+      await invoke.vtex.actions.masterdata.createDocument({
+        acronym: "CL",
+        data,
+        isPrivateEntity: true,
+      });
 
       finishedForm.value = true;
       setPopupAsSeen();
+      globalThis.window.location.href = "/assinatura";
     } catch (err) {
       console.error(err);
     } finally {
@@ -131,16 +113,14 @@ export default function Coupon(
     <>
       <button
         type="button"
-        onClick={() => {
-          displayPopup.value = false;
-        }}
+        onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
-        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+        class={`z-[51] bg-black/30 inset-0 fixed transition-all${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
       />
       <div
-        class={`max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+        class={`max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[52]${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
         style={{
@@ -165,9 +145,7 @@ export default function Coupon(
           </div>
           <button
             type="button"
-            onClick={() => {
-              displayPopup.value = false;
-            }}
+            onClick={handlePopupClose}
             aria-label="Fechar pop-up de cupom"
             class="absolute top-10 right-10 size-6 flex justify-center items-center cursor-pointer"
           >

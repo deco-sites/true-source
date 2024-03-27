@@ -21,7 +21,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
         <>
           {/* Tablet and Desktop view */}
           <ul
-            className={"hidden md:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]"}
+            className={"hidden lg:flex flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px]"}
           >
             {sections.map((section, index) => (
               <li
@@ -68,7 +68,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
           </ul>
 
           {/* Mobile view */}
-          <ul className="flex flex-col md:hidden ">
+          <ul className="flex flex-col lg:hidden ">
             <li>
               <div className="flex flex-col">
                 <span className="font-bold text-[13px] pb-[32px] font-lemon-milk">

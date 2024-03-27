@@ -1,56 +1,25 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { LoaderContext } from "deco/mod.ts";
-
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import Image from "apps/website/components/Image.tsx";
 
 /**  @titleBy alt */
 export interface Banner {
-  /**
-   * @title Imagem para desktop
-   */
+  /** @description Imagem para desktop */
   desktopSrc: ImageWidget;
-  /**
-   * @title Altura da imagem para desktop
-   * @description Deixar vazio para altura máxima da imagem
-   */
-  desktopHeight?: number;
-  /**
-   * @title Imagem para mobile
-   * @description Imagem para mobile caso seja diferente da imagem para desktop
-   */
-  mobileSrc?: ImageWidget;
-  /**
-   * @title Altura da imagem para mobile
-   * @description Deixar vazio para altura máxima da imagem
-   */
-  mobileHeight?: number;
+  /** @description Altura da imagem para desktop */
+  desktopHeight: number;
+  /** @description Imagem para mobile */
+  mobileSrc: ImageWidget;
+  /** @description Altura da imagem para mobile */
+  mobileHeight: number;
   /** @description Texto alternativo da imagem */
   alt: string;
 }
 
-const roundedMapping = {
-  bottom: "rounded-b-[20px]",
-  top: "rounded-t-[20px]",
-  full: "rounded-[20px]",
-};
-
-const textPositionMapping = {
-  left: "text-left justify-start",
-  center: "text-center justify-center",
-  right: "text-left justify-end",
-};
-
 export interface Content {
   /** @title Texto de destaque acima do título */
   tag?: string;
-  /** @title Imagem acima do título */
-  image?: {
-    src?: ImageWidget;
-    width?: number;
-    height?: number;
-  };
   /**
    * @title Título
    * @format textarea
@@ -61,7 +30,7 @@ export interface Content {
    * @format textarea
    */
   description?: string;
-  /** @title Botão */
+  /** @title Botão de cta */
   cta?: {
     text: string;
     link: string;
@@ -71,33 +40,26 @@ export interface Content {
 export interface Props {
   /** @title Imagens  */
   banner: Banner;
-  /** @title Posição do texto */
-  textPosition?: "left" | "center" | "right";
   /** @title Conteúdo do banner */
   content?: Content;
-  /** @title Banner é arredondado? */
-  rounded?: "bottom" | "top" | "full";
   /** @description Check this option when this banner is the biggest image on the screen for image optimizations */
   preload?: boolean;
   isMobile?: boolean;
 }
 
-function BannerInfo(
-  { banner, preload, isMobile, rounded, content, textPosition }: Props,
+function BannerInfoWithDivider(
+  { banner, preload, isMobile, content }: Props,
 ) {
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
-
-  const heightStyle = isMobile
-    ? (mobileHeight ? `${mobileHeight}px` : "auto")
-    : (desktopHeight ? `${desktopHeight}px` : "auto");
+  const height = isMobile ? mobileHeight : desktopHeight;
 
   return (
-    <div class="w-full relative">
+    <div class="w-full  relative">
       <Picture preload={preload}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={preload ? "high" : "auto"}
-          src={mobileSrc || desktopSrc}
+          src={mobileSrc}
           width={360}
           height={mobileHeight}
         />
@@ -109,49 +71,24 @@ function BannerInfo(
           height={600}
         />
         <img
-          class={`object-cover w-full 
-          ${rounded && roundedMapping[rounded]} 
-          `}
+          class="object-cover w-full"
           loading={preload ? "eager" : "lazy"}
           src={desktopSrc}
           alt={alt}
-          style={{ height: heightStyle }}
+          style={{ height: `${height}px` }}
         />
       </Picture>
 
-      <div
-        class={`absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[152px]
-        ${
-          textPosition
-            ? textPositionMapping[textPosition]
-            : "text-start justify-start"
-        }`}
-      >
-        <div
-          class={`flex flex-col w-full 
-        ${
-            textPosition === "center"
-              ? "items-center md:max-w-[50%]"
-              : "items-start max-w-[390px]"
-          }`}
-        >
+      <div class="absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[182px]">
+        <div class="flex flex-col w-full max-w-[475px]">
           {content?.tag &&
             (
-              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] fontWithGradient">
+              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] text-ice">
                 {content.tag}
               </span>
             )}
 
-          {content?.image &&
-            (
-              <Image
-                src={content?.image.src || ""}
-                width={content?.image.width || 0}
-                height={content?.image.height || 0}
-                alt=""
-                class={"mb-6"}
-              />
-            )}
+          <div class="w-full max-w-[475] border-b border-light-gray mb-8" />
 
           {content?.title &&
             (
@@ -162,7 +99,7 @@ function BannerInfo(
 
           {content?.description &&
             (
-              <p class="font-inter text-sm md:text-[16px] font-medium leading-[22px] md:leading-[27px] text-ice mb-8">
+              <p class="font-inter text-sm font-medium leading-[22px] md:leading-[27px] text-ice mb-8">
                 {content.description}
               </p>
             )}
@@ -188,7 +125,7 @@ function BannerInfo(
   );
 }
 
-export default BannerInfo;
+export default BannerInfoWithDivider;
 
 export const loader = (
   { ...props }: Props,

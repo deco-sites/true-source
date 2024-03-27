@@ -22,17 +22,8 @@ interface Props {
   couponCode: string;
 }
 
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies["hasSeenPopup"] === "true";
-
-  return { ...props, alreadySeenPopup };
-}
-
 export default function Coupon(
-  { discountPercentage, couponCode, alreadySeenPopup }: ReturnType<
-    typeof loader
-  >,
+  { discountPercentage, couponCode }: Props,
 ) {
   const { user } = useUser();
   const { addCouponsToCart } = useCart();
@@ -71,6 +62,8 @@ export default function Coupon(
   };
 
   useSignalEffect(() => {
+    const alreadySeenPopup = document.cookie.includes("hasSeenPopup=true");
+
     if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
       return;
     }
@@ -146,12 +139,12 @@ export default function Coupon(
         type="button"
         onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
-        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+        class={`z-[51] bg-black/30 inset-0 fixed transition-all${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
       />
       <div
-        class={`md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+        class={`md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[52]${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
         style={{

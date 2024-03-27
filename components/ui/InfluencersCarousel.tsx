@@ -32,7 +32,7 @@ function InfluencersCarousel({ title, cards }: Props) {
   return (
     <div
       id={id}
-      class="w-full max-w-[1440px] py-6 mx-auto flex flex-col pl-4 md:pl-0"
+      class="w-full max-w-[1440px] py-6 mx-auto flex flex-col"
     >
       {title && (
         <div class="flex flex-col items-center gap-5">
@@ -53,7 +53,10 @@ function InfluencersCarousel({ title, cards }: Props) {
             { image, name, occupation, user, description },
             index,
           ) => (
-            <Slider.Item index={index} class="flex carousel-item group">
+            <Slider.Item
+              index={index}
+              class="flex carousel-item group first:pl-4 last:pr-4"
+            >
               <div class="relative">
                 <Image
                   src={image}
@@ -82,45 +85,28 @@ function InfluencersCarousel({ title, cards }: Props) {
           ))}
         </Slider>
 
-        <>
-          <Slider.PrevButton>
-            <div class="hidden md:flex absolute top-[calc(50%-16px)] left-3 xl:left-[-60px] w-14 h-14 bg-white border border-stroke hover:bg-light-gray-200 justify-center items-center rounded-full transition-all ease-in-out duration-[400ms] cursor-pointer z-20">
-              <Icon
-                class="rotate-180"
-                width={16}
-                height={12}
-                id="ArrowNarrowRight"
-                strokeWidth={3}
-              />
-            </div>
-          </Slider.PrevButton>
-          <Slider.NextButton>
-            <div class="hidden md:flex absolute top-[calc(50%-16px)] right-3 xl:right-[-60px] w-14 h-14 bg-white border border-stroke hover:bg-light-gray-200 justify-center items-center rounded-full transition-all ease-in-out duration-[400ms] cursor-pointer z-20 ">
-              <Icon
-                class=""
-                width={16}
-                height={12}
-                id="ArrowNarrowRight"
-                strokeWidth={3}
-              />
-            </div>
-          </Slider.NextButton>
+        <Slider.PrevButton class="hidden md:flex absolute top-[calc(50%-16px)] left-3 xl:left-[-60px] size-14 bg-white border-2 border-Stroke rounded-full justify-center items-center disabled:pointer-events-none transition-all ease-in-out duration-[400ms] cursor-pointer z-20">
+          <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
+        </Slider.PrevButton>
 
-          <div class="mt-8 w-full h-fit grid place-items-center">
-            <ul class="carousel z-10 justify-center gap-1 flex-wrap">
-              {cards?.map((_, i) => (
-                <li class="carousel-item">
-                  <Slider.Dot index={i}>
-                    <div
-                      id={`${id}--${i}`}
-                      class="w-[5px] h-[5px] bg-ice rounded-full group-data-[active]:bg-dark duration-300"
-                    />
-                  </Slider.Dot>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
+        <Slider.NextButton class="hidden md:flex absolute top-[calc(50%-16px)] right-3 xl:right-[-60px] size-14 bg-white border-2 border-Stroke rounded-full justify-center items-center disabled:pointer-events-none transition-all ease-in-out duration-[400ms] cursor-pointer z-20">
+          <Icon size={24} id="ArrowRight" class="text-dark" />
+        </Slider.NextButton>
+
+        <div class="mt-8 w-full h-fit grid place-items-center">
+          <ul class="carousel z-10 justify-center gap-1 flex-wrap">
+            {cards?.map((_, i) => (
+              <li class="carousel-item">
+                <Slider.Dot index={i}>
+                  <div
+                    id={`${id}--${i}`}
+                    class="w-[5px] h-[5px] bg-ice rounded-full group-data-[active]:bg-dark duration-300"
+                  />
+                </Slider.Dot>
+              </li>
+            ))}
+          </ul>
+        </div>
         <SliderJS rootId={id} dotIsPage />
       </div>
     </div>

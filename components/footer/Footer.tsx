@@ -105,19 +105,19 @@ function Footer({
   copyrightText,
 }: Props) {
   return (
-    <footer class="w-full flex flex-col pt-14 pb-2 md:pb-10 bg-ice rounded-t-[35px]">
+    <footer class="w-full flex flex-col pt-14 pb-2 lg:pb-10 bg-ice">
       <div class="lg:container px-4 lg:mx-auto">
         <div class="flex flex-col items-center px-4">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full max-w-[326px] md:max-w-full lg:pb-6 lg:px-[72px] gap-x-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full max-w-[326px] md:max-w-full md:pb-6 md:px-[72px] gap-x-4">
             {newsletter && <Newsletter content={newsletter} />}
             <Social content={social} />
           </div>
           <Divider />
-          <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full pt-8 md:py-10">
+          <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between w-full pt-8 lg:py-10">
             <FooterItems sections={sections} />
           </div>
           <Divider />
-          <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] py-8 md:py-10">
+          <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 lg:justify-between w-full lg:px-[72px] py-8 lg:py-10">
             <PaymentMethods content={payments} />
           </div>
           <TextSEO

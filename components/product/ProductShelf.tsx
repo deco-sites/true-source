@@ -23,7 +23,7 @@ function ProductShelf({
   }
 
   return (
-    <div class="w-full max-w-[1364px] mx-auto flex flex-col gap-8 pt-16 pb-24">
+    <div class="w-full max-w-[1440px] mx-auto flex flex-col gap-8 pt-16 pb-24">
       <h2 class="text-dark font-bold text-lg font-lemon text-center">
         {title}
       </h2>

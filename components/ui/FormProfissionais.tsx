@@ -1,15 +1,16 @@
-import { useSignal } from "@preact/signals";
+import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
+import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 import useAccordion from "deco-sites/true-source/components/ui/useAccordion.tsx";
+import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import useCEP from "deco-sites/true-source/sdk/useCEP.ts";
 import type { JSX } from "preact";
 import { useRef } from "preact/hooks";
 import { debounce } from "std/async/debounce.ts";
-import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 
 interface Specialty {
   label: string;
@@ -177,7 +178,7 @@ const Checkbox = {
       />
       <span class="border-2 border-gray/80 w-5 h-5 rounded-md flex justify-center items-center peer-checked:border-0 peer-checked:bg-dark group">
         <Icon
-          id="Check"
+          id="CheckboxCheck"
           width={10}
           height={8}
           class="text-white hidden peer-checked:group-[]:block"
@@ -192,91 +193,98 @@ function Select({
   items,
   name,
   class: class_,
-  defaultValue,
+  value,
+  onChange,
 }: {
   placeholder: string;
   items: string[];
   name: string;
   class?: string;
-  defaultValue?: string;
+  value: string;
+  onChange: (value: string) => void;
 }) {
   const { Collapsable, Content, Trigger, ContentWrapper, close } =
     useCollapsable();
-  const selectedValue = useSignal(defaultValue ?? "");
   const hiddenSelect = useRef<HTMLSelectElement>(null);
 
   return (
-    <Collapsable class={clx("relative group/select-collapsable", class_)}>
-      <Trigger class="group/select">
-        <div class="rounded-md border border-Stroke group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
-          <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
-            {placeholder}
-          </label>
-          <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
-            {selectedValue}
-          </span>
-          <span class="ml-auto border-l border-Stroke h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
-            <Icon
-              id="ChevronDown"
-              width={16}
-              height={16}
-            />
-          </span>
-        </div>
-      </Trigger>
+    <>
+      <Collapsable class={clx("relative group/select-collapsable", class_)}>
+        <Trigger class="group/select">
+          <div class="rounded-md border border-Stroke group-has-[select:valid]:border-green group-has-[+select:focus]/select:border-dark shadow outline-0 text-sm w-full h-12 flex items-center pointer-events-none">
+            <label class="font-medium text-gray text-sm left-4 absolute top-1/2 -translate-y-1/2 [&:has(+:not(:empty))]:top-3.5 [&:has(+:not(:empty))]:text-[11px] transition-all">
+              {placeholder}
+            </label>
+            <span class="font-medium text-dark text-sm pl-3.5 translate-y-1.5 empty:opacity-0 delay-1000 transition-opacity">
+              {value}
+            </span>
+            <span class="ml-auto border-l border-Stroke group-has-[select:valid]:border-green h-full w-12 flex items-center justify-center transition-transform peer-checked:group-[]/select:rotate-180">
+              <Icon
+                id="ChevronDown"
+                width={16}
+                height={16}
+              />
+            </span>
+          </div>
+        </Trigger>
 
-      <select
-        ref={hiddenSelect}
-        class="sr-only w-full peer/select"
-        required
-        name={name}
-        value={selectedValue.value}
-        onChange={(e) => {
-          selectedValue.value = e.currentTarget.value;
-        }}
-      >
-        <option value="">{placeholder}</option>
-        {items.map((i) => (
-          <option value={i} selected={i === defaultValue}>{i}</option>
-        ))}
-      </select>
-
-      <ContentWrapper class="absolute top-full left-0 z-10 bg-white w-full rounded-bl-md rounded-br-md shadow-lg text-gray text-sm border border-Stroke">
-        <Content class="flex flex-col items-start max-h-[300px] overflow-y-auto overscroll-contain">
+        <select
+          ref={hiddenSelect}
+          class="sr-only w-full peer/select"
+          required
+          name={name}
+          onChange={(e) => {
+            onChange(e.currentTarget.value);
+          }}
+        >
+          <option value="">{placeholder}</option>
           {items.map((i) => (
-            <button
-              type="button"
-              onClick={(e) => {
-                hiddenSelect.current!.value = i;
-                selectedValue.value = i;
-                close();
-              }}
-              class={clx(
-                "w-full text-start pl-4 py-2 hover:bg-ice cursor-pointer",
-                selectedValue.value === i && "bg-ice",
-              )}
-            >
-              {i}
-            </button>
+            <option value={i} selected={i === value}>{i}</option>
           ))}
-        </Content>
-      </ContentWrapper>
-    </Collapsable>
+        </select>
+
+        <ContentWrapper class="absolute top-full left-0 z-10 bg-white w-full rounded-bl-md rounded-br-md shadow-lg text-gray text-sm border border-Stroke">
+          <Content class="flex flex-col items-start max-h-[300px] overflow-y-auto overscroll-contain">
+            {items.map((i) => (
+              <button
+                type="button"
+                onClick={(e) => {
+                  hiddenSelect.current!.value = i;
+                  hiddenSelect.current!.dispatchEvent(
+                    new Event("change", { bubbles: true }),
+                  );
+
+                  close();
+                }}
+                class={clx(
+                  "w-full text-start pl-4 py-2 hover:bg-ice cursor-pointer",
+                  hiddenSelect.current?.textContent === i && "bg-ice",
+                )}
+              >
+                {i}
+              </button>
+            ))}
+          </Content>
+        </ContentWrapper>
+      </Collapsable>
+    </>
   );
 }
 
 function Form2() {
   const { cep, loading, data, error } = useCEP();
 
-  const showLocation = useSignal(false);
-
-  if (data.value) {
-    showLocation.value = true;
-  }
-
   const cepDebounced = debounce((s: number) => {
     cep.value = s;
   }, 300);
+
+  const ufSignal = useSignal("");
+
+  useSignalEffect(() => {
+    if (data.value?.uf) {
+      ufSignal.value = data.value?.uf;
+    }
+  });
 
   return (
     <formAccordions.Accordion
@@ -354,74 +362,74 @@ function Form2() {
                   : null}
               </div>
 
-              {showLocation.value && (
-                <>
-                  <div class="text-gray font-sm font-medium my-4">
-                    Complete as informações do seu endereço
-                  </div>
+              <div class="text-gray font-sm font-medium my-4">
+                Complete as informações do seu endereço
+              </div>
 
-                  <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
-                    <Input.Container class="w-full sm:w-[70%]">
-                      <Input.Input
-                        type="text"
-                        name="city"
-                        required
-                        defaultValue={data.value?.city}
-                      />
-                      <Input.Label>Cidade *</Input.Label>
-                    </Input.Container>
+              <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
+                <Input.Container class="w-full sm:w-[70%]">
+                  <Input.Input
+                    type="text"
+                    name="city"
+                    required
+                    defaultValue={data.value?.localidade}
+                  />
+                  <Input.Label>Cidade *</Input.Label>
+                </Input.Container>
 
-                    <Select
-                      placeholder="Estado *"
-                      items={UFs}
-                      class="w-full sm:w-[calc(30%-8px)]"
-                      name="state"
-                      defaultValue={data.value?.state}
-                    />
+                <Select
+                  placeholder="Estado *"
+                  items={UFs}
+                  class="w-full sm:w-[calc(30%-8px)]"
+                  name="state"
+                  value={ufSignal.value}
+                  onChange={(s) => {
+                    ufSignal.value = s;
+                  }}
+                />
 
-                    <Input.Container class="w-full sm:w-[70%]">
-                      <Input.Input
-                        type="text"
-                        name="street"
-                        required
-                        defaultValue={data.value?.street}
-                      />
-                      <Input.Label>Rua *</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-[70%]">
+                  <Input.Input
+                    type="text"
+                    name="street"
+                    required
+                    defaultValue={data.value?.logradouro}
+                  />
+                  <Input.Label>Rua *</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-[calc(30%-8px)]">
-                      <Input.Input
-                        type="text"
-                        name="number"
-                        required
-                        onInput={(e) => {
-                          e.currentTarget.value = e.currentTarget.value
-                            .replace(/\D/g, "");
-                        }}
-                      />
-                      <Input.Label>Número *</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-[calc(30%-8px)]">
+                  <Input.Input
+                    type="text"
+                    name="number"
+                    required
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value
+                        .replace(/\D/g, "");
+                    }}
+                  />
+                  <Input.Label>Número *</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-1/2">
-                      <Input.Input
-                        type="text"
-                        name="complement"
-                      />
-                      <Input.Label>Complemento</Input.Label>
-                    </Input.Container>
+                <Input.Container class="w-full sm:w-1/2">
+                  <Input.Input
+                    type="text"
+                    name="complement"
+                    defaultValue={data.value?.complemento}
+                  />
+                  <Input.Label>Complemento</Input.Label>
+                </Input.Container>
 
-                    <Input.Container class="w-full sm:w-[calc(50%-8px)]">
-                      <Input.Input
-                        type="text"
-                        name="neighborhood"
-                        required
-                        defaultValue={data.value?.neighborhood}
-                      />
-                      <Input.Label>Bairro *</Input.Label>
-                    </Input.Container>
-                  </div>
-                </>
-              )}
+                <Input.Container class="w-full sm:w-[calc(50%-8px)]">
+                  <Input.Input
+                    type="text"
+                    name="neighborhood"
+                    required
+                    defaultValue={data.value?.bairro}
+                  />
+                  <Input.Label>Bairro *</Input.Label>
+                </Input.Container>
+              </div>
             </div>
 
             <button
@@ -442,6 +450,9 @@ const formAccordions = useAccordion("forms");
 export default function (
   { topText, specialties, supplements, services }: Props,
 ) {
+  const specialtySignal = useSignal("");
+  const formMessage = useSignal<"success" | "error" | null>(null);
+
   function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
@@ -489,6 +500,35 @@ export default function (
     const partnerships = get<HTMLInputElement>("[name=partnerships]").value;
     const meet = get<HTMLTextAreaElement>("[name=meet]").value;
 
+    // await invoke.vtex.actions.masterdata.createDocument({
+    //   acronym: "PR",
+    //   data: {
+    //     name,
+    //     specialty,
+    //     occupationArea: area,
+    //     id: cpf,
+    //     email,
+    //     whatsapp: tel,
+    //     instagram,
+    //     cep,
+    //     city,
+    //     uf: state,
+    //     street,
+    //     number,
+    //     complement,
+    //     neighborhood,
+    //     prescribe,
+    //     supplements: supplements.join(", "),
+    //     services: service,
+    //     nearbyStores: stores,
+    //     partnerships,
+    //     howDidYouMeet: meet,
+    //   },
+    //   isPrivateEntity: true,
+    // });
+
+    formMessage.value = "success";
+
     console.log({
       name,
       specialty,
@@ -514,11 +554,11 @@ export default function (
   }
 
   return (
-    <div class="py-36 bg-ice">
+    <div id="form-profissionais" class="py-36 bg-ice rounded-[40px]">
       <div class="max-w-[848px] mx-auto">
         <div
           dangerouslySetInnerHTML={{ __html: topText }}
-          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
+          class="[&_:is(h1,h2)]:font-lemon [&_:is(h1,h2)]:text-dark [&_:is(h1,h2)]:text-2xl md:[&_:is(h1,h2)]:text-[40px] [&_:is(h1,h2)]:font-bold [&_:is(h1,h2)]:leading-[1.1] text-gray font-medium leading-7 mb-16"
         />
 
         <div class="flex flex-col gap-2 w-[95%] mx-auto">
@@ -564,6 +604,10 @@ export default function (
                       placeholder="Especialidade *"
                       name="specialty"
                       items={specialties.map(({ label }) => label)}
+                      value={specialtySignal.value}
+                      onChange={(s) => {
+                        specialtySignal.value = s;
+                      }}
                     />
 
                     <Input.Container>
@@ -638,8 +682,9 @@ export default function (
                       <Input.Input
                         type="text"
                         name="instagram"
+                        required
                       />
-                      <Input.Label>Instagram</Input.Label>
+                      <Input.Label>Instagram *</Input.Label>
                     </Input.Container>
                   </div>
 
@@ -773,6 +818,18 @@ export default function (
                   >
                     Finalizar
                   </button>
+
+                  {formMessage.value === "success" && (
+                    <span class="block mt-5 text-green">
+                      Sua solicitação foi enviada com sucesso!
+                    </span>
+                  )}
+                  {formMessage.value === "error" && (
+                    <span class="block mt-5 text-red">
+                      Ocorreu um erro ao enviar sua solicitação, tente novamente
+                      mais tarde!
+                    </span>
+                  )}
                 </form>
               </formAccordions.Content>
             </formAccordions.ContentWrapper>

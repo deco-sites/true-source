@@ -1,4 +1,1 @@
-export {
-  default,
-  loader,
-} from "deco-sites/true-source/components/ui/CardsWithCta.tsx";
+export { default } from "deco-sites/true-source/components/ui/CardsWithCta.tsx";
