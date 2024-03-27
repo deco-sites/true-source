@@ -9,17 +9,13 @@ const runOnMount = () => {
       .querySelector("#header")
       ?.getBoundingClientRect().height ?? 0;
 
-    const footerHeight = document
-      .querySelector("#footer")
-      ?.getBoundingClientRect().height ?? 0;
-
     const iFrame = document.getElementById(
       "proxy-loader",
     ) as HTMLIFrameElement;
     if (!iFrame) {
       return console.error("Couldn't find iframe");
     }
-    iFrame.style.height = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
+    iFrame.height = `calc(100vh - ${headerHeight}px)`;
   };
 };
 
