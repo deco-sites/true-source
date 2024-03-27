@@ -5,13 +5,16 @@ interface Props {
 
 const runOnMount = () => {
   globalThis.onload = () => {
+    const headerHeight = document
+      .querySelector("#header")
+      ?.getBoundingClientRect().height ?? 0;
     const iFrame = document.getElementById(
       "proxy-loader",
     ) as HTMLIFrameElement;
     if (!iFrame) {
       return console.error("Couldn't find iframe");
     }
-    iFrame.height = `${iFrame.contentWindow?.document.body.scrollHeight}`;
+    iFrame.height = `calc(100vh - ${headerHeight}px)`;
   };
 };
 

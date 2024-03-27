@@ -128,8 +128,7 @@ export default function FloatingButtons(
 
       <floatingMobileModal.Modal
         class={clx(
-          "fixed right-5 bottom-[72px] lg:bottom-3 flex-col lg:flex-row justify-center items-center gap-2",
-          isMobile ? "hidden peer-checked:flex" : "flex",
+          "fixed right-5 bottom-[72px] lg:bottom-3 flex-col lg:flex-row justify-center items-center gap-2 z-40 max-lg:hidden max-lg:peer-checked:flex lg:flex",
         )}
       >
         <zapzapModal.Toggle class="shadow bg-white lg:bg-green h-10 flex items-center gap-2 px-6 rounded-full text-dark lg:text-white font-bold text-sm cursor-pointer select-none">
@@ -145,7 +144,7 @@ export default function FloatingButtons(
 
       {isMobile && (
         <div>
-          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center">
+          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center z-10">
             <Icon
               id="FloatingChat"
               width={20}

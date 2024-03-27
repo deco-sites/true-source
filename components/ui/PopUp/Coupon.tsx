@@ -24,7 +24,7 @@ interface Props {
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
   const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies["hasSeenPopup"] === "true";
+  const alreadySeenPopup = cookies.hasSeenPopup === "true";
 
   return { ...props, alreadySeenPopup };
 }

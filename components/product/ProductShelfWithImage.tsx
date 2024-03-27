@@ -55,7 +55,7 @@ function ProductShelf({
 
   return (
     <div
-      class={"flex flex-col lg:flex-row items-center justify-between md:px-10 px-4 gap-x-10 gap-y-4 pt-16 pb-24 max-w-[1448px] mx-auto" +
+      class={"flex flex-col lg:flex-row items-center justify-between md:px-10 px-4 gap-x-10 gap-y-6 pt-16 pb-24 max-w-[1448px] mx-auto" +
         (
           grayBackground ? " bg-ice" : ""
         ) + (
@@ -67,12 +67,18 @@ function ProductShelf({
     >
       <Wrapper
         {...props}
-        class="block relative rounded-[20px] overflow-hidden -translate-y-4 max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]"
+        class="block relative rounded-[20px] overflow-hidden max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]"
       >
+        <Icon
+          id="ShelfWithImageChevron"
+          width={30}
+          height={60}
+          class="text-white absolute top-1/2 -translate-y-1/2 right-10"
+        />
         <Image
           src={isMobile ? mobile.src : desktop.src}
           alt={isMobile ? mobile.title : desktop.title}
-          width={isMobile ? 450 : 320}
+          width={450}
           height={isMobile ? 260 : 450}
           class="h-[260px] max-lg:w-full lg:h-[450px] object-cover"
         />

@@ -443,4 +443,13 @@ export const RatingStar = `<svg id="RatingStar" width="14" height="13" viewBox="
 				fill="#E9B90E" />
 		</svg>`;
 
-export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning, PlayCircle, PlusCircle, MinusCircle, StarIcon, HeartFill, FloatingWhatsApp, FloatingChat, FloatingX, StarIconWhite, ThinShoppingCart, ThinUser, CashBack, RatingStar };
+export const CheckboxCheck = `<svg id="CheckboxCheck" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M9 1L3.5 6.5L1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+				stroke-linejoin="round" />
+		</svg>`;
+export const ShelfWithImageChevron = `<svg id="ShelfWithImageChevron" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M1.5 59L30.5 30L1.5 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+				stroke-linejoin="round" />
+		</svg>`;
+
+export const AvailableIcons = { Check, StrokeArrowRight, BannerArrowRight, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, User, ShoppingCart, Bars3, Heart, MagnifyingGlass, XMark, Plus, Minus, MapPin, Phone, Elos, Mastercards, Visas, Pixs, Instagram, Truck, Discount, Return, CreditCards, Deco, Discord, FilterList, Trash, WhatsApp, ArrowsPointingOut, Star, Ruler, Message, Close, Zoom, Twitter, Facebook, Linkedin, Tiktok, Elo, Diners, Mastercard, Pix, Visa, Alert, AlertInfo, AlertSuccess, AlertWarning, AlertError, share, CheckCircle, CloseCircle, X, ArrowRight, ArrowNarrowRight, Help, Login, OpenMobile, CloseMobile, IconDesktop, IconMobile, Refresh, Warning, PlayCircle, PlusCircle, MinusCircle, StarIcon, HeartFill, FloatingWhatsApp, FloatingChat, FloatingX, StarIconWhite, ThinShoppingCart, ThinUser, CashBack, RatingStar, CheckboxCheck, ShelfWithImageChevron };

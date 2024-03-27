@@ -6,6 +6,7 @@ export type AvailableIcons =
   | "AlertError"
   | "CheckboxCheck"
   | "AlertInfo"
+  | "ShelfWithImageChevron"
   | "AlertSuccess"
   | "AlertWarning"
   | "ArrowNarrowRight"
