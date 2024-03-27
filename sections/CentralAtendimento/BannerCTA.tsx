@@ -47,12 +47,12 @@ export default function BannerCTA(
         </div>
 
         <div class="flex w-full h-[400px] items-center justify-center gap-2 bg-gradient-to-r from-red to-orange md:rounded-l-2xl md:rounded-r-none rounded-b-2xl">
-          <div class="flex gap-6 h-auto w-[283px] flex-col p-4">
-            <h2 class="font-lemon-milk text-[16px] font-bold text-white">
+          <div class="flex gap-6 h-auto w-[283px] flex-col">
+            <h2 class="font-lemon-milk text-[16px] font-bold text-white leading-[21.61px]">
               {title}
             </h2>
 
-            <p class="font-inter text-[14px] font-medium text-[#CCCCCA] leading-[180%]">
+            <p class="font-inter text-[14px] font-medium text-[#CCCCCA] leading-[25.2px]">
               {description}
             </p>
             <button

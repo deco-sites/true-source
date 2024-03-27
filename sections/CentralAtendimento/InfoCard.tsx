@@ -19,7 +19,7 @@ export default function InfoCard(
     & IconProps,
 ) {
   return (
-    <div class="flex flex-col h-full w-full gap-6 rounded-xl border border-light-gray p-8 md:p-16">
+    <div class="flex flex-col gap-7 md:gap-0 h-full w-full rounded-xl border border-light-gray p-8 md:p-16">
       <div class="flex items-center w-full max-w-[925px] gap-6">
         <Image
           src={srcIcon}
@@ -27,11 +27,11 @@ export default function InfoCard(
           height={iconWidth}
           class="h-fit"
         />
-        <h2 class="font-lemon-milk flex w-full justify-start text-nowrap leading-normal tracking-tight text-[16px] font-bold text-dark sm:text-[16px]">
+        <h2 class="font-lemon-milk flex w-full justify-start text-nowrap tracking-tight text-[16px] font-bold text-dark sm:text-[16px] leading-[21.61px]">
           {titleInfoCard}
         </h2>
       </div>
-      <p class="font-inter text-[14px] font-normal text-dark tracking-tighter leading-[174%] md:ml-[65px]">
+      <p class="font-inter text-[14px] font-normal text-dark tracking-tighter leading-[24.36px] md:ml-[65px]">
         {descriptionInfoCard}
       </p>
     </div>

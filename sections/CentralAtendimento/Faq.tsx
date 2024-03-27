@@ -99,13 +99,13 @@ export default function FAQ({
 
   return (
     <div id={rootId}>
-      <div class="flex flex-row gap-2 mb-6 w-full overflow-x-scroll no-scrollbar">
+      <div class="flex flex-row gap-2 mb-6 md:mb-10 w-full overflow-x-scroll no-scrollbar">
         {tags?.map((tag, index) => (
           <button
             data-tag={index === 0 ? "none" : tag}
             data-active={index === 0}
             type="button"
-            class="bg-white hover:bg-ice data-[active='true']:hover:bg-[#2A2A2A] data-[active='true']:bg-[#3C3C3B] shadow-sm p-3 rounded-full font-bold text-[14px] data-[active='true']:text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 capitalize shrink-0"
+            class="bg-white hover:bg-ice data-[active='true']:hover:bg-[#2A2A2A] data-[active='true']:bg-[#3C3C3B] shadow-sm px-3 h-[34px] rounded-full font-bold text-[14px] data-[active='true']:text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 capitalize shrink-0 border border-ice"
           >
             {tag}
           </button>
@@ -122,7 +122,7 @@ export default function FAQ({
             <CloseButton id={id} />
             <OpenButton id={id} index={index} />
             <div
-              class={"w-full h-fit col-start-1 row-start-1 cursor-pointer flex justify-between gap-3 items-center px-6 py-4 md:p-8 md:leading-[16px]" +
+              class={"w-full h-fit col-start-1 row-start-1 cursor-pointer flex justify-between gap-3 items-center px-6 py-4 md:px-8 md:py-[34px] md:leading-[16px]" +
                 " peer-checked/open:[&_[data-closed-icon]]:opacity-0 peer-checked/open:[&_[data-closed-icon]]:rotate-90" +
                 " peer-checked/open:[&_[data-opened-icon]]:opacity-100 peer-checked/open:[&_[data-opened-icon]]:rotate-180"}
             >
