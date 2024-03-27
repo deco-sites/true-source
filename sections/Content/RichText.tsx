@@ -14,6 +14,7 @@ export default function RichText(
   return (
     <div
       dangerouslySetInnerHTML={{ __html: text }}
+      class="break-words"
       style={{
         maxWidth: containerWidth ? containerWidth : 1440,
         margin: "0 auto",

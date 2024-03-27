@@ -1,17 +1,20 @@
-import { Section } from "deco/blocks/section.ts";
-import { renderSection } from "apps/website/pages/Page.tsx";
+import Card, {
+  Props as CardProps,
+} from "deco-sites/true-source/sections/CentralAtendimento/CardNumbered.tsx";
 
 interface Props {
-  sections: Section[];
+  cards: CardProps[];
 }
 
-export default function CardNumbered({ sections }: Props) {
+export default function CardNumbered({ cards }: Props) {
   return (
-    <div class="flex w-full h-full flex-col gap-2 sm:flex-row">
-      {sections.map((section, index) => (
-        <div key={index} class="w-full h-full">
-          {renderSection(section)}
-        </div>
+    <div class="flex sm:flex-row flex-col gap-2 w-full h-full">
+      {cards.map((props, index) => (
+        <Card
+          {...props}
+          key={index}
+          index={index}
+        />
       ))}
     </div>
   );

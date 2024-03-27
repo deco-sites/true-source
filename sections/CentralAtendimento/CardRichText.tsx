@@ -12,8 +12,9 @@ export default function RichText(
   { text = DEFAULT_TEXT, containerWidth }: Props,
 ) {
   return (
-    <div class="flex w-full h-auto flex-col gap-6 p-8 lg:p-16 border rounded-xl border-[#D2D2D2] text-[#3C3C3B] text-sm leading-[24.36px]">
+    <div class="flex flex-col gap-6 p-8 lg:p-16 border border-light-gray rounded-xl w-full h-auto text-[14px] text-dark text-sm leading-[24.36px]">
       <div
+        class="break-words"
         dangerouslySetInnerHTML={{ __html: text }}
         style={{
           maxWidth: containerWidth ? containerWidth : 1440,

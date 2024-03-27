@@ -1,7 +1,7 @@
-import { Section } from "deco/blocks/section.ts";
-import { renderSection } from "apps/website/pages/Page.tsx";
-import Navigation from "deco-sites/true-source/sections/CentralAtendimento/NavigationMenu.tsx";
 import { NavigationLoader } from "deco-sites/true-source/loaders/centralNavigation.ts";
+import Navigation from "deco-sites/true-source/sections/CentralAtendimento/NavigationMenu.tsx";
+import { Section } from "deco/blocks/section.ts";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 interface Props {
   sections: Section[];
@@ -14,7 +14,9 @@ export default function NavigationPage({ sections, loader }: Props) {
       <Navigation loader={loader} />
 
       <div class="flex flex-col justify-start gap-6 w-full">
-        {sections.map(renderSection)}
+        {sections.map(({ Component, props }) =>
+          Component ? <Component key={useId()} {...props} /> : <></>
+        )}
       </div>
     </div>
   );
