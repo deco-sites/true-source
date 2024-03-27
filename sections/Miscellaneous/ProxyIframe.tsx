@@ -15,7 +15,7 @@ const runOnMount = () => {
     if (!iFrame) {
       return console.error("Couldn't find iframe");
     }
-    iFrame.height = `calc(100vh - ${headerHeight}px)`;
+    iFrame.style.height = `calc(100vh - ${headerHeight}px)`;
   };
 };
 
