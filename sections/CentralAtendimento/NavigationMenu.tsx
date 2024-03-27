@@ -1,6 +1,6 @@
 export default function Navigation() {
   return (
-    <div class="sticky top-0 z-20 flex h-[104px] w-full flex-row overflow-hidden bg-white px-0 py-4  md:h-[432px] md:w-[275px] md:flex-col md:border-l-2  md:border-solid md:border-red md:px-14 md:py-10">
+    <div class="sticky top-0 md:top-[100px] z-20 flex h-[104px] w-full flex-row overflow-hidden bg-white px-0 py-4 md:h-[432px] md:w-[275px] md:flex-col md:border-l-2 md:border-solid md:border-red md:px-14 md:py-10">
       <div class="flex h-full w-full flex-row gap-6 md:flex-col md:gap-8">
         <a
           href="/fale-conosco"

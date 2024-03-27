@@ -3,8 +3,17 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 export interface BannerProps {
+  /**
+   * @title Imagem do Mobile
+   */
   srcMobile: ImageWidget;
+  /**
+   * @title Imagem do Desktop
+   */
   srcDesktop?: ImageWidget;
+  /**
+   * @title Título
+   */
   title: string;
 }
 
@@ -12,8 +21,8 @@ export default function CabecalhoCentralAtendimento(
   { srcMobile, srcDesktop, title }: BannerProps,
 ) {
   return (
-    <div className="flex flex-col relative w-full h-[170px] md:h-[240px] justify-center items-center">
-      <Picture>
+    <div class="flex flex-col relative w-full h-[170px] md:h-[240px] justify-center items-center">
+      <Picture class="h-full" preload={true}>
         <Source
           width={390}
           height={170}
@@ -28,15 +37,15 @@ export default function CabecalhoCentralAtendimento(
         />
         <Image
           width={640}
-          className="w-full h-full object-cover rounded-b-3xl"
+          class="w-full h-full object-cover rounded-b-3xl"
           src={srcMobile}
           alt="Banner"
-          decoding="async"
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
         />
       </Picture>
 
-      <p className="absolute text-2xl w-[188px] h-[44px] sm:w-auto sm:h-auto sm:text-4xl text-center text-ice font-bold font-lemon-milk z-20">
+      <p class="absolute text-2xl w-[188px] h-[44px] sm:w-auto sm:h-auto sm:text-4xl text-center text-ice font-bold font-lemon-milk z-20">
         {title}
       </p>
 
