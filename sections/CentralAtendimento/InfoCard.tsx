@@ -30,16 +30,6 @@ export default function InfoCard(
         <h2 class="font-lemon-milk flex w-full justify-start text-nowrap leading-normal tracking-tight text-[16px] font-bold text-dark sm:text-[16px]">
           {titleInfoCard}
         </h2>
-        {
-          /* <div class="flex w-[278px] flex-col gap-6 sm:w-[861px] mt-[7px]">
-          <h2 class="font-lemon-milk flex w-full justify-start text-nowrap leading-normal tracking-tight text-[16px] font-bold text-dark sm:text-[16px]">
-            {titleInfoCard}
-          </h2>
-          <p class="font-inter text-[14px] font-normal text-dark tracking-tighter leading-[174%] -ml-[60px] md:ml-0">
-            {descriptionInfoCard}
-          </p>
-        </div> */
-        }
       </div>
       <p class="font-inter text-[14px] font-normal text-dark tracking-tighter leading-[174%] md:ml-[65px]">
         {descriptionInfoCard}

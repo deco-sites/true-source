@@ -20,7 +20,6 @@ export default function FooterItems(
     institutionalItems: Item[];
   },
 ) {
-  console.log(institutionalItems);
   return (
     <>
       {sections.length > 0 && (
