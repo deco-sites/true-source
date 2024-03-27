@@ -14,7 +14,7 @@ const MyAccount = () => {
         class={"flex items-center gap-2"}
         onClick={async () => {
           if (user.value?.email) {
-            globalThis.window.location.pathname = "/my-account";
+            globalThis.window.location.pathname = "/account";
           } else {
             const execute = () => {
               vtexIdScriptsLoaded.value = true;

@@ -10,6 +10,10 @@ export interface Props {
   /** @default 1 */
   columns: "1" | "2";
   title: HTMLWidget;
+  /**
+   * @title O título é um h1?
+   */
+  titleIsH1?: boolean;
   description: HTMLWidget;
   background?: string;
   cta?: CTA;
@@ -23,7 +27,10 @@ export default function OnlyText({
     "Os suplementos ajudam a melhorar a resistência física, auxiliam no ganho de massa magra e também na recuperação muscular, além de diversos outros benefícios para você que busca hipertrofia ou definição muscular.\n\nProduzidos com substâncias naturais, nossos produtos são desenvolvidos por especialistas de peso e formulados com produtos altamente eficientes e, claro, muito saborosos. Para te ajudar a alcançar seus objetivos de treino, a True Source dispõe de tudo o que você precisa em proteínas, aminoácidos, termogênicos e vitaminas e minerais. Venha com a gente e conheça um pouco mais de nossos suplementos!",
   background = "#fff",
   cta,
+  titleIsH1,
 }: Props) {
+  const Title = titleIsH1 ? "h1" : "h2";
+
   return (
     <div className="md:container">
       <div
@@ -65,7 +72,7 @@ export default function OnlyText({
               />
             </svg>
           </div>
-          <h2
+          <Title
             class="custom-category-title m-0"
             dangerouslySetInnerHTML={{ __html: title }}
           />

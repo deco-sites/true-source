@@ -25,6 +25,7 @@ interface ProductDataProps {
   brandName: string;
   productID: string;
   productGroupID: string;
+  isMobile: boolean;
 }
 
 function ProductData({
@@ -32,6 +33,7 @@ function ProductData({
   productID,
   productGroupID,
   brandName,
+  isMobile,
 }: ProductDataProps) {
   return (
     <>
@@ -42,38 +44,41 @@ function ProductData({
             {name}
           </span>
         </h1>
-        <div class="hidden sm:block">
-          <ProductStars
-            storeId="113397"
-            productId={productGroupID}
-          />
-        </div>
-        <div class="hidden sm:block">
-          <WishlistButtonVtex
-            variant="full"
-            productID={productID}
-            productGroupID={productGroupID}
-          />
-        </div>
+        {!isMobile && (
+          <>
+            <ProductStars
+              storeId="113397"
+              productId={productGroupID}
+            />
+
+            <WishlistButtonVtex
+              variant="full"
+              productID={productID}
+              productGroupID={productGroupID}
+            />
+          </>
+        )}
       </div>
       {/* Brand */}
       <div class="flex items-center justify-between">
         <span class="text-sm sm:text-base font-medium color-dark sm:text-light-gray">
           {brandName}
         </span>
-        <div class="block sm:hidden">
-          <ProductStars
-            storeId="113397"
-            productId={productGroupID}
-          />
-        </div>
-        <div class="block sm:hidden">
-          <WishlistButtonVtex
-            variant="full"
-            productID={productID}
-            productGroupID={productGroupID}
-          />
-        </div>
+
+        {isMobile && (
+          <>
+            <ProductStars
+              storeId="113397"
+              productId={productGroupID}
+            />
+
+            <WishlistButtonVtex
+              variant="full"
+              productID={productID}
+              productGroupID={productGroupID}
+            />
+          </>
+        )}
       </div>
       {/* Divider */}
       <div class="hidden sm:block border-b border-light-gray-200 w-full" />
@@ -146,56 +151,55 @@ function ProductInfo({ page, isMobile }: Props) {
             brandName={brandName}
             productID={productID}
             productGroupID={productGroupID}
+            isMobile={isMobile}
           />
         </div>
       )}
-      {!isMobile && (
-        <div class="flex flex-col gap-y-4 order-3">
-          <div class="flex-col gap-y-4">
+      <div class="flex flex-col gap-y-4 order-3">
+        {!isMobile && (
+          <div class="flex flex-col gap-y-4">
             <Breadcrumb itemListElement={breadcrumb.itemListElement} />
             <ProductData
               name={productName}
               brandName={brandName}
               productID={productID}
               productGroupID={productGroupID}
+              isMobile={isMobile}
             />
           </div>
-          {/* Sku Selector */}
-          <ProductSimilars
-            product={product}
-            current={currentVariantProperties}
-          />
-          {/* Add to Cart and Favorites button | Prices */}
-          <AddToCartArea
-            product={product}
-            breadcrumbList={breadcrumbList}
-            price={price}
-            listPrice={listPrice}
-          />
-          {/* Shipping Simulation */}
-          <ShippingSimulation
-            items={[
-              {
-                id: Number(product.sku),
-                quantity: 1,
-                seller: seller,
-              },
-            ]}
-          />
-          {/* Analytics Event */}
-          <SendEventOnView
-            id={id}
-            event={{
-              name: "view_item",
-              params: {
-                item_list_id: "product",
-                item_list_name: "Product",
-                items: [eventItem],
-              },
-            }}
-          />
-        </div>
-      )}
+        )}
+        {/* Sku Selector */}
+        <ProductSimilars product={product} current={currentVariantProperties} />
+        {/* Add to Cart and Favorites button | Prices */}
+        <AddToCartArea
+          product={product}
+          breadcrumbList={breadcrumbList}
+          price={price}
+          listPrice={listPrice}
+        />
+        {/* Shipping Simulation */}
+        <ShippingSimulation
+          items={[
+            {
+              id: Number(product.sku),
+              quantity: 1,
+              seller: seller,
+            },
+          ]}
+        />
+        {/* Analytics Event */}
+        <SendEventOnView
+          id={id}
+          event={{
+            name: "view_item",
+            params: {
+              item_list_id: "product",
+              item_list_name: "Product",
+              items: [eventItem],
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

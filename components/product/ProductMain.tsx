@@ -1,11 +1,10 @@
-import type { Section } from "deco/blocks/section.ts";
-import { searchSlugify } from "deco-sites/true-source/components/utils/slugify.ts";
 import type { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { Section } from "deco/blocks/section.ts";
 
-import ProductInfo from "./ProductInfo.tsx";
-import Description from "./Description/Description.tsx";
-import Trustvox from "deco-sites/true-source/islands/Product/Trustvox.tsx";
 import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import Trustvox from "deco-sites/true-source/islands/Product/Trustvox.tsx";
+import Description from "./Description/Description.tsx";
+import ProductInfo from "./ProductInfo.tsx";
 
 /**
  * @titleBy matcher
