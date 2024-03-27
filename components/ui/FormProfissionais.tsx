@@ -1,16 +1,15 @@
 import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
-import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
 import useAccordion from "deco-sites/true-source/components/ui/useAccordion.tsx";
 import useCollapsable from "deco-sites/true-source/components/ui/useCollapsable.tsx";
+import { invoke } from "deco-sites/true-source/runtime.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import useCEP from "deco-sites/true-source/sdk/useCEP.ts";
 import type { JSX } from "preact";
 import { useRef } from "preact/hooks";
 import { debounce } from "std/async/debounce.ts";
-import { invoke } from "deco-sites/true-source/runtime.ts";
 
 interface Specialty {
   label: string;
@@ -401,8 +400,9 @@ function Form2() {
                 <Input.Container class="w-full sm:w-[calc(30%-8px)]">
                   <Input.Input
                     type="text"
-                    name="number"
+                    name="profissional-number"
                     required
+                    maxLength={10}
                     onInput={(e) => {
                       e.currentTarget.value = e.currentTarget.value
                         .replace(/\D/g, "");
@@ -445,15 +445,13 @@ function Form2() {
   );
 }
 
-const formAccordions = useAccordion("forms");
-
-export default function (
-  { topText, specialties, supplements, services }: Props,
-) {
-  const specialtySignal = useSignal("");
+function Form3({ supplements, services }: {
+  supplements: Suplement[];
+  services: Service[];
+}) {
   const formMessage = useSignal<"success" | "error" | null>(null);
 
-  function afterAllForms() {
+  async function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
 
@@ -463,11 +461,7 @@ export default function (
     }
 
     function getAll<T extends HTMLElement>(s: string): T[] | never {
-      const els = document.querySelectorAll<T>(s);
-
-      if (!els.length) throw new Error(`Element not found: ${s}`);
-
-      return [...els];
+      return [...document.querySelectorAll<T>(s)];
     }
 
     // Form 1
@@ -475,8 +469,8 @@ export default function (
     const specialty = get<HTMLSelectElement>("[name=specialty]").value;
     const area = get<HTMLInputElement>("[name=area]").value;
     const cpf = get<HTMLInputElement>("[name=cpf]").value.replace(/-|\./g, "");
-    const email = get<HTMLInputElement>("[name=email]").value;
-    const tel = get<HTMLInputElement>("[name=tel]").value.replace(
+    const email = get<HTMLInputElement>("[name=profissional-email]").value;
+    const tel = get<HTMLInputElement>("[name=profissional-tel]").value.replace(
       / |-|\(|\)/g,
       "",
     );
@@ -487,7 +481,7 @@ export default function (
     const city = get<HTMLInputElement>("[name=city]").value;
     const state = get<HTMLSelectElement>("[name=state]").value;
     const street = get<HTMLInputElement>("[name=street]").value;
-    const number = get<HTMLInputElement>("[name=number]").value;
+    const number = get<HTMLInputElement>("[name=profissional-number]").value;
     const complement = get<HTMLInputElement>("[name=complement]").value;
     const neighborhood = get<HTMLInputElement>("[name=neighborhood]").value;
 
@@ -500,32 +494,32 @@ export default function (
     const partnerships = get<HTMLInputElement>("[name=partnerships]").value;
     const meet = get<HTMLTextAreaElement>("[name=meet]").value;
 
-    // await invoke.vtex.actions.masterdata.createDocument({
-    //   acronym: "PR",
-    //   data: {
-    //     name,
-    //     specialty,
-    //     occupationArea: area,
-    //     id: cpf,
-    //     email,
-    //     whatsapp: tel,
-    //     instagram,
-    //     cep,
-    //     city,
-    //     uf: state,
-    //     street,
-    //     number,
-    //     complement,
-    //     neighborhood,
-    //     prescribe,
-    //     supplements: supplements.join(", "),
-    //     services: service,
-    //     nearbyStores: stores,
-    //     partnerships,
-    //     howDidYouMeet: meet,
-    //   },
-    //   isPrivateEntity: true,
-    // });
+    await invoke.vtex.actions.masterdata.createDocument({
+      acronym: "PR",
+      data: {
+        name,
+        specialty,
+        occupationArea: area,
+        id: cpf,
+        email,
+        whatsapp: tel,
+        instagram,
+        cep,
+        city,
+        uf: state,
+        street,
+        number,
+        complement,
+        neighborhood,
+        prescribe: prescribe === "true" ? "Sim" : "Não",
+        supplements: !supplements.length ? "Nenhum" : supplements.join(", "),
+        services: service,
+        nearbyStores: stores || "Nenhum",
+        partnerships: partnerships || "Nenhum",
+        howDidYouMeet: meet,
+      },
+      isPrivateEntity: true,
+    });
 
     formMessage.value = "success";
 
@@ -552,6 +546,150 @@ export default function (
       meet,
     });
   }
+
+  return (
+    <formAccordions.Accordion
+      id="3"
+      class="bg-white p-6 rounded-xl shadow-md"
+    >
+      <formAccordions.Trigger
+        for="3"
+        class="flex items-center gap-4 group"
+      >
+        <span class="w-8 h-8 border-2 border-dark bg-white text-dark peer-checked:group-[]:bg-dark peer-checked:group-[]:text-white flex justify-center items-center font-lemon font-bold rounded-full transition-colors">
+          3
+        </span>
+        <span class="text-dark font-lemon font-bold">
+          SOBRE SEU ATENDIMENTO
+        </span>
+      </formAccordions.Trigger>
+      <formAccordions.ContentWrapper>
+        <formAccordions.Content>
+          <form
+            class="bg-white rounded-xl flex flex-col gap-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              afterAllForms();
+            }}
+          >
+            <div class="w-full flex flex-col gap-6 mt-6">
+              <div>
+                <span class="text-sm text-dark font-medium">
+                  Você já prescreve nossa marca? *
+                </span>
+
+                <div class="flex items-center gap-2 mt-4">
+                  <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
+                    <Radio.Input value="true" required name="prescribe" />
+                    Sim
+                  </Radio.Container>
+
+                  <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
+                    <Radio.Input
+                      value="false"
+                      required
+                      name="prescribe"
+                    />
+                    Não
+                  </Radio.Container>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-6 max-w-[350px] w-full">
+                <span class="text-sm text-dark font-medium">
+                  Quais suplementos mais prescreve?
+                </span>
+
+                <div class="grid grid-cols-2 gap-4">
+                  {supplements.map(({ label }) => (
+                    <Checkbox.Container>
+                      <Checkbox.Input value={label} name="supplements" />
+                      {label}
+                    </Checkbox.Container>
+                  ))}
+                </div>
+              </div>
+              <div class="flex flex-col gap-6">
+                <span class="text-sm text-dark font-medium">
+                  Qual sua média de atendimentos mensal? *
+                </span>
+
+                <div class="flex flex-col gap-4">
+                  {services.map(({ label }) => (
+                    <Radio.Container>
+                      <Radio.Input
+                        value={label}
+                        name="service"
+                        required
+                      />
+                      {label}
+                    </Radio.Container>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <TextArea.Container>
+              <TextArea.Input name="stores" />
+              <TextArea.Label>
+                Quais lojas de suplementos tem perto da sua localidade?
+              </TextArea.Label>
+            </TextArea.Container>
+
+            <div class="flex flex-col gap-6">
+              <span class="text-sm text-dark font-medium">
+                Possui parceria com alguma loja?
+              </span>
+
+              <div class="flex flex-col gap-4">
+                <Input.Container>
+                  <Input.Input name="partnerships" />
+                  <Input.Label>Se sim, qual(is) loja(s)?</Input.Label>
+                </Input.Container>
+              </div>
+            </div>
+
+            <TextArea.Container>
+              <TextArea.Input required name="meet" />
+              <TextArea.Label>
+                Conta pra gente! Como conheceu nossa marca? *
+              </TextArea.Label>
+            </TextArea.Container>
+
+            <button
+              type="submit"
+              class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
+            >
+              Finalizar
+            </button>
+
+            {formMessage.value === "success" && (
+              <span class="block mt-5 text-green">
+                Sua solicitação foi enviada com sucesso!
+              </span>
+            )}
+            {formMessage.value === "error" && (
+              <span class="block mt-5 text-red">
+                Ocorreu um erro ao enviar sua solicitação, tente novamente mais
+                tarde!
+              </span>
+            )}
+          </form>
+        </formAccordions.Content>
+      </formAccordions.ContentWrapper>
+    </formAccordions.Accordion>
+  );
+}
+
+const formAccordions = useAccordion("forms");
+
+export default function (
+  { topText, specialties, supplements, services }: Props,
+) {
+  const specialtySignal = useSignal("");
 
   return (
     <div id="form-profissionais" class="py-36 bg-ice rounded-[40px]">
@@ -646,7 +784,8 @@ export default function (
                     <Input.Container>
                       <Input.Input
                         type="email"
-                        name="email"
+                        name="profissional-email"
+                        pattern="^\S+@\S+\.\S+$"
                         required
                       />
                       <Input.Label>E-mail *</Input.Label>
@@ -655,7 +794,7 @@ export default function (
                     <Input.Container>
                       <Input.Input
                         type="tel"
-                        name="tel"
+                        name="profissional-tel"
                         required
                         pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
                         onInput={(e) => {
@@ -701,147 +840,9 @@ export default function (
 
           <Form2 />
 
-          <formAccordions.Accordion
-            id="3"
-            class="bg-white p-6 rounded-xl shadow-md"
-          >
-            <formAccordions.Trigger
-              for="3"
-              class="flex items-center gap-4 group"
-            >
-              <span class="w-8 h-8 border-2 border-dark bg-white text-dark peer-checked:group-[]:bg-dark peer-checked:group-[]:text-white flex justify-center items-center font-lemon font-bold rounded-full transition-colors">
-                3
-              </span>
-              <span class="text-dark font-lemon font-bold">
-                SOBRE SEU ATENDIMENTO
-              </span>
-            </formAccordions.Trigger>
-            <formAccordions.ContentWrapper>
-              <formAccordions.Content>
-                <form
-                  class="bg-white rounded-xl flex flex-col gap-6"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-
-                    afterAllForms();
-                  }}
-                >
-                  <div class="w-full flex flex-col gap-6 mt-6">
-                    <div>
-                      <span class="text-sm text-dark font-medium">
-                        Você já prescreve nossa marca? *
-                      </span>
-
-                      <div class="flex items-center gap-2 mt-4">
-                        <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
-                          <Radio.Input value="true" required name="prescribe" />
-                          Sim
-                        </Radio.Container>
-
-                        <Radio.Container class="flex items-center justify-start gap-2 h-12 px-4 border border-Stroke rounded-md shadow cursor-pointer has-[:checked]:border-dark">
-                          <Radio.Input
-                            value="false"
-                            required
-                            name="prescribe"
-                          />
-                          Não
-                        </Radio.Container>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="flex flex-col gap-6 max-w-[350px] w-full">
-                      <span class="text-sm text-dark font-medium">
-                        Quais suplementos mais prescreve?
-                      </span>
-
-                      <div class="grid grid-cols-2 gap-4">
-                        {supplements.map(({ label }) => (
-                          <Checkbox.Container>
-                            <Checkbox.Input value={label} name="supplements" />
-                            {label}
-                          </Checkbox.Container>
-                        ))}
-                      </div>
-                    </div>
-                    <div class="flex flex-col gap-6">
-                      <span class="text-sm text-dark font-medium">
-                        Qual sua média de atendimentos mensal? *
-                      </span>
-
-                      <div class="flex flex-col gap-4">
-                        {services.map(({ label }) => (
-                          <Radio.Container>
-                            <Radio.Input
-                              value={label}
-                              name="service"
-                              required
-                            />
-                            {label}
-                          </Radio.Container>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <TextArea.Container>
-                    <TextArea.Input required name="stores" />
-                    <TextArea.Label>
-                      Quais lojas de suplementos tem perto da sua localidade?
-                    </TextArea.Label>
-                  </TextArea.Container>
-
-                  <div class="flex flex-col gap-6">
-                    <span class="text-sm text-dark font-medium">
-                      Possui parceria com alguma loja?
-                    </span>
-
-                    <div class="flex flex-col gap-4">
-                      <Input.Container>
-                        <Input.Input name="partnerships" />
-                        <Input.Label>Se sim, qual(is) loja(s)?</Input.Label>
-                      </Input.Container>
-                    </div>
-                  </div>
-
-                  <TextArea.Container>
-                    <TextArea.Input required name="meet" />
-                    <TextArea.Label>
-                      Conta pra gente! Como conheceu nossa marca? *
-                    </TextArea.Label>
-                  </TextArea.Container>
-
-                  <button
-                    type="submit"
-                    class="h-[50px] w-full bg-gradient-to-r from-[#E4003F] to-[#E9530E] rounded-md text-white font-bold font-lemon text-sm mt-6"
-                  >
-                    Finalizar
-                  </button>
-
-                  {formMessage.value === "success" && (
-                    <span class="block mt-5 text-green">
-                      Sua solicitação foi enviada com sucesso!
-                    </span>
-                  )}
-                  {formMessage.value === "error" && (
-                    <span class="block mt-5 text-red">
-                      Ocorreu um erro ao enviar sua solicitação, tente novamente
-                      mais tarde!
-                    </span>
-                  )}
-                </form>
-              </formAccordions.Content>
-            </formAccordions.ContentWrapper>
-          </formAccordions.Accordion>
+          <Form3 supplements={supplements} services={services} />
         </div>
       </div>
     </div>
   );
-}
-
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  return {
-    ...props,
-  };
 }

@@ -1,1 +1,1 @@
-export { default, loader } from "../components/ui/FormProfissionais.tsx";
+export { default } from "../components/ui/FormProfissionais.tsx";

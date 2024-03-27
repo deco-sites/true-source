@@ -284,7 +284,7 @@ function Form2() {
     }
   });
 
-  function afterAllForms() {
+  async function afterAllForms() {
     function get<T extends HTMLElement>(s: string): T | never {
       const el = document.querySelector<T>(s);
 
@@ -296,15 +296,18 @@ function Form2() {
     // Form 1
     const socialRatio = get<HTMLInputElement>("[name=social-ratio]").value;
     const fantasyName = get<HTMLSelectElement>("[name=fantasy-name]").value;
-    const cnpj = get<HTMLInputElement>("[name=cnpj]").value;
+    const cnpj = get<HTMLInputElement>("[name=cnpj]").value.replace(
+      /\.|-|\//g,
+      "",
+    );
     const federalRegistration =
       get<HTMLInputElement>("[name=federal-registration]").value;
     const contact = get<HTMLInputElement>("[name=contact]").value;
-    const tel = get<HTMLInputElement>("[name=tel]").value.replace(
+    const tel = get<HTMLInputElement>("[name=lojista-tel]").value.replace(
       / |-|\(|\)/g,
       "",
     );
-    const email = get<HTMLInputElement>("[name=email]").value;
+    const email = get<HTMLInputElement>("[name=lojista-email]").value;
     const instagram = get<HTMLInputElement>("[name=instagram]").value;
     const site = get<HTMLInputElement>("[name=site]").value;
 
@@ -313,32 +316,32 @@ function Form2() {
     const city = get<HTMLInputElement>("[name=city]").value;
     const state = get<HTMLSelectElement>("[name=state]").value;
     const street = get<HTMLInputElement>("[name=street]").value;
-    const number = get<HTMLInputElement>("[name=number]").value;
+    const number = get<HTMLInputElement>("[name=lojista-number]").value;
     const complement = get<HTMLInputElement>("[name=complement]").value;
     const neighborhood = get<HTMLInputElement>("[name=neighborhood]").value;
 
-    // await invoke.vtex.actions.masterdata.createDocument({
-    //   acronym: "LJ",
-    //   data: {
-    //     id: cnpj,
-    //     name: socialRatio,
-    //     fantasyName,
-    //     ie: federalRegistration,
-    //     contact,
-    //     phone: tel,
-    //     email,
-    //     instagram,
-    //     site,
-    //     cep,
-    //     city,
-    //     uf: state,
-    //     street,
-    //     number,
-    //     complement,
-    //     neighborhood,
-    //   },
-    //   isPrivateEntity: true,
-    // });
+    await invoke.vtex.actions.masterdata.createDocument({
+      acronym: "LJ",
+      data: {
+        id: cnpj,
+        name: socialRatio,
+        fantasyName,
+        ie: federalRegistration,
+        contact,
+        phone: tel,
+        email,
+        instagram,
+        site,
+        cep,
+        city,
+        uf: state,
+        street,
+        number,
+        complement,
+        neighborhood,
+      },
+      isPrivateEntity: true,
+    });
 
     formMessage.value = "success";
 
@@ -471,7 +474,8 @@ function Form2() {
                 <Input.Container class="w-full sm:w-[calc(30%-8px)]">
                   <Input.Input
                     type="text"
-                    name="number"
+                    name="lojista-number"
+                    maxLength={10}
                     required
                     onInput={(e) => {
                       e.currentTarget.value = e.currentTarget.value
@@ -629,7 +633,7 @@ export default function (
                     <Input.Container>
                       <Input.Input
                         type="tel"
-                        name="tel"
+                        name="lojista-tel"
                         required
                         pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
                         onInput={(e) => {
@@ -655,7 +659,8 @@ export default function (
                     <Input.Container>
                       <Input.Input
                         type="email"
-                        name="email"
+                        name="lojista-email"
+                        pattern="^\S+@\S+\.\S+$"
                         required
                       />
                       <Input.Label>E-mail *</Input.Label>
@@ -672,7 +677,7 @@ export default function (
 
                     <Input.Container>
                       <Input.Input
-                        type="text"
+                        type="url"
                         name="site"
                         required
                       />
@@ -696,10 +701,4 @@ export default function (
       </div>
     </div>
   );
-}
-
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  return {
-    ...props,
-  };
 }
