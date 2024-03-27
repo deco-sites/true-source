@@ -161,6 +161,7 @@ function FilterValues(
                     ) => (
                       <a
                         href={url}
+                        rel="nofollow"
                         class={clx(
                           "flex justify-center items-center px-3 py-1.5 rounded-full font-bold text-sm hover:text-white hover:bg-dark hover:border-dark transition-colors",
                           selected
@@ -186,6 +187,7 @@ function FilterValues(
                             ) => (
                               <a
                                 href={url}
+                                rel="nofollow"
                                 class="flex justify-center items-center px-3 py-1.5 border-2 border-light-gray-200 rounded-full text-dark font-bold text-sm"
                               >
                                 {capitalize(label.toLowerCase()).split(" ").map(
