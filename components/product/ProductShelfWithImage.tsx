@@ -78,7 +78,7 @@ function ProductShelf({
         <Image
           src={isMobile ? mobile.src : desktop.src}
           alt={isMobile ? mobile.title : desktop.title}
-          width={450}
+          width={isMobile ? 450 : 320}
           height={isMobile ? 260 : 450}
           class="h-[260px] max-lg:w-full lg:h-[450px] object-cover"
         />
