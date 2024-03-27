@@ -37,6 +37,10 @@ export interface Content {
    */
   title?: string;
   /**
+   * @title O título é um h1?
+   */
+  titleIsH1?: boolean;
+  /**
    * @title Descrição
    * @format textarea
    */
@@ -64,6 +68,8 @@ function BannerInfoWithItems(
   { banner, preload, isMobile, content, items }: Props,
 ) {
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
+
+  const Title = content?.titleIsH1 ? "h1" : "h2";
 
   const heightStyle = isMobile
     ? (mobileHeight ? `${mobileHeight}px` : "auto")
@@ -112,9 +118,9 @@ function BannerInfoWithItems(
 
           {content?.title &&
             (
-              <h2 class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
+              <Title class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
                 {content.title}
-              </h2>
+              </Title>
             )}
 
           {content?.description &&

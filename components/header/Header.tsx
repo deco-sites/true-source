@@ -84,7 +84,7 @@ function Header({
 
   return (
     <header id="header" class="group/header h-[211px] md:h-[193px]">
-      {isHome && <h1 class='sr-only'>True Source</h1>}
+      {isHome && <h1 class="sr-only">True Source</h1>}
       <Drawers
         menu={{ items, institutionalItems, socials, helpItems }}
         searchbar={searchbar}
