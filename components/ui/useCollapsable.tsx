@@ -1,5 +1,5 @@
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
-import { useId } from "preact/hooks";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { JSX } from "preact";
 
 /**

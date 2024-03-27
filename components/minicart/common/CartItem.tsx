@@ -11,7 +11,8 @@ import QuantitySelector from "deco-sites/true-source/components/ui/QuantitySelec
 import Radio from "deco-sites/true-source/components/ui/Radio.tsx";
 import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
-import { useCallback, useId, useState } from "preact/hooks";
+import { useCallback, useState } from "preact/hooks";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 const SubscriptionOptionsMap = {
   none: "Sem recorrência",

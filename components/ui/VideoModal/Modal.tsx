@@ -3,7 +3,8 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
 import type { ComponentChildren } from "preact";
 import { Suspense } from "preact/compat";
-import { useEffect, useId } from "preact/hooks";
+import { useEffect } from "preact/hooks";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 function Lazy({ children }: { children: ComponentChildren }) {
   return (
