@@ -15,9 +15,12 @@ export default function Navigation({ loader }: Props) {
             <a
               key={url}
               href={url}
-              class={"group flex items-center gap-4 translate-x-px shrink-0" + (
-                isActive ? " border-b-[3px] border-b-red md:border-b-0" : ""
-              )}
+              class={"group flex items-center gap-4 translate-x-px shrink-0 border-b-[3px]" +
+                (
+                  isActive
+                    ? " border-b-red md:border-b-0"
+                    : " border-b-transparent"
+                )}
             >
               <Image
                 src={isActive && activeIcon ? activeIcon : icon}
