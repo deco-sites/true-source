@@ -22,17 +22,8 @@ interface Props {
   couponCode: string;
 }
 
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies.hasSeenPopup === "true";
-
-  return { ...props, alreadySeenPopup };
-}
-
 export default function Coupon(
-  { discountPercentage, couponCode, alreadySeenPopup }: ReturnType<
-    typeof loader
-  >,
+  { discountPercentage, couponCode }: Props,
 ) {
   const { user } = useUser();
   const { addCouponsToCart } = useCart();
@@ -71,6 +62,8 @@ export default function Coupon(
   };
 
   useSignalEffect(() => {
+    const alreadySeenPopup = document.cookie.includes("hasSeenPopup=true");
+
     if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
       return;
     }

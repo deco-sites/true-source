@@ -1,14 +1,12 @@
 import { useSignal, useSignalEffect } from "@preact/signals";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
-import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { invoke } from "deco-sites/true-source/runtime.ts";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 import type { JSX } from "preact";
 import type { TargetedEvent } from "preact/compat";
 import { useCallback } from "preact/hooks";
-import { getCookies } from "std/http/cookie.ts";
 
 interface Props {
   /**
@@ -17,16 +15,7 @@ interface Props {
   topText: HTMLWidget;
 }
 
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  const cookies = getCookies(req.headers);
-  const alreadySeenPopup = cookies.hasSeenSubscriptionPopup === "true";
-
-  return { ...props, alreadySeenPopup };
-}
-
-export default function Coupon(
-  { topText, alreadySeenPopup }: ReturnType<typeof loader>,
-) {
+export default function Coupon({ topText }: Props) {
   const { user } = useUser();
   const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
@@ -56,6 +45,10 @@ export default function Coupon(
   };
 
   useSignalEffect(() => {
+    const alreadySeenPopup = document.cookie.includes(
+      "hasSeenSubscriptionPopup=true",
+    );
+
     if (
       alreadySeenPopup || displayPopup.peek() || finishedForm.peek() ||
       !user.value
