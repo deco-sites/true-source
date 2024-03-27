@@ -92,11 +92,10 @@ export default defineApp(async (_req, ctx) => {
         content="iCJbdQEMujVQaR4D4m-PwH-WzpdHbHtviMn0ReC6h4Y"
       />
 
-      <script 
+      <script
         type="text/javascript"
         dangerouslySetInnerHTML={{
-          __html:
-            `
+          __html: `
               var smarthintkey = "SH-565232";
               (function () {
                   var script = document.createElement('script');
@@ -106,8 +105,8 @@ export default defineApp(async (_req, ctx) => {
                   var s = document.getElementsByTagName('script')[0];
                   s.parentNode.insertBefore(script, s);
               })();
-            `
-          }}
+            `,
+        }}
       />
     </>
   );
