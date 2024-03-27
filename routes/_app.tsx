@@ -86,6 +86,8 @@ export default defineApp(async (_req, ctx) => {
         rel="stylesheet"
         href="/swiper-bundle.min.css"
       />
+
+      <meta name="google-site-verification" content="iCJbdQEMujVQaR4D4m-PwH-WzpdHbHtviMn0ReC6h4Y" />
     </>
   );
 });
