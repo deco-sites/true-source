@@ -115,12 +115,12 @@ export default function Coupon({ topText }: Props) {
         type="button"
         onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
-        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+        class={`z-[51] bg-black/30 inset-0 fixed transition-all${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
       />
       <div
-        class={`max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+        class={`max-w-[500px] w-[95%] overflow-hidden rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[52]${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
         style={{

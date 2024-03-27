@@ -9,7 +9,7 @@ import * as $$$0 from "./loaders/CustomPLPTitle.ts";
 import * as $$$1 from "./loaders/PLPSectionsSEO.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
-import * as $$$$$$2 from "./sections/Category/CategoryCarousel.tsx"; 
+import * as $$$$$$2 from "./sections/Category/CategoryCarousel.tsx";
 import * as $$$$$$3 from "./sections/Category/CategoryGrid.tsx";
 import * as $$$$$$4 from "./sections/Category/CategoryList.tsx";
 import * as $$$$$$5 from "./sections/CategoryDescription/CategoryInfoCard.tsx";

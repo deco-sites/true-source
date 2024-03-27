@@ -139,12 +139,12 @@ export default function Coupon(
         type="button"
         onClick={handlePopupClose}
         aria-label="Fechar pop-up de cupom"
-        class={`z-[9] bg-black/30 inset-0 fixed transition-all${
+        class={`z-[51] bg-black/30 inset-0 fixed transition-all${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
       />
       <div
-        class={`md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10${
+        class={`md:max-w-[500px] w-[95%] p-6 md:mx-3 md:p-10 rounded-[20px] bg-white transition-all fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[52]${
           displayPopup.value ? "" : " opacity-0 pointer-events-none"
         }`}
         style={{
