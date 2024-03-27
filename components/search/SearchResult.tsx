@@ -11,6 +11,7 @@ import { renderSection } from "apps/website/pages/Page.tsx";
 import type { ReturnSectionSEO } from "deco-sites/true-source/loaders/PLPSectionsSEO.ts";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
 import type { ReturnCustomPLPTitle } from "deco-sites/true-source/loaders/CustomPLPTitle.ts";
+import Pagination from "deco-sites/true-source/components/ui/Pagination.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -131,28 +132,8 @@ function SearchResult(
                 isMobile={isMobile}
               />
             </div>
-            <div class="flex justify-center my-4">
-              <div class="join">
-                <a
-                  aria-label="previous page link"
-                  rel="prev"
-                  href={pageInfo.previousPage ?? "#"}
-                  class="btn btn-ghost join-item"
-                >
-                  <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-                </a>
-                <span class="btn btn-ghost join-item">
-                  Page {zeroIndexedOffsetPage + 1}
-                </span>
-                <a
-                  aria-label="next page link"
-                  rel="next"
-                  href={pageInfo.nextPage ?? "#"}
-                  class="btn btn-ghost join-item"
-                >
-                  <Icon id="ChevronRight" size={24} strokeWidth={2} />
-                </a>
-              </div>
+            <div class="flex justify-center my-8">
+              <Pagination pageInfo={pageInfo} url={url} />
             </div>
           </div>
         </div>

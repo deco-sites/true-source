@@ -5,6 +5,7 @@
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$2 from "./loaders/availableIcons.ts";
+import * as $$$3 from "./loaders/centralNavigation.ts";
 import * as $$$0 from "./loaders/CustomPLPTitle.ts";
 import * as $$$1 from "./loaders/PLPSectionsSEO.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
@@ -106,6 +107,7 @@ import * as $$$$$$94 from "./sections/Theme/Theme.tsx";
 const manifest = {
   "loaders": {
     "deco-sites/true-source/loaders/availableIcons.ts": $$$2,
+    "deco-sites/true-source/loaders/centralNavigation.ts": $$$3,
     "deco-sites/true-source/loaders/CustomPLPTitle.ts": $$$0,
     "deco-sites/true-source/loaders/PLPSectionsSEO.ts": $$$1,
   },

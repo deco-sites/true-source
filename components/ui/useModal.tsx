@@ -1,5 +1,5 @@
 import type { JSX } from "preact";
-import { useId } from "preact/hooks";
+import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 export default function (_id?: string) {
   const id = _id ?? useId();

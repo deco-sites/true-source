@@ -23,6 +23,8 @@ export type AvailableIcons =
   | "ChevronRight"
   | "ChevronUp"
   | "CloseCircle"
+  | "PreviousPage"
+  | "NextPage"
   | "CloseMobile"
   | "CreditCard"
   | "Deco"

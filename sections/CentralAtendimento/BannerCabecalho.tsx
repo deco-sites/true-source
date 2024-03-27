@@ -21,8 +21,8 @@ export default function CabecalhoCentralAtendimento(
   { srcMobile, srcDesktop, title }: BannerProps,
 ) {
   return (
-    <div class="flex flex-col relative w-full h-[170px] md:h-[240px] justify-center items-center">
-      <Picture class="h-full" preload={true}>
+    <div class="relative flex flex-col justify-center items-center mx-auto w-full max-w-[1400px] h-[170px] md:h-[240px]">
+      <Picture class="w-full h-full" preload={true}>
         <Source
           width={390}
           height={170}
@@ -37,7 +37,7 @@ export default function CabecalhoCentralAtendimento(
         />
         <Image
           width={640}
-          class="w-full h-full object-cover rounded-b-3xl"
+          class="rounded-b-3xl w-full h-full object-cover"
           src={srcMobile}
           alt="Banner"
           loading="eager"
@@ -45,12 +45,12 @@ export default function CabecalhoCentralAtendimento(
         />
       </Picture>
 
-      <p class="absolute text-2xl w-[188px] h-[44px] sm:w-auto sm:h-auto sm:text-4xl text-center text-ice font-bold font-lemon-milk z-20">
+      <p class="z-20 absolute w-[188px] sm:w-auto h-[44px] sm:h-auto font-bold font-lemon-milk text-2xl text-center text-ice sm:text-4xl">
         {title}
       </p>
 
       <svg
-        class="w-[50px] h-[30px] sm:w-[91px] sm:h-[52px] absolute bottom-0"
+        class="bottom-0 absolute w-[50px] sm:w-[91px] h-[30px] sm:h-[52px]"
         viewBox="0 0 91 52"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

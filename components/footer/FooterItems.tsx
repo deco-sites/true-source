@@ -14,7 +14,12 @@ export type Section = {
   items: Item[];
 };
 
-export default function FooterItems({ sections }: { sections: Section[] }) {
+export default function FooterItems(
+  { sections, institutionalItems }: {
+    sections: Section[];
+    institutionalItems: Item[];
+  },
+) {
   return (
     <>
       {sections.length > 0 && (
@@ -40,7 +45,10 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                     <ul className={"flex flex-col gap-5 text-sm leading-4"}>
                       {section.items.slice(0, 7).map((item) => (
                         <li>
-                          <a href={item.href} className="block hover:underline">
+                          <a
+                            href={item.href}
+                            className="block hover:underline text-dark"
+                          >
                             {item.label}
                           </a>
                         </li>
@@ -53,7 +61,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                           <li>
                             <a
                               href={item.href}
-                              className="block hover:underline"
+                              className="block hover:underline text-dark"
                             >
                               {item.label}
                             </a>
@@ -65,6 +73,18 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                 </div>
               </li>
             ))}
+            <ul className={"flex flex-col gap-5 text-sm leading-4"}>
+              {institutionalItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    className="block hover:underline text-[13px] font-bold font-lemon-milk text-dark"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </ul>
 
           {/* Mobile view */}
@@ -82,7 +102,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                       Math.ceil(sections[0].items.length / 2),
                     ).map((item) => (
                       <li>
-                        <a href={item.href} className="block">
+                        <a href={item.href} className="block text-dark">
                           {item.label}
                         </a>
                       </li>
@@ -94,7 +114,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
                       Math.ceil(sections[0].items.length / 2),
                     ).map((item) => (
                       <li>
-                        <a href={item.href} className="block">
+                        <a href={item.href} className="block text-dark">
                           {item.label}
                         </a>
                       </li>
@@ -107,7 +127,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
             <Collapsable
               class="w-full border-b border-light-gray"
               title={
-                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between">
+                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between text-dark">
                   <span>
                     {sections[1].label}
                   </span>
@@ -122,7 +142,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
               <div class="flex flex-col gap-5 pb-5">
                 {sections[1].items.map((item) => (
                   <li>
-                    <a href={item.href} class={"flex text-sm"}>
+                    <a href={item.href} class={"flex text-sm text-dark"}>
                       {item.label}
                     </a>
                   </li>
@@ -133,7 +153,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
             <Collapsable
               class="w-full border-b border-light-gray "
               title={
-                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between">
+                <div class="px-0 pb-[30px] pt-8 font-bold font-lemon-milk text-[13px] rounded-none flex items-center justify-between text-dark">
                   <span>
                     {sections[2].label}
                   </span>
@@ -148,7 +168,7 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
               <div class="flex flex-col gap-5 pb-5">
                 {sections[2].items.map((item) => (
                   <li>
-                    <a href={item.href} class={"flex text-sm"}>
+                    <a href={item.href} class={"flex text-sm text-dark"}>
                       {item.label}
                     </a>
                   </li>
@@ -160,11 +180,11 @@ export default function FooterItems({ sections }: { sections: Section[] }) {
               <div className="flex flex-col pt-[40px] pb-[32px]">
                 <div className="flex gap-[32px]">
                   <ul className={"flex flex-col gap-[14px]"}>
-                    {sections[3].items.map((item) => (
+                    {institutionalItems.map((item) => (
                       <li>
                         <a
                           href={item.href}
-                          className="block text-sm font-bold font-lemon-milk"
+                          className="block text-sm font-bold font-lemon-milk text-dark"
                         >
                           {item.label}
                         </a>
