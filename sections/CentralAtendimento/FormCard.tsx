@@ -69,16 +69,6 @@ export default function FormCard({ titleCard, buttonCard }: FormCardProps) {
 
           <div class="flex flex-col justify-start gap-2 align-top">
             <div class="flex flex-col justify-start gap-2 align-top sm:flex-row">
-              {
-                /* <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                autocomplete="given-name"
-                class="font-inter block w-full rounded-md border-0 px-3.5 py-2 text-[13px] font-medium text-gray leading-auto tracking[-2] shadow-sm focus:ring-1 sm:text-sm sm:leading-6"
-                placeholder="Anexo"
-              /> */
-              }
               <div class="relative flex w-full">
                 <input
                   type="text"
@@ -95,18 +85,6 @@ export default function FormCard({ titleCard, buttonCard }: FormCardProps) {
                   Anexo*
                 </label>
               </div>
-
-              {
-                /* <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                autocomplete="given-name"
-                class="font-inter block w-full rounded-md border-0 px-3.5 py-2 text-[13px] font-medium text-gray leading-auto tracking[-2] shadow-sm focus:ring-1 sm:text-sm sm:leading-6"
-                placeholder="Assunto*"
-              /> */
-              }
-
               <div class="relative flex w-full">
                 <input
                   type="text"
@@ -221,7 +199,7 @@ export default function FormCard({ titleCard, buttonCard }: FormCardProps) {
 
         <button
           type="button"
-          class="rounded-md bg-gradient-to-r from-[#E9530E] to-[#E4003F] px-3.5 py-2.5 text-[13px] leading-auto tracking[-2] font-bold text-white shadow-sm hover:bg-white/20"
+          class="rounded-md bg-gradient-to-r from-red to-orange px-3.5 py-2.5 text-[13px] leading-auto tracking[-2] font-bold text-white shadow-sm hover:bg-white/20"
         >
           {buttonCard}
         </button>

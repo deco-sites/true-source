@@ -20,7 +20,7 @@ export default function BannerCTA(
 ) {
   return (
     <>
-      <div class="flex lg:h-[400px] w-full flex-col items-center justify-center md:flex-row">
+      <div class="flex w-full flex-col items-center justify-center md:flex-row">
         <div class="flex flex-col w-full h-auto md:order-last">
           <Picture>
             <Source
@@ -37,7 +37,7 @@ export default function BannerCTA(
             />
             <Image
               width={640}
-              className="w-full h-[200px] sm:h-[400px] object-cover lg:rounded-r-2xl lg:rounded-l-none rounded-t-2xl"
+              className="w-full h-[200px] sm:h-[400px] object-cover md:rounded-r-2xl md:rounded-l-none rounded-t-2xl"
               src={srcMobile}
               alt="Banner"
               decoding="async"
@@ -46,7 +46,7 @@ export default function BannerCTA(
           </Picture>
         </div>
 
-        <div class="flex w-full h-full items-center justify-center gap-2 bg-gradient-to-r from-[#E9530E] to-[#E4003F] lg:rounded-l-2xl lg:rounded-r-none rounded-b-2xl">
+        <div class="flex w-full h-[400px] items-center justify-center gap-2 bg-gradient-to-r from-red to-orange md:rounded-l-2xl md:rounded-r-none rounded-b-2xl">
           <div class="flex gap-6 h-auto w-[283px] flex-col p-4">
             <h2 class="font-lemon-milk text-[16px] font-bold text-white">
               {title}
@@ -60,7 +60,7 @@ export default function BannerCTA(
               class="inline-flex w-[223px] h-[48px] justify-start items-center gap-2 px-6 rounded-3xl py-3 bg-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
             >
               <div>
-                <span class="text-[13px] font-bold font-lemon-milk bg-clip-text text-transparent bg-gradient-to-r from-[#E9530E] to-[#E4003F]">
+                <span class="text-[13px] font-bold font-lemon-milk bg-clip-text text-transparent bg-gradient-to-r from-red to-orange">
                   {button}
                 </span>
               </div>

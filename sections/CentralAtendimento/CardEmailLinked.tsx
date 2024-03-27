@@ -20,8 +20,8 @@ export default function CardEmailLinked(
 ) {
   return (
     <div class="flex h-[128px] w-full flex-row items-center justify-start gap-4 rounded-xl border border-light-gray bg-white p-6 drop-shadow-md">
-      <div class="flex h-[80px] w-[297px] flex-col gap-4">
-        <div class="flex h-[48px] w-[229px] flex-col justify-center">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col justify-center">
           <div class="flex flex-row items-center gap-4">
             <Image
               src={img}
