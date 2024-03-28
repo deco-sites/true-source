@@ -52,8 +52,8 @@ function Cart({
 
   return (
     <>
-      <div class="flex justify-between items-center py-4 px-6 border-b border-Stroke font-lemon-milk">
-        <div class="flex items-center gap-2 text-lg text-black uppercase font-medium">
+      <div class="flex justify-between items-center border-Stroke px-6 py-4 border-b font-lemon-milk">
+        <div class="flex items-center gap-2 font-medium text-black text-lg uppercase">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -89,12 +89,12 @@ function Cart({
       <div class="flex flex-col justify-between items-center overflow-hidden">
         {isEmtpy
           ? (
-            <div class="flex justify-center flex-col items-center gap-8 w-full text-center h-full outline">
-              <span class="font-bold text-sm uppercase font-lemon-milk max-w-[210px]">
+            <div class="flex flex-col justify-center items-center gap-8 w-full h-full text-center outline">
+              <span class="max-w-[210px] font-bold font-lemon-milk text-sm uppercase">
                 Seu carrinho ainda está vazio. Aceita algumas sugestões?
               </span>
               <Button
-                class="border-none bg-green rounded-[6px] text-white uppercase hover:bg-green text-xs font-lemon-milk w-full max-w-[219px] h-[40px]"
+                class="bg-green hover:bg-green border-none rounded-[6px] w-full max-w-[219px] h-[40px] font-lemon-milk text-white text-xs uppercase"
                 onClick={() => {
                   displayCart.value = false;
                 }}
@@ -106,7 +106,7 @@ function Cart({
           : (
             <>
               {/* Cart Items */}
-              <ul class="grow shrink overflow-y-auto flex flex-col w-full h-full">
+              <ul class="flex flex-col w-full h-full overflow-y-auto grow shrink">
                 {items.map((item, index) => (
                   <li>
                     <CartItem
@@ -123,7 +123,7 @@ function Cart({
               </ul>
 
               <footer
-                class="w-full bg-Ice shadow-xl max-h-[189px] flex flex-col items-center justify-center p-6"
+                class="flex flex-col justify-center items-center bg-Ice shadow-xl p-6 w-full"
                 style="box-shadow: 0px -4px 44px 0px rgba(0, 0, 0, 0.35)"
               >
                 <FreeShippingProgressBar
@@ -133,7 +133,7 @@ function Cart({
                   target={freeShippingTarget}
                 />
                 <Button
-                  class="h-[40px] mt-5 w-full max-w-[260px] border border-solid border-dark rounded-md font-bold text-xs font-lemon-milk uppercase text-dark"
+                  class="border-dark mt-5 border rounded-md w-full h-[40px] md:h-[50px] font-bold font-lemon text-dark text-xs md:text-[13px] uppercase md:leading-[17px]"
                   href="/promocoes"
                   onClick={onClose}
                 >
@@ -141,11 +141,11 @@ function Cart({
                 </Button>
                 <a
                   href={checkoutHref}
-                  class="w-full flex justify-center mt-2"
+                  class="flex justify-center mt-2 w-full"
                 >
                   <Button
                     data-deco="buy-button"
-                    class="h-[40px] w-full max-w-[260px] bg-green text-white border border-solid border-green rounded-md font-bold text-xs font-lemon-milk uppercase"
+                    class="border-green bg-green border rounded-md w-full h-[40px] md:h-[50px] font-bold font-lemon text-white text-xs md:text-[13px] uppercase md:leading-[17px]"
                     disabled={loading || isEmtpy}
                     onClick={() => {
                       sendEvent({

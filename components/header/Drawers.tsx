@@ -41,7 +41,7 @@ const HeaderLogin = (props: HeaderProps) => {
   const isUserLoggedIn = Boolean(user.value?.email);
 
   return (
-    <div class="flex justify-end items-center py-6 px-4">
+    <div class="flex justify-end items-center px-4 py-6">
       {onClose && (
         <button type="button" onClick={onClose}>
           <svg
@@ -83,7 +83,7 @@ const SearchHeader = (props: HeaderProps) => {
 
   return (
     <div class="flex justify-end items-center px-4">
-      <div class="flex items-center gap-x-2 text-white fill-white text-sm">
+      <div class="flex items-center gap-x-2 text-sm text-white fill-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18.677"
@@ -121,7 +121,7 @@ const Aside = (
     children: ComponentChildren;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full w-full max-w-[308px] rounded-l-[20px]">
+  <div class="grid grid-rows-[auto_1fr] bg-base-100 rounded-l-[20px] w-full max-w-[308px] md:max-w-[390px] h-full">
     {title === MENU_TITLE && onClose && (
       <HeaderLogin closeFunction={{ onClose }} />
     )}
@@ -134,7 +134,7 @@ const Aside = (
 
     <Suspense
       fallback={
-        <div class="w-screen flex items-center justify-center">
+        <div class="flex justify-center items-center w-screen">
           <span class="loading loading-ring" />
         </div>
       }
