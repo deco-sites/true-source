@@ -32,7 +32,7 @@ function InfluencersCarousel({ title, cards }: Props) {
   return (
     <div
       id={id}
-      class="w-full max-w-[1440px] py-6 mx-auto flex flex-col"
+      class="flex flex-col mx-auto py-6 w-full max-w-[1440px]"
     >
       {title && (
         <div class="flex flex-col items-center gap-5">
@@ -41,21 +41,24 @@ function InfluencersCarousel({ title, cards }: Props) {
               <Icon id="RatingStar" size={13} class="" />
             ))}
           </div>
-          <h2 class="text-center font-lemon-milk text-dark font-bold text-[18px] leading-[24px]">
+          <h2 class="font-bold font-lemon-milk text-[18px] text-center text-dark leading-[24px]">
             {title}
           </h2>
         </div>
       )}
 
-      <div class="relative w-full max-w-[1232px] mx-auto">
-        <Slider class="carousel gap-2 col-span-full max-w-full md:max-w-[1232px] mx-auto mt-[32px]">
+      <div class="flex items-center gap-3 mx-auto w-full">
+        <Slider.PrevButton class="md:flex justify-center items-center border-2 border-Stroke hidden bg-white rounded-full transition-all duration-[400ms] cursor-pointer disabled:pointer-events-none ease-in-out shrink-0 size-14">
+          <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
+        </Slider.PrevButton>
+        <Slider class="gap-2 mt-[32px] w-full carousel">
           {cards.map((
             { image, name, occupation, user, description },
             index,
           ) => (
             <Slider.Item
               index={index}
-              class="flex carousel-item group first:pl-4 last:pr-4"
+              class="flex md:last:pr-0 last:pr-3 md:first:pl-0 first:pl-3 w-[calc((100%/2)-8px+(8px/2))] md:w-[calc((100%/3)-8px+(8px/3))] lg:w-[calc((100%/4)-8px+(8px/4))] carousel-item group"
             >
               <div class="relative">
                 <Image
@@ -63,21 +66,21 @@ function InfluencersCarousel({ title, cards }: Props) {
                   alt={name}
                   width={302}
                   height={450}
-                  class="w-full h-full max-w-[196px] max-h-[272px] md:max-w-[302px] md:max-h-[450px] rounded-[10px] brightness-90 group-hover:brightness-100 object-cover"
+                  class="group-hover:brightness-100 brightness-90 rounded-[10px] w-full h-full object-cover"
                 />
-                <div class="flex flex-col gap-4 absolute bottom-0 left-0 p-6 text-white group-hover:opacity-0 transition-all ease-in-out duration-150">
+                <div class="bottom-0 left-0 absolute flex flex-col gap-4 group-hover:opacity-0 p-6 text-white transition-all duration-150 ease-in-out">
                   <strong class="text-sm">{name}</strong>
-                  <span class="text-xs font-medium hidden md:block">
+                  <span class="md:block hidden font-medium text-xs">
                     {occupation}
                   </span>
-                  <span class="text-xs font-medium md:hidden">
+                  <span class="md:hidden font-medium text-xs">
                     {occupation.split(" ")[0]}
                   </span>
-                  <span class="text-xs font-medium bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% rounded-full p-2 max-w-fit">
+                  <span class="bg-gradient-to-r from-35% from-red to-90% to-orange p-2 rounded-full max-w-fit font-medium text-xs">
                     {user}
                   </span>
                 </div>
-                <div class="absolute bottom-0 left-0 p-6 text-white text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-150">
+                <div class="bottom-0 left-0 absolute opacity-0 group-hover:opacity-100 p-6 font-medium text-white text-xs md:text-sm transition-all duration-150 ease-in-out">
                   <RenderHTML html={description} />
                 </div>
               </div>
@@ -85,30 +88,25 @@ function InfluencersCarousel({ title, cards }: Props) {
           ))}
         </Slider>
 
-        <Slider.PrevButton class="hidden md:flex absolute top-[calc(50%-16px)] left-3 xl:left-[-60px] size-14 bg-white border-2 border-Stroke rounded-full justify-center items-center disabled:pointer-events-none transition-all ease-in-out duration-[400ms] cursor-pointer z-20">
-          <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
-        </Slider.PrevButton>
-
-        <Slider.NextButton class="hidden md:flex absolute top-[calc(50%-16px)] right-3 xl:right-[-60px] size-14 bg-white border-2 border-Stroke rounded-full justify-center items-center disabled:pointer-events-none transition-all ease-in-out duration-[400ms] cursor-pointer z-20">
+        <Slider.NextButton class="md:flex justify-center items-center border-2 border-Stroke hidden bg-white rounded-full transition-all duration-[400ms] cursor-pointer disabled:pointer-events-none ease-in-out shrink-0 size-14">
           <Icon size={24} id="ArrowRight" class="text-dark" />
         </Slider.NextButton>
-
-        <div class="mt-8 w-full h-fit grid place-items-center">
-          <ul class="carousel z-10 justify-center gap-1 flex-wrap">
-            {cards?.map((_, i) => (
-              <li class="carousel-item">
-                <Slider.Dot index={i}>
-                  <div
-                    id={`${id}--${i}`}
-                    class="w-[5px] h-[5px] bg-ice rounded-full group-data-[active]:bg-dark duration-300"
-                  />
-                </Slider.Dot>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <SliderJS rootId={id} dotIsPage />
       </div>
+      <div class="place-items-center grid mt-8 w-full h-fit">
+        <ul class="z-10 flex-wrap justify-center gap-1 carousel">
+          {cards?.map((_, i) => (
+            <li class="carousel-item">
+              <Slider.Dot index={i}>
+                <div
+                  id={`${id}--${i}`}
+                  class="group-data-[active]:bg-dark bg-ice rounded-full w-[5px] h-[5px] duration-300"
+                />
+              </Slider.Dot>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <SliderJS rootId={id} dotIsPage />
     </div>
   );
 }
