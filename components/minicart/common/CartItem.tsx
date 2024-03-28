@@ -13,6 +13,7 @@ import { sendEvent } from "deco-sites/true-source/sdk/analytics.tsx";
 import { formatPrice } from "deco-sites/true-source/sdk/format.ts";
 import { useCallback, useState } from "preact/hooks";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
+import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
 const SubscriptionOptionsMap = {
   none: "Sem recorrência",
@@ -219,14 +220,22 @@ function CartItem(
           </div>
           {/* */}
           <div class="flex justify-end gap-x-2">
-            <span class="line-through text-xs text-dark">
+            <span
+              class={clx(
+                "text-xs text-dark",
+                listPrice > price && "line-through",
+              )}
+            >
               {formatPrice(listPrice * item.quantity, currency, locale)}
             </span>
-            <span class="text-xs text-green font-bold">
-              {isGift
-                ? "Grátis"
-                : formatPrice(price * item.quantity, currency, locale)}
-            </span>
+            {!canBuyWithSubscription &&
+              (
+                <span class="text-xs text-green font-bold">
+                  {isGift
+                    ? "Grátis"
+                    : formatPrice(price * item.quantity, currency, locale)}
+                </span>
+              )}
           </div>
         </div>
 

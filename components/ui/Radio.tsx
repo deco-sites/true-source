@@ -24,7 +24,7 @@ export default function Radio(
         />
         <label
           for={id || value}
-          class="py-2 text-xs text-dark group-hover:text-green"
+          class="py-2 text-xs text-dark group-hover:text-green select-none cursor-pointer"
           dangerouslySetInnerHTML={{ __html: text }}
         />
       </div>
