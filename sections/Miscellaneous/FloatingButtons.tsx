@@ -1,8 +1,7 @@
-import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import type { AppContext } from "deco-sites/true-source/apps/site.ts";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import useModal from "deco-sites/true-source/components/ui/useModal.tsx";
 import { clx } from "deco-sites/true-source/sdk/clx.ts";
 
 export interface Props {
@@ -14,7 +13,7 @@ export interface Props {
 }
 
 export default function FloatingButtons(
-  { isMobile, zapzap }: ReturnType<typeof loader>,
+  { zapzap }: Props,
 ) {
   const zapzapModal = useModal();
   const floatingMobileModal = useModal("floating-mobile-modal");
@@ -162,24 +161,20 @@ export default function FloatingButtons(
         </zapzapModal.Toggle>
       </floatingMobileModal.Modal>
 
-      {isMobile && (
-        <div>
-          <floatingMobileModal.Toggle class="w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center z-10">
-            <Icon
-              id="FloatingChat"
-              width={20}
-              height={20}
-              class="peer-checked:group-[]:hidden block"
-            />
-            <Icon
-              id="FloatingX"
-              width={20}
-              height={20}
-              class="hidden peer-checked:group-[]:block"
-            />
-          </floatingMobileModal.Toggle>
-        </div>
-      )}
+      <floatingMobileModal.Toggle class="md:hidden w-12 h-12 rounded-full bg-gradient-to-r from-red to-orange fixed bottom-3 right-5 group flex justify-center items-center z-10">
+        <Icon
+          id="FloatingChat"
+          width={20}
+          height={20}
+          class="peer-checked:group-[]:hidden block"
+        />
+        <Icon
+          id="FloatingX"
+          width={20}
+          height={20}
+          class="hidden peer-checked:group-[]:block"
+        />
+      </floatingMobileModal.Toggle>
 
       <script
         src={scriptAsDataURI(() => {
@@ -218,11 +213,4 @@ export default function FloatingButtons(
       />
     </>
   );
-}
-
-export function loader(props: Props, req: Request, ctx: AppContext) {
-  return {
-    ...props,
-    isMobile: ctx.device !== "desktop",
-  };
 }
