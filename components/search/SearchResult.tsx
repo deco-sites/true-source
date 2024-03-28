@@ -16,10 +16,12 @@ import Pagination from "deco-sites/true-source/components/ui/Pagination.tsx";
 export interface Props {
   /** @title Integration */
   page: ProductListingPage | null;
-
+  /**
+   * @title Mostrar apenas produtos com assinatura
+   */
+  showOnlySubscription?: boolean;
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
-
   sectionsSEO: ReturnSectionSEO;
   titles: ReturnCustomPLPTitle;
 }
@@ -49,8 +51,15 @@ function NotFound() {
 }
 
 function SearchResult(
-  { page, startingPage = 0, sectionsSEO, url, isMobile, title: _title }:
-    ReturnType<typeof loader>,
+  {
+    page,
+    startingPage = 0,
+    sectionsSEO,
+    url,
+    isMobile,
+    title: _title,
+    showOnlySubscription,
+  }: ReturnType<typeof loader>,
 ) {
   if (!page) {
     return <NotFound />;
@@ -129,6 +138,7 @@ function SearchResult(
               <ProductGallery
                 products={products}
                 isMobile={isMobile}
+                showOnlySubscription={showOnlySubscription}
               />
             </div>
             <div class="flex justify-center my-8">

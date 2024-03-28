@@ -27,6 +27,10 @@ export interface Props extends GrayBackgroundProps {
    * @title Produtos
    */
   products: Product[] | null;
+  /**
+   * @title Mostrar apenas produtos com assinatura
+   */
+  showOnlySubscription?: boolean;
   desktop: ImageProps;
   mobile: ImageProps;
   /**
@@ -51,6 +55,7 @@ function ProductShelf({
   grayBackground,
   topRounded,
   removePaddingTop = false,
+  showOnlySubscription,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -63,16 +68,11 @@ function ProductShelf({
 
   return (
     <div
-      class={"flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pb-24 max-w-[1448px] mx-auto" +
-        (
-          grayBackground ? " bg-ice" : ""
-        ) + (
-          topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""
-        ) + (
-          bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
-        ) + (
-          removePaddingTop ? " pt-0" : " pt-16"
-        )}
+      class={`flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pb-24 max-w-[1448px] mx-auto${
+        grayBackground ? " bg-ice" : ""
+      }${topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""}${
+        bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
+      }${removePaddingTop ? " pt-0" : " pt-16"}`}
       id={id}
     >
       <Wrapper
@@ -107,7 +107,11 @@ function ProductShelf({
                   class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))]"
                 >
                   <ProductCard
-                    {...productToProductCardProps({ product, isMobile })}
+                    {...productToProductCardProps({
+                      product,
+                      isMobile,
+                      showOnlySubscription,
+                    })}
                   />
                 </Slider.Item>
               );
@@ -126,10 +130,9 @@ function ProductShelf({
             {products.map((_, index) => (
               <Slider.Dot index={index} class="group">
                 <div
-                  class={"w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors" +
-                    (
-                      grayBackground ? " bg-gray" : " bg-ice"
-                    )}
+                  class={`w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors${
+                    grayBackground ? " bg-gray" : " bg-ice"
+                  }`}
                 />
               </Slider.Dot>
             ))}

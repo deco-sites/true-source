@@ -7,11 +7,13 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
-import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Props {
   products: Product[] | null;
+  /**
+   * @title Mostrar apenas produtos com assinatura
+   */
+  showOnlySubscription?: boolean;
   title?: string;
 }
 
@@ -19,6 +21,7 @@ function ProductShelf({
   products,
   title,
   isMobile,
+  showOnlySubscription,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -41,7 +44,11 @@ function ProductShelf({
                 class="carousel-item w-[calc(50%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/3))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
               >
                 <ProductCard
-                  {...productToProductCardProps({ product, isMobile })}
+                  {...productToProductCardProps({
+                    product,
+                    isMobile,
+                    showOnlySubscription,
+                  })}
                 />
               </Slider.Item>
             );

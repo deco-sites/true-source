@@ -16,25 +16,22 @@ type Props =
   & {
     /** Preload card image */
     preload?: boolean;
-
     isMobile: boolean;
-  }
-  & Pick<
-    Product,
-    "url" | "productID" | "name"
-  >
-  & {
     price: number;
     listPrice: number;
     seller: string;
     isAvailable: boolean;
     productGroupID?: string;
     isBestSeller: boolean;
-    canBuyWithSubscription: boolean;
+    canBuyWithSubscription?: boolean;
     priceCurrency?: string;
     image: string;
     alt: string;
-  };
+  }
+  & Pick<
+    Product,
+    "url" | "productID" | "name"
+  >;
 
 const WIDTH = 350;
 const HEIGHT = 350;
@@ -221,10 +218,10 @@ export default function ProductCard({
 }
 
 export function productToProductCardProps(
-  { product, isMobile }: {
-    itemListName?: string;
+  { product, isMobile, showOnlySubscription }: {
     product: Product;
     isMobile: boolean;
+    showOnlySubscription?: boolean;
   },
 ) {
   const {
@@ -261,7 +258,7 @@ export function productToProductCardProps(
     seller: seller,
     isAvailable: availability === "https://schema.org/InStock",
     productGroupID: productGroupID,
-    canBuyWithSubscription: !!canBuyWithSubscription,
+    canBuyWithSubscription: canBuyWithSubscription && showOnlySubscription,
     isBestSeller: !!isBestSeller,
     priceCurrency: offers?.priceCurrency,
   };
