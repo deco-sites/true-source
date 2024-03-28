@@ -67,7 +67,7 @@ function ProductShelf({
 
   return (
     <div
-      class={`grid items-center justify-start md:px-10 px-4 gap-x-4 gap-y-6 pb-24 max-w-[1448px] mx-auto md:grid-cols-[328px,1fr]${
+      class={`grid items-center justify-start md:px-10 gap-x-4 gap-y-6 pb-24 max-w-[1448px] mx-auto md:grid-cols-[328px,1fr]${
         grayBackground ? " bg-ice" : ""
       }${topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""}${
         bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
@@ -77,7 +77,7 @@ function ProductShelf({
     >
       <Wrapper
         {...props}
-        class="block relative rounded-[20px] md:h-full overflow-hidden"
+        class="block relative mx-4 md:mx-0 rounded-[20px] md:h-full overflow-hidden"
       >
         <Icon
           id="ShelfWithImageChevron"
@@ -97,12 +97,12 @@ function ProductShelf({
         </span>
       </Wrapper>
 
-      <div class="relative grid mx-auto w-[95%]">
+      <div class="relative grid mx-auto w-full md:w-[95%]">
         <ul data-carousel class="gap-4 w-full carousel">
           {products?.map((product, index) => (
             <li
               data-item={index}
-              class="w-[calc(75%-16px+(8px))] sm:w-[calc(42.5%-16px+(16px/2))] md:w-[calc((100%/1.5)-16px+(16px/1.5))] lg:w-[calc((100%/2)-16px+(16px/2))] xl:w-[calc(33.333333%-16px+((16px)/3))] carousel-item"
+              class="md:last:pr-0 last:pr-4 pl-4 md:pl-0 w-[calc(75%-16px+(8px))] sm:w-[calc(42.5%-16px+(16px/2))] md:w-[calc((100%/1.5)-16px+(16px/1.5))] lg:w-[calc((100%/2)-16px+(16px/2))] xl:w-[calc(33.333333%-16px+((16px)/3))] carousel-item"
             >
               <ProductCard
                 {...productToProductCardProps({
