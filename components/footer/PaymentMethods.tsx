@@ -1,13 +1,4 @@
-import {
-  GoogleSeal,
-  IconBoleto,
-  IconDinnersClub,
-  IconMastercard,
-  IconPix,
-  IconVisa,
-  RaSeal,
-  SslSeal,
-} from "deco-sites/true-source/components/ui/CustomIcons.tsx";
+import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import type { JSX } from "preact";
 
 export interface PaymentItem {
@@ -27,19 +18,44 @@ export default function PaymentMethods(
                 let iconComponent: JSX.Element | null = null;
                 switch (item.label) {
                   case "Visa":
-                    iconComponent = <IconVisa />;
+                    iconComponent = (
+                      <Icon id="Visa" width="52" height="34" strokeWidth={1} />
+                    );
                     break;
                   case "Mastercard":
-                    iconComponent = <IconMastercard />;
+                    iconComponent = (
+                      <Icon
+                        id="Mastercard"
+                        width="53"
+                        height="34"
+                        strokeWidth={1}
+                      />
+                    );
                     break;
                   case "Dinners":
-                    iconComponent = <IconDinnersClub />;
+                    iconComponent = (
+                      <Icon
+                        id="DinersClub"
+                        width="52"
+                        height="34"
+                        strokeWidth={1}
+                      />
+                    );
                     break;
                   case "Boleto":
-                    iconComponent = <IconBoleto />;
+                    iconComponent = (
+                      <Icon
+                        id="Boleto"
+                        width="52"
+                        height="34"
+                        strokeWidth={1}
+                      />
+                    );
                     break;
                   case "Pix":
-                    iconComponent = <IconPix />;
+                    iconComponent = (
+                      <Icon id="Pix" width="53" height="34" strokeWidth={1} />
+                    );
                     break;
                   default:
                     iconComponent = null;
@@ -63,17 +79,27 @@ export default function PaymentMethods(
             <div className="flex gap-6 lg:gap-[34px] list-none">
               <li class={"flex items-center"}>
                 <span className="block max-w-[57px] h-auto">
-                  <SslSeal />
+                  <Icon id="SSLSeal" width="70" height="40" strokeWidth={1} />
                 </span>
               </li>
               <li class={"flex items-center"}>
                 <span className="block max-w-[73px] h-auto">
-                  <GoogleSeal />
+                  <Icon
+                    id="GoogleSeal"
+                    width="89"
+                    height="32"
+                    strokeWidth={1}
+                  />
                 </span>
               </li>
               <li class={"flex items-center"}>
                 <span className="block max-w-[155px] h-auto">
-                  <RaSeal />
+                  <img
+                    src="/image/RaSeal.webp"
+                    alt="RaSeal"
+                    width={174}
+                    height={64}
+                  />
                 </span>
               </li>
             </div>

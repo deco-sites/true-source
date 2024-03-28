@@ -1,8 +1,6 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import RenderHTML from "deco-sites/true-source/components/ui/RenderHTML.tsx";
-import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import { VtexSeal } from "deco-sites/true-source/components/ui/CustomIcons.tsx";
 
 export default function TextSEO(
   { seoText, logo, copyrightText }: {
@@ -25,7 +23,12 @@ export default function TextSEO(
           {copyrightText}
         </p>
         <span className="block max-w-[88px] h-auto">
-          <VtexSeal />
+          <img
+            src="/image/VtexSeal.webp"
+            alt="Vtex"
+            width={174}
+            height={64}
+          />
         </span>
       </div>
     </div>
