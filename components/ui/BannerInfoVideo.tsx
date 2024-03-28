@@ -1,7 +1,8 @@
 import type { ImageWidget, VideoWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { LoaderContext } from "deco/mod.ts";
+
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 /**  @titleBy alt */
 export interface Video {
@@ -21,9 +22,21 @@ export interface Video {
   mobileHeight?: number;
 }
 
+const textPositionMapping = {
+  left: "text-left justify-start",
+  center: "text-center justify-center",
+  right: "text-left justify-end",
+};
+
 export interface Content {
   /** @title Texto de destaque acima do título */
   tag?: string;
+  /** @title Imagem acima do título */
+  image?: {
+    src?: ImageWidget;
+    width?: number;
+    height?: number;
+  };
   /**
    * @title Título
    * @format textarea
@@ -38,7 +51,7 @@ export interface Content {
    * @format textarea
    */
   description?: string;
-  /** @title Botão de cta */
+  /** @title Botão */
   cta?: {
     text: string;
     link: string;
@@ -48,19 +61,19 @@ export interface Content {
 export interface Props {
   /** @title Video */
   video: Video;
+  /** @title Posição do texto */
+  textPosition?: "left" | "center" | "right";
   /** @title Conteúdo do banner */
   content?: Content;
-  /** @title Items que ficam ao lado do banner */
-  items?: string[];
   /** @description Check this option when this banner is the biggest image on the screen for image optimizations */
   preload?: boolean;
   isMobile?: boolean;
 }
 
-function BannerInfoWithItems(
-  { isMobile, content, items, video }: Props,
+function BannerInfoVideo(
+  { video, isMobile, content, textPosition }: Props,
 ) {
-  const { source, mobileHeight, desktopHeight } = video;
+  const { mobileHeight, desktopHeight, source } = video;
 
   const Title = content?.titleIsH1 ? "h1" : "h2";
 
@@ -69,9 +82,7 @@ function BannerInfoWithItems(
     : (desktopHeight ? `${desktopHeight}px` : "auto");
 
   return (
-    <div
-      class={"w-full relative"}
-    >
+    <div class="w-full relative">
       <video
         autoplay
         loop
@@ -82,21 +93,42 @@ function BannerInfoWithItems(
         <source src={source}></source>
       </video>
       <div
-        class={"absolute top-0 w-full max-w-[1440px] mx-auto h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[182px]"}
+        class={`absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[152px]
+        ${
+          textPosition
+            ? textPositionMapping[textPosition]
+            : "text-start justify-start"
+        }`}
       >
         <div
-          class={"flex flex-col items-start w-full max-w-[441px]"}
+          class={`flex flex-col w-full 
+        ${
+            textPosition === "center"
+              ? "items-center md:max-w-[50%]"
+              : "items-start max-w-[295px] md:max-w-[390px]"
+          }`}
         >
           {content?.tag &&
             (
-              <span class="font-inter mb-6 font-lemon-milk font-bold text-sm leading-[18px] md:text-[18px] fontWithGradient">
+              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] fontWithGradient">
                 {content.tag}
               </span>
             )}
 
+          {content?.image &&
+            (
+              <Image
+                src={content?.image.src || ""}
+                width={content?.image.width || 0}
+                height={content?.image.height || 0}
+                alt=""
+                class={"mb-6"}
+              />
+            )}
+
           {content?.title &&
             (
-              <Title class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px] max-w-[337px] md:max-w-full">
+              <Title class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
                 {content.title}
               </Title>
             )}
@@ -111,53 +143,25 @@ function BannerInfoWithItems(
           {content?.cta && (
             <a
               href={content.cta.link}
-              class="hidden md:flex items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
+              class="flex items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
                 bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% max-w-fit group hover:bg-white border 
                 border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px]"
             >
               {content.cta.text}
               <Icon
                 id="ArrowRight"
-                width={14}
-                height={10}
+                size={16}
                 class="text-white group-hover:text-red"
               />
             </a>
           )}
         </div>
-        <div class="flex flex-col md:flex-row items-center gap-x-4 h-full">
-          {items?.map((item) => (
-            <div class="grid grid-cols-[auto_1fr] md:grid-cols-1 md:grid-rows-[auto_1fr] items-center border-b last:border-b-0 md:last:border-b md:border border-ice md:rounded-[20px] first:pt-0 md:first:pt-6 py-6 md:px-6 text-sm md:text-[16px] text-ice leading-[22px] md:leading-[19px] font-medium md:font-bold gap-6 w-full md:w-[185px] 
-            md:h-[185px]">
-              <Icon id="CheckCircle" size={24} class="text-red md:text-ice" />
-              <span>
-                {item}
-              </span>
-            </div>
-          ))}
-        </div>
-        {content?.cta && (
-          <a
-            href={content.cta.link}
-            class="flex md:hidden items-center gap-[10px] uppercase font-lemon-milk font-bold text-[13px] leading-[17px] text-ice py-[15px] px-6 rounded-full 
-                bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% max-w-fit group hover:bg-white border 
-                border-transparent hover:border-red hover:fontWithGradient cursor-pointer max-h-[40px] whitespace-nowrap"
-          >
-            {content.cta.text}
-            <Icon
-              id="ArrowNarrowRight"
-              width={14}
-              height={10}
-              class="text-white group-hover:text-red"
-            />
-          </a>
-        )}
       </div>
     </div>
   );
 }
 
-export default BannerInfoWithItems;
+export default BannerInfoVideo;
 
 export const loader = (
   { ...props }: Props,
