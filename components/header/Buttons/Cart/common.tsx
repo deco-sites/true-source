@@ -47,7 +47,7 @@ function CartButton(
   return (
     <div class={`indicator ${type === "menu" ? "w-full" : ""}`}>
       <span
-        class={`flex justify-center items-center indicator-item top-[5px] bg-brand text-white h-5 w-5 md:h-6 md:w-6 rounded-full badge-xs ${
+        class={`flex justify-center items-center indicator-item font-medium top-[5px] bg-brand text-white h-5 w-5 md:h-6 md:w-6 rounded-full badge-xs ${
           totalItems === 0 ? "hidden" : ""
         }`}
       >
@@ -65,7 +65,7 @@ function CartButton(
       >
         {type === "menu"
           ? (
-            <div class="flex items-center justify-between w-full">
+            <div class="flex justify-between items-center w-full">
               <p>Carrinho de Compras</p>
               <Icon id="ShoppingCart" size={iconSize} class="text-red" />
             </div>
