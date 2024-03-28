@@ -65,18 +65,18 @@ export default function CategoryList(
     <div
       id={id}
       data-root
-      class="flex flex-col items-center my-11 mx-auto px-4 w-full max-w-[1264px]"
+      class="flex flex-col items-center mx-auto px-4 w-full max-w-[1264px]"
     >
-      <h2 class="text-dark text-lg font-bold tracking-[-0.01em] leading-6 text-center uppercase font-lemon max-[992px]:max-w-[228px] max-[992px]:leading-5 max-[992px]:text-sm">
+      <h2 class="max-w-[228px] md:max-w-full font-bold font-lemon text-center text-dark text-sm md:text-lg uppercase leading-5 md:leading-6 tracking-[-0.01em]">
         {title}
       </h2>
-      <div class="flex gap-4 h-[88px] justify-center mt-8 overflow-y-clip w-full items-center">
+      <div class="flex justify-center items-center gap-4 mt-8 w-full h-[88px] overflow-y-clip">
         {!isMobile && (
           <button
             type="button"
             data-prev
             aria-label="Categoria Anterior"
-            class="justify-center items-center size-12 hidden lg:flex"
+            class="lg:flex justify-center items-center hidden size-12"
           >
             <Icon
               size={24}
@@ -89,7 +89,7 @@ export default function CategoryList(
         )}
         <ul
           data-carousel
-          class="[--gap:8px] lg:[--gap:24px] gap-[var(--gap,8px)] carousel text-dark text-sm font-bold text-center leading-[17px] items-center"
+          class="[--gap:8px] lg:[--gap:24px] items-center gap-[var(--gap,8px)] font-bold text-center text-dark text-sm leading-[17px] carousel"
           style={{
             "--items": Math.min(categories.length, 3),
             "--items-md": Math.min(categories.length, 5),
@@ -100,11 +100,11 @@ export default function CategoryList(
           {categories.map((category, index) => (
             <li
               data-item={index}
-              class="group/item shrink-0 rounded-full flex justify-center items-center h-[88px] bg-light-gray-200 hover:bg-gradient-to-r from-red to-orange transition-all duration-300 w-[calc((100%/var(--items,3))-var(--gap,8px)+(var(--gap,8px)/var(--items,3)))] min-[769px]:[--items:var(--items-md)] min-[1100px]:[--items:var(--items-lg)] xl:[--items:var(--items-xl)]"
+              class="flex justify-center items-center min-[769px]:[--items:var(--items-md)] min-[1100px]:[--items:var(--items-lg)] xl:[--items:var(--items-xl)] bg-light-gray-200 hover:bg-gradient-to-r from-red to-orange rounded-full w-[calc((100%/var(--items,3))-var(--gap,8px)+(var(--gap,8px)/var(--items,3)))] h-[88px] transition-all duration-300 group/item shrink-0"
               key={category.href}
             >
               <a
-                class="group-hover/item:bg-white transition-all duration-300 h-[calc(100%_-_4px)] w-[calc(100%_-_4px)] float-left flex cursor-pointer bg-ice rounded-full justify-center items-center px-6"
+                class="group-hover/item:bg-white float-left flex justify-center items-center bg-ice px-6 rounded-full w-[calc(100%_-_4px)] h-[calc(100%_-_4px)] transition-all duration-300 cursor-pointer"
                 href={category.href}
               >
                 {category.label}
@@ -117,7 +117,7 @@ export default function CategoryList(
             type="button"
             data-next
             aria-label="Próxima Categoria"
-            class="justify-center items-center size-12 hidden lg:flex"
+            class="lg:flex justify-center items-center hidden size-12"
           >
             <Icon
               size={24}
@@ -131,11 +131,11 @@ export default function CategoryList(
       {isMobile && (
         <ul
           data-dots
-          class="carousel gap-3 justify-center items-center h-2 w-full mt-6"
+          class="justify-center items-center gap-3 mt-6 w-full h-2 carousel"
         >
           <li
             data-dot-template
-            class="w-[5px] h-[5px] bg-ice rounded-full data-[active]:bg-dark transition-all duration-300"
+            class="bg-ice data-[active]:bg-dark rounded-full w-[5px] h-[5px] transition-all duration-300"
           />
         </ul>
       )}
