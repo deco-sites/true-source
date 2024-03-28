@@ -128,7 +128,6 @@ function SearchResult(
             <div class="flex-grow" id={id}>
               <ProductGallery
                 products={products}
-                offset={offset}
                 isMobile={isMobile}
               />
             </div>

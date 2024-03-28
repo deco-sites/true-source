@@ -2,7 +2,9 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Product } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
-import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
+import ProductCard, {
+  productToProductCardProps,
+} from "deco-sites/true-source/components/product/ProductCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
@@ -97,19 +99,19 @@ function ProductShelf({
 
       <div class="flex flex-col gap-8 w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px]">
         <div class="relative mx-auto w-[95%]">
-          <Slider class="gap-4 w-full carousel">
-            {products?.map((product, index) => (
-              <Slider.Item
-                index={index}
-                class="w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))] carousel-item"
-              >
-                <ProductCard
-                  product={product}
+          <Slider class="carousel gap-4 w-full">
+            {products?.map((product, index) => {
+              return (
+                <Slider.Item
                   index={index}
-                  isMobile={isMobile}
-                />
-              </Slider.Item>
-            ))}
+                  class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))]"
+                >
+                  <ProductCard
+                    {...productToProductCardProps({ product, isMobile })}
+                  />
+                </Slider.Item>
+              );
+            })}
           </Slider>
 
           <Slider.PrevButton class="top-1/2 -left-8 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none">

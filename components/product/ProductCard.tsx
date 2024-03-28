@@ -1,5 +1,6 @@
-import type { Platform } from "deco-sites/true-source/apps/site.ts";
-import { SendEventOnClick } from "deco-sites/true-source/components/Analytics.tsx";
+import type { Product } from "apps/commerce/types.ts";
+import { useCart } from "apps/vtex/hooks/useCart.ts";
+import Image from "apps/website/components/Image.tsx";
 import ProductStarCard from "deco-sites/true-source/components/product/ProductStarCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Loading from "deco-sites/true-source/components/ui/Loading.tsx";
@@ -9,73 +10,65 @@ import { relative } from "deco-sites/true-source/sdk/url.ts";
 import useBuyProduct from "deco-sites/true-source/sdk/useBuyProduct.ts";
 import { useOffer } from "deco-sites/true-source/sdk/useOffer.ts";
 import { useUI } from "deco-sites/true-source/sdk/useUI.ts";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { useCart } from "apps/vtex/hooks/useCart.ts";
-import Image from "apps/website/components/Image.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 
-interface Props {
-  product: Product;
-  /** Preload card image */
-  preload?: boolean;
+type Props =
+  & {
+    /** Preload card image */
+    preload?: boolean;
 
-  /** @description used for analytics event */
-  itemListName?: string;
-
-  /** @description index of the product card in the list */
-  index?: number;
-
-  isMobile: boolean;
-}
+    isMobile: boolean;
+  }
+  & Pick<
+    Product,
+    "url" | "productID" | "name"
+  >
+  & {
+    price: number;
+    listPrice: number;
+    seller: string;
+    isAvailable: boolean;
+    productGroupID?: string;
+    isBestSeller: boolean;
+    canBuyWithSubscription: boolean;
+    priceCurrency?: string;
+    image: string;
+    alt: string;
+  };
 
 const WIDTH = 350;
 const HEIGHT = 350;
 
-function ProductCard({
-  product,
+export default function ProductCard({
   preload,
-  itemListName,
-  index,
   isMobile,
+  url,
+  productID,
+  name,
+  image,
+  alt,
+  priceCurrency,
+  productGroupID,
+  price,
+  listPrice,
+  seller,
+  isAvailable,
+  isBestSeller,
+  canBuyWithSubscription,
 }: Props) {
-  const { url, productID, name, image: images, offers, isVariantOf } = product;
-  const { seller = "1", availability } = useOffer(offers) ?? {};
   const id = `product-card-${productID}`;
-  const productGroupID = isVariantOf?.productGroupID;
-  const [front] = images ?? [];
-  const { listPrice = 0, price = 0 } = useOffer(offers) || {};
   const { displayCart } = useUI();
   const { cart } = useCart();
   const { currentSubscription } = useUI();
 
-  const isBestSeller = product.additionalProperty?.some(
-    ({ value }) => value && /best-seller/i.test(value),
-  );
-
-  const canBuyWithSubscription = product.additionalProperty?.some(
-    ({ name }) => name === "activeSubscriptions",
-  );
   const discountPercentage = Math.round(
     ((listPrice - price) / listPrice) * 100,
   );
 
   const isInCart = cart.value?.items.some((item) => item.id === productID);
-  const isUnavailable = availability !== "https://schema.org/InStock";
-
-  const eventItem = mapProductToAnalyticsItem({
-    product,
-    breadcrumbList: {
-      "@type": "BreadcrumbList",
-      numberOfItems: 0,
-      itemListElement: [],
-    },
-    price,
-    listPrice,
-  });
 
   const buyProduct = useBuyProduct({
-    eventParams: { items: [eventItem] },
+    eventParams: { items: [] },
     productID,
     seller,
     quantity: 1,
@@ -90,23 +83,6 @@ function ProductCard({
       data-deco="view-product"
       class="w-full lg:max-w-[260px]"
     >
-      <SendEventOnClick
-        id={id}
-        event={{
-          name: "select_item" as const,
-          params: {
-            item_list_name: itemListName,
-            items: [
-              mapProductToAnalyticsItem({
-                product,
-                price,
-                listPrice,
-                index,
-              }),
-            ],
-          },
-        }}
-      />
       <figure class="relative overflow-hidden aspect-[13/15] flex justify-center items-center bg-ice rounded-[20px]">
         {/* Wishlist button */}
         <div class="absolute top-4 right-4 z-10 flex items-center">
@@ -138,8 +114,8 @@ function ProductCard({
           aria-label="view product"
         >
           <Image
-            src={front.url ?? ""}
-            alt={front.alternateName}
+            src={image}
+            alt={alt}
             width={WIDTH}
             height={HEIGHT}
             class="mix-blend-multiply"
@@ -161,11 +137,11 @@ function ProductCard({
           <div class="flex flex-col gap-x-2 lg:flex-row justify-center">
             {listPrice > price && (
               <div class="line-through text-gray text-xs lg:text-sm">
-                {formatPrice(listPrice, offers?.priceCurrency)}
+                {formatPrice(listPrice, priceCurrency)}
               </div>
             )}
             <div class="text-dark text-xs lg:text-sm">
-              {formatPrice(price, offers?.priceCurrency)}
+              {formatPrice(price, priceCurrency)}
             </div>
           </div>
 
@@ -179,7 +155,7 @@ function ProductCard({
 
         <button
           type="button"
-          disabled={buyProduct.loading.value || isUnavailable}
+          disabled={buyProduct.loading.value || !isAvailable}
           onClick={isInCart
             ? buyProduct.remove(productID)
             : canBuyWithSubscription
@@ -195,7 +171,7 @@ function ProductCard({
             : buyProduct.add}
           class={clx(
             "flex justify-center items-center gap-4 rounded text-xs sm:text-sm font-bold h-10 group/card",
-            isUnavailable
+            !isAvailable
               ? "text-[#666] bg-[#ccc]"
               : isInCart
               ? "bg-green text-white"
@@ -213,7 +189,7 @@ function ProductCard({
                     class="text-white"
                   />
                 )
-                : !isUnavailable &&
+                : !!isAvailable &&
                   // Show in desktop if product have subscription
                   ((!isMobile && canBuyWithSubscription) ||
                     // Show in mobile if product doesn't have subscription
@@ -227,7 +203,7 @@ function ProductCard({
                     />
                   )}
 
-              {isUnavailable
+              {!isAvailable
                 ? "Em breve"
                 : isInCart
                 ? "Adicionado"
@@ -244,4 +220,49 @@ function ProductCard({
   );
 }
 
-export default ProductCard;
+export function productToProductCardProps(
+  { product, isMobile }: {
+    itemListName?: string;
+    product: Product;
+    isMobile: boolean;
+  },
+) {
+  const {
+    url,
+    productID,
+    name,
+    image,
+    offers,
+    isVariantOf,
+    additionalProperty,
+  } = product;
+  const { price = 0, listPrice = 0, seller = "1", availability } =
+    useOffer(offers) || {};
+
+  const productGroupID = isVariantOf?.productGroupID;
+
+  const isBestSeller = additionalProperty?.some(
+    ({ value }) => value && /best-seller/i.test(value),
+  );
+
+  const canBuyWithSubscription = additionalProperty?.some(
+    ({ name }) => name === "activeSubscriptions",
+  );
+
+  return {
+    isMobile: isMobile,
+    url: url,
+    productID: productID,
+    name: name,
+    image: image?.[0].url ?? "",
+    alt: image?.[0].alternateName ?? "",
+    price: price,
+    listPrice: listPrice,
+    seller: seller,
+    isAvailable: availability === "https://schema.org/InStock",
+    productGroupID: productGroupID,
+    canBuyWithSubscription: !!canBuyWithSubscription,
+    isBestSeller: !!isBestSeller,
+    priceCurrency: offers?.priceCurrency,
+  };
+}
