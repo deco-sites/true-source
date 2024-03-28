@@ -1,6 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { GrayBackgroundProps } from "deco-sites/true-source/sdk/types.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 /** @titleBy productName */
 export interface Card {
@@ -41,35 +42,42 @@ function HighlightsBanner(
       )}
     >
       {title && (
-        <h2 class="text-center font-lemon-milk text-dark font-bold text-[18px] leading-[24px]">
+        <h2 class="font-bold font-lemon-milk text-[18px] text-center text-dark leading-[24px]">
           {title}
         </h2>
       )}
-      <div class="flex flex-col items-center md:flex-row gap-4 justify-between">
+      <div class="flex md:flex-row flex-col justify-between items-center gap-4">
         {cards?.map(({ image, tag, productName, productDescription, url }) => (
-          <a href={url} class="relative w-full">
-            <Image
-              src={image.desktopSrc}
-              alt={image.alt}
-              width={660}
-              height={450}
-              class="rounded-[20px] w-full object-cover hidden md:block"
-            />
-            <Image
-              src={image.mobileSrc}
-              alt={image.alt}
-              width={358}
-              height={217}
-              class="rounded-[20px] w-full object-cover md:hidden"
-            />
-
-            <span class="absolute top-6 left-6 md:top-10 md:left-10 font-bold font-lemon-milk text-[13px] leading-[17px] text-dark bg-ice rounded-full p-3">
+          <a
+            href={url}
+            class="relative rounded-[20px] w-full overflow-clip group"
+          >
+            <Picture>
+              <Source
+                width={660}
+                height={450}
+                media="(min-width: 768px)"
+                src={image.desktopSrc}
+              />
+              <Source
+                width={358}
+                height={217}
+                media="(max-width: 767px)"
+                src={image.mobileSrc}
+              />
+              <img
+                src={image.desktopSrc}
+                alt={image.alt}
+                class="group-hover:scale-105 rounded-[20px] w-full transition-all duration-500 object-cover"
+              />
+            </Picture>
+            <span class="top-6 md:top-10 left-6 md:left-10 absolute bg-ice p-3 rounded-full font-bold font-lemon-milk text-[13px] text-dark leading-[17px]">
               {tag}
             </span>
 
-            <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 flex flex-col max-w-[175px]">
+            <div class="bottom-6 md:bottom-10 left-6 md:left-10 absolute flex flex-col max-w-[175px]">
               <strong class="text-ice">{productName}</strong>
-              <span class="text-sm text-ice ">{productDescription}</span>
+              <span class="text-ice text-sm">{productDescription}</span>
             </div>
           </a>
         ))}
