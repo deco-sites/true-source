@@ -1,5 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { IconCheck, IconNotCheck } from "../../ui/CustomIcons.tsx";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface ComparisonImage {
   desktop: ImageWidget;
@@ -47,18 +48,25 @@ export default function Comparison({
         </ul>
       </div>
       <div class="order-3 lg:order-2 flex justify-center items-baseline col-span-3 px-10 lg:px-0 pt-4 lg:pt-0">
-        <picture>
-          <source media="(min-width:1024px)" srcset={image.desktop} />
-          <source
+        <Picture>
+          <Source
+            media="(min-width:1024px)"
+            src={image.desktop}
+            alt=""
+            width={600}
+          />
+          <Source
             media="(min-width:640px)"
-            srcset={image.tablet ? image.tablet : image.desktop}
+            src={image.tablet ? image.tablet : image.desktop}
+            alt=""
+            width={600}
           />
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="w-full h-auto"
             alt=""
           />
-        </picture>
+        </Picture>
       </div>
       <div class="order-2 lg:order-3 col-span-2">
         <h3 class="text-base lg:text-lg lg:text-right text-dark font-bold uppercase mb-4 font-lemon-milk">

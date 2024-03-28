@@ -3,11 +3,18 @@ import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import type { Theme } from "./Header.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
+
+interface AlertIcon {
+  icon: ImageWidget;
+  width: number;
+  height: number;
+}
 
 /** @titleBy text */
 export interface AlertProps {
   text: string;
-  icons?: ImageWidget;
+  icons?: AlertIcon;
   link?: string;
 }
 
@@ -43,7 +50,13 @@ function Alert({ alerts = [], theme, isMobile }: Props) {
                     }`}
                   >
                     {alert.icons && (
-                      <img className="px-2" src={alert.icons} alt="" />
+                      <Image
+                        src={alert.icons.icon}
+                        alt=""
+                        width={alert.icons.width}
+                        height={alert.icons.height}
+                        class="block mr-2"
+                      />
                     )}
                     <p
                       className={`text-xs md:text-sm sm:text-base ${
@@ -72,9 +85,15 @@ function Alert({ alerts = [], theme, isMobile }: Props) {
                 >
                   <ul class={"flex items-center w-full alertul"}>
                     <li class={"list-none "}>
-                      <a class={"flex"} href={alert.link}>
+                      <a class="flex" href={alert.link}>
                         {alert.icons && (
-                          <img className="px-2" src={alert.icons} alt="" />
+                          <Image
+                            src={alert.icons.icon}
+                            alt=""
+                            width={alert.icons.width}
+                            height={alert.icons.height}
+                            class="block mr-2"
+                          />
                         )}
                         <p
                           className={`text-xs font-medium ${

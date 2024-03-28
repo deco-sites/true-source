@@ -21,6 +21,24 @@ export default function FloatingButtons(
 
   return (
     <>
+      <script
+        src={scriptAsDataURI(() => {
+          globalThis.onload = () => {
+            const iframe = document.querySelector(
+              ".neoasssist-widget-frame",
+            ) as HTMLIFrameElement;
+
+            if (!iframe) throw new Error("iframe not found");
+
+            setTimeout(() => {
+              iframe.classList.remove("neoasssist-widget-frame");
+              iframe.classList.add("neoasssist-widget-frame--loaded");
+              console.log("removed");
+            }, 0);
+          };
+        })}
+      >
+      </script>
       <Head>
         <script
           type="text/javascript"

@@ -204,11 +204,11 @@
     .custom-category-text {
         @apply font-medium leading-7 text-dark;
     }
-    
+
     .custom-category-text ul {
         @apply list-disc pl-6;
     }
-    
+
     .custom-category-text ol {
         @apply list-decimal pl-6;
     }
@@ -720,6 +720,10 @@
 }
 
 .neoasssist-widget-frame {
+    display: none !important;
+}
+
+.neoasssist-widget-frame--loaded {
     bottom: 6px !important;
     right: 239px !important;
     z-index: 99 !important;

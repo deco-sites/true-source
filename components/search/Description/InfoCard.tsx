@@ -1,4 +1,5 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface Image {
   desktop: ImageWidget;
@@ -70,18 +71,25 @@ export default function InfoCardHorizontal({
             (rounded ? " rounded-[35px]" : "") +
             (textAlign === "right" ? " justify-end" : " justify-start")}
         >
-          <picture>
-            <source media="(min-width:1024px)" srcset={image.desktop} />
-            <source
+          <Picture>
+            <Source
+              media="(min-width:1024px)"
+              src={image.desktop}
+              alt=""
+              width={900}
+            />
+            <Source
               media="(min-width:640px)"
-              srcset={image.tablet ? image.tablet : image.desktop}
+              src={image.tablet ? image.tablet : image.desktop}
+              alt=""
+              width={600}
             />
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="absolute-center object-cover object-center w-full max-w-unset h-full"
               alt=""
             />
-          </picture>
+          </Picture>
           <div
             class={"w-full lg:w-2/5 relative z-1" + (
               type === "full"
@@ -149,18 +157,25 @@ export default function InfoCardHorizontal({
           </div>
         </div>
         <div class="w-full md:w-1/2">
-          <picture>
-            <source media="(min-width:1024px)" srcset={image.desktop} />
-            <source
+          <Picture>
+            <Source
+              media="(min-width:1024px)"
+              src={image.desktop}
+              alt=""
+              width={900}
+            />
+            <Source
               media="(min-width:640px)"
-              srcset={image.tablet ? image.tablet : image.desktop}
+              src={image.tablet ? image.tablet : image.desktop}
+              alt=""
+              width={600}
             />
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="w-full h-auto md:h-full object-cover object-center rounded-[11px]"
               alt=""
             />
-          </picture>
+          </Picture>
         </div>
       </div>
     </div>

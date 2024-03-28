@@ -36,7 +36,7 @@ function ValueItem(
       <label
         for={id}
         class={clx(
-          "size-[18px] border-2 border-dark rounded-full flex justify-center items-center",
+          "size-[18px] border-2 border-dark rounded-full flex justify-center items-center shrink-0",
           selected && "bg-dark",
         )}
       >

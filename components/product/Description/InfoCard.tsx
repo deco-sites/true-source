@@ -1,4 +1,5 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface InfoCardImage {
   desktop: ImageWidget;
@@ -55,18 +56,25 @@ export default function InfoCard({
           </div>
         </div>
         <div class="w-full md:w-1/2">
-          <picture>
-            <source media="(min-width:1024px)" srcset={image.desktop} />
-            <source
+          <Picture>
+            <Source
+              media="(min-width:1024px)"
+              src={image.desktop}
+              alt=""
+              width={900}
+            />
+            <Source
               media="(min-width:640px)"
-              srcset={image.tablet ? image.tablet : image.desktop}
+              src={image.tablet ? image.tablet : image.desktop}
+              alt=""
+              width={600}
             />
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="w-full h-auto md:h-full object-cover object-center"
               alt=""
             />
-          </picture>
+          </Picture>
         </div>
       </div>
     );
@@ -99,18 +107,25 @@ export default function InfoCard({
           />
         </div>
         <div class="overflow-hidden w-full md:w-2/5 shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-3xl flex-none">
-          <picture>
-            <source media="(min-width:1024px)" srcset={image.desktop} />
-            <source
+          <Picture>
+            <Source
+              media="(min-width:1024px)"
+              src={image.desktop}
+              alt=""
+              width={900}
+            />
+            <Source
               media="(min-width:640px)"
-              srcset={image.tablet ? image.tablet : image.desktop}
+              src={image.tablet ? image.tablet : image.desktop}
+              alt=""
+              width={600}
             />
             <img
               src={image.mobile ? image.mobile : image.desktop}
               class="w-full h-auto max-h-[471px] object-cover object-center"
               alt=""
             />
-          </picture>
+          </Picture>
         </div>
       </div>
     );
@@ -137,18 +152,25 @@ export default function InfoCard({
 
     return (
       <div class="relative z-1">
-        <picture>
-          <source media="(min-width:1024px)" srcset={image.desktop} />
-          <source
+        <Picture>
+          <Source
+            media="(min-width:1024px)"
+            src={image.desktop}
+            alt=""
+            width={900}
+          />
+          <Source
             media="(min-width:640px)"
-            srcset={image.tablet ? image.tablet : image.desktop}
+            src={image.tablet ? image.tablet : image.desktop}
+            alt=""
+            width={600}
           />
           <img
             src={image.mobile ? image.mobile : image.desktop}
             class="object-cover object-center w-full h-[712px] max-w-unset"
             alt=""
           />
-        </picture>
+        </Picture>
         <div
           class={`${alignment} w-full lg:max-w-[680px] px-10`}
           style={{ color }}

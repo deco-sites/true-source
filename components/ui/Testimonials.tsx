@@ -2,6 +2,7 @@ import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { AppContext } from "deco-sites/true-source/apps/site.ts";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @title {{authorName}} - Assinante há {{subscriptionTime}}
@@ -72,9 +73,11 @@ export default function Testimonials(
               {testimonial.text}
             </p>
             <div class="flex items-center gap-6">
-              <img
+              <Image
                 src={testimonial.authorIcon}
                 alt={testimonial.authorName}
+                width={58}
+                height={58}
                 class="size-[58px] rounded-full shrink-0"
               />
               <div>

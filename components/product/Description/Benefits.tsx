@@ -1,6 +1,7 @@
 import { useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy text
@@ -70,7 +71,7 @@ export default function Benefits({
               <div class="swiper-slide !w-[238px] sm:!w-[350px] !h-auto first:pl-4 last:pr-4">
                 <div class="flex flex-none items-center gap-6 bg-ice px-4 py-3 rounded-lg text-sm lg:text-base h-full">
                   <div class="w-[48px] sm:w-[80px] flex-none">
-                    <img
+                    <Image
                       class="w-[48px] sm:w-[80px] h-auto"
                       alt=""
                       width={80}
