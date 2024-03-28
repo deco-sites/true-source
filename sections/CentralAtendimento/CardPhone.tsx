@@ -1,84 +1,81 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
-interface ImgProps {
+interface ImageProps {
   /**
    * @title Imagem
    */
-  img: ImageWidget;
+  src: ImageWidget;
   /**
    * @title Largura da imagem
    */
-  imgWidth: number;
+  width: number;
   /**
    * @title Altura da imagem
    */
-  imgHeight: number;
-  /**
-   * @title Primeiro Ícone
-   */
-  icon1: ImageWidget;
-  /**
-   * @title Segundo Ícone
-   */
-  icon2: ImageWidget;
+  height: number;
 }
 
+/**
+ * @title {{number}}
+ */
+interface Number {
+  /**
+   * @title Número
+   */
+  number: string;
+  /**
+   * @title Ícone
+   * @description Um ícone 16x16
+   */
+  icon: ImageWidget;
+}
+
+/**
+ * @title {{title}}
+ */
 interface Props {
   /**
    * @title Título
    */
   title: string;
   /**
-   * @title Primeiro Número
+   * @title Ícone
    */
-  number1: string;
+  icon: ImageProps;
   /**
-   * @title Segundo Número
+   * @title Números
    */
-  number2: string;
+  numbers: Number[];
 }
 
 export default function CardPhone(
-  { img, imgWidth, imgHeight, icon1, icon2, title, number1, number2 }:
-    & ImgProps
-    & Props,
+  { title, icon, numbers }: Props,
 ) {
   return (
     <div class="flex w-full">
-      <div class="flex h-[107px] justify-center items-center w-full flex-row gap-4 bg-white p-6 border rounded-xl border-light-gray drop-shadow-md">
+      <div class="flex flex-row justify-center items-center gap-4 bg-white drop-shadow-md p-6 border border-light-gray rounded-xl w-full h-[107px]">
         <Image
-          src={img}
-          width={imgWidth}
-          height={imgHeight}
+          src={icon.src}
+          width={icon.width}
+          height={icon.height}
         />
-        <div class="flex w-full h-full flex-col justify-start">
-          <p class="font-lemon-milk text-[12px] sm:text-[14px] font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#E4003F] to-[#E9530E] text-nowrap">
+        <div class="flex flex-col justify-start w-full h-full">
+          <p class="bg-clip-text bg-gradient-to-r from-[#E4003F] to-[#E9530E] font-extrabold font-lemon-milk text-[12px] text-nowrap text-transparent sm:text-[14px]">
             {title}
           </p>
-          <div class="flex flex-row gap-2">
-            <Image
-              src={icon1}
-              width={16}
-              height={16}
-            />
-            <p class="font-lemon-milk left-[24px] text-[14px] underline">
-              {number1}
-            </p>
-          </div>
-
-          <div class="flex flex-row gap-2">
-            <span class="[&>svg]:h-[16px] [&>svg]:w-[16px] [&>svg]:fill-[#128c7e]">
+          {numbers.map(({ icon, number }) => (
+            <div class="flex flex-row gap-2">
               <Image
-                src={icon2}
+                src={icon}
                 width={16}
                 height={16}
               />
-            </span>
-            <p class="font-lemon-milk left-[24px] text-[14px] underline">
-              {number2}
-            </p>
-          </div>
+              <p class="left-[24px] font-lemon-milk text-[14px] underline">
+                {number}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
