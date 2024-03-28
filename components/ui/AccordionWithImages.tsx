@@ -119,31 +119,31 @@ export default function AccordionWithImages(
       <div class="mx-auto max-w-[1440px]">
         <div
           id={id}
-          class="flex w-full relative"
+          class="relative flex w-full"
         >
-          <ul data-slider class="w-full grid grid-cols-1 grid-rows-1 h-[442px]">
+          <ul data-slider class="grid grid-cols-1 grid-rows-1 w-full h-[442px]">
             {sections.map((section, index) => (
               <li
                 id={`${id}::${index}`}
                 data-intersecting={index === 0}
                 data-item
-                class="col-start-1 row-start-1 w-full group data-[intersecting='true']:opacity-100 opacity-0 transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto"
+                class="col-start-1 row-start-1 opacity-0 data-[intersecting='true']:opacity-100 w-full transition-all duration-700 pointer-events-none data-[intersecting='true']:pointer-events-auto group"
               >
                 <a
                   href={section.button.href}
                   id={id}
-                  class="relative overflow-clip w-full h-full"
+                  class="relative w-full h-full overflow-clip"
                 >
-                  <span class="bg-gradient-to-t from-black/30 to-transparent inset-0 absolute pointer-events-none" />
-                  <span class="absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] p-3 rounded-full top-8 left-8 font-lemon transition-all">
+                  <span class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+                  <span class="top-8 left-8 absolute bg-ice px-3 py-2 rounded-full font-bold font-lemon text-[13px] text-dark uppercase leading-[18px] transition-all">
                     {section.tag}
                   </span>
-                  <div class="absolute left-8 bottom-[72px] text-ice">
-                    <h2 class="font-bold text-lg leading-6 font-lemon mb-2">
+                  <div class="bottom-[72px] left-8 absolute text-ice">
+                    <h2 class="mb-2 font-bold font-lemon text-lg leading-6">
                       {section.title}
                     </h2>
-                    <p class="text-sm leading-4 mb-2">{section.description}</p>
-                    <span class="bg-gradient-to-r w-fit from-red to-orange font-lemon font-bold text-[13px] leading-[18px] flex items-center justify-center gap-4 transition-all py-3 px-6 rounded-full">
+                    <p class="mb-2 text-sm leading-4">{section.description}</p>
+                    <span class="flex justify-center items-center gap-4 bg-gradient-to-r from-red to-orange px-6 py-3 rounded-full w-fit font-bold font-lemon text-[13px] leading-[18px] transition-all">
                       {section.button.text}
                       <Icon id="BannerArrowRight" strokeWidth={2} size={16} />
                     </span>
@@ -164,7 +164,7 @@ export default function AccordionWithImages(
                       height={section.image.desktop.height}
                     />
                     <img
-                      class="object-cover w-full h-full"
+                      class="w-full h-full object-cover"
                       loading={preload ? "eager" : "lazy"}
                       src={section.image.desktop.src}
                       alt={section.image.alt}
@@ -174,11 +174,11 @@ export default function AccordionWithImages(
               </li>
             ))}
           </ul>
-          <div class="absolute left-8 bottom-8 right-8 flex justify-between items-center gap-8 z-[1]">
-            <ul class="carousel justify-center gap-3">
+          <div class="right-8 bottom-8 left-8 z-[1] absolute flex justify-between items-center gap-8">
+            <ul class="justify-center gap-3 carousel">
               {sections.map((_, index) => (
                 <li data-dot={index} class="carousel-item group">
-                  <div class="size-1.5 lg:size-2 rounded-full bg-white group-data-[active]:bg-gradient-to-tr from-red to-orange" />
+                  <div class="size-1.5 lg:size-2 bg-white group-data-[active]:bg-gradient-to-tr from-red to-orange rounded-full" />
                 </li>
               ))}
             </ul>
@@ -187,7 +187,7 @@ export default function AccordionWithImages(
                 type="button"
                 data-prev={id}
                 aria-label="Anterior"
-                class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+                class="flex justify-center items-center bg-white px-2.5 lg:px-4 py-1.5 lg:py-2 rounded-full"
               >
                 <Icon
                   class="rotate-180 size-4 lg:size-6"
@@ -200,7 +200,7 @@ export default function AccordionWithImages(
                 type="button"
                 data-next={id}
                 aria-label="Próximo"
-                class="rounded-full bg-white px-2.5 py-1.5 lg:px-4 lg:py-2 flex justify-center items-center"
+                class="flex justify-center items-center bg-white px-2.5 lg:px-4 py-1.5 lg:py-2 rounded-full"
               >
                 <Icon
                   class="size-4 lg:size-6"
@@ -244,7 +244,7 @@ export default function AccordionWithImages(
             class="absolute inset-0"
           />
           <span
-            class={`absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] p-3 rounded-full top-10 left-10 font-lemon transition-all z-[1]${
+            class={`absolute bg-ice font-bold text-[13px] uppercase text-dark leading-[18px] px-3 py-2 rounded-full top-10 left-10 font-lemon transition-all z-[1]${
               index === 0
                 ? " group-has-[~:hover]:opacity-0 opacity-100"
                 : " opacity-0 group-hover:opacity-100"
@@ -259,7 +259,7 @@ export default function AccordionWithImages(
                 : " left-[25px] max-w-[185px] group-hover:max-w-full group-hover:left-10"
             }`}
           >
-            <h2 class="font-bold text-lg leading-6 font-lemon mb-2">
+            <h2 class="mb-2 font-bold font-lemon text-lg leading-6">
               {section.title}
             </h2>
             <p class="text-sm leading-4">{section.description}</p>

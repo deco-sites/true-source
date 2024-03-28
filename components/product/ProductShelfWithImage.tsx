@@ -136,7 +136,7 @@ function ProductShelf({
         >
           <li data-dot-template class="group" role="button">
             <div
-              class={`w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors cursor-pointer${
+              class={`size-[5px] md:size-2 rounded-full group-data-[active]:bg-dark transition-colors cursor-pointer${
                 grayBackground ? " bg-gray" : " bg-ice"
               }`}
             />

@@ -70,7 +70,7 @@ export default function CategoryList(
       <h2 class="max-w-[228px] md:max-w-full font-bold font-lemon text-center text-dark text-sm md:text-lg uppercase leading-5 md:leading-6 tracking-[-0.01em]">
         {title}
       </h2>
-      <div class="flex justify-center items-center gap-4 mt-8 w-full h-[88px] overflow-y-clip">
+      <div class="flex justify-center items-center gap-4 mt-6 md:mt-8 w-full h-[73px] md:h-[88px] overflow-y-clip">
         {!isMobile && (
           <button
             type="button"
@@ -89,7 +89,7 @@ export default function CategoryList(
         )}
         <ul
           data-carousel
-          class="[--gap:8px] lg:[--gap:24px] items-center gap-[var(--gap,8px)] font-bold text-center text-dark text-sm leading-[17px] carousel"
+          class="[--gap:8px] lg:[--gap:24px] items-center gap-[var(--gap,8px)] font-medium md:font-bold text-center text-dark text-xs md:text-sm leading-[14px] md:leading-[17px] carousel"
           style={{
             "--items": Math.min(categories.length, 3),
             "--items-md": Math.min(categories.length, 5),
@@ -100,11 +100,11 @@ export default function CategoryList(
           {categories.map((category, index) => (
             <li
               data-item={index}
-              class="flex justify-center items-center min-[769px]:[--items:var(--items-md)] min-[1100px]:[--items:var(--items-lg)] xl:[--items:var(--items-xl)] bg-light-gray-200 hover:bg-gradient-to-r from-red to-orange rounded-full w-[calc((100%/var(--items,3))-var(--gap,8px)+(var(--gap,8px)/var(--items,3)))] h-[88px] transition-all duration-300 group/item shrink-0"
+              class="flex justify-center items-center min-[769px]:[--items:var(--items-md)] min-[1100px]:[--items:var(--items-lg)] xl:[--items:var(--items-xl)] bg-light-gray-200 hover:bg-gradient-to-r from-red to-orange rounded-full w-[calc((100%/var(--items,3))-var(--gap,8px)+(var(--gap,8px)/var(--items,3)))] h-[73px] md:h-[88px] transition-all duration-300 group/item shrink-0"
               key={category.href}
             >
               <a
-                class="group-hover/item:bg-white float-left flex justify-center items-center bg-ice px-6 rounded-full w-[calc(100%_-_4px)] h-[calc(100%_-_4px)] transition-all duration-300 cursor-pointer"
+                class="group-hover/item:bg-white float-left flex justify-center items-center bg-ice px-3 md:px-6 rounded-full w-[calc(100%_-_4px)] h-[calc(100%_-_4px)] transition-all duration-300 cursor-pointer"
                 href={category.href}
               >
                 {category.label}

@@ -37,7 +37,7 @@ function ProductShelf({
 
   return (
     <div
-      class={`flex flex-col gap-8 mx-auto pb-24 w-full max-w-[1440px]${
+      class={`flex flex-col gap-8 mx-auto pb-[85px] md:pb-24 w-full max-w-[1440px]${
         removePaddingTop ? "" : " pt-16"
       }`}
     >
@@ -76,7 +76,7 @@ function ProductShelf({
         <div class="top-[calc(100%+48px)] left-1/2 absolute flex items-center gap-3 -translate-x-1/2">
           {products.map((_, index) => (
             <Slider.Dot index={index} class="group">
-              <div class="group-data-[active]:bg-dark bg-ice rounded-full w-2 h-2 transition-colors" />
+              <div class="group-data-[active]:bg-dark bg-ice rounded-full size-[5px] md:size-2 transition-colors" />
             </Slider.Dot>
           ))}
         </div>

@@ -36,12 +36,12 @@ function InfluencersCarousel({ title, cards }: Props) {
     >
       {title && (
         <div class="flex flex-col items-center gap-5">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-0.5">
             {[...Array(5)].map(() => (
               <Icon id="RatingStar" size={13} class="" />
             ))}
           </div>
-          <h2 class="font-bold font-lemon-milk text-[18px] text-center text-dark leading-[24px]">
+          <h2 class="max-w-[228px] md:max-w-full font-bold font-lemon text-[18px] text-center text-dark leading-[24px]">
             {title}
           </h2>
         </div>

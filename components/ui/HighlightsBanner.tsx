@@ -42,7 +42,7 @@ function HighlightsBanner(
       )}
     >
       {title && (
-        <h2 class="font-bold font-lemon-milk text-[18px] text-center text-dark leading-[24px]">
+        <h2 class="md:block hidden font-bold font-lemon text-[18px] text-center text-dark leading-[24px]">
           {title}
         </h2>
       )}
@@ -71,7 +71,7 @@ function HighlightsBanner(
                 class="group-hover:scale-105 rounded-[20px] w-full transition-all duration-500 object-cover"
               />
             </Picture>
-            <span class="top-6 md:top-10 left-6 md:left-10 absolute bg-ice p-3 rounded-full font-bold font-lemon-milk text-[13px] text-dark leading-[17px]">
+            <span class="top-6 md:top-10 left-6 md:left-10 absolute bg-ice px-3 py-2 rounded-full font-bold font-lemon-milk text-[13px] text-dark leading-[17px]">
               {tag}
             </span>
 
