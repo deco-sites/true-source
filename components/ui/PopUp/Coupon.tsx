@@ -30,6 +30,7 @@ export default function Coupon(
   const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
   const loadingFormSubmit = useSignal(false);
+  const error = useSignal<string | null>(null);
 
   const fetchUserOrdersByEmail = useCallback(async () => {
     if (!user.value || !user.value.email) return;
@@ -129,6 +130,8 @@ export default function Coupon(
       setPopupAsSeen();
     } catch (err) {
       console.error(err);
+      error.value =
+        "Ocorreu um erro ao gerar o cupom. Tente novamente mais tarde.";
     } finally {
       loadingFormSubmit.value = false;
     }
@@ -208,6 +211,7 @@ export default function Coupon(
               finishedForm.value ? " opacity-0 pointer-events-none" : ""
             }`}
             onSubmit={handleFormSubmit}
+            onFocus={() => error.value = null}
           >
             <div class="space-y-2">
               <Input.Container>
@@ -309,6 +313,13 @@ export default function Coupon(
                 )
                 : "Gerar cupom de desconto"}
             </button>
+            {error.value
+              ? (
+                <span class="mt-4 text-center text-red text-xs pointer-events-none">
+                  {error.value}
+                </span>
+              )
+              : null}
           </form>
         </div>
       </div>
