@@ -9,12 +9,12 @@ interface Props {
   mobile?: number;
 }
 
-export default function Space({ desktop, mobile }: Props) {
+export default function Space({ desktop = 0, mobile = 0 }: Props) {
   return (
     <div
       style={{
-        "--s-d": desktop,
-        "--s-m": mobile,
+        "--s-d": `${desktop}px`,
+        "--s-m": `${mobile}px`,
       }}
       class="pt-[var(--s-m)] md:pt-[var(--s-d)]"
     />
