@@ -62,19 +62,18 @@ function Searchbar({
 
   return (
     <div
-      class="flex flex-col flex-1 group lg:pb-0"
+      class="flex flex-col flex-1 lg:pb-0 h-full group"
       ref={ref}
       tabIndex={-1}
     >
       <form
         id={id}
         action={action}
-        class="relative flex-grow flex items-center h-full z-20 flex-1 overflow-visible bg-ice border border-light-gray-200 rounded-full px-[16px] md:px-[24px]
-           min-h-[40px] md:min-h-[48px] group-data-[micro-header='true']/header:min-h-[30px]"
+        class="relative z-20 flex flex-grow flex-1 items-center bg-ice px-[16px] md:px-[24px] border border-light-gray-200 rounded-full h-full min-h-[40px] group-data-[micro-header='true']/header:min-h-[30px] md:min-h-[48px] overflow-visible"
       >
         <input
           ref={searchInputRef}
-          class="flex-grow w-full outline-none placeholder:text-grey text-grey text-[13px] placeholder:text-xs md:placeholder:text-[13px] placeholder:font-semibold h-full max-h-[48px] bg-ice group-data-[micro-header='true']/header:pb-[3px]"
+          class="group-data-[micro-header='true']/header:pb-[3px] flex-grow bg-ice w-full h-full max-h-[48px] placeholder:font-semibold text-[13px] text-grey md:placeholder:text-[13px] placeholder:text-grey placeholder:text-xs outline-none"
           name={name}
           onInput={(e) => {
             const value = e.currentTarget.value;
@@ -95,7 +94,7 @@ function Searchbar({
         />
         <button
           type="submit"
-          class="h-full flex items-center justify-center focus:outline-none"
+          class="flex justify-center items-center h-full focus:outline-none"
           aria-label="Search"
           htmlFor="searchbar"
           tabIndex={-1}

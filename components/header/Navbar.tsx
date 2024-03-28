@@ -45,8 +45,8 @@ function Navbar(
       {isMobile
         ? (
           <>
-            <div class="group-data-[micro-header='true']/header:gap-0 flex flex-col gap-[18px] lg:hidden bg-white group-data-[micro-header='true']/header:shadow-md p-4 group-data-[micro-header='true']/header:rounded-b-[20px] w-full">
-              <div class="group-data-[micro-header='true']/header:h-[30px] flex justify-between items-center gap-[10px]">
+            <div class="group-data-[micro-header='true']/header:gap-0 flex flex-col gap-[18px] lg:hidden bg-white group-data-[micro-header='true']/header:shadow-md py-4 group-data-[micro-header='true']/header:rounded-b-[20px] w-full">
+              <div class="group-data-[micro-header='true']/header:h-[30px] flex justify-between items-center gap-[10px] px-4">
                 {logo && (
                   <a
                     href="/"
@@ -84,12 +84,14 @@ function Navbar(
                 </div>
               </div>
 
-              <div class="group-data-[micro-header='true']/header:hidden mx-auto w-full max-w-full">
+              <div class="group-data-[micro-header='true']/header:hidden mx-auto px-4 w-full max-w-full">
                 <Searchbar searchbar={searchbar} />
               </div>
 
               <div class="flex justify-between items-center gap-4 group-data-[micro-header='true']/header:hidden w-full overflow-x-scroll no-scrollbar">
-                {items?.map((item) => <NavItem item={item} />)}
+                {items?.[0].children?.map((item, index) => (
+                  <NavItem item={index === 0 ? items[0] : item} />
+                ))}
               </div>
             </div>
           </>
@@ -116,7 +118,7 @@ function Navbar(
                   </ul>
                 </div>
 
-                <div class="w-full max-w-full">
+                <div class="group-data-[micro-header='true']/header:h-10 w-full max-w-full h-12">
                   <Searchbar searchbar={searchbar} />
                 </div>
 

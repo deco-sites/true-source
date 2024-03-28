@@ -39,11 +39,11 @@ export interface Props {
 
 export function Socials({ socials }: { socials: Socials[] }) {
   return (
-    <div class="flex gap-[20px] p-6 mt-[76px]">
+    <div class="flex gap-[20px] mt-[76px] p-6">
       {socials.map((item) => (
         <a
           href={item.url}
-          class="border border-[#E9530E] rounded-full w-[38.5px] h-[38.5px] flex items-center justify-center"
+          class="flex justify-center items-center border-[#E9530E] border rounded-full w-[38.5px] h-[38.5px]"
         >
           <Image
             src={item.icon}
@@ -66,7 +66,7 @@ export function MenuInstitutional(
       {institutionalItems.map((item) => (
         <a
           href={item.url}
-          class="font-lemon-milk text-[11px] text-dark px-6 uppercase font-medium"
+          class="px-6 font-lemon-milk font-medium text-[11px] text-dark uppercase"
         >
           {item.name}
         </a>
@@ -84,7 +84,7 @@ function Menu({ items, institutionalItems, socials, helpItems }: Props) {
   );
 
   return (
-    <div class="flex flex-col h-full w-[308px] px-4 overflow-y-scroll no-scrollbar">
+    <div class="flex flex-col px-4 w-[308px] h-full overflow-y-scroll no-scrollbar">
       <div class="flex flex-col">
         {itemsWithChildren.map((navItem, index) => (
           <Collapsable
@@ -116,12 +116,14 @@ function Menu({ items, institutionalItems, socials, helpItems }: Props) {
               </div>
             }
           >
-            <div class="flex flex-col ">
+            <div class="flex flex-col">
               {!!navItem.children &&
-                navItem.children.map((children) => (
+                navItem.children.map((children, index) => (
                   <a
                     href={children.url}
-                    class="py-[15.5px] pl-[40px] pr-6 font-lemon-milk text-[11px] text-dark font-medium border border-Stroke uppercase flex justify-between items-center first:border-t-0"
+                    class={`py-[15.5px] pl-[40px] pr-6 font-lemon-milk text-[11px] text-dark border border-Stroke uppercase flex justify-between items-center first:border-t-0 ${
+                      index === 0 ? "font-bold" : "font-medium"
+                    }`}
                   >
                     {children.name}
                     <Icon id="ChevronRight" size={16} />
@@ -133,19 +135,19 @@ function Menu({ items, institutionalItems, socials, helpItems }: Props) {
         {itemsWithoutChildren.map((item) => (
           <a
             href={item.url}
-            class="py-[15.5px] font-lemon-milk text-[11px] text-dark border border-Stroke px-6 uppercase font-bold last:rounded-b-[8px]"
+            class="border-Stroke px-6 py-[15.5px] border last:rounded-b-[8px] font-bold font-lemon-milk text-[11px] text-dark uppercase"
           >
             {item.name}
           </a>
         ))}
       </div>
 
-      <div class="flex flex-col border border-Stroke rounded-[8px] divide-y divide-Stroke mt-6">
-        <div class="py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold w-full">
+      <div class="flex flex-col border-Stroke mt-6 border rounded-[8px] divide-y divide-Stroke">
+        <div class="px-6 py-[15.5px] w-full font-bold font-lemon-milk text-[11px] text-dark uppercase">
           <CartButtonVTEX type="menu" />
         </div>
 
-        <div class="flex justify-between items-center py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold">
+        <div class="flex justify-between items-center px-6 py-[15.5px] font-bold font-lemon-milk text-[11px] text-dark uppercase">
           <span>Sua conta</span>
           <Icon id="Login" size={20} />
         </div>
@@ -153,26 +155,26 @@ function Menu({ items, institutionalItems, socials, helpItems }: Props) {
         {helpItems.children
           ? (
             <Collapsable
-              class="w-full rounded-b-[8px]"
+              class="rounded-b-[8px] w-full"
               title={
-                <div class="py-[15.5px] px-6 font-lemon-milk text-[11px] text-dark font-bold group-open:border-b border-Stroke uppercase flex justify-between items-center first:border-t-0">
+                <div class="flex justify-between items-center border-Stroke px-6 py-[15.5px] first:border-t-0 group-open:border-b font-bold font-lemon-milk text-[11px] text-dark uppercase">
                   <span>
                     {helpItems.title}
                   </span>
                   <Icon
                     id="ChevronDown"
                     size={16}
-                    class="rotate-0 text-neutral-5 group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                    class="group-open:rotate-180 text-neutral-5 transition-all duration-[400ms] ease-in-out rotate-0"
                   />
                 </div>
               }
             >
-              <div class="flex flex-col ">
+              <div class="flex flex-col">
                 {!!helpItems.children &&
                   helpItems.children.map((children) => (
                     <a
                       href={children.url}
-                      class="py-[15.5px] pl-[40px] pr-6 font-lemon-milk text-[11px] text-dark font-medium uppercase flex justify-between items-center first:border-t-0"
+                      class="flex justify-between items-center py-[15.5px] pr-6 pl-[40px] first:border-t-0 font-lemon-milk font-medium text-[11px] text-dark uppercase"
                     >
                       {children.title}
                       <Icon id="ChevronRight" size={16} />
@@ -183,7 +185,7 @@ function Menu({ items, institutionalItems, socials, helpItems }: Props) {
           )
           : (
             <a
-              class="flex justify-between items-center py-[15.5px] font-lemon-milk text-[11px] text-dark px-6 uppercase font-bold"
+              class="flex justify-between items-center px-6 py-[15.5px] font-bold font-lemon-milk text-[11px] text-dark uppercase"
               href={helpItems.url}
             >
               <span>{helpItems.title}</span>

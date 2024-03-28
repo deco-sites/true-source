@@ -39,33 +39,33 @@ function NavItem({ item }: Props) {
 
   // TODO: implement border gradient
   return (
-    <li className="group flex items-center">
-      <ul class="flex items-center justify-between">
+    <li class="flex items-center md:last:pr-0 last:pr-4 md:first:pl-0 first:pl-4 group">
+      <ul class="flex justify-between items-center">
         <a
           href={url}
-          class={`flex items-center gap-2 font-bold text-[11px] md:text-[13px] leading-[14px] md:leading-[17.5px] uppercase h-[25px] md:h-[40px] rounded-full font-lemon-milk text-dark group-first:text-white group-first:bg-gradient-to-r from-[#E4003F] from-35% to-[#e8530e] to-90% group-first:px-2 md:group-first:px-6 group-hover:bg-gradient-to-r group-hover:text-transparent group-hover:bg-clip-text border border-transparent group-first:hover:border-red whitespace-nowrap
-          ${item.ishighlighted && "fontWithGradient"}
-          ${children && children.length > 0 ? "has-submenu" : ""}`}
+          class={`flex items-center gap-2 font-bold text-[11px] md:text-[13px] leading-[14px] md:leading-[17.5px] uppercase h-[25px] md:h-[40px] rounded-full font-lemon-milk text-dark group-first:text-white group-first:bg-gradient-to-r from-red from-35% to-orange to-90% group-first:px-2 md:group-first:px-6 group-hover:bg-gradient-to-r group-hover:text-transparent group-hover:bg-clip-text border border-transparent group-first:hover:border-red whitespace-nowrap ${
+            item.ishighlighted && "fontWithGradient"
+          } ${children && children.length > 0 ? "has-submenu" : ""}`}
         >
           {name}
           {children && children.length > 0 && (
             <Icon
               id="ChevronDown"
               size={20}
-              class="text-dark group-first:text-white group-hover:text-red group-hover:rotate-180 duration-300 hidden md:block"
+              class="group-hover:text-red group-hover:rotate-180 group-first:text-white md:block hidden text-dark duration-300"
             />
           )}
         </a>
       </ul>
 
       {children && children.length > 0 && (
-        <div className="absolute top-full group-data-[micro-header='true']/header:top-[48px] left-0 right-0 hidden md:group-hover:block z-50 items-start justify-center gap-6 rounded-b-[20px] bg-white w-full py-8 shadow-md">
-          <div className="flex justify-between items-start border-l border-solid border-red max-w-[1360px] mx-auto">
-            <ul className="flex flex-col lg:w-[377px] px-[32px]">
+        <div class="group-data-[micro-header='true']/header:top-[48px] md:group-hover:block top-full right-0 left-0 z-50 absolute justify-center items-start gap-6 hidden bg-white shadow-md py-8 rounded-b-[20px] w-full">
+          <div class="flex justify-between items-start mx-auto border-red border-l border-solid max-w-[1360px]">
+            <ul class="flex flex-col px-[32px] lg:w-[377px]">
               {children.slice(0, 8).map((node) => (
-                <li className="group/icon border-b border-solid border-Stroke py-[13px] ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]">
+                <li class="border-Stroke hover:bg-[#f0f0ee] hover:px-[16px] py-[13px] border-b border-solid hover:rounded-[8px] duration-300 ease-in-out group/icon">
                   <a
-                    className="flex justify-between items-center"
+                    class="flex justify-between items-center"
                     href={node.url}
                   >
                     <span
@@ -77,20 +77,20 @@ function NavItem({ item }: Props) {
                       {node.name}
                     </span>
                     <Icon
-                      id="ArrowNarrowRight"
+                      id="BannerArrowRight"
                       size={16}
-                      class="text-dark group-hover/icon:text-red"
+                      class="group-hover/icon:text-red text-dark"
                     />
                   </a>
                 </li>
               ))}
             </ul>
             {children.length > 8 && (
-              <ul className="flex flex-col lg:w-[377px]">
+              <ul class="flex flex-col lg:w-[377px]">
                 {children.slice(8, 16).map((node) => (
-                  <li className="group/icon border-b border-solid border-Stroke py-[13px] ease-in-out duration-300 hover:bg-[#f0f0ee] hover:px-[16px] hover:rounded-[8px]">
+                  <li class="border-Stroke hover:bg-[#f0f0ee] hover:px-[16px] py-[13px] border-b border-solid hover:rounded-[8px] duration-300 ease-in-out group/icon">
                     <a
-                      className="flex justify-between items-center"
+                      class="flex justify-between items-center"
                       href={node.url}
                     >
                       <span
@@ -102,9 +102,9 @@ function NavItem({ item }: Props) {
                         {node.name}
                       </span>
                       <Icon
-                        id="ArrowNarrowRight"
+                        id="BannerArrowRight"
                         size={16}
-                        class="text-dark group-hover/icon:text-red"
+                        class="group-hover/icon:text-red text-dark"
                       />
                     </a>
                   </li>
@@ -114,7 +114,7 @@ function NavItem({ item }: Props) {
             <ul>
               {image && (
                 <Image
-                  className="rounded-[20px] cover"
+                  class="rounded-[20px] cover"
                   src={image.src}
                   alt={image.alt}
                   width={526}

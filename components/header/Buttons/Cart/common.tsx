@@ -47,7 +47,7 @@ function CartButton(
   return (
     <div class={`indicator ${type === "menu" ? "w-full" : ""}`}>
       <span
-        class={`flex justify-center items-center indicator-item font-medium top-[5px] bg-brand text-white h-5 w-5 md:h-6 md:w-6 rounded-full badge-xs ${
+        class={`flex pointer-events-none justify-center items-center indicator-item font-medium top-[5px] bg-brand text-white h-5 w-5 md:h-6 md:w-6 rounded-full badge-xs ${
           totalItems === 0 ? "hidden" : ""
         }`}
       >
@@ -56,9 +56,11 @@ function CartButton(
 
       <Button
         class={`${
-          type === "menu" ? "flex text-[11px] uppercase w-full" : " btn-ghost"
+          type === "menu"
+            ? "flex text-[11px] uppercase w-full"
+            : " btn-ghost hover:bg-transparent"
         }`}
-        aria-label="open cart"
+        aria-label="Abrir carrinho de compras"
         data-deco={displayCart.value && "open-cart"}
         loading={type === "menu" ? false : loading}
         onClick={onClick}
