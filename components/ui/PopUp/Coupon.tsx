@@ -30,6 +30,7 @@ export default function Coupon(
   const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
   const loadingFormSubmit = useSignal(false);
+  const error = useSignal<string | null>(null);
 
   const fetchUserOrdersByEmail = useCallback(async () => {
     if (!user.value || !user.value.email) return;
@@ -62,9 +63,15 @@ export default function Coupon(
   };
 
   useSignalEffect(() => {
+    const isInAdmin = document.location.ancestorOrigins.contains(
+      "https://admin.deco.cx",
+    );
     const alreadySeenPopup = document.cookie.includes("hasSeenPopup=true");
 
-    if (alreadySeenPopup || displayPopup.peek() || finishedForm.peek()) {
+    if (
+      isInAdmin || alreadySeenPopup || displayPopup.peek() ||
+      finishedForm.peek()
+    ) {
       return;
     }
 
@@ -123,6 +130,8 @@ export default function Coupon(
       setPopupAsSeen();
     } catch (err) {
       console.error(err);
+      error.value =
+        "Ocorreu um erro ao gerar o cupom. Tente novamente mais tarde.";
     } finally {
       loadingFormSubmit.value = false;
     }
@@ -159,10 +168,10 @@ export default function Coupon(
             }`}
           >
             <Icon id="StarIcon" class="shrink-0 size-[30px] md:size-[43px]" />
-            <p class="text-sm leading-[18px] md:text-lg md:leading-6 font-bold font-lemon uppercase">
+            <p class="font-bold font-lemon text-sm md:text-lg uppercase leading-[18px] md:leading-6">
               Seu cupom foi aplicado<br />no carrinho.
             </p>
-            <p class="text-xs leading-[14px] md:text-sm md:leading-6">
+            <p class="text-xs md:text-sm leading-[14px] md:leading-6">
               Agora é só escolher seus produtos e<br />finalizar sua compra! 😉
             </p>
           </div>
@@ -174,16 +183,16 @@ export default function Coupon(
             >
               <Icon id="StarIcon" class="shrink-0 size-[30px] md:size-[43px]" />
               <div>
-                <p class="text-sm leading-[18px] md:text-lg md:leading-6 font-bold font-lemon uppercase">
+                <p class="font-bold font-lemon text-sm md:text-lg uppercase leading-[18px] md:leading-6">
                   Seja bem-vindo(a) à<br />True Source!
                 </p>
-                <p class="text-xs leading-[14px] md:text-sm md:leading-6">
+                <p class="text-xs md:text-sm leading-[14px] md:leading-6">
                   Preencha seus dados e ganhe
                 </p>
-                <p class="text-sm leading-[18px] md:text-lg md:leading-6 font-bold font-lemon uppercase bg-gradient-to-r from-red to-orange bg-clip-text text-transparent">
+                <p class="bg-clip-text bg-gradient-to-r from-red to-orange font-bold font-lemon text-sm text-transparent md:text-lg uppercase leading-[18px] md:leading-6">
                   {discountPercentage}% de desconto
                 </p>
-                <p class="text-xs leading-[14px] md:text-sm md:leading-6">
+                <p class="text-xs md:text-sm leading-[14px] md:leading-6">
                   na sua primeira compra!
                 </p>
               </div>
@@ -192,7 +201,7 @@ export default function Coupon(
               type="button"
               aria-label="Fechar pop-up de cupom"
               onClick={handlePopupClose}
-              class="size-6 flex justify-center items-center cursor-pointer"
+              class="flex justify-center items-center cursor-pointer size-6"
             >
               <Icon id="X" size={24} />
             </button>
@@ -202,6 +211,7 @@ export default function Coupon(
               finishedForm.value ? " opacity-0 pointer-events-none" : ""
             }`}
             onSubmit={handleFormSubmit}
+            onFocus={() => error.value = null}
           >
             <div class="space-y-2">
               <Input.Container>
@@ -246,7 +256,7 @@ export default function Coupon(
                 <Input.Label>Telefone com DDD *</Input.Label>
               </Input.Container>
             </div>
-            <div class="flex items-center justify-between gap-2 mt-6">
+            <div class="flex justify-between items-center gap-2 mt-6">
               <Radio
                 name="consumer-type"
                 value="consumidor"
@@ -266,25 +276,25 @@ export default function Coupon(
                 required
               />
             </div>
-            <label class="flex gap-2 items-center mt-6 cursor-pointer text-[13px] leading-[15px] select-none">
+            <label class="flex items-center gap-2 mt-6 text-[13px] leading-[15px] cursor-pointer select-none">
               <input
                 type="checkbox"
                 name="consent"
-                class="sr-only peer"
+                class="peer sr-only"
                 required
               />
-              <span class="shrink-0 size-[18px] border border-gray bg-white rounded-[5px] peer-checked:border-dark peer-checked:bg-dark transition-all text-white peer-checked:[&>svg]:translate-y-0 peer-checked:[&>svg]:opacity-100 flex justify-center items-center peer-focus:ring-2 peer-focus:ring-black">
+              <span class="flex justify-center items-center border-gray peer-checked:border-dark bg-white peer-checked:bg-dark peer-checked:[&>svg]:opacity-100 border rounded-[5px] text-white transition-all peer-checked:[&>svg]:translate-y-0 shrink-0 size-[18px] peer-focus:ring-2 peer-focus:ring-black">
                 <Icon
                   id="Check"
                   size={12}
                   strokeWidth={4}
-                  class="transition-all opacity-0 -translate-y-2"
+                  class="opacity-0 transition-all -translate-y-2"
                 />
               </span>
               Estou ciente que poderei receber comunicações.
             </label>
             <button
-              type="button"
+              type="submit"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8E8E8D, #8E8E8D, #e4003f, #E9530E)",
@@ -292,7 +302,7 @@ export default function Coupon(
               }}
               data-loading={loadingFormSubmit.value}
               disabled={loadingFormSubmit.value}
-              class=" mt-6 text-xs leading-[16px] font-bold font-lemon h-[50px] rounded-md transition-all [background-position:0%] hover:[background-position:100%] data-[loading='true']:[background-position:100%] duration-500 text-white w-full text-center flex justify-center items-center gap-3"
+              class="flex justify-center items-center gap-3 mt-6 rounded-md w-full h-[50px] font-bold font-lemon text-center text-white text-xs leading-[16px] transition-all [background-position:0%] hover:[background-position:100%] data-[loading='true']:[background-position:100%] duration-500"
             >
               {loadingFormSubmit.value
                 ? (
@@ -303,6 +313,13 @@ export default function Coupon(
                 )
                 : "Gerar cupom de desconto"}
             </button>
+            {error.value
+              ? (
+                <span class="mt-4 text-center text-red text-xs pointer-events-none">
+                  {error.value}
+                </span>
+              )
+              : null}
           </form>
         </div>
       </div>
@@ -347,15 +364,15 @@ interface RadioProps {
 
 function Radio({ name, value, label, required = false }: RadioProps) {
   return (
-    <label class="flex gap-2 items-center cursor-pointer text-[13px] leading-[15px] select-none">
+    <label class="flex items-center gap-2 text-[13px] leading-[15px] cursor-pointer select-none">
       <input
         type="radio"
         name={name}
         value={value}
         required={required}
-        class="sr-only peer"
+        class="peer sr-only"
       />
-      <span class="shrink-0 size-[18px] border border-gray bg-white rounded-full peer-checked:border-dark peer-checked:border-[5px] transition-all peer-focus:ring-2 peer-focus:ring-black">
+      <span class="border-gray peer-checked:border-[5px] peer-checked:border-dark bg-white border rounded-full transition-all shrink-0 size-[18px] peer-focus:ring-2 peer-focus:ring-black">
       </span>
       {label}
     </label>

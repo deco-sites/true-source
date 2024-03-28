@@ -20,6 +20,7 @@ export default function Coupon({ topText }: Props) {
   const displayPopup = useSignal(false);
   const finishedForm = useSignal(false);
   const loadingFormSubmit = useSignal(false);
+  const error = useSignal<string | null>(null);
 
   const fetchUserOrdersByEmail = useCallback(async () => {
     if (!user.value || !user.value.email) return;
@@ -45,12 +46,16 @@ export default function Coupon({ topText }: Props) {
   };
 
   useSignalEffect(() => {
+    const isInAdmin = document.location.ancestorOrigins.contains(
+      "https://admin.deco.cx",
+    );
     const alreadySeenPopup = document.cookie.includes(
       "hasSeenSubscriptionPopup=true",
     );
 
     if (
-      alreadySeenPopup || displayPopup.peek() || finishedForm.peek() ||
+      isInAdmin || alreadySeenPopup || displayPopup.peek() ||
+      finishedForm.peek() ||
       !user.value
     ) {
       return;
@@ -99,6 +104,8 @@ export default function Coupon({ topText }: Props) {
       globalThis.window.location.href = "/assinatura";
     } catch (err) {
       console.error(err);
+      error.value =
+        "Ocorreu um erro ao gerar o cupom. Tente novamente mais tarde.";
     } finally {
       loadingFormSubmit.value = false;
     }
@@ -140,14 +147,14 @@ export default function Coupon({ topText }: Props) {
             />
             <div
               dangerouslySetInnerHTML={{ __html: topText }}
-              class="text-white text-sm [&_strong]:font-bold [&_strong]:text-lg [&_strong]:font-lemon leading-6 [&_strong]:leading-6 max-w-[calc(100%-6vw)]"
+              class="max-w-[calc(100%-6vw)] [&_strong]:font-bold [&_strong]:font-lemon text-sm text-white [&_strong]:text-lg leading-6 [&_strong]:leading-6"
             />
           </div>
           <button
             type="button"
             onClick={handlePopupClose}
             aria-label="Fechar pop-up de cupom"
-            class="absolute top-10 right-10 size-6 flex justify-center items-center cursor-pointer"
+            class="top-10 right-10 absolute flex justify-center items-center cursor-pointer size-6"
           >
             <Icon id="X" size={24} class="text-white" />
           </button>
@@ -157,6 +164,7 @@ export default function Coupon({ topText }: Props) {
               finishedForm.value ? " opacity-0 pointer-events-none" : ""
             }`}
             onSubmit={handleFormSubmit}
+            onFocus={() => error.value = null}
           >
             <div class="space-y-2">
               <Input.Container>
@@ -201,7 +209,7 @@ export default function Coupon({ topText }: Props) {
                 <Input.Label>Telefone com DDD *</Input.Label>
               </Input.Container>
             </div>
-            <div class="flex items-center justify-between gap-2 mt-6">
+            <div class="flex justify-between items-center gap-2 mt-6">
               <Radio
                 name="consumer-type"
                 value="consumidor"
@@ -221,19 +229,19 @@ export default function Coupon({ topText }: Props) {
                 required
               />
             </div>
-            <label class="flex gap-2 items-center mt-6 cursor-pointer text-[13px] leading-[15px] select-none">
+            <label class="flex items-center gap-2 mt-6 text-[13px] leading-[15px] cursor-pointer select-none">
               <input
                 type="checkbox"
                 name="consent"
-                class="sr-only peer"
+                class="peer sr-only"
                 required
               />
-              <span class="shrink-0 size-[18px] border border-gray bg-white rounded-[5px] peer-checked:border-dark peer-checked:bg-dark transition-all text-white peer-checked:[&>svg]:translate-y-0 peer-checked:[&>svg]:opacity-100 flex justify-center items-center peer-focus:ring-2 peer-focus:ring-black">
+              <span class="flex justify-center items-center border-gray peer-checked:border-dark bg-white peer-checked:bg-dark peer-checked:[&>svg]:opacity-100 border rounded-[5px] text-white transition-all peer-checked:[&>svg]:translate-y-0 shrink-0 size-[18px] peer-focus:ring-2 peer-focus:ring-black">
                 <Icon
                   id="Check"
                   size={12}
                   strokeWidth={4}
-                  class="transition-all opacity-0 -translate-y-2"
+                  class="opacity-0 transition-all -translate-y-2"
                 />
               </span>
               Estou ciente que poderei receber comunicações.
@@ -247,7 +255,7 @@ export default function Coupon({ topText }: Props) {
               }}
               data-loading={loadingFormSubmit.value}
               disabled={loadingFormSubmit.value}
-              class=" mt-6 text-xs leading-[16px] font-bold font-lemon h-[50px] rounded-md transition-all [background-position:0%] hover:[background-position:100%] data-[loading='true']:[background-position:100%] duration-500 text-white w-full text-center flex justify-center items-center gap-3"
+              class="flex justify-center items-center gap-3 mt-6 rounded-md w-full h-[50px] font-bold font-lemon text-center text-white text-xs leading-[16px] transition-all [background-position:0%] hover:[background-position:100%] data-[loading='true']:[background-position:100%] duration-500"
             >
               {loadingFormSubmit.value
                 ? (
@@ -258,6 +266,13 @@ export default function Coupon({ topText }: Props) {
                 )
                 : "Gerar cupom de desconto"}
             </button>
+            {error.value
+              ? (
+                <span class="mt-4 text-center text-red text-xs pointer-events-none">
+                  {error.value}
+                </span>
+              )
+              : null}
           </form>
         </div>
       </div>
@@ -302,15 +317,15 @@ interface RadioProps {
 
 function Radio({ name, value, label, required = false }: RadioProps) {
   return (
-    <label class="flex gap-2 items-center cursor-pointer text-[13px] leading-[15px] select-none">
+    <label class="flex items-center gap-2 text-[13px] leading-[15px] cursor-pointer select-none">
       <input
         type="radio"
         name={name}
         value={value}
         required={required}
-        class="sr-only peer"
+        class="peer sr-only"
       />
-      <span class="shrink-0 size-[18px] border border-gray bg-white rounded-full peer-checked:border-dark peer-checked:border-[5px] transition-all peer-focus:ring-2 peer-focus:ring-black">
+      <span class="border-gray peer-checked:border-[5px] peer-checked:border-dark bg-white border rounded-full transition-all shrink-0 size-[18px] peer-focus:ring-2 peer-focus:ring-black">
       </span>
       {label}
     </label>

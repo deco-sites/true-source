@@ -31,6 +31,7 @@ import * as $Product_ProductStarCard from "./islands/Product/ProductStarCard.tsx
 import * as $Product_ProductStars from "./islands/Product/ProductStars.tsx";
 import * as $Product_SellingPrice from "./islands/Product/SellingPrice.tsx";
 import * as $Product_Trustvox from "./islands/Product/Trustvox.tsx";
+import * as $ProductShelfWithImageJS from "./islands/ProductShelfWithImageJS.tsx";
 import * as $Radio from "./islands/Radio.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
@@ -76,6 +77,7 @@ const manifest = {
     "./islands/Product/ProductStars.tsx": $Product_ProductStars,
     "./islands/Product/SellingPrice.tsx": $Product_SellingPrice,
     "./islands/Product/Trustvox.tsx": $Product_Trustvox,
+    "./islands/ProductShelfWithImageJS.tsx": $ProductShelfWithImageJS,
     "./islands/Radio.tsx": $Radio,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,

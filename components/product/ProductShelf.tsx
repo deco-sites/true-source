@@ -1,6 +1,8 @@
 import type { Product } from "apps/commerce/types.ts";
 import type { AppContext } from "deco-sites/true-source/apps/site.ts";
-import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
+import ProductCard, {
+  productToProductCardProps,
+} from "deco-sites/true-source/components/product/ProductCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
@@ -8,6 +10,10 @@ import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 export interface Props {
   products: Product[] | null;
+  /**
+   * @title Mostrar apenas produtos com assinatura
+   */
+  showOnlySubscription?: boolean;
   title?: string;
 }
 
@@ -15,6 +21,7 @@ function ProductShelf({
   products,
   title,
   isMobile,
+  showOnlySubscription,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -30,19 +37,22 @@ function ProductShelf({
 
       <div id={id} class="relative mx-auto w-[95%]">
         <Slider class="carousel gap-4 w-full">
-          {products?.map((product, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item w-[calc(50%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/3))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
-            >
-              <ProductCard
-                product={product}
-                itemListName={title}
+          {products?.map((product, index) => {
+            return (
+              <Slider.Item
                 index={index}
-                isMobile={isMobile}
-              />
-            </Slider.Item>
-          ))}
+                class="carousel-item w-[calc(50%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/3))] md:w-[calc(33.333333%-18px+((18px)/3))] lg:w-[calc(25%-18px+((18px)/4))] xl:w-[calc(20%-18px+((18px)/5))] first:ml-auto last:mr-auto"
+              >
+                <ProductCard
+                  {...productToProductCardProps({
+                    product,
+                    isMobile,
+                    showOnlySubscription,
+                  })}
+                />
+              </Slider.Item>
+            );
+          })}
         </Slider>
 
         <Slider.PrevButton class="hidden lg:flex absolute top-1/2 -left-8 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">

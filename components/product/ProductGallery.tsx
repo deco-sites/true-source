@@ -1,21 +1,24 @@
-import ProductCard from "deco-sites/true-source/components/product/ProductCard.tsx";
+import ProductCard, {
+  productToProductCardProps,
+} from "deco-sites/true-source/components/product/ProductCard.tsx";
 import type { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   products: Product[] | null;
-  offset: number;
   isMobile: boolean;
+  showOnlySubscription?: boolean;
 }
 
-function ProductGallery({ products, offset, isMobile }: Props) {
+function ProductGallery({ products, isMobile, showOnlySubscription }: Props) {
   return (
     <div class="gap-x-3.5 gap-y-6 grid grid-cols-2 lg:grid-cols-4 items-center">
-      {products?.map((product, index) => (
+      {products?.map((product) => (
         <ProductCard
-          product={product}
-          preload={index === 0}
-          index={offset + index}
-          isMobile={isMobile}
+          {...productToProductCardProps({
+            product,
+            isMobile,
+            showOnlySubscription,
+          })}
         />
       ))}
     </div>
