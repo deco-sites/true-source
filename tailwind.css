@@ -731,12 +731,12 @@
 
 
 @media (max-width: 1024px) {
-    .neoasssist-widget-frame {
+    .neoasssist-widget-frame--loaded {
         right: 14px !important;
         bottom: 120px !important;
     }
 
-    body:not(:has(#floating-mobile-modal:checked)) .neoasssist-widget-frame {
+    body:not(:has(#floating-mobile-modal:checked)) .neoasssist-widget-frame--loaded {
         opacity: 0;
         pointer-events: none;
     }
