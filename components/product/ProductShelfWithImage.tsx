@@ -32,6 +32,11 @@ export interface Props extends GrayBackgroundProps {
    * @description URL do banner
    */
   bannerUrl?: string;
+  /**
+   * @title Remover espaçamento do topo
+   * @default false
+   */
+  removePaddingTop?: boolean;
 }
 
 function ProductShelf({
@@ -43,6 +48,7 @@ function ProductShelf({
   bottomRounded,
   grayBackground,
   topRounded,
+  removePaddingTop = false,
 }: ReturnType<typeof loader>) {
   const id = useId();
 
@@ -55,45 +61,47 @@ function ProductShelf({
 
   return (
     <div
-      class={"flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pt-16 pb-24 max-w-[1448px] mx-auto" +
+      class={"flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pb-24 max-w-[1448px] mx-auto" +
         (
           grayBackground ? " bg-ice" : ""
         ) + (
           topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""
         ) + (
           bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
+        ) + (
+          removePaddingTop ? " pt-0" : " pt-16"
         )}
       id={id}
     >
       <Wrapper
         {...props}
-        class="block relative rounded-[20px] overflow-hidden max-lg:w-[95%] max-lg:mx-auto max-lg:max-w-[500px]"
+        class="block relative max-lg:mx-auto rounded-[20px] max-lg:w-[95%] max-lg:max-w-[500px] overflow-hidden"
       >
         <Icon
           id="ShelfWithImageChevron"
           width={30}
           height={60}
-          class="text-white absolute top-1/2 -translate-y-1/2 right-10"
+          class="top-1/2 right-10 absolute text-white -translate-y-1/2"
         />
         <Image
           src={isMobile ? mobile.src : desktop.src}
           alt={isMobile ? mobile.title : desktop.title}
           width={isMobile ? 450 : 320}
           height={isMobile ? 260 : 450}
-          class="h-[260px] max-lg:w-full lg:h-[450px] object-cover"
+          class="max-lg:w-full h-[260px] lg:h-[450px] object-cover"
         />
-        <span class="text-white font-bold font-lemon text-lg leading-6 max-w-[200px] absolute bottom-10 left-10">
+        <span class="bottom-10 left-10 absolute max-w-[200px] font-bold font-lemon text-lg text-white leading-6">
           {isMobile ? mobile.title : desktop.title}
         </span>
       </Wrapper>
 
-      <div class="w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px] flex flex-col gap-8">
+      <div class="flex flex-col gap-8 w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px]">
         <div class="relative mx-auto w-[95%]">
-          <Slider class="carousel gap-4 w-full">
+          <Slider class="gap-4 w-full carousel">
             {products?.map((product, index) => (
               <Slider.Item
                 index={index}
-                class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))]"
+                class="w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))] carousel-item"
               >
                 <ProductCard
                   product={product}
@@ -104,15 +112,15 @@ function ProductShelf({
             ))}
           </Slider>
 
-          <Slider.PrevButton class="hidden lg:flex absolute top-1/2 -left-8 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+          <Slider.PrevButton class="top-1/2 -left-8 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none">
             <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
           </Slider.PrevButton>
 
-          <Slider.NextButton class="hidden lg:flex absolute top-1/2 -right-4 -translate-y-1/2 w-14 h-14 bg-white border-2  border-Stroke rounded-full justify-center items-center disabled:pointer-events-none disabled:opacity-0 transition-opacity">
+          <Slider.NextButton class="top-1/2 -right-4 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none">
             <Icon size={24} id="ArrowRight" class="text-dark" />
           </Slider.NextButton>
 
-          <div class="absolute top-[calc(100%+48px)] left-1/2 -translate-x-1/2 flex items-center gap-3">
+          <div class="top-[calc(100%+48px)] left-1/2 absolute flex items-center gap-3 -translate-x-1/2">
             {products.map((_, index) => (
               <Slider.Dot index={index} class="group">
                 <div
