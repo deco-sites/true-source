@@ -3,13 +3,29 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 interface IconProps {
+  /**
+   * @title Ícone
+   */
   srcIcon: ImageWidget;
+  /**
+   * @title Largura do ícone
+   */
   iconWidth: number;
+  /**
+   * @title Altura do ícone
+   */
   iconHeight: number;
 }
 
 interface InfoCardProps {
+  /**
+   * @title Título
+   */
   titleInfoCard: string;
+  /**
+   * @title Descrição
+   * @format textarea
+   */
   descriptionInfoCard: string;
 }
 

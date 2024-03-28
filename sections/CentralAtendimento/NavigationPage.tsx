@@ -4,6 +4,9 @@ import { Section } from "deco/blocks/section.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
 interface Props {
+  /**
+   * @title Seções
+   */
   sections: Section[];
   loader: NavigationLoader;
 }

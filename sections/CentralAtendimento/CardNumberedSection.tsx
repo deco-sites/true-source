@@ -3,6 +3,9 @@ import Card, {
 } from "deco-sites/true-source/sections/CentralAtendimento/CardNumbered.tsx";
 
 interface Props {
+  /**
+   * @title Cards
+   */
   cards: CardProps[];
 }
 

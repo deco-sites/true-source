@@ -1,14 +1,25 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 interface ImgProps {
+  /**
+   * @title Imagem
+   */
   img: ImageWidget;
+  /**
+   * @title Icone
+   */
   icon: ImageWidget;
 }
 
 interface Props {
+  /**
+   * @title Título
+   */
   title: string;
+  /**
+   * @title Email
+   */
   email: string;
 }
 

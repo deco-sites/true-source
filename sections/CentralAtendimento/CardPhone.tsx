@@ -1,18 +1,41 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 interface ImgProps {
+  /**
+   * @title Imagem
+   */
   img: ImageWidget;
+  /**
+   * @title Largura da imagem
+   */
   imgWidth: number;
+  /**
+   * @title Altura da imagem
+   */
   imgHeight: number;
+  /**
+   * @title Primeiro Ícone
+   */
   icon1: ImageWidget;
+  /**
+   * @title Segundo Ícone
+   */
   icon2: ImageWidget;
 }
 
 interface Props {
+  /**
+   * @title Título
+   */
   title: string;
+  /**
+   * @title Primeiro Número
+   */
   number1: string;
+  /**
+   * @title Segundo Número
+   */
   number2: string;
 }
 

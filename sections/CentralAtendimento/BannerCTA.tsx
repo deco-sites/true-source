@@ -3,13 +3,29 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 interface TextImgProps {
+  /**
+   * @title Imagem Mobile
+   */
   srcMobile: ImageWidget;
+  /**
+   * @title Imagem Desktop
+   */
   srcDesktop?: ImageWidget;
 }
 
 interface BannerCTAProps {
+  /**
+   * @title Título
+   */
   title: string;
+  /**
+   * @title Descrição
+   * @format textarea
+   */
   description: string;
+  /**
+   * @title Texto do botão
+   */
   button: string;
 }
 

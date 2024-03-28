@@ -1,5 +1,11 @@
 interface FormCardProps {
+  /**
+   * @title Título
+   */
   titleCard: string;
+  /**
+   * @title Texto do botão
+   */
   buttonCard: string;
 }
 

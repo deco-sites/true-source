@@ -1,4 +1,7 @@
 interface CardProps {
+  /**
+   * @title Título simples
+   */
   contentTitleSimple: string;
 }
 

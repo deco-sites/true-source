@@ -1,5 +1,11 @@
 interface CardProps {
+  /**
+   * @title Título
+   */
   contentTitle: string;
+  /**
+   * @title Subtítulo
+   */
   contentSubtitle: string;
 }
 

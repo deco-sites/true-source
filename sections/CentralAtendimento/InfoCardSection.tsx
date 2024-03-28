@@ -2,7 +2,13 @@ import { Section } from "deco/blocks/section.ts";
 import { renderSection } from "apps/website/pages/Page.tsx";
 
 interface Props {
+  /**
+   * @title Título
+   */
   title: string;
+  /**
+   * @title Seções
+   */
   sections: Section[];
 }
 
