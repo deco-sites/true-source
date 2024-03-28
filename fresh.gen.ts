@@ -24,6 +24,7 @@ import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PixPrice from "./islands/PixPrice.tsx";
 import * as $PriceRange from "./islands/PriceRange.tsx";
+import * as $ProductShelfWithImageJS from "./islands/ProductShelfWithImageJS.tsx";
 import * as $Product_Benefits from "./islands/Product/Benefits.tsx";
 import * as $Product_ProductCard from "./islands/Product/ProductCard.tsx";
 import * as $Product_ProductSimilars from "./islands/Product/ProductSimilars.tsx";
@@ -69,6 +70,7 @@ const manifest = {
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/PixPrice.tsx": $PixPrice,
     "./islands/PriceRange.tsx": $PriceRange,
+    "./islands/ProductShelfWithImageJS.tsx": $ProductShelfWithImageJS,
     "./islands/Product/Benefits.tsx": $Product_Benefits,
     "./islands/Product/ProductCard.tsx": $Product_ProductCard,
     "./islands/Product/ProductSimilars.tsx": $Product_ProductSimilars,

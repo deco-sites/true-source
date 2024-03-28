@@ -6,8 +6,7 @@ import ProductCard, {
   productToProductCardProps,
 } from "deco-sites/true-source/components/product/ProductCard.tsx";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
-import Slider from "deco-sites/true-source/components/ui/Slider.tsx";
-import SliderJS from "deco-sites/true-source/islands/SliderJS.tsx";
+import ProductShelfWithImageJS from "deco-sites/true-source/islands/ProductShelfWithImageJS.tsx";
 import { GrayBackgroundProps } from "deco-sites/true-source/sdk/types.ts";
 import { useId } from "deco-sites/true-source/sdk/useId.ts";
 
@@ -68,16 +67,17 @@ function ProductShelf({
 
   return (
     <div
-      class={`flex flex-col lg:flex-row items-center justify-start md:px-10 px-4 gap-x-10 gap-y-6 pb-24 max-w-[1448px] mx-auto${
+      class={`grid items-center justify-start md:px-10 px-4 gap-x-4 gap-y-6 pb-24 max-w-[1448px] mx-auto md:grid-cols-[328px,1fr]${
         grayBackground ? " bg-ice" : ""
       }${topRounded ? " rounded-t-[20px] md:rounded-t-[40px]" : ""}${
         bottomRounded ? " rounded-b-[20px] md:rounded-b-[40px]" : ""
       }${removePaddingTop ? " pt-0" : " pt-16"}`}
       id={id}
+      data-root
     >
       <Wrapper
         {...props}
-        class="block relative max-lg:mx-auto rounded-[20px] max-lg:w-[95%] max-lg:max-w-[500px] overflow-hidden"
+        class="block relative rounded-[20px] md:h-full overflow-hidden"
       >
         <Icon
           id="ShelfWithImageChevron"
@@ -90,62 +90,66 @@ function ProductShelf({
           alt={isMobile ? mobile.title : desktop.title}
           width={isMobile ? 450 : 320}
           height={isMobile ? 260 : 450}
-          class="max-lg:w-full h-[260px] lg:h-[450px] object-cover"
+          class="w-full h-[260px] md:h-full lg:h-[450px] object-cover"
         />
         <span class="bottom-10 left-10 absolute max-w-[200px] font-bold font-lemon text-lg text-white leading-6">
           {isMobile ? mobile.title : desktop.title}
         </span>
       </Wrapper>
 
-      <div class="flex flex-col gap-8 w-full max-w-[800px] lg:max-w-[600px] xl:max-w-[860px]">
-        <div class="relative mx-auto w-[95%]">
-          <Slider class="carousel gap-4 w-full">
-            {products?.map((product, index) => {
-              return (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item w-[calc(75%-18px+(18px/2))] sm:w-[calc(42.5%-18px+(18px/2))] xl:w-[calc(33.333333%-18px+((18px)/3))]"
-                >
-                  <ProductCard
-                    {...productToProductCardProps({
-                      product,
-                      isMobile,
-                      showOnlySubscription,
-                    })}
-                  />
-                </Slider.Item>
-              );
-            })}
-          </Slider>
+      <div class="relative grid mx-auto w-[95%]">
+        <ul data-carousel class="gap-4 w-full carousel">
+          {products?.map((product, index) => (
+            <li
+              data-item={index}
+              class="w-[calc(75%-16px+(8px))] sm:w-[calc(42.5%-16px+(16px/2))] md:w-[calc((100%/1.5)-16px+(16px/1.5))] lg:w-[calc((100%/2)-16px+(16px/2))] xl:w-[calc(33.333333%-16px+((16px)/3))] carousel-item"
+            >
+              <ProductCard
+                {...productToProductCardProps({
+                  product,
+                  isMobile,
+                  showOnlySubscription,
+                })}
+              />
+            </li>
+          ))}
+        </ul>
 
-          <Slider.PrevButton class="top-1/2 -left-8 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none">
-            <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
-          </Slider.PrevButton>
+        <button
+          data-prev
+          class="top-1/2 -left-8 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none"
+          disabled
+        >
+          <Icon size={24} id="ArrowRight" class="text-dark rotate-180" />
+        </button>
 
-          <Slider.NextButton class="top-1/2 -right-4 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none">
-            <Icon size={24} id="ArrowRight" class="text-dark" />
-          </Slider.NextButton>
+        <button
+          data-next
+          class="top-1/2 -right-4 absolute lg:flex justify-center items-center border-2 border-Stroke hidden bg-white disabled:opacity-0 rounded-full w-14 h-14 transition-opacity -translate-y-1/2 disabled:pointer-events-none"
+        >
+          <Icon size={24} id="ArrowRight" class="text-dark" />
+        </button>
 
-          <div class="top-[calc(100%+48px)] left-1/2 absolute flex items-center gap-3 -translate-x-1/2">
-            {products.map((_, index) => (
-              <Slider.Dot index={index} class="group">
-                <div
-                  class={`w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors${
-                    grayBackground ? " bg-gray" : " bg-ice"
-                  }`}
-                />
-              </Slider.Dot>
-            ))}
-          </div>
+        <ul
+          data-dots
+          class="top-[calc(100%+48px)] left-1/2 absolute flex items-center gap-3 -translate-x-1/2"
+        >
+          <li data-dot-template class="group" role="button">
+            <div
+              class={`w-2 h-2 rounded-full group-data-[active]:bg-dark transition-colors cursor-pointer${
+                grayBackground ? " bg-gray" : " bg-ice"
+              }`}
+            />
+          </li>
+        </ul>
 
-          <SliderJS rootId={id} dotIsPage />
-        </div>
+        <ProductShelfWithImageJS rootId={id} />
       </div>
     </div>
   );
 }
 
-export function loader(props: Props, req: Request, ctx: AppContext) {
+export function loader(props: Props, _req: Request, ctx: AppContext) {
   return {
     ...props,
     isMobile: ctx.device !== "desktop",
