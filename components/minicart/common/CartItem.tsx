@@ -219,7 +219,7 @@ function CartItem(
             />
           </div>
           {/* */}
-          <div class="flex justify-end gap-x-2">
+          <div class="flex flex-wrap justify-end gap-x-2">
             <span
               class={clx(
                 "text-xs text-dark",
