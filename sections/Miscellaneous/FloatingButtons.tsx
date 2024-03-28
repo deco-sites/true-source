@@ -23,6 +23,9 @@ export default function FloatingButtons(
     <>
       <script
         src={scriptAsDataURI(() => {
+          // neoasssist iframe make a big space on top of the page while is loading
+          // so i make hidden by default
+          // and show after window load
           globalThis.onload = () => {
             const iframe = document.querySelector(
               ".neoasssist-widget-frame",
@@ -33,7 +36,6 @@ export default function FloatingButtons(
             setTimeout(() => {
               iframe.classList.remove("neoasssist-widget-frame");
               iframe.classList.add("neoasssist-widget-frame--loaded");
-              console.log("removed");
             }, 0);
           };
         })}
