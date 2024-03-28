@@ -8,11 +8,11 @@ export interface Banner {
   /** @description Imagem para desktop */
   desktopSrc: ImageWidget;
   /** @description Altura da imagem para desktop */
-  desktopHeight: number;
+  desktopHeight?: number;
   /** @description Imagem para mobile */
-  mobileSrc: ImageWidget;
+  mobileSrc?: ImageWidget;
   /** @description Altura da imagem para mobile */
-  mobileHeight: number;
+  mobileHeight?: number;
   /** @description Texto alternativo da imagem */
   alt: string;
 }
@@ -51,39 +51,42 @@ function BannerInfoWithDivider(
   { banner, preload, isMobile, content }: Props,
 ) {
   const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
-  const height = isMobile ? mobileHeight : desktopHeight;
+
+  const heightStyle = isMobile
+    ? (mobileHeight ? `${mobileHeight}px` : "auto")
+    : (desktopHeight ? `${desktopHeight}px` : "auto");
 
   return (
-    <div class="w-full  relative">
+    <div class="w-full relative">
       <Picture preload={preload}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={preload ? "high" : "auto"}
-          src={mobileSrc}
+          src={mobileSrc || desktopSrc}
           width={360}
-          height={mobileHeight}
+          height={mobileHeight || 600}
         />
         <Source
           media="(min-width: 768px)"
           fetchPriority={preload ? "high" : "auto"}
           src={desktopSrc}
           width={1440}
-          height={600}
+          height={desktopHeight || 600}
         />
         <img
           class="object-cover w-full"
           loading={preload ? "eager" : "lazy"}
           src={desktopSrc}
           alt={alt}
-          style={{ height: `${height}px` }}
+          style={{ height: heightStyle }}
         />
       </Picture>
 
-      <div class="absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-center right-0 left-0 px-[30px] md:px-20 lg:px-[182px]">
+      <div class="absolute top-0 w-full max-w-[1440px] mx-auto h-full flex items-end md:items-center pb-10 md:pb-0 right-0 left-0 px-[30px] md:px-20 lg:px-[182px]">
         <div class="flex flex-col w-full max-w-[475px]">
           {content?.tag &&
             (
-              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] text-ice">
+              <span class="font-inter mb-6 font-lemon-milk font-bold text-sm md:text-[18px] text-ice">
                 {content.tag}
               </span>
             )}
@@ -92,7 +95,7 @@ function BannerInfoWithDivider(
 
           {content?.title &&
             (
-              <h2 class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
+              <h2 class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[25px] md:leading-[42px]">
                 {content.title}
               </h2>
             )}
@@ -113,8 +116,9 @@ function BannerInfoWithDivider(
             >
               {content.cta.text}
               <Icon
-                id="ArrowRight"
-                size={16}
+                id="ArrowNarrowRight"
+                width={14}
+                height={10}
                 class="text-white group-hover:text-red"
               />
             </a>

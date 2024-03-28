@@ -1,31 +1,24 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget, VideoWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { LoaderContext } from "deco/mod.ts";
 import Icon from "deco-sites/true-source/components/ui/Icon.tsx";
 
 /**  @titleBy alt */
-export interface Banner {
+export interface Video {
   /**
    * @title Imagem para desktop
    */
-  desktopSrc: ImageWidget;
+  source: VideoWidget;
   /**
-   * @title Altura da imagem para desktop
+   * @title Altura do video para desktop
    * @description Deixar vazio para altura máxima da imagem
    */
   desktopHeight?: number;
   /**
-   * @title Imagem para mobile
-   * @description Imagem para mobile caso seja diferente da imagem para desktop
-   */
-  mobileSrc?: ImageWidget;
-  /**
-   * @title Altura da imagem para mobile
+   * @title Altura do video para mobile
    * @description Deixar vazio para altura máxima da imagem
    */
   mobileHeight?: number;
-  /** @description Texto alternativo da imagem */
-  alt: string;
 }
 
 export interface Content {
@@ -53,8 +46,7 @@ export interface Content {
 }
 
 export interface Props {
-  /** @title Imagens  */
-  banner: Banner;
+  video: Video;
   /** @title Conteúdo do banner */
   content?: Content;
   /** @title Items que ficam ao lado do banner */
@@ -65,9 +57,9 @@ export interface Props {
 }
 
 function BannerInfoWithItems(
-  { banner, preload, isMobile, content, items }: Props,
+  { isMobile, content, items, video }: Props,
 ) {
-  const { mobileSrc, desktopSrc, alt, mobileHeight, desktopHeight } = banner;
+  const { source, mobileHeight, desktopHeight } = video;
 
   const Title = content?.titleIsH1 ? "h1" : "h2";
 
@@ -77,32 +69,17 @@ function BannerInfoWithItems(
 
   return (
     <div
-      class={"w-full  relative"}
+      class={"w-full relative"}
     >
-      <Picture preload={preload}>
-        <Source
-          media="(max-width: 767px)"
-          fetchPriority={preload ? "high" : "auto"}
-          src={mobileSrc || desktopSrc}
-          width={360}
-          height={mobileHeight}
-        />
-        <Source
-          media="(min-width: 768px)"
-          fetchPriority={preload ? "high" : "auto"}
-          src={desktopSrc}
-          width={1440}
-          height={desktopHeight}
-        />
-        <img
-          class="object-cover w-full rounded-b-[20px]"
-          loading={preload ? "eager" : "lazy"}
-          src={desktopSrc}
-          alt={alt}
-          style={{ height: heightStyle }}
-        />
-      </Picture>
-
+      <video
+        autoplay
+        loop
+        muted
+        class="w-full h-full object-cover rounded-b-[20px]"
+        style={{ height: heightStyle }}
+      >
+        <source src={source}></source>
+      </video>
       <div
         class={"absolute top-0 w-full max-w-[1440px] mx-auto h-full grid grid-rows-[auto_auto_40px] md:grid-rows-1 md:grid-cols-2 place-content-center md:items-center right-0 left-0 text-left md:justify-start px-[17px] md:px-20 lg:px-[182px]"}
       >
@@ -111,14 +88,14 @@ function BannerInfoWithItems(
         >
           {content?.tag &&
             (
-              <span class="font-inter mb-6 font-lemon-milk font-bold text-[18px] fontWithGradient">
+              <span class="font-inter mb-6 font-lemon-milk font-bold text-sm leading-[18px] md:text-[18px] fontWithGradient">
                 {content.tag}
               </span>
             )}
 
           {content?.title &&
             (
-              <Title class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px]">
+              <Title class="font-lemon-milk font-bold text-ice mb-8 text-[24px] md:text-[40px] leading-[24px] md:leading-[42px] max-w-[337px] md:max-w-full">
                 {content.title}
               </Title>
             )}
@@ -140,15 +117,17 @@ function BannerInfoWithItems(
               {content.cta.text}
               <Icon
                 id="ArrowRight"
-                size={16}
+                width={14}
+                height={10}
                 class="text-white group-hover:text-red"
               />
             </a>
           )}
         </div>
-        <div class="flex flex-col md:flex-row items-center gap-x-4">
+        <div class="flex flex-col md:flex-row items-center gap-x-4 h-full">
           {items?.map((item) => (
-            <div class="grid grid-cols-[auto_1fr] md:grid-cols-1 md:grid-rows-[auto_1fr] border-b last:border-b-0 md:last:border-b md:border border-ice md:rounded-[20px] py-6 md:px-6 text-sm md:text-[16px] text-ice leading-[19px] font-medium md:font-bold gap-6 w-full md:w-[185px] md:h-[185px]">
+            <div class="grid grid-cols-[auto_1fr] md:grid-cols-1 md:grid-rows-[auto_1fr] items-center border-b last:border-b-0 md:last:border-b md:border border-ice md:rounded-[20px] first:pt-0 md:first:pt-6 py-6 md:px-6 text-sm md:text-[16px] text-ice leading-[22px] md:leading-[19px] font-medium md:font-bold gap-6 w-full md:w-[185px] 
+            md:h-[185px]">
               <Icon id="CheckCircle" size={24} class="text-red md:text-ice" />
               <span>
                 {item}
@@ -166,7 +145,8 @@ function BannerInfoWithItems(
             {content.cta.text}
             <Icon
               id="ArrowNarrowRight"
-              size={16}
+              width={14}
+              height={10}
               class="text-white group-hover:text-red"
             />
           </a>
