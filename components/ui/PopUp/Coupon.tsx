@@ -290,7 +290,7 @@ export default function Coupon(
               Estou ciente que poderei receber comunicações.
             </label>
             <button
-              type="button"
+              type="submit"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #8E8E8D, #8E8E8D, #e4003f, #E9530E)",
